@@ -1,0 +1,20 @@
+{
+  "token": "redacted",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "text": "testing",
+    "type": "message",
+    "subtype": "me_message",
+    "user": "U0CHG2P26",
+    "ts": "1517614342.000163",
+    "channel": "C904QB4NS",
+    "event_ts": "1517614342.000163"
+  },
+  "type": "event_callback",
+  "event_id": "Ev9450MT62",
+  "event_time": 1517614342,
+  "authed_users": [
+    "U0CHG2P26"
+  ]
+}

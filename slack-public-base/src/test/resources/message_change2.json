@@ -1,0 +1,83 @@
+{
+  "token": "redacted",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "message",
+    "message": {
+      "type": "message",
+      "user": "U0GTY0C49",
+      "text": "<@U0EAR0875> gave <https:\/\/hubspot.slack.com\/archives\/C0B6J538E\/p1517603402000389| props> to <@U7ZAYUQR1>\n&gt; *`76` Reactions  *",
+      "bot_id": "B0GTT456Y",
+      "attachments": [
+        {
+          "from_url": "https:\/\/hubspot.slack.com\/archives\/C0B6J538E\/p1517603402000389",
+          "fallback": "[February 2nd, 2018 12:30 PM] kevin_g: Props to <@U7ZAYUQR1> for handling a pushy customer like a champ! You rock.",
+          "ts": "1517603402.000389",
+          "author_id": "U0EAR0875",
+          "author_subname": "Kevin Grondin",
+          "channel_id": "C0B6J538E",
+          "channel_name": "support-announcements",
+          "is_msg_unfurl": true,
+          "text": "Props to <@U7ZAYUQR1> for handling a pushy customer like a champ! You rock.",
+          "author_name": "Kevin Grondin",
+          "author_link": "https:\/\/hubspot.slack.com\/team\/U0EAR0875",
+          "author_icon": "https:\/\/avatars.slack-edge.com\/2017-06-29\/205725088259_e94e4c4ffe035cd4a205_48.jpg",
+          "mrkdwn_in": [
+            "text"
+          ],
+          "id": 1,
+          "footer": "Posted in #support-announcements"
+        }
+      ],
+      "edited": {
+        "user": "U0GTY0C49",
+        "ts": "1517610623.000000"
+      },
+      "ts": "1517603403.000558"
+    },
+    "subtype": "message_changed",
+    "hidden": true,
+    "channel": "C0QU0P0RL",
+    "previous_message": {
+      "type": "message",
+      "user": "U0GTY0C49",
+      "text": "<@U0EAR0875> gave <https:\/\/hubspot.slack.com\/archives\/C0B6J538E\/p1517603402000389| props> to <@U7ZAYUQR1>\n&gt; *`75` Reactions  *",
+      "bot_id": "B0GTT456Y",
+      "attachments": [
+        {
+          "from_url": "https:\/\/hubspot.slack.com\/archives\/C0B6J538E\/p1517603402000389",
+          "fallback": "[February 2nd, 2018 12:30 PM] kevin_g: Props to <@U7ZAYUQR1> for handling a pushy customer like a champ! You rock.",
+          "ts": "1517603402.000389",
+          "author_id": "U0EAR0875",
+          "author_subname": "Kevin Grondin",
+          "channel_id": "C0B6J538E",
+          "channel_name": "support-announcements",
+          "is_msg_unfurl": true,
+          "text": "Props to <@U7ZAYUQR1> for handling a pushy customer like a champ! You rock.",
+          "author_name": "Kevin Grondin",
+          "author_link": "https:\/\/hubspot.slack.com\/team\/U0EAR0875",
+          "author_icon": "https:\/\/avatars.slack-edge.com\/2017-06-29\/205725088259_e94e4c4ffe035cd4a205_48.jpg",
+          "mrkdwn_in": [
+            "text"
+          ],
+          "id": 1,
+          "footer": "Posted in #support-announcements"
+        }
+      ],
+      "edited": {
+        "user": "U0GTY0C49",
+        "ts": "1517610622.000000"
+      },
+      "ts": "1517603403.000558"
+    },
+    "event_ts": "1517610623.000145",
+    "ts": "1517610623.000145"
+  },
+  "type": "event_callback",
+  "event_id": "Ev94AA9HF1",
+  "event_time": 1517610623,
+  "authed_users": [
+    "U0CHG2P26"
+  ]
+}
