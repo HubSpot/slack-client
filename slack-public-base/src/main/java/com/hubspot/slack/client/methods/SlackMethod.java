@@ -48,7 +48,7 @@ public enum SlackMethod {
   conversations_join(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   conversations_kick(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   conversations_leave(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
-  conversations_list(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
+  conversations_list(MethodWriteMode.READ, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
   conversations_members(MethodWriteMode.READ, RateLimitingTiers.TIER_4, JsonStatus.FORM_ENCODING_ONLY),
   conversations_open(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   conversations_rename(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
