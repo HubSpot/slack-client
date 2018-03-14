@@ -1,0 +1,21 @@
+{
+  "name": "kepler_assign_root_cause",
+  "value": "elk",
+  "callback_id": "kepler",
+  "team": {
+    "id": "T024G0P55",
+    "domain": "hubspot"
+  },
+  "channel": {
+    "id": "C6S28QXGU",
+    "name": "paas-monitoring-bots"
+  },
+  "user": {
+    "id": "U0CHG2P26",
+    "name": "elias"
+  },
+  "action_ts": "1517616357.938870",
+  "message_ts": "1517389775.000294",
+  "attachment_id": "2",
+  "token": "redacted"
+}

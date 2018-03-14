@@ -1,0 +1,54 @@
+{
+  "token": "redacted",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "message",
+    "message": {
+      "text": "test br",
+      "type": "message",
+      "thread_ts": "1517613624.000289",
+      "root": {
+        "type": "message",
+        "user": "U0CHG2P26",
+        "text": "tes",
+        "edited": {
+          "user": "U0CHG2P26",
+          "ts": "1517613626.000000"
+        },
+        "thread_ts": "1517613624.000289",
+        "reply_count": 1,
+        "replies": [
+          {
+            "user": "U0CHG2P26",
+            "ts": "1517614190.000052"
+          }
+        ],
+        "unread_count": 1,
+        "ts": "1517613624.000289"
+      },
+      "subtype": "thread_broadcast",
+      "user": "U0CHG2P26",
+      "ts": "1517614190.000052"
+    },
+    "subtype": "message_changed",
+    "hidden": true,
+    "channel": "C904QB4NS",
+    "previous_message": {
+      "type": "message",
+      "user": "U0CHG2P26",
+      "text": "test br",
+      "thread_ts": "1517613624.000289",
+      "parent_user_id": "U0CHG2P26",
+      "ts": "1517614190.000052"
+    },
+    "event_ts": "1517614190.000136",
+    "ts": "1517614190.000136"
+  },
+  "type": "event_callback",
+  "event_id": "Ev944ZSDQE",
+  "event_time": 1517614190,
+  "authed_users": [
+    "U0CHG2P26"
+  ]
+}

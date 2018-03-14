@@ -1,0 +1,56 @@
+{
+  "token": "redacted",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "message",
+    "message": {
+      "type": "message",
+      "user": "U029BQ5JG",
+      "text": "<https:\/\/hubspot.slack.com\/archives\/C1FD2QLQK\/p1491836671416408>",
+      "attachments": [
+        {
+          "from_url": "https:\/\/hubspot.slack.com\/archives\/C1FD2QLQK\/p1491836671416408",
+          "fallback": "[April 10th, 2017 8:04 AM] rsharry: What do you call a snobby prisoner going down the stairs?\n\nA condescending con\u2026descending",
+          "ts": "1491836671.416408",
+          "author_id": "U0EALM57W",
+          "author_subname": "Ryan Sharry",
+          "channel_id": "C1FD2QLQK",
+          "channel_name": "dad-jokes",
+          "is_msg_unfurl": true,
+          "text": "What do you call a snobby prisoner going down the stairs?\n\nA condescending con\u2026descending",
+          "author_name": "Ryan Sharry",
+          "author_link": "https:\/\/hubspot.slack.com\/team\/U0EALM57W",
+          "author_icon": "https:\/\/avatars.slack-edge.com\/2015-11-11\/14363772675_28343079aa5b93d3f053_48.jpg",
+          "mrkdwn_in": [
+            "text"
+          ],
+          "id": 1,
+          "footer": "Posted in #dad-jokes"
+        }
+      ],
+      "thread_ts": "1517584217.000096",
+      "parent_user_id": "U1QML3EKA",
+      "ts": "1517610307.000172"
+    },
+    "subtype": "message_changed",
+    "hidden": true,
+    "channel": "C1FD2QLQK",
+    "previous_message": {
+      "type": "message",
+      "user": "U029BQ5JG",
+      "text": "<https:\/\/hubspot.slack.com\/archives\/C1FD2QLQK\/p1491836671416408>",
+      "thread_ts": "1517584217.000096",
+      "parent_user_id": "U1QML3EKA",
+      "ts": "1517610307.000172"
+    },
+    "event_ts": "1517610307.000274",
+    "ts": "1517610307.000274"
+  },
+  "type": "event_callback",
+  "event_id": "Ev9380RGEQ",
+  "event_time": 1517610307,
+  "authed_users": [
+    "U0CHG2P26"
+  ]
+}

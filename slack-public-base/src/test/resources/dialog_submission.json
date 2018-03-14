@@ -1,0 +1,24 @@
+{
+  "type": "dialog_submission",
+  "submission": {
+    "team-cname": "hs-paas-monitoring",
+    "deploy_link": null,
+    "commit_link": null,
+    "problem_desc": "Testing"
+  },
+  "callback_id": "KEPLER_PAGE_ONCALL_FINISHED_FORM",
+  "team": {
+    "id": "T024G0P55",
+    "domain": "hubspot"
+  },
+  "user": {
+    "id": "U0CHG2P26",
+    "name": "elias"
+  },
+  "channel": {
+    "id": "C904QB4NS",
+    "name": "paas-monitoring-test"
+  },
+  "action_ts": "1518138516.492753",
+  "token": "redacted"
+}

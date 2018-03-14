@@ -1,0 +1,26 @@
+{
+  "token": "redacted",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "message",
+    "deleted_ts": "1517613643.000335",
+    "subtype": "message_deleted",
+    "hidden": true,
+    "channel": "C904QB4NS",
+    "previous_message": {
+      "type": "message",
+      "user": "U0CHG2P26",
+      "text": "a",
+      "ts": "1517613643.000335"
+    },
+    "event_ts": "1517613647.000013",
+    "ts": "1517613647.000013"
+  },
+  "type": "event_callback",
+  "event_id": "Ev92NEHXT3",
+  "event_time": 1517613647,
+  "authed_users": [
+    "U0CHG2P26"
+  ]
+}

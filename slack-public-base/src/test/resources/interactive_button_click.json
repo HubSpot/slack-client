@@ -1,0 +1,31 @@
+{
+  "type": "interactive_message",
+  "actions": [
+    {
+      "name": "KEPLER_PAGE_ONCALL",
+      "type": "button",
+      "value": "paas-monitoring-oncall"
+    }
+  ],
+  "callback_id": "test",
+  "team": {
+    "id": "T024G0P55",
+    "domain": "hubspot"
+  },
+  "channel": {
+    "id": "C904QB4NS",
+    "name": "paas-monitoring-test"
+  },
+  "user": {
+    "id": "U0CHG2P26",
+    "name": "elias"
+  },
+  "action_ts": "1517894777.425671",
+  "message_ts": "1517866850.000289",
+  "attachment_id": "1",
+  "token": "redacted",
+  "is_app_unfurl": false,
+  "response_url": "https:\/\/hooks.slack.com\/actions\/T024G0P55\/311482222951\/YfXqo78FKngiy5QMCLOf6bKf",
+  "trigger_id": "309774309168.2152023175.cd3cf7ab81d56e6739591ee9797cd57a"
+}
+]
