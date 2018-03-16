@@ -15,6 +15,6 @@ import com.hubspot.immutables.styles.HubSpotStyle;
 @JsonDeserialize(as = SlackEventMessage.class)
 public interface SlackEventMessageIF extends SlackEventMessageBase {
   Optional<String> getThreadTs();
-  String getUser();
+  String getUserId();
   String getText();
 }
