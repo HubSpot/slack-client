@@ -6,24 +6,21 @@
   <parent>
     <groupId>com.hubspot</groupId>
     <artifactId>basepom</artifactId>
-    <version>18.2</version>
+    <version>18.3-SNAPSHOT</version>
   </parent>
 
+  <groupId>com.hubspot.slack</groupId>
   <artifactId>slack-client</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
     <project.build.targetJdk>1.8</project.build.targetJdk>
-
-    <!-- Dep versions -->
-    <dep.algebra.version>1.0-SNAPSHOT</dep.algebra.version>
-    <dep.horizon.version>0.0.25</dep.horizon.version>
-    <dep.slack-client.version>1.0-SNAPSHOT</dep.slack-client.version>
+    <dep.protobuf-java.version>3.5.1</dep.protobuf-java.version>
   </properties>
 
   <modules>
-    <module>slack-public-base</module>
+    <module>slack-base</module>
     <module>slack-java-client</module>
   </modules>
 
@@ -31,38 +28,39 @@
     <dependencies>
       <dependency>
         <groupId>com.hubspot</groupId>
-        <artifactId>slack-public-base</artifactId>
-        <version>${dep.slack-client.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot</groupId>
-        <artifactId>algebra-public</artifactId>
-        <version>${dep.algebra.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot</groupId>
         <artifactId>HorizonCore</artifactId>
-        <version>${dep.horizon.version}</version>
+        <version>${horizon.version}</version>
       </dependency>
       <dependency>
         <groupId>com.hubspot</groupId>
         <artifactId>HorizonNing</artifactId>
-        <version>${dep.horizon.version}</version>
+        <version>${horizon.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hubspot</groupId>
+        <artifactId>algebra</artifactId>
+        <version>${dep.algebra.version}</version>
       </dependency>
       <dependency>
         <groupId>com.hubspot.immutables</groupId>
         <artifactId>hubspot-style</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${dep.hubspot-immutables.version}</version>
       </dependency>
       <dependency>
         <groupId>com.hubspot.immutables</groupId>
         <artifactId>immutables-exceptions</artifactId>
+        <version>${dep.hubspot-immutables.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.hubspot.slack</groupId>
+        <artifactId>slack-base</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
       <dependency>
-        <groupId>org.immutables</groupId>
-        <artifactId>value</artifactId>
-        <version>2.2.10</version>
+        <groupId>com.hubspot.slack</groupId>
+        <artifactId>slack-java-client</artifactId>
+        <version>1.0-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

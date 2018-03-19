@@ -6,7 +6,7 @@ import org.immutables.value.Value.Immutable;
 
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpResponse;
-import com.hubspot.immutables.styles.HubSpotStyle;
+import com.hubspot.immutables.style.HubSpotStyle;
 
 @Immutable
 @HubSpotStyle
