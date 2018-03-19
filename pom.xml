@@ -31,11 +31,6 @@
       </dependency>
       <dependency>
         <groupId>com.hubspot</groupId>
-        <artifactId>HorizonCore</artifactId>
-        <version>${horizon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot</groupId>
         <artifactId>HorizonNing</artifactId>
         <version>${horizon.version}</version>
       </dependency>
