@@ -37,7 +37,7 @@
       <artifactId>jackson-annotations</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.hubspot</groupId>
+      <groupId>com.hubspot.slack</groupId>
       <artifactId>slack-base</artifactId>
     </dependency>
     <dependency>
