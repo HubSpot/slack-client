@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.hubspot</groupId>
     <artifactId>basepom</artifactId>
-    <version>18.2</version>
+    <version>18.3-SNAPSHOT</version>
   </parent>
 
   <artifactId>slack-client</artifactId>
@@ -17,26 +17,31 @@
     <project.build.targetJdk>1.8</project.build.targetJdk>
 
     <!-- Dep versions -->
-    <dep.algebra.version>1.0-SNAPSHOT</dep.algebra.version>
+    <dep.algebra.version>1.2</dep.algebra.version>
     <dep.horizon.version>0.0.25</dep.horizon.version>
     <dep.slack-client.version>1.0-SNAPSHOT</dep.slack-client.version>
   </properties>
 
   <modules>
-    <module>slack-public-base</module>
+    <module>slack-base</module>
     <module>slack-java-client</module>
   </modules>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>22.0</version>
+      </dependency>
+      <dependency>
         <groupId>com.hubspot</groupId>
-        <artifactId>slack-public-base</artifactId>
+        <artifactId>slack-base</artifactId>
         <version>${dep.slack-client.version}</version>
       </dependency>
       <dependency>
         <groupId>com.hubspot</groupId>
-        <artifactId>algebra-public</artifactId>
+        <artifactId>algebra</artifactId>
         <version>${dep.algebra.version}</version>
       </dependency>
       <dependency>
@@ -52,17 +57,22 @@
       <dependency>
         <groupId>com.hubspot.immutables</groupId>
         <artifactId>hubspot-style</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.2</version>
       </dependency>
       <dependency>
         <groupId>com.hubspot.immutables</groupId>
         <artifactId>immutables-exceptions</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.2</version>
       </dependency>
       <dependency>
         <groupId>org.immutables</groupId>
         <artifactId>value</artifactId>
         <version>2.2.10</version>
+      </dependency>
+      <dependency>
+        <groupId>org.reflections</groupId>
+        <artifactId>reflections</artifactId>
+        <version>0.9.11</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

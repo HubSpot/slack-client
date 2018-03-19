@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 
 import org.immutables.value.Value.Immutable;
 
-import com.hubspot.immutables.styles.HubSpotStyle;
+import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.RequestDebugger;
 import com.hubspot.slack.client.interceptors.http.ResponseDebugger;

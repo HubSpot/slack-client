@@ -14,7 +14,7 @@
   <dependencies>
     <dependency>
       <groupId>com.hubspot</groupId>
-      <artifactId>algebra-public</artifactId>
+      <artifactId>algebra</artifactId>
     </dependency>
     <dependency>
       <groupId>com.hubspot</groupId>
@@ -38,7 +38,7 @@
     </dependency>
     <dependency>
       <groupId>com.hubspot</groupId>
-      <artifactId>slack-public-base</artifactId>
+      <artifactId>slack-base</artifactId>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
