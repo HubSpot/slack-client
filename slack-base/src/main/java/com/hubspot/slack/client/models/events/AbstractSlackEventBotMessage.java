@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.immutables.value.Value.Immutable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -15,8 +16,11 @@ import com.hubspot.slack.client.models.Attachment;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackEventBotMessage.class)
-public interface SlackEventBotMessageIF extends SlackEventMessageBase {
-  Optional<String> getText();
-  List<Attachment> getAttachments();
-  String getBotId();
+public abstract class AbstractSlackEventBotMessage extends SlackEventMessageBase {
+  @JsonProperty("channel")
+  public abstract String getChannelId();
+
+  public abstract Optional<String> getText();
+  public abstract List<Attachment> getAttachments();
+  public abstract String getBotId();
 }

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.immutables.value.Value.Immutable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -13,11 +14,14 @@ import com.hubspot.slack.client.models.LiteMessage;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-@JsonDeserialize(as = SlackEventMessageChanged.class)
-public interface SlackEventMessageChangedIF extends SlackEventMessageBase {
-  boolean isHidden();
+@JsonDeserialize(as = SlackEventMessageDeleted.class)
+public abstract class AbstractSlackEventMessageDeleted extends SlackEventMessageBase {
+  @JsonProperty("channel")
+  public abstract String getChannelId();
 
-  LiteMessage getMessage();
-  Optional<LiteMessage> getPreviousMessage();
-  String getEventTs();
+  public abstract Optional<LiteMessage> getPreviousMessage();
+
+  public abstract boolean isHidden();
+  public abstract String getDeletedTs();
+  public abstract String getEventTs();
 }

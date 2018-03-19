@@ -2,7 +2,8 @@ package com.hubspot.slack.client.models.events;
 
 import java.util.Optional;
 
-public interface SlackEventMessageBase extends SlackEvent {
-  Optional<SlackMessageSubtype> getSubtype();
-  String getChannel();
+import com.hubspot.slack.client.methods.interceptor.HasChannel;
+
+public abstract class SlackEventMessageBase implements SlackEvent, HasChannel {
+  public abstract Optional<SlackMessageSubtype> getSubtype();
 }
