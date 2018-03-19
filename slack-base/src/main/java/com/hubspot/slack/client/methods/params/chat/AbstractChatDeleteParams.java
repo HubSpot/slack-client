@@ -13,6 +13,10 @@ import com.hubspot.slack.client.methods.interceptor.HasChannel;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public abstract class AbstractChatDeleteParams implements HasChannel {
+  @Override
+  @JsonProperty("channel")
+  public abstract String getChannelId();
+
   @JsonProperty("ts")
   public abstract String getMessageToDeleteTs();
 

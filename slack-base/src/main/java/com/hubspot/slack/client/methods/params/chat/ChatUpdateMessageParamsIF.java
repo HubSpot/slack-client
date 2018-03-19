@@ -12,6 +12,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ChatUpdateMessageParamsIF extends MessageParams {
+  @JsonProperty("channel")
+  String getChannelId();
+
   String getText();
   String getTs();
 

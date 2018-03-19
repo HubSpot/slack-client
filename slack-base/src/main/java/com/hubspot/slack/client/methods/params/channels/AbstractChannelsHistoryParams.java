@@ -17,6 +17,9 @@ import com.hubspot.slack.client.methods.interceptor.HasChannel;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public abstract class AbstractChannelsHistoryParams implements HasChannel, TimeIntervalFilter  {
+  @JsonProperty("channel")
+  public abstract String getChannelId();
+
   public abstract Optional<Integer> getCount();
   @JsonProperty("is_inclusive")
   public abstract Optional<Boolean> isInclusive();

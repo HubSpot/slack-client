@@ -18,6 +18,9 @@ import com.hubspot.slack.client.methods.interceptor.HasChannel;
 public interface ConversationInviteParamsIF extends HasChannel {
   Joiner COMMA_JOINER = Joiner.on(',').skipNulls();
 
+  @JsonProperty("channel")
+  String getChannelId();
+
   @JsonIgnore
   List<String> getUsers();
 

@@ -9,6 +9,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 public interface ChatPostEphemeralMessageParamsIF extends MessageParams {
+  @JsonProperty("channel")
+  String getChannelId();
+
   @JsonProperty("user")
   String getUserToSendTo();
 
