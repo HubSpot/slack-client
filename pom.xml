@@ -16,6 +16,7 @@
 
   <properties>
     <project.build.targetJdk>1.8</project.build.targetJdk>
+    <dep.protobuf-java.version>3.5.1</dep.protobuf-java.version>
   </properties>
 
   <modules>
