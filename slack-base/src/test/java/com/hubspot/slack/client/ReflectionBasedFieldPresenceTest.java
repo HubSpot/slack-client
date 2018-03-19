@@ -8,6 +8,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
+
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
@@ -41,7 +43,7 @@ class ReflectionBasedFieldPresenceTest {
       throw new IllegalStateException(
           String.format(
               "Couldn't find a method with name 'builder' on class %s",
-              base.getClass()
+              base.getClass().getName()
           )
       );
     }
@@ -52,7 +54,8 @@ class ReflectionBasedFieldPresenceTest {
         ReflectionUtils.withPrefix("set"),
         ReflectionUtils.withParametersCount(1),
         method -> !Iterable.class.isAssignableFrom(method.getParameterTypes()[0]),
-        method -> !Optional.class.isAssignableFrom(method.getParameterTypes()[0])
+        method -> !Optional.class.isAssignableFrom(method.getParameterTypes()[0]),
+        method -> !ReflectionUtils.withAnyParameterAnnotation(Nullable.class).apply(method)
     );
     for (Method builderMethod : builderMethods) {
       if (builderMethod.getParameterCount() != 1) {
@@ -61,7 +64,7 @@ class ReflectionBasedFieldPresenceTest {
       }
 
       Class<?> singletonParamType = builderMethod.getParameterTypes()[0];
-      if (Number.class.isAssignableFrom(singletonParamType)) {
+      if (isNumeric(singletonParamType)) {
         LOG.debug("Calling {} with default of {}", builderMethod.getName(), DEFAULT_NUMBER);
         builderMethod.invoke(builder, DEFAULT_NUMBER);
       } else if (String.class.isAssignableFrom(singletonParamType)) {
@@ -70,9 +73,13 @@ class ReflectionBasedFieldPresenceTest {
       } else if (Boolean.class.isAssignableFrom(singletonParamType) || boolean.class.isAssignableFrom(singletonParamType)) {
         LOG.debug("Calling {} with default of {}", builderMethod.getName(), DEFAULT_BOOLEAN);
         builderMethod.invoke(builder, DEFAULT_BOOLEAN);
+      } else if (Enum.class.isAssignableFrom(singletonParamType)) {
+        Object firstEnumConstant = singletonParamType.getEnumConstants()[0];
+        LOG.debug("Calling {} with default of {}", builderMethod.getName(), firstEnumConstant);
+        builderMethod.invoke(builder, firstEnumConstant);
       } else {
-        throw new IllegalStateException(
-            String.format("Don't know how to handle %s for %s on %s", singletonParamType.getSimpleName(), builderMethod.getName(), base.getSimpleName()));
+        LOG.debug("Recursively constructing test instance for {}", builderMethod.getName());
+        builderMethod.invoke(builder, buildTestInstance(singletonParamType));
       }
     }
 
@@ -90,6 +97,13 @@ class ReflectionBasedFieldPresenceTest {
 
     Method buildMethod = buildMethodMaybe.get();
     return buildMethod.invoke(builder);
+  }
+
+  private static boolean isNumeric(Class<?> clazz) {
+    return Number.class.isAssignableFrom(clazz)
+        || int.class.isAssignableFrom(clazz)
+        || double.class.isAssignableFrom(clazz)
+        || float.class.isAssignableFrom(clazz);
   }
 
   static void verifyHasField(
