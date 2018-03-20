@@ -35,6 +35,7 @@ import com.hubspot.slack.client.interceptors.http.ResponseDebugger;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.methods.JsonStatus;
 import com.hubspot.slack.client.methods.SlackMethod;
+import com.hubspot.slack.client.methods.SlackMethods;
 import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
@@ -150,21 +151,21 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<AuthTestResponse, SlackError>> testAuth() {
-    return postSlackCommand(SlackMethod.auth_test, Collections.emptyMap(), AuthTestResponse.class);
+    return postSlackCommand(SlackMethods.auth_test, Collections.emptyMap(), AuthTestResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<SearchMessageResponse, SlackError>> searchMessages(SearchMessagesParams params) {
-    return postSlackCommand(SlackMethod.search_messages, params, SearchMessageResponse.class);
+    return postSlackCommand(SlackMethods.search_messages, params, SearchMessageResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<FindRepliesResponse, SlackError>> findReplies(FindRepliesParams params) {
     switch (params.getChannelType()) {
       case GROUP:
-        return postSlackCommand(SlackMethod.groups_replies, params, FindRepliesResponse.class);
+        return postSlackCommand(SlackMethods.groups_replies, params, FindRepliesResponse.class);
       case CHANNEL:
-        return postSlackCommand(SlackMethod.channels_replies, params, FindRepliesResponse.class);
+        return postSlackCommand(SlackMethods.channels_replies, params, FindRepliesResponse.class);
       default:
         throw new IllegalArgumentException(params.getChannelType() + " is not a supported channel type for reply fetching");
     }
@@ -190,7 +191,7 @@ public class SlackWebClient implements SlackClient {
             .ifPresent(requestBuilder::setCursor);
 
         CompletableFuture<Result<UsersListResponse, SlackError>> resultFuture = postSlackCommand(
-            SlackMethod.users_list,
+            SlackMethods.users_list,
             requestBuilder.build(),
             UsersListResponse.class
         );
@@ -228,12 +229,12 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<UsersInfoResponse, SlackError>> lookupUserByEmail(UserEmailParams params) {
-    return postSlackCommand(SlackMethod.users_lookupByEmail, params, UsersInfoResponse.class);
+    return postSlackCommand(SlackMethods.users_lookupByEmail, params, UsersInfoResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<UsersInfoResponse, SlackError>> findUser(UsersInfoParams params) {
-    return postSlackCommand(SlackMethod.users_info, params, UsersInfoResponse.class);
+    return postSlackCommand(SlackMethods.users_info, params, UsersInfoResponse.class);
   }
 
   @Override
@@ -256,7 +257,7 @@ public class SlackWebClient implements SlackClient {
             .ifPresent(requestBuilder::setCursor);
 
         CompletableFuture<Result<ChannelsListResponse, SlackError>> resultFuture = postSlackCommand(
-            SlackMethod.channels_list,
+            SlackMethods.channels_list,
             requestBuilder.build(),
             ChannelsListResponse.class
         );
@@ -312,7 +313,7 @@ public class SlackWebClient implements SlackClient {
         }
 
         CompletableFuture<Result<ChannelsHistoryResponse, SlackError>> resultFuture = postSlackCommand(
-            SlackMethod.channels_history,
+            SlackMethods.channels_history,
             currentRequest,
             ChannelsHistoryResponse.class
         );
@@ -407,52 +408,52 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(AbstractChannelsInfoParams params) {
-    return postSlackCommand(SlackMethod.channels_info, params, ChannelsInfoResponse.class);
+    return postSlackCommand(SlackMethods.channels_info, params, ChannelsInfoResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ImOpenResponse, SlackError>> openIm(ImOpenParams params) {
-    return postSlackCommand(SlackMethod.im_open, params, ImOpenResponse.class);
+    return postSlackCommand(SlackMethods.im_open, params, ImOpenResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ChatPostMessageResponse, SlackError>> postMessage(ChatPostMessageParams params) {
-    return postSlackCommand(SlackMethod.chat_postMessage, params, ChatPostMessageResponse.class);
+    return postSlackCommand(SlackMethods.chat_postMessage, params, ChatPostMessageResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ChatPostEphemeralMessageResponse, SlackError>> postEphemeralMessage(ChatPostEphemeralMessageParams params) {
-    return postSlackCommand(SlackMethod.chat_postEphemeral, params, ChatPostEphemeralMessageResponse.class);
+    return postSlackCommand(SlackMethods.chat_postEphemeral, params, ChatPostEphemeralMessageResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ChatUpdateMessageResponse, SlackError>> updateMessage(ChatUpdateMessageParams params) {
-    return postSlackCommand(SlackMethod.chat_update, params, ChatUpdateMessageResponse.class);
+    return postSlackCommand(SlackMethods.chat_update, params, ChatUpdateMessageResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ChatGetPermalinkResponse, SlackError>> getPermalink(ChatGetPermalinkParams params) {
-    return postSlackCommand(SlackMethod.chat_getPermalink, params, ChatGetPermalinkResponse.class);
+    return postSlackCommand(SlackMethods.chat_getPermalink, params, ChatGetPermalinkResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(ChatDeleteParams params) {
-    return postSlackCommand(SlackMethod.chat_delete, params, ChatDeleteResponse.class);
+    return postSlackCommand(SlackMethods.chat_delete, params, ChatDeleteResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ConversationsCreateResponse, SlackError>> createConversation(ConversationCreateParams params) {
-    return postSlackCommand(SlackMethod.conversations_create, params, ConversationsCreateResponse.class);
+    return postSlackCommand(SlackMethods.conversations_create, params, ConversationsCreateResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ConversationsInviteResponse, SlackError>> inviteToConversation(ConversationInviteParams params) {
-    return postSlackCommand(SlackMethod.conversations_invite, params, ConversationsInviteResponse.class);
+    return postSlackCommand(SlackMethods.conversations_invite, params, ConversationsInviteResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<ConversationsUnarchiveResponse, SlackError>> unarchiveConversation(ConversationUnarchiveParams params) {
-    return postSlackCommand(SlackMethod.conversations_unarchive, params, ConversationsUnarchiveResponse.class);
+    return postSlackCommand(SlackMethods.conversations_unarchive, params, ConversationsUnarchiveResponse.class);
   }
 
   @Override
@@ -489,7 +490,7 @@ public class SlackWebClient implements SlackClient {
         }
 
         CompletableFuture<Result<ConversationsHistoryResponse, SlackError>> resultFuture = postSlackCommand(
-            SlackMethod.conversations_history,
+            SlackMethods.conversations_history,
             currentRequest,
             ConversationsHistoryResponse.class
         );
@@ -513,12 +514,12 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<ConversationsArchiveResponse, SlackError>> archiveConversation(ConversationArchiveParams params) {
-    return postSlackCommand(SlackMethod.conversations_archive, params, ConversationsArchiveResponse.class);
+    return postSlackCommand(SlackMethods.conversations_archive, params, ConversationsArchiveResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(UsergroupCreateParams params) {
-    return postSlackCommand(SlackMethod.usergroups_create, params, UsergroupCreateResponse.class);
+    return postSlackCommand(SlackMethods.usergroups_create, params, UsergroupCreateResponse.class);
   }
 
   @Override
@@ -536,7 +537,7 @@ public class SlackWebClient implements SlackClient {
         }
 
         CompletableFuture<Result<UsergroupListResponse, SlackError>> resultFuture = postSlackCommand(
-            SlackMethod.usergroups_list,
+            SlackMethods.usergroups_list,
             UsergroupListParams.builder()
                 .from(params)
                 .build(),
@@ -562,27 +563,27 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<UsergroupUpdateResponse, SlackError>> updateUsergroup(UsergroupUpdateParams params) {
-    return postSlackCommand(SlackMethod.usergroups_update, params, UsergroupUpdateResponse.class);
+    return postSlackCommand(SlackMethods.usergroups_update, params, UsergroupUpdateResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<UsergroupEnableResponse, SlackError>> enableUsergroup(UsergroupEnableParams params) {
-    return postSlackCommand(SlackMethod.usergroups_enable, params, UsergroupEnableResponse.class);
+    return postSlackCommand(SlackMethods.usergroups_enable, params, UsergroupEnableResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<UsergroupDisableResponse, SlackError>> disableUsergroup(UsergroupDisableParams params) {
-    return postSlackCommand(SlackMethod.usergroups_disable, params, UsergroupDisableResponse.class);
+    return postSlackCommand(SlackMethods.usergroups_disable, params, UsergroupDisableResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<UsergroupUsersUpdateResponse, SlackError>> updateUsergroupUsers(UsergroupUsersUpdateParams params) {
-    return postSlackCommand(SlackMethod.usergroups_users_update, params, UsergroupUsersUpdateResponse.class);
+    return postSlackCommand(SlackMethods.usergroups_users_update, params, UsergroupUsersUpdateResponse.class);
   }
 
   @Override
   public CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(DialogOpenParams params) {
-    return postSlackCommand(SlackMethod.dialog_open, params, DialogOpenResponse.class);
+    return postSlackCommand(SlackMethods.dialog_open, params, DialogOpenResponse.class);
   }
 
   @Override
@@ -600,7 +601,7 @@ public class SlackWebClient implements SlackClient {
         }
 
         CompletableFuture<Result<GroupsListResponse, SlackError>> resultFuture = postSlackCommand(
-            SlackMethod.groups_list,
+            SlackMethods.groups_list,
             GroupsListParams.builder()
                 .from(filter)
                 .build(), GroupsListResponse.class
@@ -623,7 +624,7 @@ public class SlackWebClient implements SlackClient {
     };
   }
 
-  private <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
+  public <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
       SlackMethod method,
       Object params,
       Class<T> returnClazz) {
@@ -649,7 +650,11 @@ public class SlackWebClient implements SlackClient {
     );
   }
 
-  private <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommandJsonEncoded(SlackMethod method, Object params, Class<T> responseType) {
+  private <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommandJsonEncoded(
+      SlackMethod method,
+      Object params,
+      Class<T> responseType
+  ) {
     HttpRequest request = buildBaseSlackPost(method)
         .setContentType(ContentType.JSON)
         .setBody(params)
