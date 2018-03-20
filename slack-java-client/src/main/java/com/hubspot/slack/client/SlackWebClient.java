@@ -54,6 +54,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationCreateP
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
@@ -87,6 +88,7 @@ import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsHistoryResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationsInfoResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsInviteResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
@@ -523,6 +525,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ConversationsArchiveResponse, SlackError>> archiveConversation(ConversationArchiveParams params) {
     return postSlackCommand(SlackMethods.conversations_archive, params, ConversationsArchiveResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(ConversationsInfoParams params) {
+    return postSlackCommand(SlackMethods.conversations_info, params, ConversationsInfoResponse.class);
   }
 
   @Override
