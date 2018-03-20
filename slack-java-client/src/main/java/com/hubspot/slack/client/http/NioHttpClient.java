@@ -5,21 +5,23 @@ import java.util.concurrent.CompletableFuture;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import com.google.inject.assistedinject.Assisted;
 import com.hubspot.horizon.AsyncHttpClient;
 import com.hubspot.horizon.AsyncHttpClient.Callback;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpRequest.Options;
 import com.hubspot.horizon.HttpResponse;
-import com.hubspot.slack.client.Slack;
 
-@Singleton
 public class NioHttpClient {
   private final AsyncHttpClient delegate;
 
+  public interface Factory {
+    NioHttpClient wrap(@Assisted AsyncHttpClient delegate);
+  }
+
   @Inject
   public NioHttpClient(
-      @Slack AsyncHttpClient delegate
+      @Assisted AsyncHttpClient delegate
   ) {
     this.delegate = delegate;
   }

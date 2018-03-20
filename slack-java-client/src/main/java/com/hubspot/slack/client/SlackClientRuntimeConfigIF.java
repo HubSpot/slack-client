@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 
 import org.immutables.value.Value.Immutable;
 
+import com.hubspot.horizon.HttpConfig;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.RequestDebugger;
@@ -20,6 +21,8 @@ public interface SlackClientRuntimeConfigIF {
   Supplier<Integer> getChannelsListBatchSize();
   Supplier<Integer> getChannelsHistoryMessageBatchSize();
   Supplier<Integer> getConversationsHistoryMessageBatchSize();
+
+  Optional<HttpConfig> getHttpConfig();
 
   Optional<SlackMethodAcceptor> getMethodFilter();
 

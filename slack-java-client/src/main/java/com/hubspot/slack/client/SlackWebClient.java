@@ -21,10 +21,12 @@ import com.google.common.collect.Multimap;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 import com.hubspot.algebra.Result;
+import com.hubspot.horizon.HttpConfig;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpRequest.ContentType;
 import com.hubspot.horizon.HttpRequest.Method;
 import com.hubspot.horizon.HttpResponse;
+import com.hubspot.horizon.ning.NingAsyncHttpClient;
 import com.hubspot.slack.client.http.NioHttpClient;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpRequestDebugger;
@@ -104,9 +106,11 @@ import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.paging.AbstractPagedIterable;
 import com.hubspot.slack.client.paging.LazyLoadingPage;
 
-;
-
 public class SlackWebClient implements SlackClient {
+  private static final HttpConfig DEFAULT_CONFIG = HttpConfig.newBuilder()
+      .setObjectMapper(ObjectMapperUtils.mapper())
+      .build();
+
   public interface Factory {
     SlackWebClient build(
         @Assisted SlackClientRuntimeConfig config
@@ -127,10 +131,14 @@ public class SlackWebClient implements SlackClient {
   public SlackWebClient(
       DefaultHttpRequestDebugger defaultHttpRequestDebugger,
       DefaultHttpResponseDebugger defaultHttpResponseDebugger,
-      @Slack NioHttpClient nioHttpClient,
+      NioHttpClient.Factory nioHttpClientFactory,
       @Assisted SlackClientRuntimeConfig config
   ) {
-    this.nioHttpClient = nioHttpClient;
+    this.nioHttpClient = nioHttpClientFactory.wrap(
+        new NingAsyncHttpClient(
+            config.getHttpConfig().orElse(DEFAULT_CONFIG)
+        )
+    );
     this.config = config;
 
     this.methodAcceptor = config.getMethodFilter()
