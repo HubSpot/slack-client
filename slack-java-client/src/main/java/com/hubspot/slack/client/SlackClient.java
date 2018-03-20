@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import com.hubspot.algebra.Result;
+import com.hubspot.slack.client.methods.SlackMethod;
 import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
-import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
+import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
 import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
 import com.hubspot.slack.client.methods.params.chat.ChatGetPermalinkParams;
@@ -35,6 +36,7 @@ import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.group.SlackGroup;
 import com.hubspot.slack.client.models.response.FindRepliesResponse;
 import com.hubspot.slack.client.models.response.SlackError;
+import com.hubspot.slack.client.models.response.SlackResponse;
 import com.hubspot.slack.client.models.response.auth.AuthTestResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
 import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
@@ -107,4 +109,11 @@ public interface SlackClient {
 
   // dialogs
   CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(DialogOpenParams params);
+
+  // extension
+  <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
+      SlackMethod method,
+      Object params,
+      Class<T> returnClazz
+  );
 }
