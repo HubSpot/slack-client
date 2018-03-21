@@ -38,6 +38,11 @@
       </dependency>
       <dependency>
         <groupId>com.hubspot</groupId>
+        <artifactId>HorizonApache</artifactId>
+        <version>${horizon.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hubspot</groupId>
         <artifactId>algebra</artifactId>
         <version>${dep.algebra.version}</version>
       </dependency>

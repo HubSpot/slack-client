@@ -689,7 +689,6 @@ public class SlackWebClient implements SlackClient {
             JsonNode responseJson = response.getAsJsonNode();
             boolean isOk = responseJson.get("ok").asBoolean();
             if (isOk) {
-              responseDebugger.debug(requestId, method, request, response);
               return Result.ok(ObjectMapperUtils.mapper().treeToValue(responseJson, responseType));
             }
 

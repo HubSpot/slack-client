@@ -11,6 +11,8 @@ import com.hubspot.horizon.AsyncHttpClient.Callback;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpRequest.Options;
 import com.hubspot.horizon.HttpResponse;
+import com.hubspot.horizon.apache.internal.CachedHttpResponse;
+import com.hubspot.horizon.internal.AbstractHttpResponse;
 
 public class NioHttpClient {
   private final AsyncHttpClient delegate;
@@ -63,7 +65,16 @@ public class NioHttpClient {
     execute(request, new Callback() {
       @Override
       public void completed(HttpResponse response) {
-        responseFuture.complete(response);
+        if (response instanceof AbstractHttpResponse) {
+          try {
+            HttpResponse cached = CachedHttpResponse.from((AbstractHttpResponse) response);
+            responseFuture.complete(cached);
+          } catch (IOException ex) {
+            throw new RuntimeException("Unable to cache http response", ex);
+          }
+        } else {
+          responseFuture.complete(response);
+        }
       }
 
       @Override
