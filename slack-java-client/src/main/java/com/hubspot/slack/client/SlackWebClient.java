@@ -689,6 +689,7 @@ public class SlackWebClient implements SlackClient {
             JsonNode responseJson = response.getAsJsonNode();
             boolean isOk = responseJson.get("ok").asBoolean();
             if (isOk) {
+              responseDebugger.debug(requestId, method, request, response);
               return Result.ok(ObjectMapperUtils.mapper().treeToValue(responseJson, responseType));
             }
 
@@ -714,13 +715,12 @@ public class SlackWebClient implements SlackClient {
       Multimap<String, String> params,
       Class<T> responseType
   ) {
-    HttpRequest.Builder requestBuilder = buildBaseSlackPost(method);
+    HttpRequest.Builder requestBuilder = buildBaseSlackPost(method)
+        .setContentType(ContentType.FORM);
     params.entries()
         .forEach(param -> requestBuilder.setFormParam(param.getKey()).to(param.getValue()));
     requestBuilder.setFormParam("token").to(config.getTokenSupplier().get());
-    requestBuilder.setContentType(ContentType.FORM)
-        .setQueryParam("token").to(config.getTokenSupplier().get())
-        .build();
+    requestBuilder.setQueryParam("token").to(config.getTokenSupplier().get());
     return executeLoggedAs(method, requestBuilder.build(), responseType);
   }
 

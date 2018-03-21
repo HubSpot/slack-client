@@ -24,7 +24,7 @@ public class DefaultHttpResponseDebugger implements ResponseDebugger {
       HttpRequest request,
       Throwable exception
   ) {
-    LOG.error("REQ<{}> [{}]: Failed because {}", requestId, method, exception);
+    LOG.error("REQ<{}> [{}]: Failed because {}", requestId, method, exception.getCause().getMessage(), exception);
   }
 
   @Override
