@@ -2,6 +2,7 @@ package com.hubspot.slack.client.http;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hubspot.horizon.Headers;
@@ -48,7 +49,7 @@ public class CachingHttpResponse extends AbstractHttpResponse {
 
   @Override
   public byte[] getAsBytes() {
-    return responseBytes;
+    return Arrays.copyOf(responseBytes, responseBytes.length);
   }
 
   @Override
