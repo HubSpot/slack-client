@@ -79,7 +79,6 @@ public class NioHttpClient implements Closeable {
       @Override
       public void completed(HttpResponse response) {
         if (response instanceof AbstractHttpResponse) {
-          response.getAsBytes();
           HttpResponse cached = CachingHttpResponse.from((AbstractHttpResponse) response);
           responseFuture.complete(cached);
         } else {
