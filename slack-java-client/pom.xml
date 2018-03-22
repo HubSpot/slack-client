@@ -18,10 +18,6 @@
     </dependency>
     <dependency>
       <groupId>com.hubspot</groupId>
-      <artifactId>HorizonApache</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.hubspot</groupId>
       <artifactId>HorizonNing</artifactId>
     </dependency>
     <dependency>
