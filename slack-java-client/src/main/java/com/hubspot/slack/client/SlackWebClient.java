@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import com.google.inject.assistedinject.Assisted;
@@ -718,7 +719,6 @@ public class SlackWebClient implements SlackClient {
         .setContentType(ContentType.FORM);
     params.entries()
         .forEach(param -> requestBuilder.setFormParam(param.getKey()).to(param.getValue()));
-    requestBuilder.setFormParam("token").to(config.getTokenSupplier().get());
     requestBuilder.setQueryParam("token").to(config.getTokenSupplier().get());
     return executeLoggedAs(method, requestBuilder.build(), responseType);
   }
@@ -729,6 +729,7 @@ public class SlackWebClient implements SlackClient {
       HttpRequest request
   ) {
     requestDebugger.debug(requestId, method, request);
+    Stopwatch timer = Stopwatch.createStarted();
 
     CompletableFuture<HttpResponse> responseFuture = nioHttpClient.executeCompletableFuture(request);
 
@@ -737,7 +738,7 @@ public class SlackWebClient implements SlackClient {
         responseDebugger.debugTransportException(requestId, method, request, throwable);
 
       } else {
-        responseDebugger.debug(requestId, method, request, httpResponse);
+        responseDebugger.debug(requestId, method, timer, request, httpResponse);
       }
     });
 

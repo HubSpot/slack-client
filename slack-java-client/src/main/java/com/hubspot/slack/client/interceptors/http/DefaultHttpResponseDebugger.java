@@ -1,8 +1,11 @@
 package com.hubspot.slack.client.interceptors.http;
 
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Stopwatch;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.hubspot.horizon.HttpRequest;
@@ -31,10 +34,11 @@ public class DefaultHttpResponseDebugger implements ResponseDebugger {
   public void debug(
       long requestId,
       SlackMethod method,
+      Stopwatch timer,
       HttpRequest request,
       HttpResponse response
   ) {
-    LOG.debug("REQ<{}> [{}]: Received \n\n{}", requestId, method, HttpFormatter.formatResponse(response));
+    LOG.debug("REQ<{}> [{}, completion in {}ms]: Received \n\n{}", requestId, method, timer.elapsed(TimeUnit.MILLISECONDS), HttpFormatter.formatResponse(response));
   }
 
   @Override

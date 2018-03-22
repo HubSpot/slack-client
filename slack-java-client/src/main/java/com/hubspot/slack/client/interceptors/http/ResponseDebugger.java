@@ -1,6 +1,7 @@
 package com.hubspot.slack.client.interceptors.http;
 
 
+import com.google.common.base.Stopwatch;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpResponse;
 import com.hubspot.slack.client.methods.SlackMethod;
@@ -9,6 +10,7 @@ public interface ResponseDebugger {
   void debug(
       long requestId,
       SlackMethod method,
+      Stopwatch timer,
       HttpRequest request,
       HttpResponse response
   );

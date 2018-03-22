@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.http;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
@@ -14,7 +15,7 @@ import com.hubspot.horizon.HttpResponse;
 import com.hubspot.horizon.apache.internal.CachedHttpResponse;
 import com.hubspot.horizon.internal.AbstractHttpResponse;
 
-public class NioHttpClient {
+public class NioHttpClient implements Closeable {
   private final AsyncHttpClient delegate;
 
   public interface Factory {
@@ -85,6 +86,7 @@ public class NioHttpClient {
     return responseFuture;
   }
 
+  @Override
   public void close() throws IOException {
     delegate.close();
   }
