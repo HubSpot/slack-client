@@ -3,6 +3,11 @@ package com.hubspot.slack.client.http;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.inject.Inject;
@@ -16,6 +21,14 @@ import com.hubspot.horizon.apache.internal.CachedHttpResponse;
 import com.hubspot.horizon.internal.AbstractHttpResponse;
 
 public class NioHttpClient implements Closeable {
+  private static final ExecutorService CALLBACK_EXECUTOR = new ThreadPoolExecutor(
+      0,
+      Integer.MAX_VALUE,
+      60,
+      TimeUnit.SECONDS,
+      new SynchronousQueue<>(false)
+  );
+
   private final AsyncHttpClient delegate;
 
   public interface Factory {
@@ -71,6 +84,7 @@ public class NioHttpClient implements Closeable {
             HttpResponse cached = CachedHttpResponse.from((AbstractHttpResponse) response);
             responseFuture.complete(cached);
           } catch (IOException ex) {
+            responseFuture.completeExceptionally(ex);
             throw new RuntimeException("Unable to cache http response", ex);
           }
         } else {
@@ -83,7 +97,8 @@ public class NioHttpClient implements Closeable {
         responseFuture.completeExceptionally(ex);
       }
     });
-    return responseFuture;
+
+    return responseFuture.thenApplyAsync(Function.identity(), CALLBACK_EXECUTOR);
   }
 
   @Override
