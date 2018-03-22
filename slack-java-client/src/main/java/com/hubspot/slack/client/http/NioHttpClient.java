@@ -17,7 +17,6 @@ import com.hubspot.horizon.AsyncHttpClient.Callback;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpRequest.Options;
 import com.hubspot.horizon.HttpResponse;
-import com.hubspot.horizon.apache.internal.CachedHttpResponse;
 import com.hubspot.horizon.internal.AbstractHttpResponse;
 
 public class NioHttpClient implements Closeable {
@@ -80,13 +79,9 @@ public class NioHttpClient implements Closeable {
       @Override
       public void completed(HttpResponse response) {
         if (response instanceof AbstractHttpResponse) {
-          try {
-            HttpResponse cached = CachedHttpResponse.from((AbstractHttpResponse) response);
-            responseFuture.complete(cached);
-          } catch (IOException ex) {
-            responseFuture.completeExceptionally(ex);
-            throw new RuntimeException("Unable to cache http response", ex);
-          }
+          response.getAsBytes();
+          HttpResponse cached = CachingHttpResponse.from((AbstractHttpResponse) response);
+          responseFuture.complete(cached);
         } else {
           responseFuture.complete(response);
         }
