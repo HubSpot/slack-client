@@ -32,12 +32,20 @@ public interface UserProfileIF {
   Optional<String> getTeamId();
 
   Optional<String> getAvatarHash();
-  Optional<String> getImage24();
-  Optional<String> getImage32();
-  Optional<String> getImage48();
-  Optional<String> getImage72();
-  Optional<String> getImage192();
-  Optional<String> getImage512();
-  Optional<String> getImage1024();
   Optional<String> getImageOriginal();
+
+  @JsonProperty("image_24")
+  Optional<String> getImage24();
+  @JsonProperty("image_32")
+  Optional<String> getImage32();
+  @JsonProperty("image_48")
+  Optional<String> getImage48();
+  @JsonProperty("image_72")
+  Optional<String> getImage72();
+  @JsonProperty("image_192")
+  Optional<String> getImage192();
+  @JsonProperty("image_512")
+  Optional<String> getImage512();
+  @JsonProperty("image_1024")
+  Optional<String> getImage1024();
 }
