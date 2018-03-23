@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -21,10 +20,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.util.concurrent.RateLimiter;
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 import com.hubspot.algebra.Result;
@@ -691,40 +688,23 @@ public class SlackWebClient implements SlackClient {
   ) {
     long requestId = REQUEST_COUNTER.getAndIncrement();
     return executeLogged(requestId, method, request)
-        .thenCompose(response -> {
+        .thenApply(response -> {
           try {
             JsonNode responseJson = response.getAsJsonNode();
             boolean isOk = responseJson.get("ok").asBoolean();
             if (isOk) {
-              return CompletableFuture.completedFuture(
-                  Result.ok(ObjectMapperUtils.mapper().treeToValue(responseJson, responseType))
-              );
+              return Result.ok(ObjectMapperUtils.mapper().treeToValue(responseJson, responseType));
             }
 
             SlackError error = ObjectMapperUtils.mapper().treeToValue(response.getAsJsonNode(), SlackError.class);
             responseDebugger.debugSlackApiError(requestId, method, request, response);
-
-            if (error.getType() == SlackErrorType.RATE_LIMITED) {
-              List<String> retryAfterHeaders = response.getHeaders().get("Retry-After");
-              String retryAfterRaw = Iterables.getOnlyElement(retryAfterHeaders);
-              int retryAfterSeconds = Integer.parseInt(retryAfterRaw);
-
-              LOG.warn("Rate limited, so sleeping {}s and then retrying", retryAfterSeconds);
-              Uninterruptibles.sleepUninterruptibly(retryAfterSeconds, TimeUnit.SECONDS);
-              return executeLoggedAs(method, request, responseType);
-            }
-
-            return CompletableFuture.completedFuture(
-                Result.err(error)
-            );
+            return Result.err(error);
           } catch (JsonProcessingException e) {
             responseDebugger.debugProcessingFailure(requestId, method, request, response, e);
-            return CompletableFuture.completedFuture(
-                Result.err(SlackError.builder()
-                    .setError(SlackErrorType.JSON_PARSING_FAILED.getCode())
-                    .setType(SlackErrorType.JSON_PARSING_FAILED)
-                    .build()
-                )
+            return Result.err(SlackError.builder()
+                .setError(SlackErrorType.JSON_PARSING_FAILED.getCode())
+                .setType(SlackErrorType.JSON_PARSING_FAILED)
+                .build()
             );
           } catch (RuntimeException ex) {
             responseDebugger.debugProcessingFailure(requestId, method, request, response, ex);
