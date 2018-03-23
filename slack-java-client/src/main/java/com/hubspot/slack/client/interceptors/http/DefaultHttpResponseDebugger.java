@@ -48,7 +48,7 @@ public class DefaultHttpResponseDebugger implements ResponseDebugger {
       HttpRequest request,
       HttpResponse failure
   ) {
-    LOG.error("REQ<{}> [{}]: Failed interaction\n{}\n{}", request, method, HttpFormatter.formatRequest(request), HttpFormatter.formatResponse(failure));
+    LOG.error("REQ<{}> [{}]: Failed interaction\n{}\n{}", requestId, method, HttpFormatter.formatRequest(request), HttpFormatter.formatResponse(failure));
   }
 
   @Override
@@ -59,6 +59,6 @@ public class DefaultHttpResponseDebugger implements ResponseDebugger {
       HttpResponse response,
       Throwable ex
   ) {
-    LOG.error("REQ<{}> [{}]: Failed interaction\n{}\n{}", request, method, HttpFormatter.formatRequest(request), HttpFormatter.formatResponse(response), ex);
+    LOG.error("REQ<{}> [{}]: Failed interaction\n{}\n{}", requestId, method, HttpFormatter.formatRequest(request), HttpFormatter.formatResponse(response), ex);
   }
 }
