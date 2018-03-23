@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
+import com.google.common.util.concurrent.RateLimiter;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 import com.hubspot.algebra.Result;
@@ -108,18 +111,18 @@ import com.hubspot.slack.client.paging.AbstractPagedIterable;
 import com.hubspot.slack.client.paging.LazyLoadingPage;
 
 public class SlackWebClient implements SlackClient {
+  private static final Logger LOG = LoggerFactory.getLogger(SlackWebClient.class);
   private static final HttpConfig DEFAULT_CONFIG = HttpConfig.newBuilder()
       .setObjectMapper(ObjectMapperUtils.mapper())
       .build();
+  private static final AtomicLong REQUEST_COUNTER = new AtomicLong(0);
+  private static final ConcurrentMap<SlackMethod, RateLimiter> RATE_LIMITERS = new ConcurrentHashMap<>();
 
   public interface Factory {
     SlackWebClient build(
         @Assisted SlackClientRuntimeConfig config
     );
   }
-
-  private static final Logger LOG = LoggerFactory.getLogger(SlackWebClient.class);
-  private static final AtomicLong REQUEST_COUNTER = new AtomicLong(0);
 
   private final NioHttpClient nioHttpClient;
   private final SlackClientRuntimeConfig config;
@@ -731,6 +734,7 @@ public class SlackWebClient implements SlackClient {
     requestDebugger.debug(requestId, method, request);
     Stopwatch timer = Stopwatch.createStarted();
 
+    acquirePermit(method);
     CompletableFuture<HttpResponse> responseFuture = nioHttpClient.executeCompletableFuture(request);
 
     responseFuture.whenComplete((httpResponse, throwable) -> {
@@ -743,5 +747,16 @@ public class SlackWebClient implements SlackClient {
     });
 
     return responseFuture;
+  }
+
+  private void acquirePermit(SlackMethod method) {
+    double permissibleQps = method.getRateLimitingTier().getMinutelyAllowance() / 60.0;
+    double acquireTime = RATE_LIMITERS.computeIfAbsent(
+        method,
+        ignored -> RateLimiter.create(permissibleQps)
+    ).acquire();
+    if (acquireTime > 0.0) {
+      LOG.warn("Throttling {}, waited {}ms to acquire permit to run", method, acquireTime);
+    }
   }
 }
