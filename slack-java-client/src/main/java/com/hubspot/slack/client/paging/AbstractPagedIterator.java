@@ -12,8 +12,18 @@ public abstract class AbstractPagedIterator<T, K> extends AbstractIterator<Compl
   @Override
   protected final CompletableFuture<T> computeNext() {
     try {
-      if (page == null || page.hasMore().join()) {
+      if (page == null) {
         page = getPage(getInitialOffset());
+
+        if (page == null) {
+          return endOfData();
+        }
+
+        return page.getResults();
+      }
+
+      if (page.hasMore().join()) {
+        page = getPage(page.getOffset().join());
         return page.getResults();
       }
 
