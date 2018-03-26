@@ -255,8 +255,7 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  // TODO: switch this to channelsListParams and make sure to use it in the request builder
-  public Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsFilter filter) {
+  public Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter) {
     return new AbstractPagedIterable<Result<List<SlackChannel>, SlackError>, String>() {
       @Override
       protected String getInitialOffset() {
@@ -270,6 +269,7 @@ public class SlackWebClient implements SlackClient {
         }
 
         ChannelsListParams.Builder requestBuilder = ChannelsListParams.builder()
+            .from(filter)
             .setLimit(config.getChannelsListBatchSize().get());
         Optional.ofNullable(offset)
             .ifPresent(requestBuilder::setCursor);
@@ -399,7 +399,7 @@ public class SlackWebClient implements SlackClient {
   }
 
   private CompletableFuture<Optional<SlackChannel>> findChannelByName(String name, ChannelsFilter channelsFilter) {
-    return searchNextPage(name, listChannels(channelsFilter).iterator());
+    return searchNextPage(name, listChannels(ChannelsListParams.builder().from(channelsFilter).build()).iterator());
   }
 
   private CompletableFuture<Optional<SlackChannel>> searchNextPage(

@@ -8,6 +8,7 @@ import com.hubspot.slack.client.methods.SlackMethod;
 import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
+import com.hubspot.slack.client.methods.params.channels.ChannelsListParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
 import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
 import com.hubspot.slack.client.methods.params.chat.ChatGetPermalinkParams;
@@ -78,7 +79,7 @@ public interface SlackClient {
   Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
 
   // channels
-  Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsFilter filter);
+  Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter);
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> channelHistory(ChannelsHistoryParams params);
   CompletableFuture<Result<SlackChannel, SlackError>> getChannelByName(String channelName, ChannelsFilter channelsFilter);
   CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(AbstractChannelsInfoParams params);
