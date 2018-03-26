@@ -8,12 +8,12 @@ Include the base and client modules in your POM:
 
 ```xml
 <dependency>
-  <groupId>com.hubspot</groupId>
-  <artifactId>slack-public-base</artifactId>
+  <groupId>com.hubspot.slack</groupId>
+  <artifactId>slack-base</artifactId>
   <version>1.0</version>
 </dependency>
 <dependency>
-  <groupId>com.hubspot</groupId>
+  <groupId>com.hubspot.slack</groupId>
   <artifactId>slack-java-client</artifactId>
   <version>1.0</version>
 </dependency>
