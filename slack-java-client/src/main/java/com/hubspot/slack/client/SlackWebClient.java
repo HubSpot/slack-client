@@ -399,7 +399,13 @@ public class SlackWebClient implements SlackClient {
   }
 
   private CompletableFuture<Optional<SlackChannel>> findChannelByName(String name, ChannelsFilter channelsFilter) {
-    return searchNextPage(name, listChannels(ChannelsListParams.builder().from(channelsFilter).build()).iterator());
+    return searchNextPage(name,
+        listChannels(
+            ChannelsListParams.builder()
+                .from(channelsFilter)
+                .build()
+        ).iterator()
+    );
   }
 
   private CompletableFuture<Optional<SlackChannel>> searchNextPage(
