@@ -59,6 +59,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationInviteP
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
@@ -74,6 +75,7 @@ import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.methods.params.users.UsersListParams;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
+import com.hubspot.slack.client.models.conversations.Conversation;
 import com.hubspot.slack.client.models.group.SlackGroup;
 import com.hubspot.slack.client.models.response.FindRepliesResponse;
 import com.hubspot.slack.client.models.response.ResponseMetadata;
@@ -89,6 +91,7 @@ import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsHistoryResponse;
@@ -252,6 +255,7 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  // TODO: switch this to channelsListParams and make sure to use it in the request builder
   public Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsFilter filter) {
     return new AbstractPagedIterable<Result<List<SlackChannel>, SlackError>, String>() {
       @Override
@@ -453,6 +457,50 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(ChatDeleteParams params) {
     return postSlackCommand(SlackMethods.chat_delete, params, ChatDeleteResponse.class);
+  }
+
+  @Override
+  public Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> listConversations(ConversationsListParams params) {
+    return new AbstractPagedIterable<Result<List<Conversation>, SlackError>, String>() {
+
+      @Override
+      protected String getInitialOffset() {
+        return null;
+      }
+
+      @Override
+      protected LazyLoadingPage<Result<List<Conversation>, SlackError>, String> getPage(String offset) throws Exception {
+        if (LOG.isTraceEnabled()) {
+          LOG.trace("Fetching slack conversation page from {}", offset);
+        }
+
+        ConversationsListParams.Builder requestBuilder = ConversationsListParams.builder()
+            .from(params)
+            .setLimit(config.getChannelsListBatchSize().get());
+        Optional.ofNullable(offset)
+            .ifPresent(requestBuilder::setCursor);
+
+        CompletableFuture<Result<ConversationListResponse, SlackError>> resultFuture = postSlackCommand(
+            SlackMethods.conversations_list,
+            requestBuilder.build(),
+            ConversationListResponse.class
+        );
+
+        CompletableFuture<Result<List<Conversation>, SlackError>> pageFuture = resultFuture.thenApply(
+            result -> result.mapOk(ConversationListResponse::getConversations)
+        );
+
+        CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(resultFuture);
+        CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(Optional::isPresent);
+        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
+
+        return new LazyLoadingPage<>(
+            pageFuture,
+            hasMoreFuture,
+            nextCursorFuture
+        );
+      }
+    };
   }
 
   @Override
