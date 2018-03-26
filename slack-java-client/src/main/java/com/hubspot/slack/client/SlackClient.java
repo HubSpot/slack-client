@@ -34,6 +34,7 @@ import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
+import com.hubspot.slack.client.models.conversations.Conversation;
 import com.hubspot.slack.client.models.group.SlackGroup;
 import com.hubspot.slack.client.models.response.FindRepliesResponse;
 import com.hubspot.slack.client.models.response.SlackError;
@@ -99,6 +100,7 @@ public interface SlackClient {
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> getConversationHistory(ConversationsHistoryParams params);
   CompletableFuture<Result<ConversationsArchiveResponse, SlackError>> archiveConversation(ConversationArchiveParams params);
   CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(ConversationsInfoParams params);
+  CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ChannelsFilter channelsFilter);
 
   // usergroups
   CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(UsergroupCreateParams params);

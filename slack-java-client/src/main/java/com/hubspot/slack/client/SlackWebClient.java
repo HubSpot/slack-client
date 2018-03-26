@@ -74,6 +74,8 @@ import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.methods.params.users.UsersListParams;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
+import com.hubspot.slack.client.models.actions.Option;
+import com.hubspot.slack.client.models.conversations.Conversation;
 import com.hubspot.slack.client.models.group.SlackGroup;
 import com.hubspot.slack.client.models.response.FindRepliesResponse;
 import com.hubspot.slack.client.models.response.ResponseMetadata;
@@ -420,6 +422,32 @@ public class SlackWebClient implements SlackClient {
         });
   }
 
+  private CompletableFuture<Optional<Conversation>> findConversationByName(String conversationName, ChannelsFilter channelsFilter) {
+    return searchNextConversationPage(conversationName, listConversations(channelsFilter));
+  }
+
+  private CompletableFuture<Optional<Conversation>> searchNextConversationPage(
+      String conversationName,
+      Iterator<CompletableFuture<Result<List<Conversation>, SlackError>>> pageIterator
+  ) {
+    if (!pageIterator.hasNext()) {
+      return CompletableFuture.completedFuture(Optional.empty());
+    }
+
+    CompletableFuture<Result<List<Conversation>, SlackError>> nextPage = pageIterator.next();
+    return nextPage.thenApply(Result::unwrapOrElseThrow)
+        .thenCompose(conversations -> {
+          Optional<Conversation> matchInPage = conversations.stream()
+              .filter(conversation -> conversation.getName().isPresent() && conversation.getName().get().equals(conversationName))
+              .findFirst();
+          if (matchInPage.isPresent()) {
+            return CompletableFuture.completedFuture(matchInPage);
+          }
+
+          return searchNextConversationPage(conversationName, pageIterator);
+        });
+  }
+
   @Override
   public CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(AbstractChannelsInfoParams params) {
     return postSlackCommand(SlackMethods.channels_info, params, ChannelsInfoResponse.class);
@@ -534,6 +562,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(ConversationsInfoParams params) {
     return postSlackCommand(SlackMethods.conversations_info, params, ConversationsInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ChannelsFilter channelsFilter) {
+    return null;
   }
 
   @Override
