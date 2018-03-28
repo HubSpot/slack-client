@@ -57,6 +57,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationArchive
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
@@ -588,6 +589,51 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(ConversationsInfoParams params) {
     return postSlackCommand(SlackMethods.conversations_info, params, ConversationsInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter) {
+    return findConversationByName(conversationName, conversationsFilter)
+        .thenApply(conversation -> {
+          if (conversation.isPresent()) {
+            return Result.ok(conversation.get());
+          } else {
+            return Result.err(SlackError.builder()
+                .setType(SlackErrorType.CHANNEL_NOT_FOUND)
+                .setError("No conversation found with name: " + conversationName)
+                .build());
+          }
+        });
+  }
+
+  private CompletableFuture<Optional<Conversation>> findConversationByName(String conversationName, ConversationsFilter conversationsFilter) {
+    return searchNextConversationPage(conversationName,
+        listConversations(ConversationsListParams.builder()
+            .from(conversationsFilter)
+            .build()
+        ).iterator());
+  }
+
+  private CompletableFuture<Optional<Conversation>> searchNextConversationPage(
+      String conversationName,
+      Iterator<CompletableFuture<Result<List<Conversation>, SlackError>>> pageIterator
+  ) {
+    if (!pageIterator.hasNext()) {
+      return CompletableFuture.completedFuture(Optional.empty());
+    }
+
+    CompletableFuture<Result<List<Conversation>, SlackError>> nextPage = pageIterator.next();
+    return nextPage.thenApply(Result::unwrapOrElseThrow)
+        .thenCompose(conversations -> {
+          Optional<Conversation> matchInPage = conversations.stream()
+              .filter(conversation -> conversation.getName().isPresent() && conversation.getName().get().equals(conversationName))
+              .findFirst();
+          if (matchInPage.isPresent()) {
+            return CompletableFuture.completedFuture(matchInPage);
+          }
+
+          return searchNextConversationPage(conversationName, pageIterator);
+        });
   }
 
   @Override
