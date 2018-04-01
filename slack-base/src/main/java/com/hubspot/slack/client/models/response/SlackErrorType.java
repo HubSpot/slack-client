@@ -8,6 +8,7 @@ import com.google.common.collect.Maps;
 
 public enum SlackErrorType {
   ACCOUNT_INACTIVE("account_inactive"),
+  ALREADY_REACTED("already_reacted"),
   APP_MISSING_ACTION_URL("app_missing_action_url"),
 
   CANT_DELETE_MESSAGE("cant_delete_message"),
