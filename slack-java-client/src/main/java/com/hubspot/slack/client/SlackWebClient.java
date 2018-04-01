@@ -64,6 +64,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsListPa
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
+import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
 import com.hubspot.slack.client.methods.params.search.SearchMessagesParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupCreateParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupDisableParams;
@@ -703,6 +704,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(DialogOpenParams params) {
     return postSlackCommand(SlackMethods.dialog_open, params, DialogOpenResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<SlackResponse, SlackError>> addReaction(ReactionsAddParams params) {
+    return postSlackCommand(SlackMethods.reactions_add, params, SlackResponse.class);
   }
 
   @Override
