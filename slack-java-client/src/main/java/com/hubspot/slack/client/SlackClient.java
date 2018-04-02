@@ -57,6 +57,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
+import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupDisableResponse;
@@ -121,7 +122,7 @@ public interface SlackClient {
   CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(DialogOpenParams params);
 
   // reactions
-  CompletableFuture<Result<SlackResponse, SlackError>> addReaction(ReactionsAddParams param);
+  CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(ReactionsAddParams param);
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(

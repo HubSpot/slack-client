@@ -103,6 +103,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsUnarc
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.group.GroupsListResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
+import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupDisableResponse;
@@ -707,8 +708,8 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<SlackResponse, SlackError>> addReaction(ReactionsAddParams params) {
-    return postSlackCommand(SlackMethods.reactions_add, params, SlackResponse.class);
+  public CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(ReactionsAddParams params) {
+    return postSlackCommand(SlackMethods.reactions_add, params, AddReactionResponse.class);
   }
 
   @Override
