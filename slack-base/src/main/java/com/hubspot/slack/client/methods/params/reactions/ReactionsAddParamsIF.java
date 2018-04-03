@@ -15,9 +15,6 @@ import com.hubspot.immutables.validation.ImmutableConditions;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ReactionsAddParamsIF {
   String getName();
-  /**
-   * One of file, file_comment, or the combination of channel and timestamp must be specified.
-   **/
   Optional<String> getChannel();
   Optional<String> getTimestamp();
   Optional<String> getFile();
