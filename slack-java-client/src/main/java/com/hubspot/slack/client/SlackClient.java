@@ -26,6 +26,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsListPa
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
+import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
 import com.hubspot.slack.client.methods.params.search.SearchMessagesParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupCreateParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupDisableParams;
@@ -56,6 +57,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
+import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupDisableResponse;
@@ -118,6 +120,9 @@ public interface SlackClient {
 
   // dialogs
   CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(DialogOpenParams params);
+
+  // reactions
+  CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(ReactionsAddParams param);
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
