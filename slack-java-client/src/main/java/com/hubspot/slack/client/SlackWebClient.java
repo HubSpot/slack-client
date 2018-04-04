@@ -57,12 +57,14 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationArchive
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
+import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
 import com.hubspot.slack.client.methods.params.search.SearchMessagesParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupCreateParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupDisableParams;
@@ -101,6 +103,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsUnarc
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.group.GroupsListResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
+import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupDisableResponse;
@@ -591,6 +594,51 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  public CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter) {
+    return findConversationByName(conversationName, conversationsFilter)
+        .thenApply(conversation -> {
+          if (conversation.isPresent()) {
+            return Result.ok(conversation.get());
+          } else {
+            return Result.err(SlackError.builder()
+                .setType(SlackErrorType.CHANNEL_NOT_FOUND)
+                .setError("No conversation found with name: " + conversationName)
+                .build());
+          }
+        });
+  }
+
+  private CompletableFuture<Optional<Conversation>> findConversationByName(String conversationName, ConversationsFilter conversationsFilter) {
+    return searchNextConversationPage(conversationName,
+        listConversations(ConversationsListParams.builder()
+            .from(conversationsFilter)
+            .build()
+        ).iterator());
+  }
+
+  private CompletableFuture<Optional<Conversation>> searchNextConversationPage(
+      String conversationName,
+      Iterator<CompletableFuture<Result<List<Conversation>, SlackError>>> pageIterator
+  ) {
+    if (!pageIterator.hasNext()) {
+      return CompletableFuture.completedFuture(Optional.empty());
+    }
+
+    CompletableFuture<Result<List<Conversation>, SlackError>> nextPage = pageIterator.next();
+    return nextPage.thenApply(Result::unwrapOrElseThrow)
+        .thenCompose(conversations -> {
+          Optional<Conversation> matchInPage = conversations.stream()
+              .filter(conversation -> conversation.getName().isPresent() && conversation.getName().get().equals(conversationName))
+              .findFirst();
+          if (matchInPage.isPresent()) {
+            return CompletableFuture.completedFuture(matchInPage);
+          }
+
+          return searchNextConversationPage(conversationName, pageIterator);
+        });
+  }
+
+  @Override
   public CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(UsergroupCreateParams params) {
     return postSlackCommand(SlackMethods.usergroups_create, params, UsergroupCreateResponse.class);
   }
@@ -657,6 +705,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(DialogOpenParams params) {
     return postSlackCommand(SlackMethods.dialog_open, params, DialogOpenResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(ReactionsAddParams params) {
+    return postSlackCommand(SlackMethods.reactions_add, params, AddReactionResponse.class);
   }
 
   @Override

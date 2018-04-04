@@ -19,12 +19,14 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationArchive
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
+import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
 import com.hubspot.slack.client.methods.params.search.SearchMessagesParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupCreateParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupDisableParams;
@@ -55,6 +57,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
+import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupDisableResponse;
@@ -103,6 +106,7 @@ public interface SlackClient {
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> getConversationHistory(ConversationsHistoryParams params);
   CompletableFuture<Result<ConversationsArchiveResponse, SlackError>> archiveConversation(ConversationArchiveParams params);
   CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(ConversationsInfoParams params);
+  CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter);
 
   // usergroups
   CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(UsergroupCreateParams params);
@@ -116,6 +120,9 @@ public interface SlackClient {
 
   // dialogs
   CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(DialogOpenParams params);
+
+  // reactions
+  CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(ReactionsAddParams param);
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
