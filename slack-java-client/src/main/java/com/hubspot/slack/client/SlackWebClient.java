@@ -415,22 +415,19 @@ public class SlackWebClient implements SlackClient {
       String channelName,
       Iterator<CompletableFuture<Result<List<SlackChannel>, SlackError>>> pageIterator
   ) {
-    if (!pageIterator.hasNext()) {
-      return CompletableFuture.completedFuture(Optional.empty());
+    while (pageIterator.hasNext()) {
+      Result<List<SlackChannel>, SlackError> page = pageIterator.next().join();
+      Optional<SlackChannel> maybeChannel = page.unwrapOrElseThrow()
+          .stream()
+          .filter(channel -> channel.getName().equals(channelName))
+          .findFirst();
+
+      if (maybeChannel.isPresent()) {
+        return CompletableFuture.completedFuture(maybeChannel);
+      }
     }
 
-    CompletableFuture<Result<List<SlackChannel>, SlackError>> nextPage = pageIterator.next();
-    return nextPage.thenApply(Result::unwrapOrElseThrow)
-        .thenCompose(channels -> {
-          Optional<SlackChannel> matchInPage = channels.stream()
-              .filter(channel -> channel.getName().equals(channelName))
-              .findFirst();
-          if (matchInPage.isPresent()) {
-            return CompletableFuture.completedFuture(matchInPage);
-          }
-
-          return searchNextPage(channelName, pageIterator);
-        });
+    return CompletableFuture.completedFuture(Optional.empty());
   }
 
   @Override
@@ -620,22 +617,19 @@ public class SlackWebClient implements SlackClient {
       String conversationName,
       Iterator<CompletableFuture<Result<List<Conversation>, SlackError>>> pageIterator
   ) {
-    if (!pageIterator.hasNext()) {
-      return CompletableFuture.completedFuture(Optional.empty());
+    while (pageIterator.hasNext()) {
+      Result<List<Conversation>, SlackError> page = pageIterator.next().join();
+
+      Optional<Conversation> maybeConversation = page.unwrapOrElseThrow().stream()
+          .filter(conversation -> conversation.getName().isPresent() && conversation.getName().get().equalsIgnoreCase(conversationName))
+          .findFirst();
+
+      if (maybeConversation.isPresent()) {
+        return CompletableFuture.completedFuture(maybeConversation);
+      }
     }
 
-    CompletableFuture<Result<List<Conversation>, SlackError>> nextPage = pageIterator.next();
-    return nextPage.thenApply(Result::unwrapOrElseThrow)
-        .thenCompose(conversations -> {
-          Optional<Conversation> matchInPage = conversations.stream()
-              .filter(conversation -> conversation.getName().isPresent() && conversation.getName().get().equals(conversationName))
-              .findFirst();
-          if (matchInPage.isPresent()) {
-            return CompletableFuture.completedFuture(matchInPage);
-          }
-
-          return searchNextConversationPage(conversationName, pageIterator);
-        });
+    return CompletableFuture.completedFuture(Optional.empty());
   }
 
   @Override
