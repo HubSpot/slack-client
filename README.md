@@ -1,4 +1,9 @@
-# slack-client [![Build Status](https://travis-ci.org/HubSpot/slack-client.svg?branch=master)](https://travis-ci.org/HubSpot/slack-client)
+# slack-client 
+
+![license](https://img.shields.io/github/license/HubSpot/slack-client.svg?style=social) 
+![GitHub last commit](https://img.shields.io/github/last-commit/HubSpot/slack-client.svg?style=social)
+ [![Build Status](https://travis-ci.org/HubSpot/slack-client.svg?branch=master)](https://travis-ci.org/HubSpot/slack-client) ![GitHub release](https://img.shields.io/github/release/HubSpot/slack-client.svg) ![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/com/hubspot/slack/slack-client/maven-metadata.xml.svg) 
+
 
 ## Overview
 
