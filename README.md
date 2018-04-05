@@ -157,7 +157,7 @@ public class MySlacker {
                 @Override
                 public boolean test(SlackMethod slackMethod, Object o) {
                   if (isQa() && slackMethod.getWriteMode() == MethodWriteMode.WRITE) {
-                    if (o instanceof HasChanenl && ((HasChannel) o).getChannelId().equals("snazzy id")) {
+                    if (o instanceof HasChannel && ((HasChannel) o).getChannelId().equals("snazzy id")) {
                       return true;
                     }
                     return false;
