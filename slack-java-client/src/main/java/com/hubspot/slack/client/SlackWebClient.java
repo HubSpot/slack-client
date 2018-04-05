@@ -1,5 +1,6 @@
 package com.hubspot.slack.client;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -883,7 +884,8 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public void close() {
+  public void close() throws IOException {
     recursingExecutor.close();
+    nioHttpClient.close();
   }
 }
