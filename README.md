@@ -134,7 +134,9 @@ ChatPostMessageResponse slackMe(SlackUser me) {
   return postResult.unwrapOrElseThrow();// again, release failure here as a RTE
 }
 ```
+
 #### Filtering messages in a QA environment to specific channels
+
 ```java
 public class MySlacker {
   private final SlackClient slackClient;
@@ -171,4 +173,36 @@ public class MySlacker {
   
   // then just use the client!
 }
+```
+
+#### Printing requests for specific methods
+
+```java
+public class MySlacker {
+  private final SlackClient slackClient;
+  
+  public MySlacker(
+      SlackWebClient.Factory clientFactory
+  ) {
+    this.slackClient = clientFactory.build(
+        SlackClientRuntimeConfig.builder()
+          .setTokenSupplier(() -> "your token here")
+          .setRequestDebugger(
+              new RequestDebugger() {
+                @Override
+                public void debug(long requestId, SlackMethod method, HttpRequest request) {
+                  if (method == SlackMethods.chat_postEphemeral) {
+                    LOG.info("Posting ephemeral message {}", format(request));
+                  }
+                }
+              }
+          )
+          // ... all your configuration here
+          .build()
+    );
+  }
+  
+  // then just use the client!
+}
+```
 ```
