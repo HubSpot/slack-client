@@ -4,9 +4,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -18,15 +15,13 @@ import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpRequest.Options;
 import com.hubspot.horizon.HttpResponse;
 import com.hubspot.horizon.internal.AbstractHttpResponse;
+import com.hubspot.slack.client.concurrency.MoreExecutors;
 
 public class NioHttpClient implements Closeable {
-  private static final ExecutorService CALLBACK_EXECUTOR = new ThreadPoolExecutor(
-      0,
-      Integer.MAX_VALUE,
-      60,
-      TimeUnit.SECONDS,
-      new SynchronousQueue<>(false)
-  );
+  private static final ExecutorService CALLBACK_EXECUTOR = MoreExecutors.threadPoolDaemonExecutorBuilder("NioHttpClient-Callback")
+      .setFollowThreadLocals(false)
+      .setUnbounded(true)
+      .build();
 
   private final AsyncHttpClient delegate;
 

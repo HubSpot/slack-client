@@ -31,6 +31,8 @@ import com.hubspot.horizon.HttpRequest.ContentType;
 import com.hubspot.horizon.HttpRequest.Method;
 import com.hubspot.horizon.HttpResponse;
 import com.hubspot.horizon.ning.NingAsyncHttpClient;
+import com.hubspot.slack.client.concurrency.CloseableExecutorService;
+import com.hubspot.slack.client.concurrency.MoreExecutors;
 import com.hubspot.slack.client.http.NioHttpClient;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpRequestDebugger;
@@ -133,6 +135,7 @@ public class SlackWebClient implements SlackClient {
   }
 
   private final NioHttpClient nioHttpClient;
+  private final CloseableExecutorService recursingExecutor;
   private final SlackClientRuntimeConfig config;
 
   private final SlackMethodAcceptor methodAcceptor;
@@ -167,6 +170,10 @@ public class SlackWebClient implements SlackClient {
         });
     this.requestDebugger = config.getRequestDebugger().orElse(defaultHttpRequestDebugger);
     this.responseDebugger = config.getResponseDebugger().orElse(defaultHttpResponseDebugger);
+    this.recursingExecutor = MoreExecutors.threadPoolDaemonExecutorBuilder("Slack-recursive-callbacks")
+        .setFollowThreadLocals(true)
+        .setUnbounded(true)
+        .build();
   }
 
   @Override
@@ -421,7 +428,7 @@ public class SlackWebClient implements SlackClient {
 
     CompletableFuture<Result<List<SlackChannel>, SlackError>> nextPage = pageIterator.next();
     return nextPage.thenApply(Result::unwrapOrElseThrow)
-        .thenCompose(channels -> {
+        .thenComposeAsync(channels -> {
           Optional<SlackChannel> matchInPage = channels.stream()
               .filter(channel -> channel.getName().equals(channelName))
               .findFirst();
@@ -430,7 +437,7 @@ public class SlackWebClient implements SlackClient {
           }
 
           return searchNextPage(channelName, pageIterator);
-        });
+        }, recursingExecutor);
   }
 
   @Override
@@ -613,7 +620,8 @@ public class SlackWebClient implements SlackClient {
         listConversations(ConversationsListParams.builder()
             .from(conversationsFilter)
             .build()
-        ).iterator());
+        ).iterator()
+    );
   }
 
   private CompletableFuture<Optional<Conversation>> searchNextConversationPage(
@@ -626,7 +634,7 @@ public class SlackWebClient implements SlackClient {
 
     CompletableFuture<Result<List<Conversation>, SlackError>> nextPage = pageIterator.next();
     return nextPage.thenApply(Result::unwrapOrElseThrow)
-        .thenCompose(conversations -> {
+        .thenComposeAsync(conversations -> {
           Optional<Conversation> matchInPage = conversations.stream()
               .filter(conversation -> conversation.getName().isPresent() && conversation.getName().get().equals(conversationName))
               .findFirst();
@@ -635,7 +643,7 @@ public class SlackWebClient implements SlackClient {
           }
 
           return searchNextConversationPage(conversationName, pageIterator);
-        });
+        }, recursingExecutor);
   }
 
   @Override
@@ -872,5 +880,10 @@ public class SlackWebClient implements SlackClient {
     if (acquireTime > 10.0) {
       LOG.warn("Throttling {}, waited {}ms to acquire permit to run", method, acquireTime);
     }
+  }
+
+  @Override
+  public void close() {
+    recursingExecutor.close();
   }
 }
