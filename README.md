@@ -7,7 +7,11 @@
 
 ## Overview
 
-An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slack.com/web). Provides an extensible API with builder-style parameters and responses, allowing you to focus on your interactions with users, rather than your interactions with Slack.
+An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slack.com/web). Provides an extensible API with builder-style parameters and responses, allowing you to focus on your interactions with users, rather than your interactions with Slack. Notably, we:
+
+* Implement most (if not all) of Slack's [web API](https://api.slack.com/web), and actively maintain this project
+* Provide per-method in-memory rate limiting so you don't have to worry about overwhelming slack from a single process
+* Expose highly configurable hooks to allow filtering and debugging in an extensible way
 
 ## Usage
 
@@ -63,8 +67,9 @@ public class MySlacker {
   ) {
     this.slackClient = clientFactory.build(
         SlackClientRuntimeConfig.builder()
+          .setTokenSupplier(() -> "your token here")
           // ... all your configuration here
-          .builder()
+          .build()
     );
   }
   
@@ -127,5 +132,43 @@ ChatPostMessageResponse slackMe(SlackUser me) {
   ).join();
 
   return postResult.unwrapOrElseThrow();// again, release failure here as a RTE
+}
+```
+#### Filtering messages in a QA environment to specific channels
+```java
+public class MySlacker {
+  private final SlackClient slackClient;
+  
+  public MySlacker(
+      SlackWebClient.Factory clientFactory
+  ) {
+    this.slackClient = clientFactory.build(
+        SlackClientRuntimeConfig.builder()
+          .setTokenSupplier(() -> "your token here")
+          .setMethodFilter(
+            new SlackMethodAcceptor() {
+                @Override
+                public String getFailureExplanation(SlackMethod method, Object params) {
+                  return "Only allow WRITE methods to our special channel in QA!";
+                }
+  
+                @Override
+                public boolean test(SlackMethod slackMethod, Object o) {
+                  if (isQa() && slackMethod.getWriteMode() == MethodWriteMode.WRITE) {
+                    if (o instanceof HasChanenl && ((HasChannel) o).getChannelId().equals("snazzy id")) {
+                      return true;
+                    }
+                    return false;
+                  }
+  
+                  return true;
+                }
+            })
+          // ... all your configuration here
+          .build()
+    );
+  }
+  
+  // then just use the client!
 }
 ```
