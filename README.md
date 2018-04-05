@@ -1,23 +1,29 @@
-# slack-client
+# slack-client [![Build Status](https://travis-ci.org/HubSpot/slack-client.svg?branch=master)](https://travis-ci.org/HubSpot/slack-client)
 
-An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slack.com/web). The API here is simple: you just need a `SlackClient` and you're good to go. 
+## Overview
+
+An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slack.com/web). Provides an extensible API with builder-style parameters and responses, allowing you to focus on your interactions with users, rather than your interactions with Slack.
 
 ## Usage
 
-Include the base and client modules in your POM:
+To use with Maven-based projects, add the following dependencies::
 
 ```xml
 <dependency>
   <groupId>com.hubspot.slack</groupId>
   <artifactId>slack-base</artifactId>
-  <version>1.0</version>
+  <version>{latest version}</version>
 </dependency>
 <dependency>
   <groupId>com.hubspot.slack</groupId>
   <artifactId>slack-java-client</artifactId>
-  <version>1.0</version>
+  <version>{latest  version}</version>
 </dependency>
 ```
+
+Latest version can be seen [here, on Maven central](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.hubspot.slack%22).
+
+### Seting up Guice
 
 Install the `SlackClientModule` in the Guice module you want to use to talk to slack.
 
