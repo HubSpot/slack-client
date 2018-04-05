@@ -1,5 +1,6 @@
 package com.hubspot.slack.client;
 
+import java.io.Closeable;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -68,7 +69,7 @@ import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 
-public interface SlackClient {
+public interface SlackClient extends Closeable {
   // auth
   CompletableFuture<Result<AuthTestResponse, SlackError>> testAuth();
 
