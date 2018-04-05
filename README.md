@@ -3,6 +3,14 @@
 ![license](https://img.shields.io/github/license/HubSpot/slack-client.svg?style=social) 
 ![GitHub last commit](https://img.shields.io/github/last-commit/HubSpot/slack-client.svg?style=social)
  [![Build Status](https://travis-ci.org/HubSpot/slack-client.svg?branch=master)](https://travis-ci.org/HubSpot/slack-client) ![GitHub release](https://img.shields.io/github/release/HubSpot/slack-client.svg) ![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/com/hubspot/slack/slack-client/maven-metadata.xml.svg) 
+ 
+* [Overview](overview)
+* [Usage](usage)
+* [Setting up Guice](setting-up-guice)
+* [Using the Client](using-the-client)
+    * [Find a user by email, then send a message](find-a-user-by-email-then-send-a-message)
+    * [Filtering messages in a QA environment to specific channels](filtering-messages-in-a-qa-environment-to-specific-channels)
+    * [Printing requests for specific methods](printing-requests-for-specific-methods)
 
 
 ## Overview
