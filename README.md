@@ -75,6 +75,8 @@ We currently support:
  - getConversationByName
  - getChannelByName
 
+We happily welcome any PRs for APIs that haven't yet been implemented!
+
 ## Usage
 
 To use with Maven-based projects, add the following dependencies::
@@ -266,7 +268,6 @@ public class MySlacker {
   
   // then just use the client!
 }
-```
 ```
 
 ## Contributors
