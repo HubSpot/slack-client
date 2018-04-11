@@ -4,22 +4,22 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/HubSpot/slack-client.svg?style=social)](https://github.com/HubSpot/slack-client/commits/master)
  [![Build Status](https://travis-ci.org/HubSpot/slack-client.svg?branch=master)](https://travis-ci.org/HubSpot/slack-client) [![GitHub release](https://img.shields.io/github/release/HubSpot/slack-client.svg)](https://github.com/HubSpot/slack-client/releases) ![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/com/hubspot/slack/slack-client/maven-metadata.xml.svg) 
  
-* [Overview](overview)
-* [Features](features)
-* [Usage](usage)
-* [Setting up Guice](setting-up-guice)
-* [Using the Client](using-the-client)
+* [Overview](#overview)
+* [Features](#features)
+* [Usage](#usage)
+* [Setting up Guice](#setting-up-guice)
+* [Using the Client](#using-the-client)
     * [Find a user by email, then send a message](find-a-user-by-email-then-send-a-message)
     * [Filtering messages in a QA environment to specific channels](filtering-messages-in-a-qa-environment-to-specific-channels)
     * [Printing requests for specific methods](printing-requests-for-specific-methods)
-* [Contributors](contributors)
-* [License](license)
+* [Contributors](#contributors)
+* [License](#license)
 
 ## Overview
 
 An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slack.com/web). Provides an extensible API with builder-style parameters and responses, allowing you to focus on your interactions with users, rather than your interactions with Slack. Notably, we:
 
-* Implement [most](features) of Slack's [web API](https://api.slack.com/web)
+* Implement [most](#features) of Slack's [web API](https://api.slack.com/web)
 * Actively maintain this project
 * Provide per-method in-memory rate limiting so you don't have to worry about overwhelming slack from a single process
 * Expose highly configurable hooks to allow filtering and debugging in an extensible way
@@ -272,10 +272,10 @@ public class MySlacker {
 
 ## Contributors
  - [@szabowexler](https://github.com/szabowexler) [:computer:](https://github.com/HubSpot/slack-client/commits?author=szabowexler)
- - [@zklapow] (https://github.com/zklapow) [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
- - [@wsorenson] (https://github.com/wsorenson) [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
- - [@darcatron] (https://github.com/darcatron) [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
- - [@dylanrb123] (https://github.com/dylanrb123) [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
+ - [@zklapow](https://github.com/zklapow) [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
+ - [@wsorenson](https://github.com/wsorenson) [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
+ - [@darcatron](https://github.com/darcatron) [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
+ - [@dylanrb123](https://github.com/dylanrb123) [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
 
 ## License
 
