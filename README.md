@@ -271,11 +271,11 @@ public class MySlacker {
 ```
 
 ## Contributors
- - @szabowexler [:computer:](https://github.com/HubSpot/slack-client/commits?author=szabowexler)
- - @zklapow [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
- - @wsorenson [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
- - @darcatron [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
- - @dylanrb123  [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
+ - [@szabowexler](https://github.com/szabowexler) [:computer:](https://github.com/HubSpot/slack-client/commits?author=szabowexler)
+ - [@zklapow] (https://github.com/zklapow) [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
+ - [@wsorenson] (https://github.com/wsorenson) [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
+ - [@darcatron] (https://github.com/darcatron) [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
+ - [@dylanrb123] (https://github.com/dylanrb123) [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
 
 ## License
 
