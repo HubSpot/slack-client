@@ -12,6 +12,7 @@
     * [Find a user by email, then send a message](find-a-user-by-email-then-send-a-message)
     * [Filtering messages in a QA environment to specific channels](filtering-messages-in-a-qa-environment-to-specific-channels)
     * [Printing requests for specific methods](printing-requests-for-specific-methods)
+* [Contributors](contributors)
 * [License](license)
 
 ## Overview
@@ -267,6 +268,14 @@ public class MySlacker {
 }
 ```
 ```
+
+## Contributors
+ - @szabowexler [:computer:](https://github.com/HubSpot/slack-client/commits?author=szabowexler)
+ - @zklapow [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
+ - @wsorenson [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
+ - @darcatron [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
+ - @dylanrb123  [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
+
 ## License
 
    Copyright 2018 HubSpot, Inc.
