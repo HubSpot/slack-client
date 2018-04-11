@@ -4,22 +4,78 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/HubSpot/slack-client.svg?style=social)](https://github.com/HubSpot/slack-client/commits/master)
  [![Build Status](https://travis-ci.org/HubSpot/slack-client.svg?branch=master)](https://travis-ci.org/HubSpot/slack-client) [![GitHub release](https://img.shields.io/github/release/HubSpot/slack-client.svg)](https://github.com/HubSpot/slack-client/releases) ![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/com/hubspot/slack/slack-client/maven-metadata.xml.svg) 
  
-* [Overview](overview)
-* [Usage](usage)
-* [Setting up Guice](setting-up-guice)
-* [Using the Client](using-the-client)
+* [Overview](#overview)
+* [Features](#features)
+* [Usage](#usage)
+* [Setting up Guice](#setting-up-guice)
+* [Using the Client](#using-the-client)
     * [Find a user by email, then send a message](find-a-user-by-email-then-send-a-message)
     * [Filtering messages in a QA environment to specific channels](filtering-messages-in-a-qa-environment-to-specific-channels)
     * [Printing requests for specific methods](printing-requests-for-specific-methods)
-
+* [Contributors](#contributors)
+* [License](#license)
 
 ## Overview
 
 An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slack.com/web). Provides an extensible API with builder-style parameters and responses, allowing you to focus on your interactions with users, rather than your interactions with Slack. Notably, we:
 
-* Implement most (if not all) of Slack's [web API](https://api.slack.com/web), and actively maintain this project
+* Implement [most](#features) of Slack's [web API](https://api.slack.com/web)
+* Actively maintain this project
 * Provide per-method in-memory rate limiting so you don't have to worry about overwhelming slack from a single process
 * Expose highly configurable hooks to allow filtering and debugging in an extensible way
+
+## Features
+
+We currently support:
+#### auth
+ - auth.test
+#### channels
+ - channels.history
+ - channels.info
+ - channels.list
+ - channels.replies (findReplies)
+#### chat
+ - chat.delete
+ - chat.getPermalink
+ - chat.postEphemeral
+ - chat.postMessage
+ - chat.update
+#### conversations
+ - conversations.archive
+ - conversations.create
+ - conversations.history
+ - conversations.info
+ - conversations.invite
+ - conversations.list
+ - conversations.unarchive
+#### dialog
+ - dialog.open
+#### groups
+ - groups.list
+ - groups.replies (findReplies)
+#### im
+ - im.open
+#### reactions
+ - reactions.add
+#### search
+ - search.messages
+#### usergroups
+ - usergroups.create
+ - usergroups.disable
+ - usergroups.enable
+ - usergroups.list
+ - usergroups.update
+#### usergroups.users
+ - usergroups.users.update
+#### users
+ - users.info (findUser)
+ - users.list
+ - users.lookupByEmail
+#### Utility Methods
+ - getConversationByName
+ - getChannelByName
+
+We happily welcome any PRs for APIs that haven't yet been implemented!
 
 ## Usage
 
@@ -213,4 +269,27 @@ public class MySlacker {
   // then just use the client!
 }
 ```
-```
+
+## Contributors
+ - [@szabowexler](https://github.com/szabowexler) [:computer:](https://github.com/HubSpot/slack-client/commits?author=szabowexler)
+ - [@zklapow](https://github.com/zklapow) [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
+ - [@wsorenson](https://github.com/wsorenson) [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
+ - [@darcatron](https://github.com/darcatron) [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
+ - [@dylanrb123](https://github.com/dylanrb123) [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
+
+## License
+
+    Copyright 2018 HubSpot, Inc.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
