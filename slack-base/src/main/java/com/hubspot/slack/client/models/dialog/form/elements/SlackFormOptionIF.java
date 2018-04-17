@@ -22,8 +22,8 @@ public interface SlackFormOptionIF {
     }
 
     String label = getLabel();
-    if (label.length() > 75) {
-      throw new IllegalStateException("Label cannot exceed 75 chars - '" + label + "'");
+    if (label.length() > 24) {
+      throw new IllegalStateException("Label cannot exceed 24 chars - '" + label + "'");
     }
 
     if (Strings.isNullOrEmpty(getValue())) {
