@@ -26,7 +26,7 @@ public abstract class AbstractSlackFormTextareaElement extends AbstractSlackDial
   public void validate() {
     super.validateBaseTextElementProps();
 
-    if (getMaxLength() > 500) {
+    if (getMaxLength() > 3000) {
       throw new IllegalStateException("Form text area cannot have max length > 500 chars, got " + getMaxLength());
     }
   }
