@@ -19,6 +19,7 @@ import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationOpenParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
@@ -55,6 +56,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsArchi
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsInfoResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsInviteResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
@@ -108,6 +110,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<ConversationsArchiveResponse, SlackError>> archiveConversation(ConversationArchiveParams params);
   CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(ConversationsInfoParams params);
   CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter);
+  CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(ConversationOpenParams params);
 
   // usergroups
   CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(UsergroupCreateParams params);

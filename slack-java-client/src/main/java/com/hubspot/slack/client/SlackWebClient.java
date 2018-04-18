@@ -59,6 +59,7 @@ import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationOpenParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
@@ -102,6 +103,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsCreat
 import com.hubspot.slack.client.models.response.conversations.ConversationsHistoryResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsInfoResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsInviteResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.group.GroupsListResponse;
@@ -614,6 +616,11 @@ public class SlackWebClient implements SlackClient {
                 .build());
           }
         });
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(ConversationOpenParams params) {
+    return postSlackCommand(SlackMethods.conversations_open, params, ConversationsOpenResponse.class);
   }
 
   private CompletableFuture<Optional<Conversation>> findConversationByName(String conversationName, ConversationsFilter conversationsFilter) {
