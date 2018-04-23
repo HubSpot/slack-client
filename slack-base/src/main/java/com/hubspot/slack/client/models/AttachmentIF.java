@@ -25,6 +25,7 @@ public interface AttachmentIF {
   Optional<String> getTitle();
   Optional<String> getTitleLink();
   Optional<String> getText();
+  Optional<String> getImageUrl();
   Optional<String> getAttachmentType();
   List<Field> getFields();
   Optional<String> getFooter();
