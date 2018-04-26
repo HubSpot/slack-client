@@ -9,9 +9,6 @@
 * [Usage](#usage)
 * [Setting up Guice](#setting-up-guice)
 * [Using the Client](#using-the-client)
-    * [Find a user by email, then send a message](find-a-user-by-email-then-send-a-message)
-    * [Filtering messages in a QA environment to specific channels](filtering-messages-in-a-qa-environment-to-specific-channels)
-    * [Printing requests for specific methods](printing-requests-for-specific-methods)
 * [Contributors](#contributors)
 * [License](#license)
 
