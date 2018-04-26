@@ -30,6 +30,7 @@ public interface AttachmentIF {
   List<Field> getFields();
   Optional<String> getFooter();
   Optional<String> getFooterIcon();
+  Optional<String> getThumbUrl();
 
 
   @JsonProperty("ts")
