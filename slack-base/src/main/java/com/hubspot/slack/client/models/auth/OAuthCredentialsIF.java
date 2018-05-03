@@ -13,10 +13,10 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface OAuthCredentialsIF {
   String getAccessToken();
-  String getScope();
   String getTeamName();
   String getTeamId();
-  String getUserId();
+  Optional<String> getScope();
+  Optional<String> getUserId();
   Optional<BotCredentials> getBot();
   Optional<IncomingWebhook> getIncomingWebhook();
 }
