@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.response.auth;
 
+import java.util.Optional;
+
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
@@ -13,7 +15,7 @@ import com.hubspot.slack.client.models.response.SlackResponse;
 public interface AuthTestResponseIF extends SlackResponse {
   String getUrl();
   String getTeam();
-  String getUser();
   String getTeamId();
-  String getUserId();
+  Optional<String> getUser();
+  Optional<String> getUserId();
 }
