@@ -53,6 +53,8 @@ public enum SlackErrorType {
   TRIGGER_EXCHANGED("trigger_exchanged"),
   TRIGGER_EXPIRED("trigger_expired"),
 
+  TOKEN_REVOKED("token_revoked"),
+
   USERS_NOT_FOUND("users_not_found"),
   USERS_NOT_VISIBLE("user_not_visible"),
   USER_NOT_IN_CHANNEL("user_not_in_channel"),
