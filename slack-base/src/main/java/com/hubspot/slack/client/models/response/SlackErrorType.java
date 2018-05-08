@@ -23,6 +23,7 @@ public enum SlackErrorType {
 
   MISSING_DIALOG("missing_dialog"),
   MISSING_POST_TYPE("missing_post_type"),
+  MISSING_SCOPE("missing_scope"),
   MISSING_TRIGGER("missing_trigger"),
   MESSAGE_TOO_LONG("msg_too_long"),
   MESSAGE_NOT_FOUND("message_not_found"),
