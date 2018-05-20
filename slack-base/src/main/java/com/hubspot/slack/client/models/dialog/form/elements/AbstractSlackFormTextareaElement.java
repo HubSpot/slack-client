@@ -29,5 +29,13 @@ public abstract class AbstractSlackFormTextareaElement extends AbstractSlackDial
     if (getMaxLength() > 3000) {
       throw new IllegalStateException("Form text area cannot have max length > 3000 chars, got " + getMaxLength());
     }
+
+    if (getMinLength() > 3000) {
+      throw new IllegalStateException("Form text area cannot have min length > 3000 chars, got " + getMinLength());
+    }
+
+    if (getValue().isPresent() && getValue().get().length() > 3000) {
+      throw new IllegalStateException("Value cannot exceed 3000 chars, got '" + getValue().get() + "'");
+    }
   }
 }

@@ -36,10 +36,6 @@ public abstract class AbstractSlackDialogFormTextElement extends SlackDialogForm
       throw new IllegalStateException("Min length must be <= max length, got " + getMinLength() + ", " + getMaxLength());
     }
 
-    if (getValue().isPresent() && getValue().get().length() > 500) {
-      throw new IllegalStateException("Value cannot exceed 500 chars, got '" + getValue().get() + "'");
-    }
-
     if (getHint().isPresent() && getHint().get().length() > 150) {
       throw new IllegalStateException("Hint cannot exceed 150 chars, got '" + getHint().get() + "'");
     }
