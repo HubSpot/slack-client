@@ -26,16 +26,16 @@ public abstract class AbstractSlackFormTextElement extends AbstractSlackDialogFo
   public void validate() {
     super.validateBaseTextElementProps();
 
-    if (getMaxLength() > 500) {
-      throw new IllegalStateException("Form text element cannot have max length > 500 chars, got " + getMaxLength());
+    if (getMaxLength() > 150) {
+      throw new IllegalStateException("Form text element cannot have max length > 150 chars, got " + getMaxLength());
     }
 
-    if (getMinLength() > 500) {
-      throw new IllegalStateException("Form text element cannot have min length > 500 chars, got " + getMinLength());
+    if (getMinLength() > 150) {
+      throw new IllegalStateException("Form text element cannot have min length > 150 chars, got " + getMinLength());
     }
 
-    if (getValue().isPresent() && getValue().get().length() > 500) {
-      throw new IllegalStateException("Value cannot exceed 500 chars, got '" + getValue().get() + "'");
+    if (getValue().isPresent() && getValue().get().length() > 150) {
+      throw new IllegalStateException("Value cannot exceed 150 chars, got '" + getValue().get() + "'");
     }
   }
 }
