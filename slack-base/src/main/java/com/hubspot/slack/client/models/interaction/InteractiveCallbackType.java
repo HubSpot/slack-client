@@ -7,6 +7,7 @@ import com.hubspot.slack.client.enums.EnumIndex;
 public enum InteractiveCallbackType {
   INTERACTIVE_MESSAGE,
   DIALOG_SUBMISSION,
+  MESSAGE_ACTION,
   UNKNOWN
   ;
 
