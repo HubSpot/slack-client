@@ -5,6 +5,8 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.hubspot.slack.client.enums.EnumIndex;
+import com.hubspot.slack.client.enums.UnmappedKeyException;
 
 public enum SlackErrorType {
   ACCOUNT_INACTIVE("account_inactive"),
@@ -82,10 +84,21 @@ public enum SlackErrorType {
     return code;
   }
 
-  private static final ImmutableMap<String, SlackErrorType> INDEX = Maps.uniqueIndex(Arrays.asList(SlackErrorType.values()), SlackErrorType::getCode);
+  public String key() {
+    return name().toLowerCase();
+  }
+
+
+  private static final ImmutableMap<String, SlackErrorType> CODE_INDEX = Maps.uniqueIndex(Arrays.asList(SlackErrorType.values()), SlackErrorType::getCode);
+
+  private static final EnumIndex<String, SlackErrorType> TYPE_INDEX = new EnumIndex<>(SlackErrorType.class, SlackErrorType::key);
 
   @JsonCreator
   public static SlackErrorType fromCode(String code) {
-    return INDEX.getOrDefault(code, SlackErrorType.UNKNOWN);
+    try {
+      return TYPE_INDEX.get(code.toLowerCase());
+    } catch (UnmappedKeyException uke) {
+      return CODE_INDEX.getOrDefault(code.toLowerCase(), SlackErrorType.UNKNOWN);
+    }
   }
 }
