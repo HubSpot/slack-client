@@ -94,7 +94,7 @@ public enum SlackErrorType {
   private static final EnumIndex<String, SlackErrorType> TYPE_INDEX = new EnumIndex<>(SlackErrorType.class, SlackErrorType::key);
 
   @JsonCreator
-  public static SlackErrorType fromCode(String code) {
+  public static SlackErrorType get(String code) {
     try {
       return TYPE_INDEX.get(code.toLowerCase());
     } catch (UnmappedKeyException uke) {
