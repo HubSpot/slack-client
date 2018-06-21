@@ -65,6 +65,7 @@ We currently support:
 #### usergroups.users
  - usergroups.users.update
 #### users
+ - users.conversations
  - users.info (findUser)
  - users.list
  - users.lookupByEmail

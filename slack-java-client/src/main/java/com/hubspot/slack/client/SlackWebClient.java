@@ -65,6 +65,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
@@ -501,6 +502,50 @@ public class SlackWebClient implements SlackClient {
 
         CompletableFuture<Result<ConversationListResponse, SlackError>> resultFuture = postSlackCommand(
             SlackMethods.conversations_list,
+            requestBuilder.build(),
+            ConversationListResponse.class
+        );
+
+        CompletableFuture<Result<List<Conversation>, SlackError>> pageFuture = resultFuture.thenApply(
+            result -> result.mapOk(ConversationListResponse::getConversations)
+        );
+
+        CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(resultFuture);
+        CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(Optional::isPresent);
+        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
+
+        return new LazyLoadingPage<>(
+            pageFuture,
+            hasMoreFuture,
+            nextCursorFuture
+        );
+      }
+    };
+  }
+
+  @Override
+  public Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> usersConversations(ConversationsUserParams params) {
+    return new AbstractPagedIterable<Result<List<Conversation>, SlackError>, String>() {
+
+      @Override
+      protected String getInitialOffset() {
+        return null;
+      }
+
+      @Override
+      protected LazyLoadingPage<Result<List<Conversation>, SlackError>, String> getPage(String offset) throws Exception {
+        if (LOG.isTraceEnabled()) {
+          LOG.trace("Fetching slack user conversation page from {}", offset);
+        }
+
+        ConversationsUserParams.Builder requestBuilder = ConversationsUserParams.builder()
+            .from(params)
+            .setLimit(config.getChannelsListBatchSize().get());
+        Optional.ofNullable(offset)
+            .ifPresent(requestBuilder::setCursor);
+
+        CompletableFuture<Result<ConversationListResponse, SlackError>> resultFuture = postSlackCommand(
+            SlackMethods.users_conversations,
             requestBuilder.build(),
             ConversationListResponse.class
         );

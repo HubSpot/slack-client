@@ -156,6 +156,7 @@ public enum SlackMethods implements SlackMethod {
   usergroups_users_list(MethodWriteMode.READ, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
   usergroups_users_update(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
 
+  users_conversations(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
   users_deletePhoto(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
   users_getPresence(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
   users_identity(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
