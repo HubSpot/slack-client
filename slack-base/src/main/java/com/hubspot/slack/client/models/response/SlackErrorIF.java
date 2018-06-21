@@ -12,7 +12,7 @@ public interface SlackErrorIF {
 
   @Default
   default SlackErrorType getType() {
-    return SlackErrorType.fromCode(getError());
+    return SlackErrorType.get(getError());
   }
 
   @Parameter String getError();
