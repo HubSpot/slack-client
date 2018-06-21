@@ -12,7 +12,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ConversationsUserParamsIF extends ConversationsListParamsIF {
+public interface ConversationsUserParamsIF extends BaseConversationsFilter {
   @JsonProperty("user")
   Optional<String> getUserId();
+  Optional<String> getCursor();
+  Optional<Integer> getLimit();
 }
