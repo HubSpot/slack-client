@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.interaction;
 
+import java.util.Optional;
+
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
@@ -21,7 +23,7 @@ public interface InteractiveLoadOptionsRequestIF {
   SlackUserLite getUser();
 
   String getActionTs();
-  String getMessageTs();
-  String getAttachmentId();
+  Optional<String> getMessageTs();
+  Optional<String> getAttachmentId();
   String getToken();
 }
