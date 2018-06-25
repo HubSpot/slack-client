@@ -53,9 +53,9 @@ public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElem
       throw new IllegalStateException("Cannot have more than 100 option groups");
     }
 
-    if (getDataSource().equals(SlackDataSource.STATIC) || getDataSource().equals(SlackDataSource.EXTERNAL)) {
+    if (getDataSource().equals(SlackDataSource.STATIC)) {
       if (numOptions == 0 && numOptionGroups == 0) {
-        throw new IllegalStateException("Either options or option groups are required for static and external data source types");
+        throw new IllegalStateException("Either options or option groups are required for static data source types");
       }
     }
 
