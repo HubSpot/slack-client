@@ -1,6 +1,7 @@
 {
   "name": "kepler_assign_root_cause",
   "value": "elk",
+  "type": "interactive_message",
   "callback_id": "kepler",
   "team": {
     "id": "T024G0P55",
