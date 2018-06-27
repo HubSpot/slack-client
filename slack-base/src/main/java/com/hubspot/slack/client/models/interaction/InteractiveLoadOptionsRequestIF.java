@@ -21,6 +21,7 @@ public interface InteractiveLoadOptionsRequestIF {
   SlackTeam getTeam();
   SlackChannel getChannel();
   SlackUserLite getUser();
+  InteractiveLoadOptionsRequestType getType();
 
   String getActionTs();
   Optional<String> getMessageTs();
