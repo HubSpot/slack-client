@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.dialog.form.elements;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,49 +42,62 @@ public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElem
   @Check
   public void validate() {
     super.validateBaseElementProperties();
+    List<String> errors = new ArrayList<>();
 
     int numOptions = getOptions().size();
     int numOptionGroups = getOptionGroups().size();
 
     if (numOptions > 100) {
-      throw new IllegalStateException("Cannot have more than 100 options");
+      errors.add("Cannot have more than 100 options");
     }
 
     if (numOptionGroups > 100) {
-      throw new IllegalStateException("Cannot have more than 100 option groups");
+      errors.add("Cannot have more than 100 option groups");
     }
 
     if (getDataSource().equals(SlackDataSource.STATIC)) {
       if (numOptions == 0 && numOptionGroups == 0) {
-        throw new IllegalStateException("Either options or option groups are required for static data source types");
+        errors.add("Either options or option groups are required for static data source types");
       }
     }
 
     if (getValue().isPresent() && getDataSource().equals(SlackDataSource.EXTERNAL)) {
-      throw new IllegalStateException("Cannot use value for external data source, must use selected options");
+      errors.add("Cannot use value for external data source, must use selected options");
     }
 
     if (getValue().isPresent()) {
       boolean valueIsSomeOptionValue = getOptions().stream()
           .anyMatch(option -> option.getValue().equalsIgnoreCase(getValue().get()));
       if (!valueIsSomeOptionValue) {
-        throw new IllegalStateException("Value must exactly match the value field for one provided option");
+        errors.add("Value must exactly match the value field for one provided option");
       }
     }
 
     if (!getSelectedOptions().isEmpty()) {
       if (getSelectedOptions().size() != 1) {
-        throw new IllegalStateException("Selected options must be a single element array");
+        errors.add("Selected options must be a single element array");
       }
-      boolean selectedOptionIsInOptionsGroup = getOptionGroups().stream()
-          .map(SlackFormOptionGroup::getOptions)
-          .collect(Collectors.toList())
-          .stream()
-          .flatMap(List::stream)
-          .anyMatch(option -> option.equals(getSelectedOptions().get(0)));
-      if (!selectedOptionIsInOptionsGroup) {
-        throw new IllegalStateException("Selected option must exactly match an option in the options groups");
+      if (!getOptionGroups().isEmpty()) {
+        boolean selectedOptionIsInOptionsGroup = getOptionGroups().stream()
+            .map(SlackFormOptionGroup::getOptions)
+            .collect(Collectors.toList())
+            .stream()
+            .flatMap(List::stream)
+            .anyMatch(option -> option.equals(getSelectedOptions().get(0)));
+        if (!selectedOptionIsInOptionsGroup) {
+          errors.add("Selected option must exactly match an option in the provided options groups");
+        }
+      } else if (!getOptions().isEmpty()) {
+        boolean selectedOptionIsInOptions = getOptions().stream()
+            .anyMatch(option -> option.equals(getSelectedOptions().get(0)));
+        if (!selectedOptionIsInOptions) {
+          errors.add("Selected option must exactly match an option in the provided options");
+        }
       }
+    }
+
+    if (!errors.isEmpty()) {
+      throw new IllegalStateException(errors.toString());
     }
   }
 }
