@@ -23,7 +23,10 @@ public class SlackFormOptionsTest {
           .build();
     } catch (IllegalStateException ise) {
       assertThat(ise.getMessage()).contains("Either options or option groups are required for static data source types");
+      return;
     }
+
+    fail("Didn't throw exception");
   }
 
   @Test
@@ -37,7 +40,10 @@ public class SlackFormOptionsTest {
           .build();
     } catch (IllegalStateException ise) {
       assertThat(ise.getMessage()).contains("Cannot use value for external data source, must use selected options");
+      return;
     }
+
+    fail("Didn't throw exception");
   }
 
   @Test
@@ -54,11 +60,14 @@ public class SlackFormOptionsTest {
           .build();
     } catch (IllegalStateException ise) {
       assertThat(ise.getMessage()).contains("Value must exactly match the value field for one provided option");
+      return;
     }
+
+    fail("Didn't throw exception");
   }
 
   @Test
-  public void itFailsToBuildFormSelectElementForInvalidSelectOption() {
+  public void itFailsToBuildFormSelectElementForMultipleSelectedOptions() {
     try {
       SlackFormSelectElement.builder()
           .setDataSource(SlackDataSource.EXTERNAL)
@@ -69,8 +78,14 @@ public class SlackFormOptionsTest {
           .build();
     } catch (IllegalStateException ise) {
       assertThat(ise.getMessage()).contains("Selected options must be a single element array");
+      return;
     }
 
+    fail("Didn't throw exception");
+  }
+
+  @Test
+  public void itFailsToBuildFormSelectElementForSelectedOptionNotMatchingOptionGroups() {
     try {
       SlackFormSelectElement.builder()
           .setDataSource(SlackDataSource.EXTERNAL)
@@ -87,9 +102,14 @@ public class SlackFormOptionsTest {
           .build();
     } catch (IllegalStateException ise) {
       assertThat(ise.getMessage()).contains("Selected option must exactly match an option in the provided options groups");
+      return;
     }
 
+    fail("Didn't throw exception");
+  }
 
+  @Test
+  public void itFailsToBuildFormSelectElementForSelectedOptionNotMatchingOptions() {
     try {
       SlackFormSelectElement.builder()
           .setDataSource(SlackDataSource.EXTERNAL)
@@ -103,7 +123,10 @@ public class SlackFormOptionsTest {
           .build();
     } catch (IllegalStateException ise) {
       assertThat(ise.getMessage()).contains("Selected option must exactly match an option in the provided options");
+      return;
     }
+
+    fail("Didn't throw exception");
   }
 
   @Test
@@ -124,11 +147,14 @@ public class SlackFormOptionsTest {
       assertThat(ise.getMessage())
           .contains("Selected options must be a single element array")
           .contains("Selected option must exactly match an option in the provided options");
+      return;
     }
+
+    fail("Didn't throw exception");
   }
 
   @Test
-  public void itFailsToBuildFormSelectOptionGroupForInvalidLabel() {
+  public void itFailsToBuildFormSelectOptionGroupForMissingLabel() {
     try {
       SlackFormOptionGroup.builder()
           .setLabel("") // missing label
@@ -139,8 +165,14 @@ public class SlackFormOptionsTest {
           ).build();
     } catch (IllegalStateException ise) {
       assertThat(ise.getMessage()).contains("Must provide a label");
+      return;
     }
 
+    fail("Didn't throw exception");
+  }
+
+  @Test
+  public void itFailsToBuildFormSelectOptionGroupForLongLabel() {
     try {
       SlackFormOptionGroup.builder()
           .setLabel(String.join("", Collections.nCopies(76, "a"))) // long label
