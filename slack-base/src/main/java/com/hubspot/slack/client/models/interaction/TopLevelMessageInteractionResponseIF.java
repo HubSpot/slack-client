@@ -1,7 +1,9 @@
 package com.hubspot.slack.client.models.interaction;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 
@@ -24,7 +26,14 @@ public interface TopLevelMessageInteractionResponseIF {
     return false;
   }
 
-  String getText();
+  Optional<String> getText();
 
   List<Attachment> getAttachments();
+
+  @Check
+  default void check() {
+    if (!getText().isPresent() && getAttachments().isEmpty()) {
+      throw new IllegalStateException("Must supply either text or attachments");
+    }
+  }
 }
