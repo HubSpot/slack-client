@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.methods.params.users;
 
+import java.util.Optional;
+
 import org.immutables.value.Value.Immutable;
 import org.immutables.value.Value.Parameter;
 
@@ -14,4 +16,9 @@ public interface UsersInfoParamsIF extends HasUser {
   @Parameter
   @JsonProperty("user")
   String getUserId();
+
+  @JsonProperty("include_local")
+  default boolean getIncludeLocale() {
+    return false;
+  }
 }
