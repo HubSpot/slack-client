@@ -23,6 +23,7 @@ public abstract class AbstractSlackDialogFormTextElement extends SlackDialogForm
   public abstract Optional<String> getValue();
 
   protected void validateBaseTextElementProps() {
+
     super.validateBaseElementProperties();
     if (getMinLength() < 0) {
       throw new IllegalStateException("Min length cannot be negative, got " + getMinLength());
