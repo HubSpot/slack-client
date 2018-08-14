@@ -7,7 +7,7 @@
   <parent>
     <artifactId>slack-client</artifactId>
     <groupId>com.hubspot.slack</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-PAGINATED-LIST-USERS</version>
   </parent>
 
   <artifactId>slack-java-client-examples</artifactId>
