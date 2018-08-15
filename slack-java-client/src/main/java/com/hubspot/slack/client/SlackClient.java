@@ -85,7 +85,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<UsersInfoResponse, SlackError>> lookupUserByEmail(UserEmailParams email);
 
   // users
-  Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers(); //TODO bwehner create identical searchUsersByFilter endpoint
+  Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
   CompletableFuture<Result<UsersListResponse, SlackError>> listPaginatedUsers(UsersListParams params);
 
   // channels
