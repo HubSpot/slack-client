@@ -86,7 +86,7 @@ public interface SlackClient extends Closeable {
 
   // users
   Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
-  CompletableFuture<Result<UsersListResponse, SlackError>> listPaginatedUsers(UsersListParams params);
+  CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params);
 
   // channels
   Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter);
