@@ -244,6 +244,11 @@ public class SlackWebClient implements SlackClient {
     };
   }
 
+  @Override
+  public CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params) {
+    return postSlackCommand(SlackMethods.users_list, params, UsersListResponse.class);
+  }
+
   private <T extends SlackResponse> CompletableFuture<Optional<String>> extractNextCursor(CompletableFuture<Result<T, SlackError>> responseFuture) {
     return responseFuture.thenApply(result ->
         result.mapOk(response ->

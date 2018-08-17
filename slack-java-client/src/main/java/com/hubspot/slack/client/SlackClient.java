@@ -39,6 +39,7 @@ import com.hubspot.slack.client.methods.params.usergroups.UsergroupUpdateParams;
 import com.hubspot.slack.client.methods.params.usergroups.users.UsergroupUsersUpdateParams;
 import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
+import com.hubspot.slack.client.methods.params.users.UsersListParams;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.conversations.Conversation;
@@ -69,6 +70,7 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupEnableRespon
 import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateResponse;
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
+import com.hubspot.slack.client.models.response.users.UsersListResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 
@@ -84,6 +86,7 @@ public interface SlackClient extends Closeable {
 
   // users
   Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
+  CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params);
 
   // channels
   Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter);
