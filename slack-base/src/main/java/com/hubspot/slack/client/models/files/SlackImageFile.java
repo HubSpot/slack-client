@@ -5,7 +5,6 @@ import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public interface SlackImageFile extends SlackFile {
-
   @JsonProperty("thumb_64")
   Optional<String> getThumb64Url();
   @JsonProperty("thumb_80")
@@ -32,4 +31,7 @@ public interface SlackImageFile extends SlackFile {
   Optional<Integer> getOriginalWidth();
   @JsonProperty("original_h")
   Optional<Integer> getOriginalHeight();
+
+  @JsonProperty("has_rich_preview")
+  boolean hasRichPreview();
 }
