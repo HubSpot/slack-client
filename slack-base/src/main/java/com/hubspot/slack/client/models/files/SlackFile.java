@@ -59,7 +59,4 @@ public interface SlackFile {
   List<String> getGroupIds();
   @JsonProperty("ims")
   List<String> getImIds();
-
-  @JsonProperty("has_rich_preview")
-  boolean hasRichPreview();
 }
