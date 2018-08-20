@@ -23,6 +23,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
   String getText();
   String getTs();
 
+  @JsonProperty("as_user")
   Optional<Boolean> getAsUser();
 
   @Default
