@@ -13,7 +13,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public interface SlackGifFileIF extends SlackImageFile {
   @Default
   @Override
-  default SlackFileTypes getFiletype() {
-    return SlackFileTypes.GIF;
+  default SlackFileType getFiletype() {
+    return SlackFileType.GIF;
   }
 }

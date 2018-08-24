@@ -5,14 +5,14 @@ import java.util.stream.Stream;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum SlackFileTypes {
+public enum SlackFileType {
   TEXT("text"),
   GIF("gif"),
   ;
 
   final String type;
 
-  SlackFileTypes(String type) {
+  SlackFileType(String type) {
     this.type = type;
   }
 
@@ -22,7 +22,7 @@ public enum SlackFileTypes {
   }
 
   @JsonCreator
-  public static SlackFileTypes parse(String field) {
+  public static SlackFileType parse(String field) {
     return Stream.of(values())
         .filter(val -> val.getType().equalsIgnoreCase(field))
         .findFirst()
