@@ -14,8 +14,8 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public interface SlackTextFileIF extends SlackFile {
   @Default
   @Override
-  default SlackFileTypes getFiletype() {
-    return SlackFileTypes.TEXT;
+  default SlackFileType getFiletype() {
+    return SlackFileType.TEXT;
   }
 
   String getEditLink();
