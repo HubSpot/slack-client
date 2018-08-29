@@ -63,6 +63,7 @@ import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
+import com.hubspot.slack.client.models.response.team.TeamInfoResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupDisableResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupEnableResponse;
@@ -129,6 +130,9 @@ public interface SlackClient extends Closeable {
 
   // reactions
   CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(ReactionsAddParams param);
+
+  // teams
+  CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo();
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(

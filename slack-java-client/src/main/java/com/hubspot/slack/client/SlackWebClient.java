@@ -111,6 +111,7 @@ import com.hubspot.slack.client.models.response.group.GroupsListResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
+import com.hubspot.slack.client.models.response.team.TeamInfoResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupDisableResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupEnableResponse;
@@ -119,6 +120,7 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
+import com.hubspot.slack.client.models.teams.SlackTeam;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.paging.AbstractPagedIterable;
@@ -809,6 +811,11 @@ public class SlackWebClient implements SlackClient {
         );
       }
     };
+  }
+
+  @Override
+  public CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo() {
+    return postSlackCommand(SlackMethods.team_info, new Object(), TeamInfoResponse.class);
   }
 
   public <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
