@@ -12,14 +12,19 @@ public enum SlackErrorType {
   ACCOUNT_INACTIVE("account_inactive"),
   ALREADY_REACTED("already_reacted"),
   APP_MISSING_ACTION_URL("app_missing_action_url"),
+  AS_USER_NOT_SUPPORTED("as_user_not_supported"),
 
   CANT_DELETE_MESSAGE("cant_delete_message"),
+  CANT_UPDATE_MESSAGE("cant_update_message"),
   CANNOT_CREATE_DIALOG("cannot_create_dialog"),
   CHANNEL_NOT_FOUND("channel_not_found"),
   COMPLIANCE_EXPORTS_PREVENT_DELETION("compliance_exports_prevent_deletion"),
 
+  EDIT_WINDOW_CLOSED("edit_window_closed"),
+
   FAILED_SENDING_DIALOG("failed_sending_dialog"),
   FATAL_ERROR("fatal_error"),
+  FILE_NOT_FOUND("file_not_found"),
 
   JSON_NOT_OBJECT("json_not_object"),
 
@@ -35,6 +40,10 @@ public enum SlackErrorType {
   NO_PERMISSION("no_permission"),
   NO_TEXT("no_text"),
   NOT_AUTHED("not_authed"),
+  NOT_ALLOWED("not_allowed"),
+  NOT_ALLOWED_TOKEN_TYPE("not_allowed_token_type"),
+
+  ORG_LOGIN_REQUIRED("org_login_required"),
 
   INVALID_AUTH("invalid_auth"),
   INVALID_ARG_NAME("invalid_arg_name"),

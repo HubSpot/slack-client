@@ -47,6 +47,9 @@ We currently support:
  - conversations.unarchive
 #### dialog
  - dialog.open
+#### files
+ - files.upload
+ - files.sharedPublicURL
 #### groups
  - groups.list
  - groups.replies (findReplies)

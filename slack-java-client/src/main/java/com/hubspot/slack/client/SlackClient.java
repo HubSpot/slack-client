@@ -27,6 +27,8 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoPa
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
+import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
+import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
 import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
@@ -39,6 +41,7 @@ import com.hubspot.slack.client.methods.params.usergroups.UsergroupUpdateParams;
 import com.hubspot.slack.client.methods.params.usergroups.users.UsergroupUsersUpdateParams;
 import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
+import com.hubspot.slack.client.methods.params.users.UsersListParams;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.conversations.Conversation;
@@ -60,6 +63,8 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
+import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
+import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
@@ -70,6 +75,7 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupEnableRespon
 import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateResponse;
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
+import com.hubspot.slack.client.models.response.users.UsersListResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 
@@ -85,6 +91,7 @@ public interface SlackClient extends Closeable {
 
   // users
   Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
+  CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params);
 
   // channels
   Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter);
@@ -133,6 +140,10 @@ public interface SlackClient extends Closeable {
 
   // teams
   CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo();
+
+  // files
+  CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(FilesUploadParams params);
+  CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(FilesSharedPublicUrlParams params);
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(

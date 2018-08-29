@@ -67,6 +67,8 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoPa
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
+import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
+import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
 import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
@@ -107,6 +109,8 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
+import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
+import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.group.GroupsListResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
@@ -244,6 +248,11 @@ public class SlackWebClient implements SlackClient {
         );
       }
     };
+  }
+
+  @Override
+  public CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params) {
+    return postSlackCommand(SlackMethods.users_list, params, UsersListResponse.class);
   }
 
   private <T extends SlackResponse> CompletableFuture<Optional<String>> extractNextCursor(CompletableFuture<Result<T, SlackError>> responseFuture) {
@@ -773,6 +782,16 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(ReactionsAddParams params) {
     return postSlackCommand(SlackMethods.reactions_add, params, AddReactionResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(FilesUploadParams params) {
+    return postSlackCommand(SlackMethods.files_upload, params, FilesUploadResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(FilesSharedPublicUrlParams params) {
+    return postSlackCommand(SlackMethods.files_sharedPublicURL, params, FilesSharedPublicUrlResponse.class);
   }
 
   @Override
