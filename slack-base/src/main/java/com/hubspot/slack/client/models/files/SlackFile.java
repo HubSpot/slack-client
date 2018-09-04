@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = SlackTextFile.class, name = "text"),
+    @JsonSubTypes.Type(value = SlackCsvFile.class, name = "csv"),
     @JsonSubTypes.Type(value = SlackGifFile.class, name = "gif")
 })
 public interface SlackFile {

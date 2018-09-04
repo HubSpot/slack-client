@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum SlackFileType {
   TEXT("text"),
   GIF("gif"),
+  CSV("csv"),
   ;
 
   final String type;

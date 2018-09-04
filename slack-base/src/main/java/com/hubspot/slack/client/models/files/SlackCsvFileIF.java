@@ -10,10 +10,10 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface SlackTextFileIF extends SlackTextFileCore {
+public interface SlackCsvFileIF extends SlackTextFileCore {
   @Default
   @Override
   default SlackFileType getFiletype() {
-    return SlackFileType.TEXT;
+    return SlackFileType.CSV;
   }
 }
