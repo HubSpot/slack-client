@@ -26,7 +26,7 @@ public interface SlackFile {
   String getName();
   String getTitle();
   String getMimetype();
-  SlackFileTypes getFiletype();
+  SlackFileType getFiletype();
   String getPrettyType();
 
   @JsonProperty("user")
