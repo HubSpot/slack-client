@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,7 +26,7 @@ class ReflectionBasedFieldPresenceTest {
   private static final Boolean DEFAULT_BOOLEAN = false;
   private static final String DEFAULT_STRING = "default";
   private static final Optional<String> DEFAULT_OPTIONAL_STRING = Optional.of("defaultOptional");
-  private static final List<String> OPTIONAL_STRING_METHODS_TO_BUILD = Collections.singletonList("setText");
+  private static final Set<String> OPTIONAL_STRING_METHODS_TO_BUILD = Collections.singleton("setText");
 
   private static final Reflections SLACK_CLIENT_REFLECTOR = new Reflections("com.hubspot.slack.client");
 
