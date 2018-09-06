@@ -32,7 +32,7 @@ public interface ChatPostEphemeralMessageParamsIF extends MessageParams {
   @Default
   @JsonProperty("parse")
   default String getParseMode() {
-    return "full";
+    return "none";
   }
 
   @Check

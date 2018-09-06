@@ -39,6 +39,8 @@ public interface SlackUserIF extends SlackUserCore {
   @JsonProperty("updated")
   Optional<Integer> getRawUpdated();
 
+  Optional<String> getLocale();
+
   @Derived
   default Optional<Long> getUpdatedAt() {
     return getRawUpdated().map(updated -> updated * 1000L);

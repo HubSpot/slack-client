@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "file": {
+    "id": "F0TD0GUTS",
+    "created": 1532294750,
+    "timestamp": 1532294750,
+    "name": "-.txt",
+    "title": "Untitled",
+    "mimetype": "text/plain",
+    "filetype": "text",
+    "pretty_type": "Plain Text",
+    "user": "U0L4B9NSU",
+    "editable": true,
+    "size": 11,
+    "mode": "snippet",
+    "is_external": false,
+    "external_type": "",
+    "is_public": true,
+    "public_url_shared": false,
+    "display_as_bot": false,
+    "username": "",
+    "url_private": "https://.../.txt",
+    "url_private_download": "https://...download/-.txt",
+    "permalink": "https://.../.txt",
+    "permalink_public": "https://.../.txt",
+    "edit_link": "https://.../.txt/edit",
+    "preview": "launch plan",
+    "preview_highlight": "<div class=\"CodeMirror cm-s-default CodeMirrorServer\" oncopy=\"if(event.clipboardData){event.clipboardData.setData('text/plain',window.getSelection().toString().replace(/\\u200b/g,''));event.preventDefault();event.stopPropagation();}\">\n<div class=\"CodeMirror-code\">\n<div><pre>launch plan</pre></div>\n</div>\n</div>\n",
+    "lines": 1,
+    "lines_more": 0,
+    "preview_is_truncated": false,
+    "comments_count": 0,
+    "is_starred": false,
+    "shares": {
+      "public": {
+        "C061EG9SL": [
+          {
+            "reply_users": [],
+            "reply_users_count": 0,
+            "reply_count": 0,
+            "ts": "1532294750.000001",
+            "channel_name": "general",
+            "team_id": "T061EG9R6"
+          }
+        ]
+      }
+    },
+    "channels": [
+      "C061EG9SL"
+    ],
+    "groups": [],
+    "ims": [],
+    "has_rich_preview": false
+  }
+}

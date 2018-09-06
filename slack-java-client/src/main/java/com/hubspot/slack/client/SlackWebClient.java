@@ -65,7 +65,10 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
+import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
+import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
 import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
@@ -106,10 +109,13 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
+import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
+import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.group.GroupsListResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
+import com.hubspot.slack.client.models.response.team.TeamInfoResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupDisableResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupEnableResponse;
@@ -118,6 +124,7 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
+import com.hubspot.slack.client.models.teams.SlackTeam;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.paging.AbstractPagedIterable;
@@ -241,6 +248,11 @@ public class SlackWebClient implements SlackClient {
         );
       }
     };
+  }
+
+  @Override
+  public CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params) {
+    return postSlackCommand(SlackMethods.users_list, params, UsersListResponse.class);
   }
 
   private <T extends SlackResponse> CompletableFuture<Optional<String>> extractNextCursor(CompletableFuture<Result<T, SlackError>> responseFuture) {
@@ -523,6 +535,50 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  public Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> usersConversations(ConversationsUserParams params) {
+    return new AbstractPagedIterable<Result<List<Conversation>, SlackError>, String>() {
+
+      @Override
+      protected String getInitialOffset() {
+        return null;
+      }
+
+      @Override
+      protected LazyLoadingPage<Result<List<Conversation>, SlackError>, String> getPage(String offset) throws Exception {
+        if (LOG.isTraceEnabled()) {
+          LOG.trace("Fetching slack user conversation page from {}", offset);
+        }
+
+        ConversationsUserParams.Builder requestBuilder = ConversationsUserParams.builder()
+            .from(params)
+            .setLimit(config.getChannelsListBatchSize().get());
+        Optional.ofNullable(offset)
+            .ifPresent(requestBuilder::setCursor);
+
+        CompletableFuture<Result<ConversationListResponse, SlackError>> resultFuture = postSlackCommand(
+            SlackMethods.users_conversations,
+            requestBuilder.build(),
+            ConversationListResponse.class
+        );
+
+        CompletableFuture<Result<List<Conversation>, SlackError>> pageFuture = resultFuture.thenApply(
+            result -> result.mapOk(ConversationListResponse::getConversations)
+        );
+
+        CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(resultFuture);
+        CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(Optional::isPresent);
+        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
+
+        return new LazyLoadingPage<>(
+            pageFuture,
+            hasMoreFuture,
+            nextCursorFuture
+        );
+      }
+    };
+  }
+
+  @Override
   public CompletableFuture<Result<ConversationsCreateResponse, SlackError>> createConversation(ConversationCreateParams params) {
     return postSlackCommand(SlackMethods.conversations_create, params, ConversationsCreateResponse.class);
   }
@@ -729,6 +785,16 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  public CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(FilesUploadParams params) {
+    return postSlackCommand(SlackMethods.files_upload, params, FilesUploadResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(FilesSharedPublicUrlParams params) {
+    return postSlackCommand(SlackMethods.files_sharedPublicURL, params, FilesSharedPublicUrlResponse.class);
+  }
+
+  @Override
   public Iterable<CompletableFuture<Result<List<SlackGroup>, SlackError>>> listGroups(GroupsListParams filter) {
     return new AbstractPagedIterable<Result<List<SlackGroup>, SlackError>, String>() {
       @Override
@@ -764,6 +830,11 @@ public class SlackWebClient implements SlackClient {
         );
       }
     };
+  }
+
+  @Override
+  public CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo() {
+    return postSlackCommand(SlackMethods.team_info, new Object(), TeamInfoResponse.class);
   }
 
   public <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(

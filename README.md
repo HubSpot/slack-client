@@ -47,6 +47,9 @@ We currently support:
  - conversations.unarchive
 #### dialog
  - dialog.open
+#### files
+ - files.upload
+ - files.sharedPublicURL
 #### groups
  - groups.list
  - groups.replies (findReplies)
@@ -65,6 +68,7 @@ We currently support:
 #### usergroups.users
  - usergroups.users.update
 #### users
+ - users.conversations
  - users.info (findUser)
  - users.list
  - users.lookupByEmail

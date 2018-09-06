@@ -4,16 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.hubspot.slack.client.TestMappers;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 
 public class SlackResponseTest {
-
-  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
-      .registerModule(new Jdk8Module())
-      .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
   private static final String ERROR_RESPONSE = "{\n" +
       "    \"ok\": false,\n" +
@@ -48,7 +42,7 @@ public class SlackResponseTest {
 
   @Test
   public void itDoesDeserializeErrorResponse() throws Exception {
-    SlackErrorResponse errorResponse = OBJECT_MAPPER.readValue(ERROR_RESPONSE, SlackErrorResponse.class);
+    SlackErrorResponse errorResponse = TestMappers.OBJECT_MAPPER.readValue(ERROR_RESPONSE, SlackErrorResponse.class);
 
     assertThat(errorResponse.isOk()).isFalse();
     assertThat(errorResponse.getError().getError()).isNotEmpty();
@@ -57,7 +51,7 @@ public class SlackResponseTest {
 
   @Test
   public void itDoesDeserializeUserResponse() throws Exception {
-    UsersInfoResponse userResponse = OBJECT_MAPPER.readValue(USER_RESPONSE, UsersInfoResponse.class);
+    UsersInfoResponse userResponse = TestMappers.OBJECT_MAPPER.readValue(USER_RESPONSE, UsersInfoResponse.class);
 
     assertThat(userResponse.isOk()).isTrue();
     assertThat(userResponse.getUser().getUsername()).isPresent();
