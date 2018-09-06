@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
 
 @Immutable
@@ -22,7 +23,8 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
   @JsonProperty("channel")
   String getChannelId();
 
-  Optional<String> getText();
+  String getText();
+
   String getTs();
 
   @JsonProperty("as_user")
@@ -41,7 +43,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
 
   @Check
   default void check() {
-    Preconditions.checkState(getText().isPresent() || !getAttachments().isEmpty(),
+    Preconditions.checkState(!Strings.isNullOrEmpty(getText()) || !getAttachments().isEmpty(),
         "Must include text if not providing attachments");
   }
 }

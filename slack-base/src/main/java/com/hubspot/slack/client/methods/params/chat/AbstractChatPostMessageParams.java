@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
 
 @Immutable
@@ -17,8 +18,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public abstract class AbstractChatPostMessageParams implements MessageParams {
   @JsonProperty("channel")
   public abstract String getChannelId();
-
-  public abstract Optional<String> getText();
+  public abstract String getText();
   public abstract Optional<String> getThreadTs();
   public abstract Optional<String> getUsername();
   public abstract Optional<Boolean> getAsUser();
@@ -31,7 +31,7 @@ public abstract class AbstractChatPostMessageParams implements MessageParams {
 
   @Check
   public void check() {
-    Preconditions.checkState(getText().isPresent() || !getAttachments().isEmpty(),
+    Preconditions.checkState(!Strings.isNullOrEmpty(getText()) || !getAttachments().isEmpty(),
         "Must include text if not providing attachments");
   }
 }

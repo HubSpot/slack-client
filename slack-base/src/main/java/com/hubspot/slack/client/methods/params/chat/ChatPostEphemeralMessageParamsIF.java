@@ -6,6 +6,7 @@ import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
 
 @Immutable
@@ -37,7 +38,7 @@ public interface ChatPostEphemeralMessageParamsIF extends MessageParams {
 
   @Check
   default void check() {
-    Preconditions.checkState(getText().isPresent() || !getAttachments().isEmpty(),
+    Preconditions.checkState(!Strings.isNullOrEmpty(getText()) || !getAttachments().isEmpty(),
         "Must include text if not providing attachments");
   }
 }
