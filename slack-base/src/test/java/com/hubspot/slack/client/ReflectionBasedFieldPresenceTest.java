@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,8 +24,10 @@ class ReflectionBasedFieldPresenceTest {
   private static final Logger LOG = LoggerFactory.getLogger(ReflectionBasedFieldPresenceTest.class);
 
   private static final Number DEFAULT_NUMBER = 5;
-  private static final String DEFAULT_STRING = "default";
   private static final Boolean DEFAULT_BOOLEAN = false;
+  private static final String DEFAULT_STRING = "default";
+  private static final Optional<String> DEFAULT_OPTIONAL_STRING = Optional.of("defaultOptional");
+  private static final List<String> OPTIONAL_STRING_METHODS_TO_BUILD = Collections.singletonList("setText");
 
   private static final Reflections SLACK_CLIENT_REFLECTOR = new Reflections("com.hubspot.slack.client");
 
@@ -54,7 +58,8 @@ class ReflectionBasedFieldPresenceTest {
         ReflectionUtils.withPrefix("set"),
         ReflectionUtils.withParametersCount(1),
         method -> !Iterable.class.isAssignableFrom(method.getParameterTypes()[0]),
-        method -> !Optional.class.isAssignableFrom(method.getParameterTypes()[0]),
+        method -> !(Optional.class.isAssignableFrom(method.getParameterTypes()[0]) &&
+            !OPTIONAL_STRING_METHODS_TO_BUILD.contains(method.getName())),
         method -> !ReflectionUtils.withAnyParameterAnnotation(Nullable.class).apply(method)
     );
     for (Method builderMethod : builderMethods) {
@@ -70,6 +75,9 @@ class ReflectionBasedFieldPresenceTest {
       } else if (String.class.isAssignableFrom(singletonParamType)) {
         LOG.debug("Calling {} with default of {}", builderMethod.getName(), DEFAULT_STRING);
         builderMethod.invoke(builder, DEFAULT_STRING);
+      } else if (OPTIONAL_STRING_METHODS_TO_BUILD.contains(builderMethod.getName())) {
+        LOG.debug("Calling {} with default optional of {}", builderMethod.getName(), DEFAULT_OPTIONAL_STRING);
+        builderMethod.invoke(builder, DEFAULT_OPTIONAL_STRING);
       } else if (Boolean.class.isAssignableFrom(singletonParamType) || boolean.class.isAssignableFrom(singletonParamType)) {
         LOG.debug("Calling {} with default of {}", builderMethod.getName(), DEFAULT_BOOLEAN);
         builderMethod.invoke(builder, DEFAULT_BOOLEAN);

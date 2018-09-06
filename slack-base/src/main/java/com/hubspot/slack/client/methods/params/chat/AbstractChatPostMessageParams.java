@@ -18,7 +18,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public abstract class AbstractChatPostMessageParams implements MessageParams {
   @JsonProperty("channel")
   public abstract String getChannelId();
-  public abstract String getText();
+  public abstract Optional<String> getText();
   public abstract Optional<String> getThreadTs();
   public abstract Optional<String> getUsername();
   public abstract Optional<Boolean> getAsUser();
@@ -31,7 +31,8 @@ public abstract class AbstractChatPostMessageParams implements MessageParams {
 
   @Check
   public void check() {
-    Preconditions.checkState(!Strings.isNullOrEmpty(getText()) || !getAttachments().isEmpty(),
+    Preconditions.checkState((getText().isPresent() && !Strings.isNullOrEmpty(getText().get())) ||
+            !getAttachments().isEmpty(),
         "Must include text if not providing attachments");
   }
 }

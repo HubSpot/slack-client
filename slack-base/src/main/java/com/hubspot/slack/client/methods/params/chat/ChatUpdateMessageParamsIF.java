@@ -23,7 +23,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
   @JsonProperty("channel")
   String getChannelId();
 
-  String getText();
+  Optional<String> getText();
 
   String getTs();
 
@@ -43,7 +43,8 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
 
   @Check
   default void check() {
-    Preconditions.checkState(!Strings.isNullOrEmpty(getText()) || !getAttachments().isEmpty(),
+    Preconditions.checkState((getText().isPresent() && !Strings.isNullOrEmpty(getText().get())) ||
+            !getAttachments().isEmpty(),
         "Must include text if not providing attachments");
   }
 }

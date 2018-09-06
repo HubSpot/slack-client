@@ -38,7 +38,8 @@ public interface ChatPostEphemeralMessageParamsIF extends MessageParams {
 
   @Check
   default void check() {
-    Preconditions.checkState(!Strings.isNullOrEmpty(getText()) || !getAttachments().isEmpty(),
+    Preconditions.checkState((getText().isPresent() && !Strings.isNullOrEmpty(getText().get())) ||
+            !getAttachments().isEmpty(),
         "Must include text if not providing attachments");
   }
 }
