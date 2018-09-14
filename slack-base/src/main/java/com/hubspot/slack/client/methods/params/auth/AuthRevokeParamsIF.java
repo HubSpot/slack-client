@@ -8,5 +8,8 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 public interface AuthRevokeParamsIF {
-  @Parameter boolean isTest();
+  @Parameter
+  default boolean isTest() {
+    return false;
+  }
 }
