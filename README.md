@@ -26,6 +26,7 @@ An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slac
 We currently support:
 #### auth
  - auth.test
+ - auth.revoke
 #### channels
  - channels.history
  - channels.info
@@ -44,6 +45,7 @@ We currently support:
  - conversations.info
  - conversations.invite
  - conversations.list
+ - conversations.open
  - conversations.unarchive
 #### dialog
  - dialog.open

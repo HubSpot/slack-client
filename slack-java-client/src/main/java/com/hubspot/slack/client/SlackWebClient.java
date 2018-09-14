@@ -45,6 +45,7 @@ import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.methods.JsonStatus;
 import com.hubspot.slack.client.methods.SlackMethod;
 import com.hubspot.slack.client.methods.SlackMethods;
+import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
 import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
@@ -91,6 +92,7 @@ import com.hubspot.slack.client.models.response.ResponseMetadata;
 import com.hubspot.slack.client.models.response.SlackError;
 import com.hubspot.slack.client.models.response.SlackErrorType;
 import com.hubspot.slack.client.models.response.SlackResponse;
+import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
 import com.hubspot.slack.client.models.response.auth.AuthTestResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsHistoryResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
@@ -124,7 +126,6 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
-import com.hubspot.slack.client.models.teams.SlackTeam;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.paging.AbstractPagedIterable;
@@ -189,6 +190,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<AuthTestResponse, SlackError>> testAuth() {
     return postSlackCommand(SlackMethods.auth_test, Collections.emptyMap(), AuthTestResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<AuthRevokeResponse, SlackError>> revokeAuth(AuthRevokeParams params) {
+    return postSlackCommand(SlackMethods.auth_revoke, params, AuthRevokeResponse.class);
   }
 
   @Override

@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 
 import com.hubspot.algebra.Result;
 import com.hubspot.slack.client.methods.SlackMethod;
+import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
 import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
@@ -49,6 +50,7 @@ import com.hubspot.slack.client.models.group.SlackGroup;
 import com.hubspot.slack.client.models.response.FindRepliesResponse;
 import com.hubspot.slack.client.models.response.SlackError;
 import com.hubspot.slack.client.models.response.SlackResponse;
+import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
 import com.hubspot.slack.client.models.response.auth.AuthTestResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
 import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
@@ -82,6 +84,7 @@ import com.hubspot.slack.client.models.users.SlackUser;
 public interface SlackClient extends Closeable {
   // auth
   CompletableFuture<Result<AuthTestResponse, SlackError>> testAuth();
+  CompletableFuture<Result<AuthRevokeResponse, SlackError>> revokeAuth(AuthRevokeParams params);
 
   // searching
   CompletableFuture<Result<SearchMessageResponse, SlackError>> searchMessages(SearchMessagesParams params);
