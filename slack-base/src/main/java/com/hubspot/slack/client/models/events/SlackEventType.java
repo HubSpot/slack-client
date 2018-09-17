@@ -3,16 +3,21 @@ package com.hubspot.slack.client.models.events;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
+import com.hubspot.slack.client.models.events.channel.SlackChannelArchiveEvent;
+import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
+import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
+import com.hubspot.slack.client.models.events.channel.SlackChannelRenameEvent;
+import com.hubspot.slack.client.models.events.channel.SlackChannelUnarchiveEvent;
 
 public enum SlackEventType {
 
   APP_UNINSTALLED,
-  CHANNEL_ARCHIVE,
-  CHANNEL_CREATED,
-  CHANNEL_DELETED,
+  CHANNEL_ARCHIVE(SlackChannelArchiveEvent.class),
+  CHANNEL_CREATED(SlackChannelCreatedEvent.class),
+  CHANNEL_DELETED(SlackChannelDeletedEvent.class),
   CHANNEL_HISTORY_CHANGED,
-  CHANNEL_RENAME,
-  CHANNEL_UNARCHIVE,
+  CHANNEL_RENAME(SlackChannelRenameEvent.class),
+  CHANNEL_UNARCHIVE(SlackChannelUnarchiveEvent.class),
   DND_UPDATED,
   DND_UPDATED_USER,
   EMAIL_DOMAIN_CHANGED,
