@@ -1,0 +1,25 @@
+{
+  "token": "uWopedqK86MJfjUeq8v9pUAD",
+  "team_id": "TBQPW3FH6",
+  "api_app_id": "A945JNH24",
+  "event": {
+    "type": "channel_created",
+    "channel": {
+      "id": "CCXF9BDV1",
+      "is_channel": true,
+      "name": "test",
+      "name_normalized": "test",
+      "created": 1537452804,
+      "creator": "UBRFHDFGA",
+      "is_shared": false,
+      "is_org_shared": false
+    },
+    "event_ts": "1537452804.000100"
+  },
+  "type": "event_callback",
+  "event_id": "EvCXCPK952",
+  "event_time": 1537452804,
+  "authed_users": [
+    "UBRFHDFGA"
+  ]
+}

@@ -15,11 +15,13 @@ import com.hubspot.slack.client.models.events.SlackEvent;
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackChannelCreatedEvent.class)
 public interface SlackChannelCreatedEventIF extends SlackEvent {
+  //Channel.created and channel.creator do not exist on the SlackChannel object and consequently aren't parsed right now. If we need these in the future
+  //we can define a wrapper around SlackChannel containing those two fields.
+
   SlackChannel getChannel();
 
-  @JsonProperty("channel.created")
-  long getChannelCreatedTime();
-
-  @JsonProperty("channel.creator")
-  String getCreaterUserId();
+  //Channel deleted events do not have a ts, so we manually set it as null
+  default String getTs() {
+    return null;
+  }
 }

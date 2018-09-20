@@ -1,0 +1,23 @@
+{
+  "token": "uWopedqK86MJfjUeq8v9pUAD",
+  "team_id": "TBQPW3FH6",
+  "api_app_id": "A945JNH24",
+  "event": {
+    "user": "UBRFHDFGA",
+    "old_name": "fdsafd",
+    "name": "ni",
+    "text": "<@UBRFHDFGA> has renamed the channel from \"fdsafd\" to \"ni\"",
+    "type": "message",
+    "subtype": "channel_name",
+    "ts": "1537468880.000100",
+    "channel": "CCX8BFXED",
+    "event_ts": "1537468880.000100",
+    "channel_type": "channel"
+  },
+  "type": "event_callback",
+  "event_id": "EvCXL4PQ20",
+  "event_time": 1537468880,
+  "authed_users": [
+    "UBRFHDFGA"
+  ]
+}

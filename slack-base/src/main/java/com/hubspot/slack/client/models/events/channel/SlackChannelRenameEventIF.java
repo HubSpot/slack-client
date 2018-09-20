@@ -15,8 +15,8 @@ import com.hubspot.slack.client.models.events.SlackEvent;
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackChannelRenameEvent.class)
 public interface SlackChannelRenameEventIF extends SlackEvent {
-  SlackChannel getChannel();
+  //Channel.created does not exist on the SlackChannel object and consequently isn't parsed right now. If we need this in the future
+  //we can define a wrapper around SlackChannel containing that field
 
-  @JsonProperty("channel.created")
-  long getChannelCreatedTime();
+  SlackChannel getChannel();
 }

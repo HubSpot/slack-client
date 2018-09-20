@@ -16,4 +16,9 @@ import com.hubspot.slack.client.models.events.SlackEvent;
 public interface SlackChannelDeletedEventIF extends SlackEvent {
   @JsonProperty("channel")
   String getChannelId();
+
+  //Channel deleted events do not have a ts, so we manually set it as null
+  default String getTs() {
+    return null;
+  }
 }
