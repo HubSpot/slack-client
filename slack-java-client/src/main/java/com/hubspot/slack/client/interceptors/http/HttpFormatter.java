@@ -11,7 +11,12 @@ public class HttpFormatter {
   static String formatRequest(HttpRequest request) {
     StringBuilder builder = new StringBuilder();
 
-    builder.append(request.getMethod()).append(" ").append(request.getUrl()).append("\n");
+    String url = request.getUrl().toString();
+    if (urlContainsRawAuthToken(url)) {
+      url = urlWithRedactedToken(url);
+    }
+
+    builder.append(request.getMethod()).append(" ").append(url).append("\n");
 
     builder.append("------------------------------------------\n");
     request.getHeaders().forEach(header -> builder.append(safeHeaderString(header.getName(), header.getValue())));
@@ -32,6 +37,44 @@ public class HttpFormatter {
     return builder.toString();
   }
 
+  private static boolean urlContainsRawAuthToken(
+      String url
+  ) {
+    return url.contains("token=");
+  }
+
+  static String urlWithRedactedToken(
+      String rawUrl
+  ) {
+    String[] urlSplitOnToken = rawUrl.split("token=");
+    String prefix = urlSplitOnToken[0];
+    String rest = urlSplitOnToken[1];
+
+    String[] restOfUrlSplit = rest.split("&", 2);
+    String token = restOfUrlSplit[0];
+
+    StringBuilder redactedUrl = new StringBuilder();
+
+    redactedUrl.append(prefix)
+        .append("token=").append(redactedToken(token));
+
+    if (restOfUrlSplit.length > 1) {
+      redactedUrl.append("&").append(restOfUrlSplit[1]);
+    }
+
+    return redactedUrl.toString();
+  }
+
+  private static String redactedToken(
+      String token
+  ) {
+    if (token.length() < 9) {
+      return token.charAt(0) + "..." + token.charAt(token.length() - 1);
+    }
+
+    return token.substring(0, 3) + "..." + token.substring(token.length() - 4, token.length());
+  }
+
   static String safeHeaderString(
       String headerName,
       String headerValue
@@ -40,14 +83,8 @@ public class HttpFormatter {
       String[] authParts = headerValue.split(" ");
       if (authParts.length == 2) {
         String token = authParts[1];
-        String elidedToken;
-        if (token.length() < 9) {
-          elidedToken = token.charAt(0) + "..." + token.charAt(token.length() - 1);
-        } else {
-          elidedToken = token.substring(0, 3) + "..." + token.substring(token.length() - 4, token.length());
-        }
 
-        return headerName + " = " + authParts[0] + " " + elidedToken;
+        return headerName + " = " + authParts[0] + " " + redactedToken(token);
       }
     }
 
