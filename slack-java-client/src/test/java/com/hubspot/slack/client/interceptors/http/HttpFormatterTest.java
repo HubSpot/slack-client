@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class HttpFormatterTest {
   @Test
-  public void itDoesElideAuthTokens() throws Exception {
+  public void itDoesElideAuthTokensInHeader() throws Exception {
     assertThat(
         HttpFormatter.safeHeaderString(
             "Authorization",
@@ -33,5 +33,24 @@ public class HttpFormatterTest {
     )
         .describedAs("If it looks like a basic HTTP auth token, we should redact the full token, providing just a fingerprint")
         .contains("Authorization = Basic YWx...YW1l");
+  }
+
+  @Test
+  public void itDoesElideAuthTokensInUrl() throws Exception {
+    assertThat(
+        HttpFormatter.urlWithRedactedToken(
+            "https://slack.com/api/channels.info?token=xoxb-000000000000-AAAAAAoM5xCesZ1d9HDFhKMG"
+        )
+    )
+        .describedAs("If it looks like a URL with only the raw token, we should redact the full token, providing just a fingerprint")
+        .isEqualTo("https://slack.com/api/channels.info?token=xox...hKMG");
+
+    assertThat(
+        HttpFormatter.urlWithRedactedToken(
+            "https://slack.com/api/channels.info?foo=bar&token=xoxb-000000000000-AAAAAAoM5xCesZ1d9HDFhKMG&baz=why"
+        )
+    )
+        .describedAs("If it looks like a URL with the raw token and other query params, we should redact the full token, providing just a fingerprint")
+        .isEqualTo("https://slack.com/api/channels.info?foo=bar&token=xox...hKMG&baz=why");
   }
 }
