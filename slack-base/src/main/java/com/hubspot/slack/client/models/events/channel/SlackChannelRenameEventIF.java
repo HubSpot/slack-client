@@ -20,6 +20,8 @@ public interface SlackChannelRenameEventIF extends SlackEvent {
 
   SlackChannel getChannel();
 
+  //Channel rename events do not have a ts, so we manually set it as null
+  @Override
   default String getTs() {
     return null;
   }

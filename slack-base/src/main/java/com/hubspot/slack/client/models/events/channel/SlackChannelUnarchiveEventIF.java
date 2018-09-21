@@ -20,6 +20,8 @@ public interface SlackChannelUnarchiveEventIF extends SlackEvent {
   @JsonProperty("user")
   String getUnarchivedByUserId();
 
+  //Channel unarchive events do not have a ts, so we manually set it as null
+  @Override
   default String getTs() {
     return null;
   }

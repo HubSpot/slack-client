@@ -20,6 +20,8 @@ public interface SlackChannelArchiveEventIF extends SlackEvent {
   @JsonProperty("user")
   String getUserId();
 
+  //Channel archive events do not have a ts, so we manually set it as null
+  @Override
   default String getTs() {
     return null;
   }

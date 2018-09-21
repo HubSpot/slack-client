@@ -20,7 +20,8 @@ public interface SlackChannelCreatedEventIF extends SlackEvent {
 
   SlackChannel getChannel();
 
-  //Channel deleted events do not have a ts, so we manually set it as null
+  //Channel created events do not have a ts, so we manually set it as null
+  @Override
   default String getTs() {
     return null;
   }
