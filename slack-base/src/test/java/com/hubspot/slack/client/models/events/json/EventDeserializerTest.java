@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.events.json;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.IOException;
 
 import org.junit.Test;
@@ -8,67 +10,79 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.events.SlackEvent;
+import com.hubspot.slack.client.models.events.SlackEventType;
 import com.hubspot.slack.client.models.events.SlackEventWrapper;
 
 public class EventDeserializerTest {
   @Test
   public void itCanDeserMessageChanged1() throws IOException {
-    fetchAndDeserializeSlackEvent("message_change1.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("message_change1.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);
   }
 
   @Test
   public void itCanDeserMessageChanged2() throws IOException {
-    fetchAndDeserializeSlackEvent("message_change2.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("message_change2.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);
   }
 
   @Test
   public void itCanDeserMessageDeleted() throws IOException {
-    fetchAndDeserializeSlackEvent("message_delete.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("message_delete.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);
   }
 
   @Test
   public void itCanDeserMessageFileShared() throws IOException {
-    fetchAndDeserializeSlackEvent("message_file_shared.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("message_file_shared.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);
   }
 
   @Test
   public void itCanDeserMessageThreadBroadcast() throws IOException {
-    fetchAndDeserializeSlackEvent("message_thread_broadcast.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("message_thread_broadcast.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);
   }
 
   @Test
   public void itCanDeserMessageMeMessage() throws IOException {
-    fetchAndDeserializeSlackEvent("message_me_message.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("message_me_message.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);
   }
 
   @Test
   public void itCanDeserChannelCreatedMessage() throws IOException {
-    fetchAndDeserializeSlackEvent("channel_created_message.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("channel_created_message.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_CREATED);
   }
 
   @Test
   public void itCanDeserChannelDeletedMessage() throws IOException {
-    fetchAndDeserializeSlackEvent("channel_deleted_message.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("channel_deleted_message.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_DELETED);
   }
 
   @Test
   public void itCanDeserChannelRenamedEvent() throws IOException {
-    fetchAndDeserializeSlackEvent("channel_renamed_event.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("channel_renamed_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_RENAME);
   }
 
   @Test
   public void itCanDeserChannelArchivedEvent() throws IOException {
-    fetchAndDeserializeSlackEvent("channel_archived_event.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("channel_archived_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_ARCHIVE);
   }
 
   @Test
   public void itCanDeserChannelUnarchivedEvent() throws IOException {
-    fetchAndDeserializeSlackEvent("channel_unarchived_event.json");
+    SlackEvent event = fetchAndDeserializeSlackEvent("channel_unarchived_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_UNARCHIVE);
   }
 
-  private void fetchAndDeserializeSlackEvent(String jsonFileName) throws IOException {
+  private SlackEvent fetchAndDeserializeSlackEvent(String jsonFileName) throws IOException {
     String rawJson = JsonLoader.loadJsonFromFile(jsonFileName);
-    deserializeSlackEvent(rawJson);
+    return deserializeSlackEvent(rawJson);
   }
 
   private SlackEvent deserializeSlackEvent(String rawJson) throws IOException {

@@ -3,14 +3,15 @@
   "team_id": "TBQPW3FH6",
   "api_app_id": "A945JNH24",
   "event": {
-    "type": "channel_deleted",
-    "channel": "CCXCZNATW",
-    "actor_id": "UBRFHDFGA",
-    "event_ts": "1537468216.000200"
+    "type": "channel_archive",
+    "channel": "CCX8BFXED",
+    "user": "UBRFHDFGA",
+    "is_moved": 0,
+    "event_ts": "1537542788.000200"
   },
   "type": "event_callback",
-  "event_id": "EvCY17K7QD",
-  "event_time": 1537468216,
+  "event_id": "EvCYA72LVA",
+  "event_time": 1537542788,
   "authed_users": [
     "UBRFHDFGA"
   ]

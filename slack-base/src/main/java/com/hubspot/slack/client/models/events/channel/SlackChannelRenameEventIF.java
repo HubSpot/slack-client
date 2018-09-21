@@ -19,4 +19,8 @@ public interface SlackChannelRenameEventIF extends SlackEvent {
   //we can define a wrapper around SlackChannel containing that field
 
   SlackChannel getChannel();
+
+  default String getTs() {
+    return null;
+  }
 }

@@ -3,18 +3,14 @@
   "team_id": "TBQPW3FH6",
   "api_app_id": "A945JNH24",
   "event": {
-    "user": "UBRFHDFGA",
-    "text": "<@UBRFHDFGA> un-archived the channel",
-    "type": "message",
-    "subtype": "channel_unarchive",
-    "ts": "1537468761.000300",
+    "type": "channel_unarchive",
     "channel": "CCX8BFXED",
-    "event_ts": "1537468761.000300",
-    "channel_type": "channel"
+    "user": "UBRFHDFGA",
+    "event_ts": "1537543598.000200"
   },
   "type": "event_callback",
-  "event_id": "EvCY1FC4JH",
-  "event_time": 1537468761,
+  "event_id": "EvCYD468UB",
+  "event_time": 1537543598,
   "authed_users": [
     "UBRFHDFGA"
   ]

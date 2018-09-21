@@ -3,20 +3,19 @@
   "team_id": "TBQPW3FH6",
   "api_app_id": "A945JNH24",
   "event": {
-    "user": "UBRFHDFGA",
-    "old_name": "fdsafd",
-    "name": "ni",
-    "text": "<@UBRFHDFGA> has renamed the channel from \"fdsafd\" to \"ni\"",
-    "type": "message",
-    "subtype": "channel_name",
-    "ts": "1537468880.000100",
-    "channel": "CCX8BFXED",
-    "event_ts": "1537468880.000100",
-    "channel_type": "channel"
+    "type": "channel_rename",
+    "channel": {
+      "id": "CCX8BFXED",
+      "is_channel": true,
+      "name": "knightwhosayni",
+      "name_normalized": "knightwhosayni",
+      "created": 1537468268
+    },
+    "event_ts": "1537543256.000100"
   },
   "type": "event_callback",
-  "event_id": "EvCXL4PQ20",
-  "event_time": 1537468880,
+  "event_id": "EvCXQ1LM0Q",
+  "event_time": 1537543256,
   "authed_users": [
     "UBRFHDFGA"
   ]
