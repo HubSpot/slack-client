@@ -1,0 +1,22 @@
+{
+  "token": "uWopedqK86MJfjUeq8v9pUAD",
+  "team_id": "TBQPW3FH6",
+  "api_app_id": "A945JNH24",
+  "event": {
+    "type": "channel_rename",
+    "channel": {
+      "id": "CCX8BFXED",
+      "is_channel": true,
+      "name": "knightwhosayni",
+      "name_normalized": "knightwhosayni",
+      "created": 1537468268
+    },
+    "event_ts": "1537543256.000100"
+  },
+  "type": "event_callback",
+  "event_id": "EvCXQ1LM0Q",
+  "event_time": 1537543256,
+  "authed_users": [
+    "UBRFHDFGA"
+  ]
+}

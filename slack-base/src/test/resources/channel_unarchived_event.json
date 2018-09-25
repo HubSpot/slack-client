@@ -1,0 +1,17 @@
+{
+  "token": "uWopedqK86MJfjUeq8v9pUAD",
+  "team_id": "TBQPW3FH6",
+  "api_app_id": "A945JNH24",
+  "event": {
+    "type": "channel_unarchive",
+    "channel": "CCX8BFXED",
+    "user": "UBRFHDFGA",
+    "event_ts": "1537543598.000200"
+  },
+  "type": "event_callback",
+  "event_id": "EvCYD468UB",
+  "event_time": 1537543598,
+  "authed_users": [
+    "UBRFHDFGA"
+  ]
+}
