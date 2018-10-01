@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.immutables.value.Value.Immutable;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -12,6 +13,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface SlackEventWrapperIF<T extends SlackEvent> {
+  @JsonView(SlackEventView.Internal.class)
   String getToken();
   String getTeamId();
   SlackEventType getType();
