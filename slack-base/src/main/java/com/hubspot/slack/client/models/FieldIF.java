@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models;
 
+import java.util.Optional;
+
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +13,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface FieldIF {
-  String getTitle();
+  Optional<String> getTitle();
   String getValue();
 
   @JsonProperty("short")
