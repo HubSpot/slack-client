@@ -8,6 +8,7 @@ import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelRenameEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelUnarchiveEvent;
+import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public enum SlackEventType {
 
@@ -67,7 +68,7 @@ public enum SlackEventType {
   TEAM_RENAME,
   TOKENS_REVOKED,
   URL_VERIFICATION,
-  USER_CHANGE,
+  USER_CHANGE(SlackUserChangeEvent.class),
   UNKNOWN
   ;
 

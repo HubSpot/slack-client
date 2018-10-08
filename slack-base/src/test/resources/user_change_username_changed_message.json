@@ -1,0 +1,63 @@
+{
+  "token": "uWopedqK86MJfjUeq8v9pUAD",
+  "team_id": "TBQPW3FH6",
+  "api_app_id": "A945JNH24",
+  "event": {
+    "type": "user_change",
+    "user": {
+      "id": "UBRFHDFGA",
+      "team_id": "TBQPW3FH6",
+      "name": "bwehner",
+      "deleted": false,
+      "color": "9f69e7",
+      "real_name": "Bryan wehner",
+      "tz": "America\/New_York",
+      "tz_label": "Eastern Daylight Time",
+      "tz_offset": -14400,
+      "profile": {
+        "title": "Test change",
+        "phone": "",
+        "skype": "",
+        "real_name": "Bryan wehner",
+        "real_name_normalized": "Bryan wehner",
+        "display_name": "bryanw",
+        "display_name_normalized": "bryanw",
+        "fields": [
+
+        ],
+        "status_text": "",
+        "status_emoji": "",
+        "status_expiration": 0,
+        "avatar_hash": "gec277bb22fc",
+        "email": "bwehner@hubspot.com",
+        "first_name": "Bryan",
+        "last_name": "wehner",
+        "image_24": "https:\/\/secure.gravatar.com\/avatar\/ec277bb22fcebf3a7baed4c14adb146a.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0012-24.png",
+        "image_32": "https:\/\/secure.gravatar.com\/avatar\/ec277bb22fcebf3a7baed4c14adb146a.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0012-32.png",
+        "image_48": "https:\/\/secure.gravatar.com\/avatar\/ec277bb22fcebf3a7baed4c14adb146a.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0012-48.png",
+        "image_72": "https:\/\/secure.gravatar.com\/avatar\/ec277bb22fcebf3a7baed4c14adb146a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0012-72.png",
+        "image_192": "https:\/\/secure.gravatar.com\/avatar\/ec277bb22fcebf3a7baed4c14adb146a.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0012-192.png",
+        "image_512": "https:\/\/secure.gravatar.com\/avatar\/ec277bb22fcebf3a7baed4c14adb146a.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0012-512.png",
+        "status_text_canonical": "",
+        "team": "TBQPW3FH6"
+      },
+      "is_admin": true,
+      "is_owner": true,
+      "is_primary_owner": true,
+      "is_restricted": false,
+      "is_ultra_restricted": false,
+      "is_bot": false,
+      "is_app_user": false,
+      "updated": 1539024283,
+      "locale": "en-US"
+    },
+    "cache_ts": 1539024283,
+    "event_ts": "1539024283.000200"
+  },
+  "type": "event_callback",
+  "event_id": "EvD9H77VBM",
+  "event_time": 1539024283,
+  "authed_users": [
+    "UBRFHDFGA"
+  ]
+}

@@ -12,6 +12,7 @@ import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.events.SlackEvent;
 import com.hubspot.slack.client.models.events.SlackEventType;
 import com.hubspot.slack.client.models.events.SlackEventWrapper;
+import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public class EventDeserializerTest {
   @Test
@@ -78,6 +79,25 @@ public class EventDeserializerTest {
   public void itCanDeserChannelUnarchivedEvent() throws IOException {
     SlackEvent event = fetchAndDeserializeSlackEvent("channel_unarchived_event.json");
     assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_UNARCHIVE);
+  }
+
+  @Test
+  public void itCanDeserUserChangeEventUserDeleted() throws IOException {
+    SlackUserChangeEvent event = fetchAndDeserializeSlackEvent("user_change_user_deleted_message.json").toDetailedEvent();
+    assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
+    assertThat(event.getUser().isDeleted().isPresent() && event.getUser().isDeleted().get());
+  }
+
+  @Test
+  public void itCanDeserUserChangeEventUsernameChanged() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("user_change_username_changed_message.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
+  }
+
+  @Test
+  public void itCanDeserUserChangeEventDisplayNameChanged() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("user_change_display_name_changed_message.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
   }
 
   private SlackEvent fetchAndDeserializeSlackEvent(String jsonFileName) throws IOException {
