@@ -1,12 +1,12 @@
 {
   "token": "uWopedqK86MJfjUeq8v9pUAD",
-  "team_id": "TBQPW3FH6",
-  "api_app_id": "A945JNH24",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
   "event": {
     "type": "user_change",
     "user": {
       "id": "UD8T2P96C",
-      "team_id": "TBQPW3FH6",
+      "team_id": "redacted",
       "name": "jisuvasug",
       "deleted": true,
       "profile": {
@@ -30,7 +30,7 @@
         "image_192": "https:\/\/secure.gravatar.com\/avatar\/18e65e0de317b3fa3e5aa41489e1a0cf.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0008-192.png",
         "image_512": "https:\/\/secure.gravatar.com\/avatar\/18e65e0de317b3fa3e5aa41489e1a0cf.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0008-512.png",
         "status_text_canonical": "",
-        "team": "TBQPW3FH6"
+        "team": "redacted"
       },
       "is_bot": false,
       "is_app_user": false,
