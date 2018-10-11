@@ -82,22 +82,10 @@ public class EventDeserializerTest {
   }
 
   @Test
-  public void itCanDeserUserChangeEventUserDeleted() throws IOException {
-    SlackUserChangeEvent event = fetchAndDeserializeSlackEvent("user_change_user_deleted_message.json").toDetailedEvent();
+  public void itCanDeserUserChangeEvent() throws IOException {
+    SlackUserChangeEvent event = fetchAndDeserializeSlackEvent("user_change.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
     assertThat(event.getUser().isDeleted().isPresent() && event.getUser().isDeleted().get());
-  }
-
-  @Test
-  public void itCanDeserUserChangeEventUsernameChanged() throws IOException {
-    SlackEvent event = fetchAndDeserializeSlackEvent("user_change_username_changed_message.json");
-    assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
-  }
-
-  @Test
-  public void itCanDeserUserChangeEventDisplayNameChanged() throws IOException {
-    SlackEvent event = fetchAndDeserializeSlackEvent("user_change_display_name_changed_message.json");
-    assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
   }
 
   private SlackEvent fetchAndDeserializeSlackEvent(String jsonFileName) throws IOException {
