@@ -1,0 +1,50 @@
+{
+  "id": "redacted",
+  "name": "busting",
+  "is_channel": true,
+  "created": 1466025154,
+  "creator": "redacted",
+  "is_archived": false,
+  "is_general": true,
+  "name_normalized": "busting",
+  "is_shared": false,
+  "is_org_shared": false,
+  "is_member": true,
+  "is_private": false,
+  "is_mpim": false,
+  "last_read": "1503435939.000101",
+  "latest": {
+    "text": "Containment unit is 98% full",
+    "username": "ecto1138",
+    "bot_id": "redacted",
+    "attachments": [
+      {
+        "text": "Don't get too attached",
+        "id": 1,
+        "fallback": "This is an attachment fallback"
+      }
+    ],
+    "type": "message",
+    "subtype": "bot_message",
+    "ts": "1503435956.000247"
+  },
+  "unread_count": 1,
+  "unread_count_display": 1,
+  "members": [
+    "U0G9QF9C6",
+    "U1QNSQB9U"
+  ],
+  "topic": {
+    "value": "Spiritual containment strategies",
+    "creator": "U0G9QF9C6",
+    "last_set": 1503435128
+  },
+  "purpose": {
+    "value": "Discuss busting ghosts",
+    "creator": "U0G9QF9C6",
+    "last_set": 1503435128
+  },
+  "previous_names": [
+    "dusting"
+  ]
+}
