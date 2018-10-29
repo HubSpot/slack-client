@@ -26,6 +26,6 @@ public class SlackUserDeserializationTest {
   }
 
   private SlackUser getSlackUser() throws IOException {
-    return ObjectMapperUtils.mapper().readValue(JsonLoader.loadJsonFromFile("deleted_slack_user.json"), new TypeReference<SlackUser>() {});
+    return ObjectMapperUtils.mapper().readValue(JsonLoader.loadJsonFromFile("deleted_slack_user.json"), SlackUser.class);
   }
 }
