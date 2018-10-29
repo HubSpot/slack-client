@@ -16,8 +16,8 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public interface SlackChannelIF {
   String getId();
   String getName();
-
   Optional<Boolean> getIsArchived();
+  Optional<Boolean> getIsGeneral();
 
   @Derived
   @JsonIgnore
