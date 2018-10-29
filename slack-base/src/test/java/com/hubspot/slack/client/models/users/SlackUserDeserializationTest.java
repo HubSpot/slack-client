@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
 
