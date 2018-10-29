@@ -13,7 +13,7 @@ import com.hubspot.slack.client.models.JsonLoader;
 
 public class SlackUserDeserializationTest {
   @Test
-  public void usersSerializeAndDeserializeProperly() throws IOException {
+  public void deletedUsersDeserializeProperly() throws IOException {
     SlackUser user = getSlackUser();
     assertTrue(user.isDeleted().isPresent() && user.isDeleted().get());
   }
