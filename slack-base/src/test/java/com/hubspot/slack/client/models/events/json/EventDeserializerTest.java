@@ -1,6 +1,7 @@
 package com.hubspot.slack.client.models.events.json;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
@@ -86,12 +87,15 @@ public class EventDeserializerTest {
   public void itCanDeserMemberJoinedChannelEventWithoutInviter() throws IOException {
     SlackMemberJoinedChannelEvent event = fetchAndDeserializeSlackEvent("member_joined_channel.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_JOINED_CHANNEL);
+    assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberJoinedChannelEvent.class)).isEqualTo(event);
   }
 
   @Test
   public void itCanDeserMemberJoinedChannelEventWithInviter() throws IOException {
     SlackMemberJoinedChannelEvent event = fetchAndDeserializeSlackEvent("member_joined_channel_with_inviter.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_JOINED_CHANNEL);
+    assertTrue(event.getInviterId().isPresent());
+    assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberJoinedChannelEvent.class)).isEqualTo(event);
   }
 
   @Test
