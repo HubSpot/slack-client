@@ -13,6 +13,7 @@ import com.hubspot.slack.client.models.events.SlackEvent;
 import com.hubspot.slack.client.models.events.SlackEventType;
 import com.hubspot.slack.client.models.events.SlackEventWrapper;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
+import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public class EventDeserializerTest {
   @Test
@@ -91,6 +92,13 @@ public class EventDeserializerTest {
   public void itCanDeserMemberJoinedChannelEventWithInviter() throws IOException {
     SlackMemberJoinedChannelEvent event = fetchAndDeserializeSlackEvent("member_joined_channel_with_inviter.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_JOINED_CHANNEL);
+  }
+
+  @Test
+  public void itCanDeserUserChangeEvent() throws IOException {
+    SlackUserChangeEvent event = fetchAndDeserializeSlackEvent("user_change.json").toDetailedEvent();
+    assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
+    assertThat(event.getUser().isDeleted().isPresent() && event.getUser().isDeleted().get());
   }
 
   private SlackEvent fetchAndDeserializeSlackEvent(String jsonFileName) throws IOException {

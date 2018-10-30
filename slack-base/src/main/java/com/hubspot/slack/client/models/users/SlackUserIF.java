@@ -15,6 +15,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface SlackUserIF extends SlackUserCore {
   Optional<UserProfile> getProfile();
+  @JsonProperty("deleted")
   Optional<Boolean> isDeleted();
   Optional<String> getColor();
   Optional<String> isAdmin();
