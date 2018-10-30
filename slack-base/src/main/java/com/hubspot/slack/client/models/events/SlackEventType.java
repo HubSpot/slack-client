@@ -8,6 +8,7 @@ import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelRenameEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelUnarchiveEvent;
+import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public enum SlackEventType {
@@ -45,7 +46,7 @@ public enum SlackEventType {
   IM_HISTORY_CHANGED,
   IM_OPEN,
   LINK_SHARED,
-  MEMBER_JOINED_CHANNEL,
+  MEMBER_JOINED_CHANNEL(SlackMemberJoinedChannelEvent.class),
   MEMBER_LEFT_CHANNEL,
   MESSAGE(SlackEventMessage.class),
   PIN_ADDED,
