@@ -12,6 +12,7 @@ import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.events.SlackEvent;
 import com.hubspot.slack.client.models.events.SlackEventType;
 import com.hubspot.slack.client.models.events.SlackEventWrapper;
+import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public class EventDeserializerTest {
   @Test
@@ -78,6 +79,13 @@ public class EventDeserializerTest {
   public void itCanDeserChannelUnarchivedEvent() throws IOException {
     SlackEvent event = fetchAndDeserializeSlackEvent("channel_unarchived_event.json");
     assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_UNARCHIVE);
+  }
+
+  @Test
+  public void itCanDeserUserChangeEvent() throws IOException {
+    SlackUserChangeEvent event = fetchAndDeserializeSlackEvent("user_change.json").toDetailedEvent();
+    assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
+    assertThat(event.getUser().isDeleted().isPresent() && event.getUser().isDeleted().get());
   }
 
   private SlackEvent fetchAndDeserializeSlackEvent(String jsonFileName) throws IOException {
