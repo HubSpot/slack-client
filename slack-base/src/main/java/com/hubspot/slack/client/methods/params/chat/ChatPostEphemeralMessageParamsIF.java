@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import java.util.Optional;
+
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
@@ -12,6 +14,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 public interface ChatPostEphemeralMessageParamsIF extends MessageParams {
+  @Override
   @JsonProperty("channel")
   String getChannelId();
 
@@ -23,6 +26,9 @@ public interface ChatPostEphemeralMessageParamsIF extends MessageParams {
   default boolean getSendAsUser() {
     return false;
   }
+
+  @JsonProperty("thread_ts")
+  Optional<String> getThreadTs();
 
   @Default
   @JsonProperty("link_names")
