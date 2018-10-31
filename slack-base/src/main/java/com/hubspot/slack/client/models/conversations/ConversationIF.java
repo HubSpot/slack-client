@@ -25,4 +25,6 @@ public interface ConversationIF {
   Optional<Boolean> isIm();
   @JsonProperty("is_archived")
   Optional<Boolean> isArchived();
+  @JsonProperty("is_general")
+  Optional<Boolean> isGeneral();
 }
