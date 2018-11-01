@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,7 +20,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
-import com.google.common.util.concurrent.RateLimiter;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 import com.hubspot.algebra.Result;
@@ -130,6 +127,8 @@ import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.paging.AbstractPagedIterable;
 import com.hubspot.slack.client.paging.LazyLoadingPage;
+import com.hubspot.slack.client.ratelimiting.ByMethodRateLimiter;
+import com.hubspot.slack.client.ratelimiting.SlackRateLimiter;
 
 public class SlackWebClient implements SlackClient {
   private static final Logger LOG = LoggerFactory.getLogger(SlackWebClient.class);
@@ -137,7 +136,6 @@ public class SlackWebClient implements SlackClient {
       .setObjectMapper(ObjectMapperUtils.mapper())
       .build();
   private static final AtomicLong REQUEST_COUNTER = new AtomicLong(0);
-  private static final ConcurrentMap<SlackMethod, RateLimiter> RATE_LIMITERS = new ConcurrentHashMap<>();
 
   public interface Factory {
     SlackWebClient build(
@@ -147,6 +145,7 @@ public class SlackWebClient implements SlackClient {
 
   private final NioHttpClient nioHttpClient;
   private final CloseableExecutorService recursingExecutor;
+  private final ByMethodRateLimiter defaultRateLimiter;
   private final SlackClientRuntimeConfig config;
 
   private final SlackMethodAcceptor methodAcceptor;
@@ -158,6 +157,7 @@ public class SlackWebClient implements SlackClient {
       DefaultHttpRequestDebugger defaultHttpRequestDebugger,
       DefaultHttpResponseDebugger defaultHttpResponseDebugger,
       NioHttpClient.Factory nioHttpClientFactory,
+      ByMethodRateLimiter defaultRateLimiter,
       @Assisted SlackClientRuntimeConfig config
   ) {
     this.nioHttpClient = nioHttpClientFactory.wrap(
@@ -165,6 +165,7 @@ public class SlackWebClient implements SlackClient {
             config.getHttpConfig().orElse(DEFAULT_CONFIG)
         )
     );
+    this.defaultRateLimiter = defaultRateLimiter;
     this.config = config;
 
     this.methodAcceptor = config.getMethodFilter()
@@ -957,14 +958,14 @@ public class SlackWebClient implements SlackClient {
   }
 
   private void acquirePermit(SlackMethod method) {
-    double permissibleQps = method.getRateLimitingTier().getMinutelyAllowance() / 60.0;
-    double acquireTime = RATE_LIMITERS.computeIfAbsent(
-        method,
-        ignored -> RateLimiter.create(permissibleQps)
-    ).acquire();
+    double acquireTime = getSlackRateLimiter().acquire(config.getTokenSupplier().get(), method);
     if (acquireTime > 10.0) {
       LOG.warn("Throttling {}, waited {}ms to acquire permit to run", method, acquireTime);
     }
+  }
+
+  private SlackRateLimiter getSlackRateLimiter() {
+    return config.getSlackRateLimiter().orElse(defaultRateLimiter);
   }
 
   @Override
