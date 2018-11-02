@@ -22,10 +22,6 @@ public interface SlackChannelIF {
   @Derived
   @JsonIgnore
   default ChannelType getChannelType() {
-    if (getId().toLowerCase().startsWith("g")) {
-      return ChannelType.GROUP;
-    }
-
-    return ChannelType.CHANNEL;
+    return ChannelType.fromSlackName(String.valueOf(getId().charAt(0)));
   }
 }
