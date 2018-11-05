@@ -962,8 +962,8 @@ public class SlackWebClient implements SlackClient {
         method,
         ignored -> RateLimiter.create(permissibleQps)
     ).acquire();
-    if (acquireTime > 10.0) {
-      LOG.warn("Throttling {}, waited {}ms to acquire permit to run", method, acquireTime);
+    if (acquireTime > 5.0) {
+      LOG.warn("Throttling {}, waited {} seconds to acquire permit to run", method, acquireTime);
     }
   }
 
