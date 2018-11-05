@@ -12,7 +12,7 @@ public class ByMethodRateLimiter implements SlackRateLimiter {
   @Override
   public double acquire(String slackToken, SlackMethod slackMethod) {
     double permissibleQueriesPerSecond = slackMethod.getRateLimitingTier().getMinutelyAllowance() / 60.0;
-    return RATE_LIMITERS.computeIfAbsent( //TODO bwehner this is where we'd call the interface
+    return RATE_LIMITERS.computeIfAbsent(
         slackMethod,
         ignored -> RateLimiter.create(permissibleQueriesPerSecond)
     ).acquire();
