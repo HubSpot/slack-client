@@ -959,8 +959,8 @@ public class SlackWebClient implements SlackClient {
 
   private void acquirePermit(SlackMethod method) {
     double acquireTime = getSlackRateLimiter().acquire(config.getTokenSupplier().get(), method);
-    if (acquireTime > 10.0) {
-      LOG.warn("Throttling {}, waited {}ms to acquire permit to run", method, acquireTime);
+    if (acquireTime > 5.0) {
+      LOG.warn("Throttling {}, waited {} seconds to acquire permit to run", method, acquireTime);
     }
   }
 
