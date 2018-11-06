@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.ChannelType;
 import com.hubspot.slack.client.models.events.SlackEvent;
 
 @Immutable
@@ -23,7 +24,7 @@ public interface SlackMemberJoinedChannelEventIF extends SlackEvent {
   @JsonProperty("channel")
   String getChannelId();
 
-  String getChannelType();
+  ChannelType getChannelType();
 
   String getTeam();
 
