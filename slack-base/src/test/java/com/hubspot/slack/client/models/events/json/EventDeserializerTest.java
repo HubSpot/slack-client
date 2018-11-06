@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
+import com.hubspot.slack.client.models.ChannelType;
 import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.events.SlackEvent;
 import com.hubspot.slack.client.models.events.SlackEventType;
@@ -95,6 +96,14 @@ public class EventDeserializerTest {
     SlackMemberJoinedChannelEvent event = fetchAndDeserializeSlackEvent("member_joined_channel_with_inviter.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_JOINED_CHANNEL);
     assertTrue(event.getInviterId().isPresent());
+    assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberJoinedChannelEvent.class)).isEqualTo(event);
+  }
+
+  @Test
+  public void itCanDeserMemberJoinedPrivateChannels() throws IOException {
+    SlackMemberJoinedChannelEvent event = fetchAndDeserializeSlackEvent("member_joined_private_channel.json").toDetailedEvent();
+    assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_JOINED_CHANNEL);
+    assertThat(event.getChannelType()).isEqualTo(ChannelType.GROUP);
     assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberJoinedChannelEvent.class)).isEqualTo(event);
   }
 
