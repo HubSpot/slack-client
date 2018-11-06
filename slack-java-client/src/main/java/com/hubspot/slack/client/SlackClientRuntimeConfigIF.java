@@ -11,8 +11,6 @@ import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.RequestDebugger;
 import com.hubspot.slack.client.interceptors.http.ResponseDebugger;
-import com.hubspot.slack.client.ratelimiting.ByMethodRateLimiter;
-import com.hubspot.slack.client.ratelimiting.SlackRateLimiter;
 
 @Immutable
 @HubSpotStyle
@@ -43,8 +41,6 @@ public interface SlackClientRuntimeConfigIF {
   default Supplier<Integer> getConversationsHistoryMessageBatchSize() {
     return () -> 1000;
   }
-
-  Optional<SlackRateLimiter> getSlackRateLimiter();
 
   Optional<HttpConfig> getHttpConfig();
 
