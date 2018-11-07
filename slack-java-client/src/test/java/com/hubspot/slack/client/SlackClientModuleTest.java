@@ -9,6 +9,6 @@ public class SlackClientModuleTest {
 
   @Test
   public void itGuices() {
-    Guice.createInjector(Stage.TOOL, new SlackClientModule());
+    Guice.createInjector(Stage.TOOL, new SlackClientTestModule());
   }
 }
