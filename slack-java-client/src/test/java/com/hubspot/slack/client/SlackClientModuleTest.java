@@ -18,7 +18,6 @@ public class SlackClientModuleTest {
     @Override
     protected void configure() {
       binder().requireAtInjectOnConstructors();
-      binder().requireExactBindingAnnotations();
 
       install(new SlackClientModule());
     }
