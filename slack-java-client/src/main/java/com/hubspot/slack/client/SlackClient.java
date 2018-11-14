@@ -100,7 +100,7 @@ public interface SlackClient extends Closeable {
   Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter);
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> channelHistory(ChannelsHistoryParams params);
   CompletableFuture<Result<SlackChannel, SlackError>> getChannelByName(String channelName, ChannelsFilter channelsFilter);
-  CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(AbstractChannelsInfoParams params);
+  CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(ChannelsInfoParams params);
 
   // groups
   Iterable<CompletableFuture<Result<List<SlackGroup>, SlackError>>> listGroups(GroupsListParams filter);
