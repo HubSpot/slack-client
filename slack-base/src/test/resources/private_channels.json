@@ -1,0 +1,215 @@
+[
+  {
+    "id" : "G2K8U290W",
+    "name" : "stream-team",
+    "is_group" : true,
+    "created" : 1475607042,
+    "creator" : "U0C4B3B39",
+    "is_archived" : false,
+    "name_normalized" : "stream-team",
+    "is_mpim" : false,
+    "is_open" : true,
+    "last_read" : "1540407961.000200",
+    "latest" : {
+      "type" : "message",
+      "user" : "U0J686AAC",
+      "text" : "Here is more context on the blocking deploys, and we are on bootstrap-rest <https://git.hubteam.com/HubSpot/liquibase-utils#blocking-deploys>",
+      "client_msg_id" : "92748f2f-627d-424a-80e6-aac4676a3c96",
+      "ts" : "1542728096.123300"
+    },
+    "unread_count" : 248,
+    "unread_count_display" : 244,
+    "members" : [ ],
+    "topic" : {
+      "value" : "Bytes In Bytes Out. :ez: go/pro, go/git/KafkaEZ",
+      "creator" : "U28LA122W",
+      "last_set" : 1500327195
+    },
+    "purpose" : {
+      "value" : "",
+      "creator" : "",
+      "last_set" : 0
+    },
+    "priority" : 0.019458842559772
+  },
+  {
+    "id" : "G76EVQWQM",
+    "name" : "conversations-be",
+    "is_group" : true,
+    "created" : 1505944477,
+    "creator" : "U0FKSRP0X",
+    "is_archived" : false,
+    "name_normalized" : "conversations-be",
+    "is_mpim" : false,
+    "is_open" : true,
+    "last_read" : "1542144583.018100",
+    "latest" : {
+      "type" : "message",
+      "user" : "U1D09C1AT",
+      "text" : "I think mainly updating or adding columns. We've been adding and dropping indexes fine for the thread table.",
+      "client_msg_id" : "b2d22eae-f203-4571-b1c5-8bb69b2d2c16",
+      "edited" : {
+        "user" : "U1D09C1AT",
+        "ts" : "1542733037.000000"
+      },
+      "ts" : "1542733022.004900"
+    },
+    "unread_count" : 154,
+    "unread_count_display" : 151,
+    "members" : [ ],
+    "topic" : {
+      "value" : "Perf review lessons learned: <https://paper.dropbox.com/doc/blah>",
+      "creator" : "U0CHT6TTL",
+      "last_set" : 1537912021
+    },
+    "purpose" : {
+      "value" : "",
+      "creator" : "",
+      "last_set" : 0
+    },
+    "priority" : 0.030529612115912
+  },
+  {
+    "id" : "G7CJKVCCQ",
+    "name" : "inbounddb",
+    "is_group" : true,
+    "created" : 1444935558,
+    "creator" : "U08SF7DD0",
+    "is_archived" : false,
+    "name_normalized" : "inbounddb",
+    "is_mpim" : false,
+    "is_open" : true,
+    "last_read" : "1542289463.423500",
+    "latest" : {
+      "type" : "message",
+      "user" : "U1B1PVDGC",
+      "text" : "I flipped the switch back. Line item creates are broken. Going to debug on a local instance.",
+      "client_msg_id" : "53d7d83b-e913-4345-815b-4abd1a096c73",
+      "ts" : "1542735731.564900"
+    },
+    "unread_count" : 341,
+    "unread_count_display" : 338,
+    "members" : [ ],
+    "topic" : {
+      "value" : ":crm::heart: :hbase: :dealwithit:  - Never Forget 11/15/18",
+      "creator" : "U0CHDNCF9",
+      "last_set" : 1542336212
+    },
+    "purpose" : {
+      "value" : "There once was a channel named <#C0EAU9ZJA|inbound> \nPurveyors of software with a price of free,\n\tWith object galore\n\tAnd cross-object repor\nThey turn one and one into three.",
+      "creator" : "U0CHDNCF9",
+      "last_set" : 1515719958
+    },
+    "priority" : 0.019458842559772
+  },
+  {
+    "id" : "G7H9LM7DG",
+    "name" : "bet-fintech",
+    "is_group" : true,
+    "created" : 1507815475,
+    "creator" : "U08GTSK9U",
+    "is_archived" : false,
+    "name_normalized" : "bet-fintech",
+    "is_mpim" : false,
+    "is_open" : true,
+    "last_read" : "1541596017.326500",
+    "latest" : {
+      "type" : "message",
+      "user" : "U1X1S38TC",
+      "text" : "<@U7NFXCLMA> we'll need to resend the amendments to zuora to fix that subscription, i'll dm you",
+      "client_msg_id" : "3c4ed1b0-0b35-4351-9799-529fea100182",
+      "thread_ts" : "1542728910.208400",
+      "parent_user_id" : "U7NFXCLMA",
+      "ts" : "1542736382.216400"
+    },
+    "unread_count" : 1000,
+    "unread_count_display" : 1000,
+    "members" : [ ],
+    "topic" : {
+      "value" : "Internal Collab/Triage Channel for Billing Teams (PM’s, BSA’s, BSM’s, Engineering)",
+      "creator" : "U08U4HQ90",
+      "last_set" : 1507818090
+    },
+    "purpose" : {
+      "value" : "Internal Channel for Billing Teams (PM's, BSA's, Engineering)",
+      "creator" : "U08GTSK9U",
+      "last_set" : 1507815862
+    },
+    "priority" : 0.14462166478186
+  },
+  {
+    "id" : "G7REEGSGY",
+    "name" : "bots-team",
+    "is_group" : true,
+    "created" : 1509377348,
+    "creator" : "U759W1N2C",
+    "is_archived" : false,
+    "name_normalized" : "bots-team",
+    "is_mpim" : false,
+    "is_open" : true,
+    "last_read" : "1542214972.259900",
+    "latest" : {
+      "type" : "message",
+      "user" : "U0CHT6TTL",
+      "text" : "test is passing now",
+      "client_msg_id" : "f4da2d94-1706-4faa-bc5c-26c1710da444",
+      "thread_ts" : "1542677480.343200",
+      "parent_user_id" : "U0CHT6TTL",
+      "ts" : "1542727254.353000",
+      "reactions" : [ {
+        "name" : "thankyou",
+        "users" : [ "U037PDPVC" ],
+        "count" : 1
+      } ]
+    },
+    "unread_count" : 213,
+    "unread_count_display" : 212,
+    "members" : [ ],
+    "topic" : {
+      "value" : "",
+      "creator" : "U759W1N2C",
+      "last_set" : 1509382936
+    },
+    "purpose" : {
+      "value" : "Bots BE/FE and product discussion",
+      "creator" : "U759W1N2C",
+      "last_set" : 1509382936
+    },
+    "priority" : 0.019458842559772
+  },
+  {
+    "id" : "G89J6A56Z",
+    "name" : "bet-gtm-bsas",
+    "is_group" : true,
+    "created" : 1512409288,
+    "creator" : "U1X2L6EQL",
+    "is_archived" : false,
+    "name_normalized" : "bet-gtm-bsas",
+    "is_mpim" : false,
+    "is_open" : true,
+    "last_read" : "1536370494.000100",
+    "latest" : {
+      "type" : "message",
+      "user" : "U0EATBGLE",
+      "text" : "phew :slightly_smiling_face:",
+      "client_msg_id" : "e050cda0-c789-4b8b-bb07-75ae4b171974",
+      "thread_ts" : "1542725717.084200",
+      "parent_user_id" : "U0CPA5R19",
+      "ts" : "1542727199.085700"
+    },
+    "unread_count" : 727,
+    "unread_count_display" : 723,
+    "members" : [ ],
+    "topic" : {
+      "value" : "\"Can I borrow your cheese cloth?\" - Woody",
+      "creator" : "U0DH2K2TH",
+      "last_set" : 1526593053
+    },
+    "purpose" : {
+      "value" : "go get'em",
+      "creator" : "U1X2L6EQL",
+      "last_set" : 1512413893
+    },
+    "priority" : 0.34485626996769
+  }
+]

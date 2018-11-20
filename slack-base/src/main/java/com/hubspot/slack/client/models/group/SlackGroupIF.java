@@ -8,7 +8,7 @@ import org.immutables.value.Value.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.ChannelMetadata;
-import com.hubspot.slack.client.models.Message;
+import com.hubspot.slack.client.models.LatestMessage;
 
 @Immutable
 @HubSpotStyle
@@ -34,5 +34,5 @@ public interface SlackGroupIF {
   ChannelMetadata getTopic();
   ChannelMetadata getPurpose();
 
-  Optional<Message> getLatest();
+  Optional<LatestMessage> getLatest();
 }
