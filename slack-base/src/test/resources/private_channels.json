@@ -1,19 +1,19 @@
 [
   {
     "id" : "some-id",
-    "name" : "stream-team",
+    "name" : "a string",
     "is_group" : true,
     "created" : 1475607042,
     "creator" : "some-id",
     "is_archived" : false,
-    "name_normalized" : "stream-team",
+    "name_normalized" : "a string",
     "is_mpim" : false,
     "is_open" : true,
     "last_read" : "1540407961.000200",
     "latest" : {
       "type" : "message",
       "user" : "some-id",
-      "text" : "Here is more context on the blocking deploys, and we are on bootstrap-rest <https://git.hubteam.com/HubSpot/liquibase-utils#blocking-deploys>",
+      "text" : "a string",
       "client_msg_id" : "some-id",
       "ts" : "1542728096.123300"
     },
@@ -21,7 +21,7 @@
     "unread_count_display" : 244,
     "members" : [ ],
     "topic" : {
-      "value" : "Bytes In Bytes Out. :ez: go/pro, go/git/KafkaEZ",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1500327195
     },
@@ -34,19 +34,19 @@
   },
   {
     "id" : "some-id",
-    "name" : "conversations-be",
+    "name" : "a string",
     "is_group" : true,
     "created" : 1505944477,
     "creator" : "some-id",
     "is_archived" : false,
-    "name_normalized" : "conversations-be",
+    "name_normalized" : "a string",
     "is_mpim" : false,
     "is_open" : true,
     "last_read" : "1542144583.018100",
     "latest" : {
       "type" : "message",
       "user" : "some-id",
-      "text" : "I think mainly updating or adding columns. We've been adding and dropping indexes fine for the thread table.",
+      "text" : "a string",
       "client_msg_id" : "some-id",
       "edited" : {
         "user" : "some-id",
@@ -58,7 +58,7 @@
     "unread_count_display" : 151,
     "members" : [ ],
     "topic" : {
-      "value" : "Perf review lessons learned: <https://paper.dropbox.com/doc/blah>",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1537912021
     },
@@ -71,19 +71,19 @@
   },
   {
     "id" : "some-id",
-    "name" : "inbounddb",
+    "name" : "a string",
     "is_group" : true,
     "created" : 1444935558,
     "creator" : "some-id",
     "is_archived" : false,
-    "name_normalized" : "inbounddb",
+    "name_normalized" : "a string",
     "is_mpim" : false,
     "is_open" : true,
     "last_read" : "1542289463.423500",
     "latest" : {
       "type" : "message",
       "user" : "some-id",
-      "text" : "I flipped the switch back. Line item creates are broken. Going to debug on a local instance.",
+      "text" : "a string",
       "client_msg_id" : "some-id",
       "ts" : "1542735731.564900"
     },
@@ -91,12 +91,12 @@
     "unread_count_display" : 338,
     "members" : [ ],
     "topic" : {
-      "value" : ":crm::heart: :hbase: :dealwithit:  - Never Forget 11/15/18",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1542336212
     },
     "purpose" : {
-      "value" : "There once was a channel named <#C0EAU9ZJA|inbound> \nPurveyors of software with a price of free,\n\tWith object galore\n\tAnd cross-object repor\nThey turn one and one into three.",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1515719958
     },
@@ -104,19 +104,19 @@
   },
   {
     "id" : "some-id",
-    "name" : "bet-fintech",
+    "name" : "a string",
     "is_group" : true,
     "created" : 1507815475,
     "creator" : "some-id",
     "is_archived" : false,
-    "name_normalized" : "bet-fintech",
+    "name_normalized" : "a string",
     "is_mpim" : false,
     "is_open" : true,
     "last_read" : "1541596017.326500",
     "latest" : {
       "type" : "message",
       "user" : "some-id",
-      "text" : "<@some-id> we'll need to resend the amendments to zuora to fix that subscription, i'll dm you",
+      "text" : "a string",
       "client_msg_id" : "some-id",
       "thread_ts" : "1542728910.208400",
       "parent_user_id" : "some-id",
@@ -126,12 +126,12 @@
     "unread_count_display" : 1000,
     "members" : [ ],
     "topic" : {
-      "value" : "Internal Collab/Triage Channel for Billing Teams (PM’s, BSA’s, BSM’s, Engineering)",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1507818090
     },
     "purpose" : {
-      "value" : "Internal Channel for Billing Teams (PM's, BSA's, Engineering)",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1507815862
     },
@@ -139,19 +139,19 @@
   },
   {
     "id" : "some-id",
-    "name" : "bots-team",
+    "name" : "a string",
     "is_group" : true,
     "created" : 1509377348,
     "creator" : "some-id",
     "is_archived" : false,
-    "name_normalized" : "bots-team",
+    "name_normalized" : "a string",
     "is_mpim" : false,
     "is_open" : true,
     "last_read" : "1542214972.259900",
     "latest" : {
       "type" : "message",
       "user" : "some-id",
-      "text" : "test is passing now",
+      "text" : "a string",
       "client_msg_id" : "some-id",
       "thread_ts" : "1542677480.343200",
       "parent_user_id" : "some-id",
@@ -171,7 +171,7 @@
       "last_set" : 1509382936
     },
     "purpose" : {
-      "value" : "Bots BE/FE and product discussion",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1509382936
     },
@@ -179,19 +179,19 @@
   },
   {
     "id" : "some-id",
-    "name" : "bet-gtm-bsas",
+    "name" : "a string",
     "is_group" : true,
     "created" : 1512409288,
     "creator" : "some-id",
     "is_archived" : false,
-    "name_normalized" : "bet-gtm-bsas",
+    "name_normalized" : "a string",
     "is_mpim" : false,
     "is_open" : true,
     "last_read" : "1536370494.000100",
     "latest" : {
       "type" : "message",
       "user" : "some-id",
-      "text" : "phew :slightly_smiling_face:",
+      "text" : "a string",
       "client_msg_id" : "some-id",
       "thread_ts" : "1542725717.084200",
       "parent_user_id" : "some-id",
@@ -201,12 +201,12 @@
     "unread_count_display" : 723,
     "members" : [ ],
     "topic" : {
-      "value" : "\"Can I borrow your cheese cloth?\" - Woody",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1526593053
     },
     "purpose" : {
-      "value" : "go get'em",
+      "value" : "a string",
       "creator" : "some-id",
       "last_set" : 1512413893
     },
