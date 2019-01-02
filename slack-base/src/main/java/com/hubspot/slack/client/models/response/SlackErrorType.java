@@ -67,7 +67,8 @@ public enum SlackErrorType {
 
   TOKEN_REVOKED("token_revoked"),
 
-  USERS_NOT_FOUND("users_not_found"),
+  USER_NOT_FOUND("user_not_found"), // all APIs except users.lookupByEmail
+  USERS_NOT_FOUND("users_not_found"), // users.lookupByEmail
   USERS_NOT_VISIBLE("user_not_visible"),
   USER_NOT_IN_CHANNEL("user_not_in_channel"),
   USER_IS_BOT("user_is_bot"),
