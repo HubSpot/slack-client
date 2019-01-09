@@ -10,6 +10,7 @@ import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
 import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
+import com.hubspot.slack.client.methods.params.channels.ChannelsKickParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsListParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
 import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
@@ -53,6 +54,7 @@ import com.hubspot.slack.client.models.response.SlackResponse;
 import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
 import com.hubspot.slack.client.models.response.auth.AuthTestResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
+import com.hubspot.slack.client.models.response.channels.ChannelsKickResponse;
 import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageResponse;
@@ -101,6 +103,7 @@ public interface SlackClient extends Closeable {
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> channelHistory(ChannelsHistoryParams params);
   CompletableFuture<Result<SlackChannel, SlackError>> getChannelByName(String channelName, ChannelsFilter channelsFilter);
   CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(AbstractChannelsInfoParams params);
+  CompletableFuture<Result<ChannelsKickResponse, SlackError>> kickUserFromChannel(ChannelsKickParams channelKickParams);
 
   // groups
   Iterable<CompletableFuture<Result<List<SlackGroup>, SlackError>>> listGroups(GroupsListParams filter);
