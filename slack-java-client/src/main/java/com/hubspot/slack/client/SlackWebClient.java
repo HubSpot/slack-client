@@ -46,6 +46,7 @@ import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
 import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
+import com.hubspot.slack.client.methods.params.channels.ChannelsKickParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsListParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
 import com.hubspot.slack.client.methods.params.channels.PagingDirection;
@@ -93,6 +94,7 @@ import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
 import com.hubspot.slack.client.models.response.auth.AuthTestResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsHistoryResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
+import com.hubspot.slack.client.models.response.channels.ChannelsKickResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsListResponse;
 import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
@@ -465,6 +467,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(AbstractChannelsInfoParams params) {
     return postSlackCommand(SlackMethods.channels_info, params, ChannelsInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ChannelsKickResponse, SlackError>> kickUserFromChannel(ChannelsKickParams params) {
+    return postSlackCommand(SlackMethods.channels_kick, params, ChannelsKickResponse.class);
   }
 
   @Override
