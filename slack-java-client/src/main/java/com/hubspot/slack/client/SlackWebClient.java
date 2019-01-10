@@ -43,9 +43,9 @@ import com.hubspot.slack.client.methods.JsonStatus;
 import com.hubspot.slack.client.methods.SlackMethod;
 import com.hubspot.slack.client.methods.SlackMethods;
 import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
-import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
+import com.hubspot.slack.client.methods.params.channels.ChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsKickParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsListParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
@@ -467,7 +467,7 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(AbstractChannelsInfoParams params) {
+  public CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(ChannelsInfoParams params) {
     return postSlackCommand(SlackMethods.channels_info, params, ChannelsInfoResponse.class);
   }
 
