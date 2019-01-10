@@ -43,9 +43,10 @@ import com.hubspot.slack.client.methods.JsonStatus;
 import com.hubspot.slack.client.methods.SlackMethod;
 import com.hubspot.slack.client.methods.SlackMethods;
 import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
-import com.hubspot.slack.client.methods.params.channels.AbstractChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
+import com.hubspot.slack.client.methods.params.channels.ChannelsInfoParams;
+import com.hubspot.slack.client.methods.params.channels.ChannelsKickParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsListParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
 import com.hubspot.slack.client.methods.params.channels.PagingDirection;
@@ -67,6 +68,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsUserPa
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
+import com.hubspot.slack.client.methods.params.group.GroupsKickParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
 import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
@@ -93,6 +95,7 @@ import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
 import com.hubspot.slack.client.models.response.auth.AuthTestResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsHistoryResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
+import com.hubspot.slack.client.models.response.channels.ChannelsKickResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsListResponse;
 import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
@@ -110,6 +113,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsUnarc
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
+import com.hubspot.slack.client.models.response.group.GroupsKickResponse;
 import com.hubspot.slack.client.models.response.group.GroupsListResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
@@ -463,8 +467,13 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(AbstractChannelsInfoParams params) {
+  public CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(ChannelsInfoParams params) {
     return postSlackCommand(SlackMethods.channels_info, params, ChannelsInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ChannelsKickResponse, SlackError>> kickUserFromChannel(ChannelsKickParams params) {
+    return postSlackCommand(SlackMethods.channels_kick, params, ChannelsKickResponse.class);
   }
 
   @Override
@@ -837,6 +846,11 @@ public class SlackWebClient implements SlackClient {
         );
       }
     };
+  }
+
+  @Override
+  public CompletableFuture<Result<GroupsKickResponse, SlackError>> kickUserFromGroup(GroupsKickParams params) {
+    return postSlackCommand(SlackMethods.groups_kick, params, GroupsKickResponse.class);
   }
 
   @Override

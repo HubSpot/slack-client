@@ -10,6 +10,7 @@ import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsInfoParams;
+import com.hubspot.slack.client.methods.params.channels.ChannelsKickParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsListParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
 import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
@@ -30,6 +31,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsUserPa
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
+import com.hubspot.slack.client.methods.params.group.GroupsKickParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
 import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
@@ -53,6 +55,7 @@ import com.hubspot.slack.client.models.response.SlackResponse;
 import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
 import com.hubspot.slack.client.models.response.auth.AuthTestResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
+import com.hubspot.slack.client.models.response.channels.ChannelsKickResponse;
 import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageResponse;
@@ -67,6 +70,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsUnarc
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
+import com.hubspot.slack.client.models.response.group.GroupsKickResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
@@ -101,9 +105,11 @@ public interface SlackClient extends Closeable {
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> channelHistory(ChannelsHistoryParams params);
   CompletableFuture<Result<SlackChannel, SlackError>> getChannelByName(String channelName, ChannelsFilter channelsFilter);
   CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(ChannelsInfoParams params);
+  CompletableFuture<Result<ChannelsKickResponse, SlackError>> kickUserFromChannel(ChannelsKickParams channelKickParams);
 
   // groups
   Iterable<CompletableFuture<Result<List<SlackGroup>, SlackError>>> listGroups(GroupsListParams filter);
+  CompletableFuture<Result<GroupsKickResponse, SlackError>> kickUserFromGroup(GroupsKickParams params);
 
   // messaging
   CompletableFuture<Result<ImOpenResponse, SlackError>> openIm(ImOpenParams params);
