@@ -149,6 +149,8 @@ If you're not familiar with Java 8's `CompletableFuture` API, know that you can 
  - [@wsorenson](https://github.com/wsorenson) [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
  - [@darcatron](https://github.com/darcatron) [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
  - [@dylanrb123](https://github.com/dylanrb123) [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
+ - [@stevegutz](https://github.com/stevegutz) [:computer:](https://github.com/HubSpot/slack-client/commits?author=stevegutz)
+ - [@BWehner](https://github.com/BWehner) [:computer:](https://github.com/HubSpot/slack-client/commits?author=BWehner)
  - [@axiak](https://github.com/axiak) [:computer:](https://github.com/HubSpot/slack-client/commits?author=axiak)
  - [@andybergon](https://github.com/andybergon) [:computer:](https://github.com/HubSpot/slack-client/commits?author=andybergon)
 
