@@ -19,7 +19,7 @@ An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slac
 * Implement [most](#features) of Slack's [web API](https://api.slack.com/web)
 * Actively maintain this project
 * Provide per-method in-memory rate limiting so you don't have to worry about overwhelming slack from a single process
-* Expose highly configurable hooks to allow filtering and debugging in an extensible way
+* Expose highly configurable hooks to allow custom rate limiting, method filtering, and debugging in an extensible way
 
 ## Features
 
@@ -30,6 +30,7 @@ We currently support:
 #### channels
  - channels.history
  - channels.info
+ - channels.kick (kickUserFromChannel)
  - channels.list
  - channels.replies (findReplies)
 #### chat
@@ -53,6 +54,7 @@ We currently support:
  - files.upload
  - files.sharedPublicURL
 #### groups
+ - groups.kick (kickUserFromGroup)
  - groups.list
  - groups.replies (findReplies)
 #### im
@@ -61,6 +63,8 @@ We currently support:
  - reactions.add
 #### search
  - search.messages
+#### team
+ - team.info 
 #### usergroups
  - usergroups.create
  - usergroups.disable
@@ -145,6 +149,8 @@ If you're not familiar with Java 8's `CompletableFuture` API, know that you can 
  - [@wsorenson](https://github.com/wsorenson) [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
  - [@darcatron](https://github.com/darcatron) [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
  - [@dylanrb123](https://github.com/dylanrb123) [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
+ - [@axiak](https://github.com/axiak) [:computer:](https://github.com/HubSpot/slack-client/commits?author=axiak)
+ - [@andybergon](https://github.com/andybergon) [:computer:](https://github.com/HubSpot/slack-client/commits?author=andybergon)
 
 ## License
 
