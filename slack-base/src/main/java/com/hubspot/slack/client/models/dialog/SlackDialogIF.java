@@ -52,18 +52,16 @@ public interface SlackDialogIF {
       throw new IllegalStateException("At most 5 form elements allowed, got " + getElements().size());
     }
 
-    getState()
-        .ifPresent(state -> {
-          if (state.length() > 3000) {
-            throw new IllegalStateException("State cannot exist 3000 chars, got " + state.length());
-          }
-        });
+    getState().ifPresent(state -> {
+      if (state.length() > 3000) {
+        throw new IllegalStateException("State cannot exist 3000 chars, got " + state.length());
+      }
+    });
 
-    getSubmitLabel()
-        .ifPresent(submitLabel -> {
-          if (submitLabel.length() > 24) {
-            throw new IllegalStateException("Submit label cannot exceed 24 chars, got " + submitLabel.length());
-          }
-        });
+    getSubmitLabel().ifPresent(submitLabel -> {
+      if (submitLabel.length() > 24) {
+        throw new IllegalStateException("Submit label cannot exceed 24 chars, got " + submitLabel.length());
+      }
+    });
   }
 }
