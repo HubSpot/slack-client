@@ -22,7 +22,9 @@ public interface SlackDialogIF {
   String getTitle();
   String getCallbackId();
   List<SlackDialogFormElement> getElements();
+  Optional<String> getState();
   Optional<String> getSubmitLabel();
+  Optional<Boolean> getNotifyOnCancel();
 
   @Check
   default void validate() {
@@ -50,11 +52,16 @@ public interface SlackDialogIF {
       throw new IllegalStateException("At most 5 form elements allowed, got " + getElements().size());
     }
 
-    if (getSubmitLabel().isPresent()) {
-      String label = getSubmitLabel().get();
-      if (label.length() > 24) {
-        throw new IllegalStateException("Submit label cannot exceed 24 chars, got " + label);
+    getState().ifPresent(state -> {
+      if (state.length() > 3000) {
+        throw new IllegalStateException("State cannot exist 3000 chars, got " + state.length());
       }
-    }
+    });
+
+    getSubmitLabel().ifPresent(submitLabel -> {
+      if (submitLabel.length() > 24) {
+        throw new IllegalStateException("Submit label cannot exceed 24 chars, got " + submitLabel.length());
+      }
+    });
   }
 }
