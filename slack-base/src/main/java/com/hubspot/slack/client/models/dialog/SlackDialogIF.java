@@ -22,7 +22,9 @@ public interface SlackDialogIF {
   String getTitle();
   String getCallbackId();
   List<SlackDialogFormElement> getElements();
+  Optional<String> getState();
   Optional<String> getSubmitLabel();
+  Optional<Boolean> getNotifyOnCancel();
 
   @Check
   default void validate() {
