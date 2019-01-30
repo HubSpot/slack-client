@@ -19,4 +19,9 @@ public interface DialogSubmissionIF extends SlackInteractiveCallback {
    * where the keys are the field names used when creating the dialog.
    */
   Map<String, Optional<String>> getSubmission();
+  
+  /**
+   * The state that was passed to the dialog when it was opened.
+   */
+  String getState();
 }
