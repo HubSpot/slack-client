@@ -1,0 +1,17 @@
+package com.hubspot.slack.client.models.files;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.hubspot.immutables.style.HubSpotStyle;
+import org.immutables.value.Value;
+
+@Value.Immutable
+@HubSpotStyle
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public interface SlackJpgFileIF extends SlackTextFileCore {
+    @Value.Default
+    @Override
+    default SlackFileType getFiletype() {
+        return SlackFileType.JPG;
+    }
+}
