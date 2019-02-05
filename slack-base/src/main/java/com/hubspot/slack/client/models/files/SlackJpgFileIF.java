@@ -8,7 +8,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public interface SlackJpgFileIF extends SlackTextFileCore {
+public interface SlackJpgFileIF extends SlackImageFile {
     @Value.Default
     @Override
     default SlackFileType getFiletype() {

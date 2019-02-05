@@ -54,7 +54,7 @@ public interface SlackDialogIF {
 
     getState().ifPresent(state -> {
       if (state.length() > 3000) {
-        throw new IllegalStateException("State cannot exist 3000 chars, got " + state.length());
+        throw new IllegalStateException("State cannot exceed 3000 chars, got " + state.length());
       }
     });
 
