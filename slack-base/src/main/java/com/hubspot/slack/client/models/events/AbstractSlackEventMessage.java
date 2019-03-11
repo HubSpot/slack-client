@@ -21,6 +21,8 @@ public abstract class AbstractSlackEventMessage extends SlackEventMessageBase im
 
   public abstract Optional<String> getThreadTs();
 
+  public abstract Optional<String> getBotId();
+
   @Override
   @JsonProperty("user")
   public abstract String getUserId();
