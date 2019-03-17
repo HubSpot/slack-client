@@ -103,7 +103,7 @@ To use with Maven-based projects, add the following dependencies::
 
 Latest version can be seen [here, on Maven central](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.hubspot.slack%22).
 
-### Seting up Guice
+### Setting up Guice
 
 Install the `SlackClientModule` in the Guice module you want to use to talk to slack.
 
