@@ -89,6 +89,7 @@ import com.hubspot.slack.client.models.group.SlackGroup;
 import com.hubspot.slack.client.models.response.FindRepliesResponse;
 import com.hubspot.slack.client.models.response.ResponseMetadata;
 import com.hubspot.slack.client.models.response.SlackError;
+import com.hubspot.slack.client.models.response.SlackErrorResponse;
 import com.hubspot.slack.client.models.response.SlackErrorType;
 import com.hubspot.slack.client.models.response.SlackResponse;
 import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
@@ -858,6 +859,7 @@ public class SlackWebClient implements SlackClient {
     return postSlackCommand(SlackMethods.team_info, new Object(), TeamInfoResponse.class);
   }
 
+  @Override
   public <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
       SlackMethod method,
       Object params,
@@ -918,9 +920,9 @@ public class SlackWebClient implements SlackClient {
               return Result.ok(ObjectMapperUtils.mapper().treeToValue(responseJson, responseType));
             }
 
-            SlackError error = ObjectMapperUtils.mapper().treeToValue(response.getAsJsonNode(), SlackError.class);
+            SlackErrorResponse errorResponse = ObjectMapperUtils.mapper().treeToValue(response.getAsJsonNode(), SlackErrorResponse.class);
             responseDebugger.debugSlackApiError(requestId, method, request, response);
-            return Result.err(error);
+            return Result.err(errorResponse.getError().orElseGet(() -> errorResponse.getErrors().get().get(0)));
           } catch (JsonProcessingException e) {
             responseDebugger.debugProcessingFailure(requestId, method, request, response, e);
             return Result.err(SlackError.builder()
