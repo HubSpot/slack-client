@@ -54,8 +54,8 @@ public class SlackResponseTest {
 
     assertThat(errorMultipleResponse.isOk()).isFalse();
     assertThat(errorMultipleResponse.getError()).isNotPresent();
-    assertThat(errorMultipleResponse.getErrors()).isPresent();
-    assertThat(errorMultipleResponse.getErrors().get().get(0).getError()).isEqualTo("cant_invite_self");
+    assertThat(errorMultipleResponse.getErrors()).isNotEmpty();
+    assertThat(errorMultipleResponse.getErrors().get(0).getError()).isEqualTo("cant_invite_self");
   }
 
   @Test

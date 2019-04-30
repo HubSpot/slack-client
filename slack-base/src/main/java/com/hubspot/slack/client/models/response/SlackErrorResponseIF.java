@@ -11,5 +11,5 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 public interface SlackErrorResponseIF extends SlackResponse {
   Optional<SlackError> getError();
-  Optional<List<SlackError>> getErrors();
+  List<SlackError> getErrors();
 }

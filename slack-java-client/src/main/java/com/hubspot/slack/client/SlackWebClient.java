@@ -922,7 +922,7 @@ public class SlackWebClient implements SlackClient {
 
             SlackErrorResponse errorResponse = ObjectMapperUtils.mapper().treeToValue(response.getAsJsonNode(), SlackErrorResponse.class);
             responseDebugger.debugSlackApiError(requestId, method, request, response);
-            return Result.err(errorResponse.getError().orElseGet(() -> errorResponse.getErrors().get().get(0)));
+            return Result.err(errorResponse.getError().orElseGet(() -> errorResponse.getErrors().get(0)));
           } catch (JsonProcessingException e) {
             responseDebugger.debugProcessingFailure(requestId, method, request, response, e);
             return Result.err(SlackError.builder()
