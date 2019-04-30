@@ -19,8 +19,8 @@ The main reason for this process is to be proactive and prevent possible future 
 
 There are 2 changelogs: current and future.
 
-[Current](https://api.slack.com/changelog)
-[Future](https://api.slack.com/changelog/future)
+* [Current](https://api.slack.com/changelog)
+* [Future](https://api.slack.com/changelog/future)
 
 The former contains recent changes and dates on when an endpoint will be changed in a possible breaking way.
 The latter shows proposed future changes.
