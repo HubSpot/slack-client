@@ -9,10 +9,12 @@ import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 
 public class SlackResponseTest {
 
-  private static final String ERROR_RESPONSE = "{\n" +
+  private static final String ERROR_RESPONSE_SINGLE_ERROR = "{\n" +
       "    \"ok\": false,\n" +
       "    \"error\": \"something_bad\"\n" +
       "}";
+
+  private static final String ERROR_RESPONSE_MULTIPLE_ERRORS = "{\"ok\":false, \"errors\":[{\"ok\":false, \"error\":\"cant_invite_self\"}]}";
 
   private static final String USER_RESPONSE = "{\n" +
       "    \"ok\": true,\n" +
@@ -42,11 +44,18 @@ public class SlackResponseTest {
 
   @Test
   public void itDoesDeserializeErrorResponse() throws Exception {
-    SlackErrorResponse errorResponse = TestMappers.OBJECT_MAPPER.readValue(ERROR_RESPONSE, SlackErrorResponse.class);
+    SlackErrorResponse errorResponse = TestMappers.OBJECT_MAPPER.readValue(ERROR_RESPONSE_SINGLE_ERROR, SlackErrorResponse.class);
 
     assertThat(errorResponse.isOk()).isFalse();
-    assertThat(errorResponse.getError().getError()).isNotEmpty();
-    assertThat(errorResponse.getError().getType()).isEqualTo(SlackErrorType.UNKNOWN);
+    assertThat(errorResponse.getError()).isPresent();
+    assertThat(errorResponse.getError().get().getType()).isEqualTo(SlackErrorType.UNKNOWN);
+
+    SlackErrorResponse errorMultipleResponse = TestMappers.OBJECT_MAPPER.readValue(ERROR_RESPONSE_MULTIPLE_ERRORS, SlackErrorResponse.class);
+
+    assertThat(errorMultipleResponse.isOk()).isFalse();
+    assertThat(errorMultipleResponse.getError()).isNotPresent();
+    assertThat(errorMultipleResponse.getErrors()).isNotEmpty();
+    assertThat(errorMultipleResponse.getErrors().get(0).getError()).isEqualTo("cant_invite_self");
   }
 
   @Test
