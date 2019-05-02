@@ -7,6 +7,7 @@
 * [Overview](#overview)
 * [Changelogs](#changelogs)
 * [Audit](#audit)
+* [History](#history)
 
 ## Overview
 
@@ -31,10 +32,17 @@ Both should be read through when determining if the changes affect us.
 
 The following is a list of proposed steps to take in order to make sure that `slack-client` stays stable and on the latest working Slack Web API.
 
-* Read the docs above for possible “breaking changes”. It's generally a good idea to go back a few months and see if anything changed.
+* Read the docs above for possible “breaking changes”. It's generally a good idea to go back a few months and see if anything changed. See `History` and don't revisit the same stuff.
 * Look for red APIs found throughout their docs above. These indicate the change could be breaking.
 * Every month, generate a list of changes to look out for.Make sure that the prior months' lists didn't already include the same breaking change. We don’t want to verify the same change twice.
 * For each change, we should audit the `slack-client` code and see if it affects us.
 * If we find anything that requires further investigation or actual code changes, an issue should be logged [here](https://github.com/HubSpot/slack-client/issues) with the label `breaking change`.
 * If HubSpot is making the change, it's recommended that an internal ZenHub task is created to track this as well. Reference the github issue above.
 * We should aim to wrap up issues with several weeks to spare. If a deadline for a breaking change is the end of June, we should have something ready in early June if at all possible.
+* We should add a record of this audit to `History` table. Make sure to document where in changelog docs you went to so we can reference next time and not revisit.
+
+## History
+
+| Date | Found Issues | Description |
+| ---- | ------------ | ----------- |
+| | | |
