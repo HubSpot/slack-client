@@ -1,7 +1,5 @@
 package com.hubspot.slack.client.methods.params.conversations;
 
-import java.util.Optional;
-
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
@@ -12,6 +10,6 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ConversationsRepliesParamsIF {
-  Optional<String> getChannel();
-  Optional<String> getTs();
+  String getChannel();
+  String getTs();
 }
