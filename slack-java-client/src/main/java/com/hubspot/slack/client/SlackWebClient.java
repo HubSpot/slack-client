@@ -64,6 +64,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
@@ -110,6 +111,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsHisto
 import com.hubspot.slack.client.models.response.conversations.ConversationsInfoResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsInviteResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
@@ -218,6 +220,11 @@ public class SlackWebClient implements SlackClient {
       default:
         throw new IllegalArgumentException(params.getChannelType() + " is not a supported channel type for reply fetching");
     }
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationsRepliesResponse, SlackError>> getConversationReplies(ConversationsRepliesParams params) {
+    return postSlackCommand(SlackMethods.conversations_replies, params, ConversationsRepliesResponse.class);
   }
 
   @Override
