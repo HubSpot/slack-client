@@ -27,6 +27,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
@@ -66,6 +67,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsCreat
 import com.hubspot.slack.client.models.response.conversations.ConversationsInfoResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsInviteResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
@@ -128,6 +130,7 @@ public interface SlackClient extends Closeable {
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> getConversationHistory(ConversationsHistoryParams params);
   CompletableFuture<Result<ConversationsArchiveResponse, SlackError>> archiveConversation(ConversationArchiveParams params);
   CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(ConversationsInfoParams params);
+  CompletableFuture<Result<ConversationsRepliesResponse, SlackError>> getConversationReplies(ConversationsRepliesParams params);
   CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter);
   CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(ConversationOpenParams params);
 
