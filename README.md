@@ -5,6 +5,7 @@
  [![Build Status](https://travis-ci.org/HubSpot/slack-client.svg?branch=master)](https://travis-ci.org/HubSpot/slack-client) [![GitHub release](https://img.shields.io/github/release/HubSpot/slack-client.svg)](https://github.com/HubSpot/slack-client/releases) ![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/com/hubspot/slack/slack-client/maven-metadata.xml.svg) 
  
 * [Overview](#overview)
+* [Maintenance](#maintenance)
 * [Features](#features)
 * [Usage](#usage)
 * [Setting up Guice](#setting-up-guice)
@@ -20,6 +21,11 @@ An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slac
 * Actively maintain this project
 * Provide per-method in-memory rate limiting so you don't have to worry about overwhelming slack from a single process
 * Expose highly configurable hooks to allow custom rate limiting, method filtering, and debugging in an extensible way
+
+## Maintenance
+
+Like most APIs, deprecations and modifications that we'll call "breaking changes" will occur on Slack's web API.
+General guidelines on detecting and handling "breaking changes" can be found [here](https://github.com/HubSpot/slack-client/blob/master/DEV_README.md)
 
 ## Features
 
