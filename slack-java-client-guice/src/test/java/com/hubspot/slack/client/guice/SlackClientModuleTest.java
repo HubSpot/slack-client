@@ -1,4 +1,4 @@
-package com.hubspot.slack.client;
+package com.hubspot.slack.client.guice;
 
 import org.junit.Test;
 

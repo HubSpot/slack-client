@@ -6,19 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Stopwatch;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpResponse;
 import com.hubspot.slack.client.methods.SlackMethod;
 
-@Singleton
 public class DefaultHttpResponseDebugger implements ResponseDebugger {
   private static final Logger LOG = LoggerFactory.getLogger(DefaultHttpResponseDebugger.class);
-
-  @Inject
-  public DefaultHttpResponseDebugger() {
-  }
 
   @Override
   public void debugTransportException(

@@ -7,8 +7,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.function.Function;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
 import com.hubspot.horizon.AsyncHttpClient;
 import com.hubspot.horizon.AsyncHttpClient.Callback;
 import com.hubspot.horizon.HttpRequest;
@@ -25,13 +23,8 @@ public class NioHttpClient implements Closeable {
 
   private final AsyncHttpClient delegate;
 
-  public interface Factory {
-    NioHttpClient wrap(@Assisted AsyncHttpClient delegate);
-  }
-
-  @Inject
   public NioHttpClient(
-      @Assisted AsyncHttpClient delegate
+      AsyncHttpClient delegate
   ) {
     this.delegate = delegate;
   }

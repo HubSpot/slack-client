@@ -20,8 +20,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
-import com.google.inject.assistedinject.Assisted;
-import com.google.inject.assistedinject.AssistedInject;
 import com.hubspot.algebra.Result;
 import com.hubspot.horizon.HttpConfig;
 import com.hubspot.horizon.HttpRequest;
@@ -32,6 +30,7 @@ import com.hubspot.horizon.ning.NingAsyncHttpClient;
 import com.hubspot.slack.client.concurrency.CloseableExecutorService;
 import com.hubspot.slack.client.concurrency.MoreExecutors;
 import com.hubspot.slack.client.http.NioHttpClient;
+import com.hubspot.slack.client.http.NioHttpClientFactory;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpRequestDebugger;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpResponseDebugger;
@@ -144,12 +143,6 @@ public class SlackWebClient implements SlackClient {
       .build();
   private static final AtomicLong REQUEST_COUNTER = new AtomicLong(0);
 
-  public interface Factory {
-    SlackWebClient build(
-        @Assisted SlackClientRuntimeConfig config
-    );
-  }
-
   private final NioHttpClient nioHttpClient;
   private final CloseableExecutorService recursingExecutor;
   private final ByMethodRateLimiter defaultRateLimiter;
@@ -159,20 +152,17 @@ public class SlackWebClient implements SlackClient {
   private final RequestDebugger requestDebugger;
   private final ResponseDebugger responseDebugger;
 
-  @AssistedInject
-  public SlackWebClient(
-      DefaultHttpRequestDebugger defaultHttpRequestDebugger,
-      DefaultHttpResponseDebugger defaultHttpResponseDebugger,
-      NioHttpClient.Factory nioHttpClientFactory,
-      ByMethodRateLimiter defaultRateLimiter,
-      @Assisted SlackClientRuntimeConfig config
+  SlackWebClient(
+      NioHttpClientFactory nioHttpClientFactory,
+      SlackClientRuntimeConfig config
   ) {
+
     this.nioHttpClient = nioHttpClientFactory.wrap(
         new NingAsyncHttpClient(
             config.getHttpConfig().orElse(DEFAULT_CONFIG)
         )
     );
-    this.defaultRateLimiter = defaultRateLimiter;
+    this.defaultRateLimiter = new ByMethodRateLimiter();
     this.config = config;
 
     this.methodAcceptor = config.getMethodFilter()
@@ -187,8 +177,8 @@ public class SlackWebClient implements SlackClient {
             return true;
           }
         });
-    this.requestDebugger = config.getRequestDebugger().orElse(defaultHttpRequestDebugger);
-    this.responseDebugger = config.getResponseDebugger().orElse(defaultHttpResponseDebugger);
+    this.requestDebugger = config.getRequestDebugger().orElse(new DefaultHttpRequestDebugger());
+    this.responseDebugger = config.getResponseDebugger().orElse(new DefaultHttpResponseDebugger());
     this.recursingExecutor = MoreExecutors.threadPoolDaemonExecutorBuilder("Slack-recursive-callbacks")
         .setFollowThreadLocals(true)
         .setUnbounded(true)
