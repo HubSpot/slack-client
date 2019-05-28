@@ -19,10 +19,6 @@
     </dependency>
     <dependency>
       <groupId>com.hubspot.slack</groupId>
-      <artifactId>slack-base</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.hubspot.slack</groupId>
       <artifactId>slack-java-client</artifactId>
     </dependency>
     <dependency>
