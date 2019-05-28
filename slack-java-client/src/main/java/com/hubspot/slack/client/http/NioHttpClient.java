@@ -23,7 +23,7 @@ public class NioHttpClient implements Closeable {
 
   private final AsyncHttpClient delegate;
 
-  public NioHttpClient(
+  NioHttpClient(
       AsyncHttpClient delegate
   ) {
     this.delegate = delegate;
