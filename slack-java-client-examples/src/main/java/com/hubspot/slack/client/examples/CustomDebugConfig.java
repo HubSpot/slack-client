@@ -12,7 +12,7 @@ import com.hubspot.slack.client.methods.SlackMethods;
 
 public class CustomDebugConfig {
   public static SlackClient getClient() {
-    return SlackClientFactory.defaultFactory().create(get());
+    return SlackClientFactory.defaultFactory().build(get());
   }
 
   public static SlackClientRuntimeConfig get() {

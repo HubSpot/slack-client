@@ -23,6 +23,10 @@ public class NioHttpClient implements Closeable {
 
   private final AsyncHttpClient delegate;
 
+  public interface Factory {
+    NioHttpClient wrap(AsyncHttpClient delegate);
+  }
+
   NioHttpClient(
       AsyncHttpClient delegate
   ) {

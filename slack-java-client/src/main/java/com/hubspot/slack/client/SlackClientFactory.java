@@ -2,15 +2,13 @@ package com.hubspot.slack.client;
 
 import com.hubspot.slack.client.http.NioHttpClientFactory;
 
-public interface SlackClientFactory {
+public interface SlackClientFactory extends SlackWebClient.Factory {
 
   static SlackClientFactory defaultFactory() {
     return DefaultSlackClientFactory.defaultFactory();
   }
 
-  SlackClient create(SlackClientRuntimeConfig config);
-
-  SlackClient create(NioHttpClientFactory httpClientFactory, SlackClientRuntimeConfig config);
+  SlackClient build(NioHttpClientFactory httpClientFactory, SlackClientRuntimeConfig config);
 
   static class DefaultSlackClientFactory implements SlackClientFactory {
     private static final SlackClientFactory INSTANCE = new DefaultSlackClientFactory();
@@ -20,13 +18,13 @@ public interface SlackClientFactory {
     }
 
     @Override
-    public SlackClient create(SlackClientRuntimeConfig config) {
-      return create(NioHttpClientFactory.defaultFactory(), config);
+    public SlackClient build(SlackClientRuntimeConfig config) {
+      return build(NioHttpClientFactory.defaultFactory(), config);
     }
 
     @Override
-    public SlackClient create(NioHttpClientFactory httpClientFactory,
-                              SlackClientRuntimeConfig config) {
+    public SlackClient build(NioHttpClientFactory httpClientFactory,
+                             SlackClientRuntimeConfig config) {
       return new SlackWebClient(httpClientFactory, config);
     }
   }

@@ -152,6 +152,10 @@ public class SlackWebClient implements SlackClient {
   private final RequestDebugger requestDebugger;
   private final ResponseDebugger responseDebugger;
 
+  public interface Factory {
+    SlackClient build(SlackClientRuntimeConfig config);
+  }
+
   SlackWebClient(
       NioHttpClientFactory nioHttpClientFactory,
       SlackClientRuntimeConfig config

@@ -2,12 +2,10 @@ package com.hubspot.slack.client.http;
 
 import com.hubspot.horizon.AsyncHttpClient;
 
-public interface NioHttpClientFactory {
+public interface NioHttpClientFactory extends NioHttpClient.Factory {
   static NioHttpClientFactory defaultFactory() {
     return DefaultNioHttpClientFactory.defaultFactory();
   }
-
-  NioHttpClient wrap(AsyncHttpClient asyncHttpClient);
 
   static class DefaultNioHttpClientFactory implements NioHttpClientFactory {
     private static final NioHttpClientFactory INSTANCE = new DefaultNioHttpClientFactory();
@@ -16,6 +14,7 @@ public interface NioHttpClientFactory {
       return INSTANCE;
     }
 
+    @Override
     public NioHttpClient wrap(AsyncHttpClient asyncHttpClient) {
       return new NioHttpClient(asyncHttpClient);
     }

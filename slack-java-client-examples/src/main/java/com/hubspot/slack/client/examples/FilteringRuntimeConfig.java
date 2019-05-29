@@ -11,7 +11,7 @@ import com.hubspot.slack.client.methods.interceptor.HasChannel;
 public class FilteringRuntimeConfig {
 
   public static SlackClient getClient() {
-    return SlackClientFactory.defaultFactory().create(get());
+    return SlackClientFactory.defaultFactory().build(get());
   }
 
   public static SlackClientRuntimeConfig get() {
