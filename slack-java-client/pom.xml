@@ -65,6 +65,12 @@
       <artifactId>jackson-core</artifactId>
     </dependency>
 
+    <!-- temporary -->
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+    </dependency>
+
     <!-- test deps -->
     <dependency>
       <groupId>junit</groupId>
