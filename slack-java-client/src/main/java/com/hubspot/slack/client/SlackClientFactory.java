@@ -8,7 +8,9 @@ public interface SlackClientFactory extends SlackWebClient.Factory {
     return DefaultSlackClientFactory.defaultFactory();
   }
 
-  SlackClient build(NioHttpClientFactory httpClientFactory, SlackClientRuntimeConfig config);
+  SlackClient create(SlackClientRuntimeConfig config);
+
+  SlackClient create(NioHttpClientFactory httpClientFactory, SlackClientRuntimeConfig config);
 
   static class DefaultSlackClientFactory implements SlackClientFactory {
     private static final SlackClientFactory INSTANCE = new DefaultSlackClientFactory();
@@ -17,13 +19,22 @@ public interface SlackClientFactory extends SlackWebClient.Factory {
       return INSTANCE;
     }
 
+    /**
+     * Use {@link SlackClientFactory#create(SlackClientRuntimeConfig)} instead
+     */
     @Override
-    public SlackClient build(SlackClientRuntimeConfig config) {
-      return build(NioHttpClientFactory.defaultFactory(), config);
+    @Deprecated
+    public SlackWebClient build(SlackClientRuntimeConfig config) {
+      return new SlackWebClient(NioHttpClientFactory.defaultFactory(), config);
     }
 
     @Override
-    public SlackClient build(NioHttpClientFactory httpClientFactory,
+    public SlackClient create(SlackClientRuntimeConfig config) {
+      return create(NioHttpClientFactory.defaultFactory(), config);
+    }
+
+    @Override
+    public SlackClient create(NioHttpClientFactory httpClientFactory,
                              SlackClientRuntimeConfig config) {
       return new SlackWebClient(httpClientFactory, config);
     }

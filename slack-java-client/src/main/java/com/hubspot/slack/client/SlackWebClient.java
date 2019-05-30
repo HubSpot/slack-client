@@ -153,7 +153,7 @@ public class SlackWebClient implements SlackClient {
   private final ResponseDebugger responseDebugger;
 
   public interface Factory {
-    SlackClient build(SlackClientRuntimeConfig config);
+    SlackWebClient build(SlackClientRuntimeConfig config);
   }
 
   SlackWebClient(
