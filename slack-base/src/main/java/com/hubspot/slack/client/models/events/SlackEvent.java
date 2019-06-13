@@ -8,6 +8,10 @@ public interface SlackEvent {
   SlackEventType getType();
   String getTs();
 
+  /**
+   * @deprecated you should just cast the event to the type you need
+   */
+  @Deprecated
   default <T extends SlackEvent> T toDetailedEvent() {
     return (T) this;
   }
