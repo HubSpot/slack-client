@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.files.SlackFile;
 
 @Immutable
 @HubSpotStyle
@@ -23,6 +24,7 @@ public interface LiteMessageIF {
   String getText();
 
   List<Attachment> getAttachments();
+  Optional<SlackFile> getFile();
 
   @JsonProperty("ts")
   String getTimestamp();
