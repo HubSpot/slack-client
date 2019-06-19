@@ -70,6 +70,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsOpenR
 import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
+import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.group.GroupsKickResponse;
@@ -156,6 +157,9 @@ public interface SlackClient extends Closeable {
   // files
   CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(FilesUploadParams params);
   CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(FilesSharedPublicUrlParams params);
+
+  // emoji
+  CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji();
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(

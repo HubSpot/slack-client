@@ -114,6 +114,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsOpenR
 import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
+import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.group.GroupsKickResponse;
@@ -864,6 +865,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo() {
     return postSlackCommand(SlackMethods.team_info, new Object(), TeamInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji() {
+    return postSlackCommand(SlackMethods.emoji_list, Collections.emptyMap(), EmojiListResponse.class);
   }
 
   @Override
