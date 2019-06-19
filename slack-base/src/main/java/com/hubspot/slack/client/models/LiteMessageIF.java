@@ -24,7 +24,7 @@ public interface LiteMessageIF {
   String getText();
 
   List<Attachment> getAttachments();
-  Optional<SlackFile> getFile();
+  List<SlackFile> getFiles();
 
   @JsonProperty("ts")
   String getTimestamp();
