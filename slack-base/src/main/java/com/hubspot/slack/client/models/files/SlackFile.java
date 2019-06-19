@@ -2,6 +2,8 @@ package com.hubspot.slack.client.models.files;
 
 import java.util.List;
 
+import org.immutables.value.Value.Default;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -17,7 +19,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
     @JsonSubTypes.Type(value = SlackTextFile.class, name = "text"),
     @JsonSubTypes.Type(value = SlackCsvFile.class, name = "csv"),
     @JsonSubTypes.Type(value = SlackGifFile.class, name = "gif"),
-    @JsonSubTypes.Type(value = SlackJpgFile.class, name = "jpg")
+    @JsonSubTypes.Type(value = SlackJpgFile.class, name = "jpg"),
+    @JsonSubTypes.Type(value = SlackPngFile.class, name = "png")
 })
 public interface SlackFile {
   String getId();
@@ -51,7 +54,11 @@ public interface SlackFile {
   String getPermalink();
   String getPermalinkPublic();
 
-  int getCommentsCount();
+  @Default
+  default int getCommentsCount() {
+    return 0;
+  }
+
   @JsonProperty("is_starred")
   boolean isStarred();
 
