@@ -2,6 +2,8 @@ package com.hubspot.slack.client.models.files;
 
 import java.util.List;
 
+import org.immutables.value.Value.Default;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -52,7 +54,11 @@ public interface SlackFile {
   String getPermalink();
   String getPermalinkPublic();
 
-  int getCommentsCount();
+  @Default
+  default int getCommentsCount() {
+    return 0;
+  }
+
   @JsonProperty("is_starred")
   boolean isStarred();
 
