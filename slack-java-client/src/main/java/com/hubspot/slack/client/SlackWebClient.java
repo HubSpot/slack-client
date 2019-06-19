@@ -869,7 +869,7 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji() {
-    return postSlackCommand(SlackMethods.emoji_list, new Object(), EmojiListResponse.class);
+    return postSlackCommand(SlackMethods.emoji_list, Collections.emptyMap(), EmojiListResponse.class);
   }
 
   @Override
