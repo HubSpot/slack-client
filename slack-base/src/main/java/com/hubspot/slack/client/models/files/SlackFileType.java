@@ -10,6 +10,7 @@ public enum SlackFileType {
   GIF("gif"),
   CSV("csv"),
   JPG("jpg"),
+  PNG("png"),
   ;
 
   final String type;
