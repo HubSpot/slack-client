@@ -11,6 +11,7 @@ public enum SlackFileType {
   CSV("csv"),
   JPG("jpg"),
   PNG("png"),
+  UNKNOWN("unknown"),
   ;
 
   final String type;

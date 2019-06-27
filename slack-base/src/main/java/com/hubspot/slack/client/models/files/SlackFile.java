@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 @JsonTypeInfo(
     use = Id.NAME,
     include = As.EXISTING_PROPERTY,
-    property = "filetype"
+    property = "filetype",
+    defaultImpl = SlackUnknownFiletype.class
 )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = SlackTextFile.class, name = "text"),
