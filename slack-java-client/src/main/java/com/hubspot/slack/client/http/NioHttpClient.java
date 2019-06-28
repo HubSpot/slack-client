@@ -30,7 +30,7 @@ public class NioHttpClient implements Closeable {
   }
 
   @Inject
-  NioHttpClient(
+  public NioHttpClient(
       @Assisted AsyncHttpClient delegate
   ) {
     this.delegate = delegate;
