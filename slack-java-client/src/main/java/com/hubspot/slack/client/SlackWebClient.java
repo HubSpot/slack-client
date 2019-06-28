@@ -20,6 +20,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 import com.hubspot.algebra.Result;
 import com.hubspot.horizon.HttpConfig;
 import com.hubspot.horizon.HttpRequest;
@@ -154,12 +156,16 @@ public class SlackWebClient implements SlackClient {
   private final ResponseDebugger responseDebugger;
 
   public interface Factory {
-    SlackWebClient build(SlackClientRuntimeConfig config);
+    SlackWebClient build(@Assisted SlackClientRuntimeConfig config);
   }
 
-  SlackWebClient(
-      NioHttpClientFactory nioHttpClientFactory,
-      SlackClientRuntimeConfig config
+  @AssistedInject
+  public SlackWebClient(
+      DefaultHttpRequestDebugger defaultHttpRequestDebugger,
+      DefaultHttpResponseDebugger defaultHttpResponseDebugger,
+      NioHttpClient.Factory nioHttpClientFactory,
+      ByMethodRateLimiter defaultRateLimiter,
+      @Assisted SlackClientRuntimeConfig config
   ) {
 
     this.nioHttpClient = nioHttpClientFactory.wrap(
@@ -167,7 +173,7 @@ public class SlackWebClient implements SlackClient {
             config.getHttpConfig().orElse(DEFAULT_CONFIG)
         )
     );
-    this.defaultRateLimiter = new ByMethodRateLimiter();
+    this.defaultRateLimiter = defaultRateLimiter;
     this.config = config;
 
     this.methodAcceptor = config.getMethodFilter()
@@ -182,12 +188,24 @@ public class SlackWebClient implements SlackClient {
             return true;
           }
         });
-    this.requestDebugger = config.getRequestDebugger().orElse(new DefaultHttpRequestDebugger());
-    this.responseDebugger = config.getResponseDebugger().orElse(new DefaultHttpResponseDebugger());
+    this.requestDebugger = config.getRequestDebugger().orElse(defaultHttpRequestDebugger);
+    this.responseDebugger = config.getResponseDebugger().orElse(defaultHttpResponseDebugger);
     this.recursingExecutor = MoreExecutors.threadPoolDaemonExecutorBuilder("Slack-recursive-callbacks")
         .setFollowThreadLocals(true)
         .setUnbounded(true)
         .build();
+  }
+
+  SlackWebClient(
+      NioHttpClientFactory nioHttpClientFactory,
+      SlackClientRuntimeConfig config
+  ) {
+    this (
+        new DefaultHttpRequestDebugger(),
+        new DefaultHttpResponseDebugger(),
+        nioHttpClientFactory,
+        new ByMethodRateLimiter(),
+        config);
   }
 
   @Override
