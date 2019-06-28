@@ -17,6 +17,7 @@ public enum SlackErrorType {
   CANT_DELETE_MESSAGE("cant_delete_message"),
   CANT_UPDATE_MESSAGE("cant_update_message"),
   CANNOT_CREATE_DIALOG("cannot_create_dialog"),
+  CANNOT_DM_BOT("cannot_dm_bot"),
   CHANNEL_NOT_FOUND("channel_not_found"),
   COMPLIANCE_EXPORTS_PREVENT_DELETION("compliance_exports_prevent_deletion"),
 
