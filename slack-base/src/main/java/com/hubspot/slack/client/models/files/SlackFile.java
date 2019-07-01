@@ -22,7 +22,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
     @JsonSubTypes.Type(value = SlackCsvFile.class, name = "csv"),
     @JsonSubTypes.Type(value = SlackGifFile.class, name = "gif"),
     @JsonSubTypes.Type(value = SlackJpgFile.class, name = "jpg"),
-    @JsonSubTypes.Type(value = SlackPngFile.class, name = "png")
+    @JsonSubTypes.Type(value = SlackPngFile.class, name = "png"),
+    @JsonSubTypes.Type(value = SlackUnknownFiletype.class, name = "unknown")
 })
 public interface SlackFile {
   String getId();
