@@ -45,4 +45,4 @@ The following is a list of proposed steps to take in order to make sure that `sl
 
 | Date | Found Issues | Description |
 | ---- | ------------ | ----------- |
-| 20190702 | One small deprecation | Fixed up to July 08 2019 tasks in https://api.slack.com/changelog/future |
+| 20190702 | One small deprecation | Audited up to July 08 2019 tasks in https://api.slack.com/changelog/future |
