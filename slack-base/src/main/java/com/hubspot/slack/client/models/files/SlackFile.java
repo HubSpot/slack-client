@@ -1,6 +1,7 @@
 package com.hubspot.slack.client.models.files;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.immutables.value.Value.Default;
 
@@ -50,10 +51,10 @@ public interface SlackFile {
   boolean getDisplayAsBot();
   String getUsername();
   String getUrlPrivate();
-  String getUrlPrivateDownload();
+  Optional<String> getUrlPrivateDownload();
 
   String getPermalink();
-  String getPermalinkPublic();
+  Optional<String> getPermalinkPublic();
 
   @Default
   default int getCommentsCount() {
@@ -61,7 +62,7 @@ public interface SlackFile {
   }
 
   @JsonProperty("is_starred")
-  boolean isStarred();
+  Optional<Boolean> isStarred();
 
   @JsonProperty("channels")
   List<String> getChannelIds();
