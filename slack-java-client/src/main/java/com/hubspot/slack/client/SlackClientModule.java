@@ -12,7 +12,10 @@ public class SlackClientModule extends AbstractModule {
 
   @Override
   protected void configure() {
+    bind(NioHttpClientFactory.class).toInstance(NioHttpClientFactory.defaultFactory());
     bind(NioHttpClient.Factory.class).toInstance(NioHttpClientFactory.defaultFactory());
+
+    bind(SlackClientFactory.class).toInstance(SlackClientFactory.defaultFactory());
     bind(SlackWebClient.Factory.class).toInstance(SlackClientFactory.defaultFactory());
   }
 
