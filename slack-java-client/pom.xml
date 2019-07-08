@@ -44,10 +44,6 @@
       <artifactId>guava</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.google.inject</groupId>
-      <artifactId>guice</artifactId>
-    </dependency>
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
@@ -60,10 +56,6 @@
       <artifactId>annotations</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.google.inject.extensions</groupId>
-      <artifactId>guice-assistedinject</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.immutables</groupId>
       <artifactId>value</artifactId>
       <scope>provided</scope>
@@ -71,6 +63,16 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
+    </dependency>
+
+    <!-- temporary -->
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-assistedinject</artifactId>
     </dependency>
 
     <!-- test deps -->

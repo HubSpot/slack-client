@@ -32,6 +32,7 @@ import com.hubspot.horizon.ning.NingAsyncHttpClient;
 import com.hubspot.slack.client.concurrency.CloseableExecutorService;
 import com.hubspot.slack.client.concurrency.MoreExecutors;
 import com.hubspot.slack.client.http.NioHttpClient;
+import com.hubspot.slack.client.http.NioHttpClientFactory;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpRequestDebugger;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpResponseDebugger;
@@ -145,12 +146,6 @@ public class SlackWebClient implements SlackClient {
       .build();
   private static final AtomicLong REQUEST_COUNTER = new AtomicLong(0);
 
-  public interface Factory {
-    SlackWebClient build(
-        @Assisted SlackClientRuntimeConfig config
-    );
-  }
-
   private final NioHttpClient nioHttpClient;
   private final CloseableExecutorService recursingExecutor;
   private final ByMethodRateLimiter defaultRateLimiter;
@@ -160,6 +155,10 @@ public class SlackWebClient implements SlackClient {
   private final RequestDebugger requestDebugger;
   private final ResponseDebugger responseDebugger;
 
+  public interface Factory {
+    SlackWebClient build(@Assisted SlackClientRuntimeConfig config);
+  }
+
   @AssistedInject
   public SlackWebClient(
       DefaultHttpRequestDebugger defaultHttpRequestDebugger,
@@ -168,6 +167,7 @@ public class SlackWebClient implements SlackClient {
       ByMethodRateLimiter defaultRateLimiter,
       @Assisted SlackClientRuntimeConfig config
   ) {
+
     this.nioHttpClient = nioHttpClientFactory.wrap(
         new NingAsyncHttpClient(
             config.getHttpConfig().orElse(DEFAULT_CONFIG)
@@ -194,6 +194,18 @@ public class SlackWebClient implements SlackClient {
         .setFollowThreadLocals(true)
         .setUnbounded(true)
         .build();
+  }
+
+  SlackWebClient(
+      NioHttpClientFactory nioHttpClientFactory,
+      SlackClientRuntimeConfig config
+  ) {
+    this (
+        new DefaultHttpRequestDebugger(),
+        new DefaultHttpResponseDebugger(),
+        nioHttpClientFactory,
+        new ByMethodRateLimiter(),
+        config);
   }
 
   @Override

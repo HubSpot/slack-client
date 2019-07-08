@@ -1,16 +1,22 @@
 package com.hubspot.slack.client;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.hubspot.slack.client.http.NioHttpClient;
+import com.hubspot.slack.client.http.NioHttpClientFactory;
 
+/**
+ * Use slack-java-client-guice module instead
+ */
+@Deprecated
 public class SlackClientModule extends AbstractModule {
+
   @Override
   protected void configure() {
-    install(new FactoryModuleBuilder().build(NioHttpClient.Factory.class));
-    install(new FactoryModuleBuilder()
-        .implement(SlackClient.class, SlackWebClient.class)
-        .build(SlackWebClient.Factory.class));
+    bind(NioHttpClientFactory.class).toInstance(NioHttpClientFactory.defaultFactory());
+    bind(NioHttpClient.Factory.class).toInstance(NioHttpClientFactory.defaultFactory());
+
+    bind(SlackClientFactory.class).toInstance(SlackClientFactory.defaultFactory());
+    bind(SlackWebClient.Factory.class).toInstance(SlackClientFactory.defaultFactory());
   }
 
   @Override

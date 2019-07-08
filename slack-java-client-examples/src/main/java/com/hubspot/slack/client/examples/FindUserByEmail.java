@@ -7,35 +7,23 @@ import java.util.concurrent.CompletableFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.inject.Guice;
-import com.google.inject.Inject;
 import com.hubspot.algebra.Result;
 import com.hubspot.slack.client.SlackClient;
-import com.hubspot.slack.client.SlackClientExampleModule;
-import com.hubspot.slack.client.SlackExampleClient;
 import com.hubspot.slack.client.models.response.SlackError;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.models.users.UserProfile;
 
 public class FindUserByEmail {
   private static final Logger LOG = LoggerFactory.getLogger(FindUserByEmail.class);
-  private final SlackClient slackClient;
 
   public static void main(String[] args) {
-    Optional<SlackUser> matchingUserMaybe = Guice.createInjector(new SlackClientExampleModule())
-        .getInstance(FindUserByEmail.class)
-        .findUser("eszabowexler@hubspot.com");
+    SlackClient client = BasicRuntimeConfig.getClient();
+
+    Optional<SlackUser> matchingUserMaybe = findUser("eszabowexler@hubspot.com", client);
     LOG.info("Found: {}", matchingUserMaybe);
   }
 
-  @Inject
-  public FindUserByEmail(
-      @SlackExampleClient SlackClient slackClient
-  ) {
-    this.slackClient = slackClient;
-  }
-
-  public Optional<SlackUser> findUser(String emailAddress) {
+  public static Optional<SlackUser> findUser(String emailAddress, SlackClient slackClient) {
     /*
      * Since we may have to enumerate a large set, we chunk it up into pages, and handle each page separately.
      */

@@ -17,6 +17,7 @@
     <module>slack-base</module>
     <module>slack-java-client</module>
     <module>slack-java-client-examples</module>
+    <module>slack-java-client-guice</module>
   </modules>
 
   <properties>
