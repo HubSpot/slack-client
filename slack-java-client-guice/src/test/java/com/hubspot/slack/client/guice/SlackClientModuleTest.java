@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.hubspot.slack.client.SlackClientFactory;
+import com.hubspot.slack.client.SlackWebClient;
 
 public class SlackClientModuleTest {
 
@@ -26,7 +28,7 @@ public class SlackClientModuleTest {
 
   @Test
   public void itCanHaveBothModulesInstalled() {
-    Guice.createInjector(new AbstractModule() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
       @Override
       protected void configure() {
         binder().requireAtInjectOnConstructors();
@@ -34,6 +36,9 @@ public class SlackClientModuleTest {
         install(new SlackClientModule());
         install(new com.hubspot.slack.client.SlackClientModule());
       }
-    }).getInstance(SlackClientFactory.class);
+    });
+
+    injector.getInstance(SlackClientFactory.class);
+    injector.getInstance(SlackWebClient.Factory.class);
   }
 }
