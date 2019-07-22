@@ -52,6 +52,7 @@ We currently support:
  - conversations.info
  - conversations.invite
  - conversations.list
+ - conversations.members
  - conversations.open
  - conversations.unarchive
 #### dialog
