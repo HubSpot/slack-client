@@ -43,6 +43,11 @@ public class CustomDebugConfig {
           public void debugProcessingFailure(long requestId, SlackMethod method, HttpRequest request, HttpResponse response, Throwable ex) {
             // problem in the client code itself resulted in failure
           }
+
+          @Override
+          public void debugProactiveRateLimit(long requestId, SlackMethod method, HttpRequest request) {
+            // configured rate limiter prevented request
+          }
         })
         .build();
   }

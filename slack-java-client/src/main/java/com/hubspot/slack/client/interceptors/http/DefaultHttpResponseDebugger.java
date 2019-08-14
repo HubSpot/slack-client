@@ -54,4 +54,9 @@ public class DefaultHttpResponseDebugger implements ResponseDebugger {
   ) {
     LOG.error("REQ<{}> [{}]: Failed interaction\n{}\n{}", requestId, method, HttpFormatter.formatRequest(request), HttpFormatter.formatResponse(response), ex);
   }
+
+  @Override
+  public void debugProactiveRateLimit(long requestId, SlackMethod method, HttpRequest request) {
+    LOG.debug("REQ<{}> [{}]: Proactively rate limited request\n{}", requestId, method, HttpFormatter.formatRequest(request));
+  }
 }
