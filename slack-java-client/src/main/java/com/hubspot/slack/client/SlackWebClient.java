@@ -142,6 +142,7 @@ import com.hubspot.slack.client.ratelimiting.SlackRateLimiter;
 
 public class SlackWebClient implements SlackClient {
   public static final int RATE_LIMIT_SENTINEL_VALUE = -1;
+  public static final int RATE_LIMIT_LOG_WARNING_THRESHOLD_SECONDS = 5;
 
   private static final Logger LOG = LoggerFactory.getLogger(SlackWebClient.class);
   private static final HttpConfig DEFAULT_CONFIG = HttpConfig.newBuilder()
@@ -1018,7 +1019,7 @@ public class SlackWebClient implements SlackClient {
 
   private double acquirePermit(SlackMethod method) {
     double acquireSeconds = getSlackRateLimiter().acquire(config.getTokenSupplier().get(), method);
-    if (acquireSeconds > 5.0) {
+    if (acquireSeconds > RATE_LIMIT_LOG_WARNING_THRESHOLD_SECONDS) {
       LOG.warn("Throttling {}, waited {} seconds to acquire permit to run", method, acquireSeconds);
     }
 
