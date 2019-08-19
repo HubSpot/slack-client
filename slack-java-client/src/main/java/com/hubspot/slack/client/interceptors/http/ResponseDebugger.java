@@ -37,4 +37,10 @@ public interface ResponseDebugger {
       HttpResponse response,
       Throwable ex
   );
+
+  void debugProactiveRateLimit(
+      long requestId,
+      SlackMethod method,
+      HttpRequest request
+  );
 }
