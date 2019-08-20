@@ -6,8 +6,8 @@ package com.hubspot.slack.client.methods;
 public enum SlackMethods implements SlackMethod {
   api_test(MethodWriteMode.READ, RateLimitingTiers.TIER_4, JsonStatus.FORM_ENCODING_ONLY),
 
-  apps_permission_info(MethodWriteMode.READ, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
-  apps_permission_request(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
+  apps_permissions_info(MethodWriteMode.READ, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
+  apps_permissions_request(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
 
   auth_revoke(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
   auth_test(MethodWriteMode.READ, SpecialTier.of(200), JsonStatus.ACCEPTS_JSON),
@@ -22,7 +22,7 @@ public enum SlackMethods implements SlackMethod {
   channels_join(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   channels_kick(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   channels_leave(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
-  channels_list(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
+  channels_list(MethodWriteMode.READ, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
   channels_mark(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   channels_rename(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
   channels_replies(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
@@ -59,7 +59,7 @@ public enum SlackMethods implements SlackMethod {
 
   dialog_open(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
 
-  dnd_EndDnd(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
+  dnd_endDnd(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
   dnd_endSnooze(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
   dnd_info(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
   dnd_setSnooze(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
@@ -67,9 +67,7 @@ public enum SlackMethods implements SlackMethod {
 
   emoji_list(MethodWriteMode.READ, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
 
-  files_comments_add(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
   files_comments_delete(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
-  files_comments_edit(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
 
   files_delete(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   files_info(MethodWriteMode.READ, RateLimitingTiers.TIER_4, JsonStatus.FORM_ENCODING_ONLY),
