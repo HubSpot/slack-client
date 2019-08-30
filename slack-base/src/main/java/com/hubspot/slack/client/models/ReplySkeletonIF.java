@@ -10,6 +10,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
+@Deprecated
 public interface ReplySkeletonIF {
   @JsonProperty("user")
   String getUserId();
