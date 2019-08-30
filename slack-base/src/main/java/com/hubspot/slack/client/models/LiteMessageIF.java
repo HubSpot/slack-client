@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.immutables.value.Value.Derived;
 import org.immutables.value.Value.Immutable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +20,9 @@ import com.hubspot.slack.client.models.files.SlackFile;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface LiteMessageIF {
+
+  Logger LOG = LoggerFactory.getLogger(LiteMessage.class);
+
   String getType();
 
   Optional<String> getSubtype();
@@ -58,6 +63,7 @@ public interface LiteMessageIF {
   @Derived
   @JsonIgnore
   default List getReplies() {
+    LOG.error("Method getReplies() is now deprecated. Slack will stop supporting completely on Oct 18th 2019");
     return Collections.emptyList();
   }
 }
