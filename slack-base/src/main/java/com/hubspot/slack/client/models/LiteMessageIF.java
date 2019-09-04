@@ -63,7 +63,7 @@ public interface LiteMessageIF {
   @Deprecated
   @Default
   @JsonIgnore
-  default List<ReplySkeleton > getReplies() {
+  default List<ReplySkeleton> getReplies() {
     LOG.error("Method getReplies() is now deprecated. Slack will stop supporting completely on Oct 18th 2019");
     return Collections.emptyList();
   }
