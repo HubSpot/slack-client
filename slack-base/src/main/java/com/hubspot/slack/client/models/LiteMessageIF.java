@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.immutables.value.Value.Derived;
+import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,22 +47,23 @@ public interface LiteMessageIF {
 
   Optional<Integer> getReplyCount();
 
-  Optional<List<String>> getReplyUsers();
+  @JsonProperty("reply_users")
+  Optional<List<String>> getReplyUserIds();
 
-  Optional<Integer> getResplyUsersCount();
+  Optional<Integer> getReplyUsersCount();
 
   @JsonProperty("latest_reply")
   Optional<String> getLatestReplyTimestamp();
 
   /**
-   * @deprecated use {@link #getReplyUsers()} or {@link #getLatestReplyTimestamp()}
+   * @deprecated use {@link #getReplyUserIds()} or {@link #getLatestReplyTimestamp()}
    * These can be used to find the user ids and the last reply timestamp.
-   * Used to return a list of `ReplySkeleton`
+   * Deprecated for use with `conversations.replies`
    */
   @Deprecated
-  @Derived
+  @Default
   @JsonIgnore
-  default List getReplies() {
+  default List<ReplySkeleton > getReplies() {
     LOG.error("Method getReplies() is now deprecated. Slack will stop supporting completely on Oct 18th 2019");
     return Collections.emptyList();
   }
