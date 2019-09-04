@@ -28,7 +28,7 @@ An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slac
 **NOTICE:**
 
 On October 18th 2019, Slack will stop supporting the `replies` thread on a `Message`.
-Due to this, we are deprecating `getReplies()` on [`LiteMessage`](https://github.com/HubSpot/slack-client/blob/master/slack-base/src/main/java/com/hubspot/slack/client/models/LiteMessageIF.java) and [`SlackReplyMessage`](https://github.com/HubSpot/slack-client/blob/master/slack-base/src/main/java/com/hubspot/slack/client/models/events/util/AbstractSlackReplyMessage.java) and it will now just return an empty array as of now.
+Due to this, we are deprecating `getReplies()` on [`LiteMessage`](https://github.com/HubSpot/slack-client/blob/master/slack-base/src/main/java/com/hubspot/slack/client/models/LiteMessageIF.java) and it will now just return an empty array as of now.
 More context in the [April 2019 changelog](https://api.slack.com/changelog)
 
 You can continue to use an older version of this client until October 18th, at which time you'll need to upgrade to the latest.

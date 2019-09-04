@@ -26,10 +26,10 @@ public abstract class AbstractSlackReplyMessage extends SlackEventMessageBase im
   @JsonProperty("channel")
   public abstract String getChannelId();
 
+  public abstract List<Reply> getReplies();
+
   @Default
   public int getReplyCount() {
     return 0;
   }
-
-  public abstract List<Reply> getReplies();
 }

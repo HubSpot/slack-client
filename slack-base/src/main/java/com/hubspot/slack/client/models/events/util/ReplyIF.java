@@ -6,7 +6,6 @@ import com.hubspot.immutables.style.HubSpotStyle;
 
 @Immutable
 @HubSpotStyle
-@Deprecated
 public interface ReplyIF {
   String getUser();
   String getTs();
