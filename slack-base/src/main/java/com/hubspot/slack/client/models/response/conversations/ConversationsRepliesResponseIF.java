@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.ConversationsRepliesMessage;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.response.SlackResponse;
 
@@ -15,7 +16,7 @@ import com.hubspot.slack.client.models.response.SlackResponse;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ConversationsRepliesResponseIF extends SlackResponse {
-  List<LiteMessage> getMessages();
+  List<ConversationsRepliesMessage> getMessages();
 
   @JsonProperty("has_more")
   boolean hasMore();
