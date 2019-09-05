@@ -49,3 +49,5 @@ The following is a list of proposed steps to take in order to make sure that `sl
 | 20190702 | Replies deprecation | Audited up to June 2019 section https://api.slack.com/changelog/ |
 | 20190805 | 1000 count limit already done | Audited up to `Effective August 30, 2019` change in https://api.slack.com/changelog/future |
 | 20190805 | No deprecations | Audited up to July 2019 section https://api.slack.com/changelog/ |
+| 20190905 | Surprise deprecation in `reactions.add` effective Aug 22 | https://api.slack.com/changelog/future |
+| 20190905 | Already on `TLS 1.2` | TLS 1.2 section in https://api.slack.com/changelog |
