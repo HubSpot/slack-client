@@ -8,8 +8,8 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
-import com.hubspot.slack.client.models.ConversationsRepliesMessage;
 import com.hubspot.slack.client.models.JsonLoader;
+import com.hubspot.slack.client.models.LiteMessage;
 
 public class ConversationsRepliesResponseTest {
 
@@ -18,10 +18,11 @@ public class ConversationsRepliesResponseTest {
     ConversationsRepliesResponse response = fetchAndDeserializeModel("conversations.replies.with_replies.json");
     assertThat(response.isOk()).isEqualTo(true);
     assertThat(response.getMessages().size()).isEqualTo(4);
-    assertThat(response.getMessages().get(0)).isInstanceOf(ConversationsRepliesMessage.class);
+    assertThat(response.getMessages().get(0)).isInstanceOf(LiteMessage.class);
     assertThat(response.getMessages().get(0).getReplyUserIds()).isEmpty();
     assertThat(response.getMessages().get(0).getReplyUsersCount()).isEmpty();
     assertThat(response.getMessages().get(0).getLatestReplyTimestamp()).isEmpty();
+    assertThat(response.getMessages().get(0).getReplies()).isNotEmpty();
   }
 
   @Test
@@ -29,10 +30,11 @@ public class ConversationsRepliesResponseTest {
     ConversationsRepliesResponse response = fetchAndDeserializeModel("conversations.replies.with_replies_and_new_fields.json");
     assertThat(response.isOk()).isEqualTo(true);
     assertThat(response.getMessages().size()).isEqualTo(4);
-    assertThat(response.getMessages().get(0)).isInstanceOf(ConversationsRepliesMessage.class);
+    assertThat(response.getMessages().get(0)).isInstanceOf(LiteMessage.class);
     assertThat(response.getMessages().get(0).getReplyUserIds().get()).isEqualTo(Arrays.asList("U061F7AUR", "U061F7AUR", "U061F7AUR"));
     assertThat(response.getMessages().get(0).getReplyUsersCount().get()).isEqualTo(3);
     assertThat(response.getMessages().get(0).getLatestReplyTimestamp().get()).isEqualTo("1483125339.020269");
+    assertThat(response.getMessages().get(0).getReplies()).isNotEmpty();
   }
 
   @Test
@@ -40,10 +42,11 @@ public class ConversationsRepliesResponseTest {
     ConversationsRepliesResponse response = fetchAndDeserializeModel("conversations.replies.no_replies_with_only_new_fields.json");
     assertThat(response.isOk()).isEqualTo(true);
     assertThat(response.getMessages().size()).isEqualTo(4);
-    assertThat(response.getMessages().get(0)).isInstanceOf(ConversationsRepliesMessage.class);
+    assertThat(response.getMessages().get(0)).isInstanceOf(LiteMessage.class);
     assertThat(response.getMessages().get(0).getReplyUserIds().get()).isEqualTo(Arrays.asList("U061F7AUR", "U061F7AUR", "U061F7AUR"));
     assertThat(response.getMessages().get(0).getReplyUsersCount().get()).isEqualTo(3);
     assertThat(response.getMessages().get(0).getLatestReplyTimestamp().get()).isEqualTo("1483125339.020269");
+    assertThat(response.getMessages().get(0).getReplies()).isEmpty();
   }
 
   private ConversationsRepliesResponse fetchAndDeserializeModel(String jsonFileName) throws IOException {

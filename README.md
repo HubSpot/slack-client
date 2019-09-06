@@ -27,11 +27,10 @@ An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slac
 
 **NOTICE:**
 
-On October 18th 2019, Slack will stop supporting the `replies` thread on a `Message` returned from the [`conversations.replies` endpoint](https://api.slack.com/methods/conversations.replies).
+On October 18th 2019, Slack will stop supporting the `replies` thread on a `Message` returned from the [`conversations.replies` endpoint](https://api.slack.com/methods/conversations.replies) as well as any places that use `LiteMessage`.
 
-Due to this, we are removing `getReplies()` on a newly created[`ConversationsRepliesMessage`](https://github.com/HubSpot/slack-client/blob/master/slack-base/src/main/java/com/hubspot/slack/client/models/ConversationsRepliesMessageIF.java)
-
-Slack has said that other API responses will still have threaded replies where `LiteMessage` is used, so we're keeping that, and we created the new model object.
+Due to this, we are deprecating `getReplies()` on [`LiteMessage`](https://github.com/HubSpot/slack-client/blob/master/slack-base/src/main/java/com/hubspot/slack/client/models/LiteMessageIF.java)
+It will return the data as long as Slack still returns it, bue when they stop, we will just return an empty array.
 
 More context in the [April 2019 changelog](https://api.slack.com/changelog)
 
