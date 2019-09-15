@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "messages": [
+    {
+      "type": "message",
+      "user": "U061F7AUR",
+      "text": "Was there was there was there what was there was there what was there was there there was there.",
+      "thread_ts": "1482960137.003543",
+      "reply_count": 3,
+      "reply_users": ["U061F7AUR", "U061F7AUR", "U061F7AUR"],
+      "reply_users_count": 3,
+      "latest_reply": "1483125339.020269",
+      "subscribed": true,
+      "last_read": "1484678597.521003",
+      "unread_count": 0,
+      "ts": "1482960137.003543"
+    },
+    {
+      "type": "message",
+      "user": "U061F7AUR",
+      "text": "Shutters shut and shutters and so shutters shut and shutters and so and so shutters and so shutters shut and so shutters shut and shutters and so.",
+      "thread_ts": "1482960137.003543",
+      "parent_user_id": "U061F7AUR",
+      "ts": "1483037603.017503"
+    },
+    {
+      "type": "message",
+      "user": "U061F7AUR",
+      "text": "Let me recite what history teaches. History teaches.",
+      "thread_ts": "1482960137.003543",
+      "parent_user_id": "U061F7AUR",
+      "ts": "1483051909.018632"
+    },
+    {
+      "type": "message",
+      "user": "U061F7AUR",
+      "text": "I love you Alice B. Toklas and so does Gertrude Stein.",
+      "thread_ts": "1482960137.003543",
+      "parent_user_id": "U061F7AUR",
+      "ts": "1483125339.020269"
+    }
+  ],
+  "has_more": true,
+  "response_metadata": {
+    "next_cursor": "bmV4dF90czoxNDg0Njc4MjkwNTE3MDkx"
+  }
+}

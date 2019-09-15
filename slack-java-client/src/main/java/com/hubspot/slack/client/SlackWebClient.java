@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
@@ -142,6 +143,9 @@ import com.hubspot.slack.client.ratelimiting.ByMethodRateLimiter;
 import com.hubspot.slack.client.ratelimiting.SlackRateLimiter;
 
 public class SlackWebClient implements SlackClient {
+  public static final int RATE_LIMIT_SENTINEL_VALUE = -1;
+  public static final int RATE_LIMIT_LOG_WARNING_THRESHOLD_SECONDS = 5;
+
   private static final Logger LOG = LoggerFactory.getLogger(SlackWebClient.class);
   private static final HttpConfig DEFAULT_CONFIG = HttpConfig.newBuilder()
       .setObjectMapper(ObjectMapperUtils.mapper())
@@ -971,24 +975,27 @@ public class SlackWebClient implements SlackClient {
         .setUrl(config.getSlackApiBasePath().get() + "/" + method.getMethod());
   }
 
-  private <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> executeLoggedAs(
+  @VisibleForTesting
+  <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> executeLoggedAs(
       SlackMethod method,
       HttpRequest request,
       Class<T> responseType
   ) {
     long requestId = REQUEST_COUNTER.getAndIncrement();
-    return executeLogged(requestId, method, request)
+    requestDebugger.debug(requestId, method, request);
+
+    Stopwatch timer = Stopwatch.createStarted();
+    double acquireSeconds = acquirePermit(method);
+
+    if (acquireSeconds == RATE_LIMIT_SENTINEL_VALUE) {
+      responseDebugger.debugProactiveRateLimit(requestId, method, request);
+      return CompletableFuture.completedFuture(Result.err(SlackError.of(SlackErrorType.RATE_LIMITED.key())));
+    }
+
+    return executeLogged(requestId, method, request, timer)
         .thenApply(response -> {
           try {
-            JsonNode responseJson = response.getAsJsonNode();
-            boolean isOk = responseJson.get("ok").asBoolean();
-            if (isOk) {
-              return Result.ok(ObjectMapperUtils.mapper().treeToValue(responseJson, responseType));
-            }
-
-            SlackErrorResponse errorResponse = ObjectMapperUtils.mapper().treeToValue(response.getAsJsonNode(), SlackErrorResponse.class);
-            responseDebugger.debugSlackApiError(requestId, method, request, response);
-            return Result.err(errorResponse.getError().orElseGet(() -> errorResponse.getErrors().get(0)));
+            return parseSlackResponse(response, responseType, requestId, method, request);
           } catch (JsonProcessingException e) {
             responseDebugger.debugProcessingFailure(requestId, method, request, response, e);
             return Result.err(SlackError.builder()
@@ -1001,6 +1008,23 @@ public class SlackWebClient implements SlackClient {
             throw ex;
           }
         });
+  }
+
+  private <T extends SlackResponse> Result<T, SlackError> parseSlackResponse(HttpResponse response,
+                                                                             Class<T> responseType,
+                                                                             long requestId,
+                                                                             SlackMethod method,
+                                                                             HttpRequest request) throws JsonProcessingException {
+    JsonNode responseJson = response.getAsJsonNode();
+    boolean isOk = responseJson.get("ok").asBoolean();
+    if (isOk) {
+      return Result.ok(ObjectMapperUtils.mapper().treeToValue(responseJson, responseType));
+    }
+
+    SlackErrorResponse errorResponse = ObjectMapperUtils.mapper()
+        .treeToValue(response.getAsJsonNode(), SlackErrorResponse.class);
+    responseDebugger.debugSlackApiError(requestId, method, request, response);
+    return Result.err(errorResponse.getError().orElseGet(() -> errorResponse.getErrors().get(0)));
   }
 
   private <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommandUrlEncoded(
@@ -1019,18 +1043,13 @@ public class SlackWebClient implements SlackClient {
   private CompletableFuture<HttpResponse> executeLogged(
       long requestId,
       SlackMethod method,
-      HttpRequest request
-  ) {
-    requestDebugger.debug(requestId, method, request);
-    Stopwatch timer = Stopwatch.createStarted();
-
-    acquirePermit(method);
+      HttpRequest request,
+      Stopwatch timer) {
     CompletableFuture<HttpResponse> responseFuture = nioHttpClient.executeCompletableFuture(request);
 
     responseFuture.whenComplete((httpResponse, throwable) -> {
       if (throwable != null) {
         responseDebugger.debugTransportException(requestId, method, request, throwable);
-
       } else {
         responseDebugger.debug(requestId, method, timer, request, httpResponse);
       }
@@ -1039,11 +1058,13 @@ public class SlackWebClient implements SlackClient {
     return responseFuture;
   }
 
-  private void acquirePermit(SlackMethod method) {
-    double acquireTime = getSlackRateLimiter().acquire(config.getTokenSupplier().get(), method);
-    if (acquireTime > 5.0) {
-      LOG.warn("Throttling {}, waited {} seconds to acquire permit to run", method, acquireTime);
+  private double acquirePermit(SlackMethod method) {
+    double acquireSeconds = getSlackRateLimiter().acquire(config.getTokenSupplier().get(), method);
+    if (acquireSeconds > RATE_LIMIT_LOG_WARNING_THRESHOLD_SECONDS) {
+      LOG.warn("Throttling {}, waited {} seconds to acquire permit to run", method, acquireSeconds);
     }
+
+    return acquireSeconds;
   }
 
   private SlackRateLimiter getSlackRateLimiter() {
