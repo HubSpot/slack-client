@@ -731,21 +731,27 @@ public class SlackWebClient implements SlackClient {
       }
 
       @Override
-      protected LazyLoadingPage<Result<List<String>, SlackError>, String> getPage(String offset) throws Exception {
+      protected LazyLoadingPage<Result<List<String>, SlackError>, String> getPage(String offset) {
         if (LOG.isTraceEnabled()) {
-          LOG.trace("Fetching slack usergroup page from {}", offset);
+          LOG.trace("Fetching slack conversation members page from {}", offset);
         }
+        ConversationMemberParams.Builder requestBuilder = ConversationMemberParams.builder()
+                .from(params);
+        if (!params.getLimit().isPresent()) {
+            requestBuilder.setLimit(config.getConversationMembersBatchSize().get());
+        }
+        Optional.ofNullable(offset)
+                .ifPresent(requestBuilder::setCursor);
 
+        ConversationMemberParams params = requestBuilder.build();
         CompletableFuture<Result<ConversationMemberResponse, SlackError>> resultFuture = postSlackCommand(
                 SlackMethods.conversations_members,
-                ConversationMemberParams.builder()
-                        .from(params)
-                        .build(),
+                params,
                 ConversationMemberResponse.class
         );
 
         CompletableFuture<Result<List<String>, SlackError>> pageFuture = resultFuture.thenApply(
-                result -> result.mapOk(ConversationMemberResponse::getMember)
+                result -> result.mapOk(ConversationMemberResponse::getMemberIds)
         );
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(resultFuture);

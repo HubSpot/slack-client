@@ -11,5 +11,5 @@ import java.util.List;
 @HubSpotStyle
 public interface ConversationMemberResponseIF extends SlackResponse {
     @JsonProperty("members")
-    List<String> getMember();
+    List<String> getMemberIds();
 }

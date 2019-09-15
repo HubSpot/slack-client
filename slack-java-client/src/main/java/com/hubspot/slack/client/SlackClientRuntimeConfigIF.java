@@ -44,6 +44,9 @@ public interface SlackClientRuntimeConfigIF {
     return () -> 1000;
   }
 
+  @Default
+  default Supplier<Integer> getConversationMembersBatchSize() {return () -> 1000;}
+
   Optional<SlackRateLimiter> getSlackRateLimiter();
 
   Optional<HttpConfig> getHttpConfig();

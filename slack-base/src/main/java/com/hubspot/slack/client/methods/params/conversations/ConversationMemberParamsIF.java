@@ -15,6 +15,5 @@ public interface ConversationMemberParamsIF {
     Optional<String> getCursor();
     Optional<Integer> getLimit();
     @JsonProperty("channel")
-    Optional<String> getChannelId();
-
+    String getChannelId();
 }
