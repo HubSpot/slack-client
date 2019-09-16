@@ -166,15 +166,18 @@ If you're not familiar with Java 8's `CompletableFuture` API, know that you can 
 
 
 ## Contributors
- - [@szabowexler](https://github.com/szabowexler) [:computer:](https://github.com/HubSpot/slack-client/commits?author=szabowexler)
- - [@zklapow](https://github.com/zklapow) [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
- - [@wsorenson](https://github.com/wsorenson) [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
- - [@darcatron](https://github.com/darcatron) [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
- - [@dylanrb123](https://github.com/dylanrb123) [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
- - [@stevegutz](https://github.com/stevegutz) [:computer:](https://github.com/HubSpot/slack-client/commits?author=stevegutz)
- - [@BWehner](https://github.com/BWehner) [:computer:](https://github.com/HubSpot/slack-client/commits?author=BWehner)
- - [@axiak](https://github.com/axiak) [:computer:](https://github.com/HubSpot/slack-client/commits?author=axiak)
- - [@andybergon](https://github.com/andybergon) [:computer:](https://github.com/HubSpot/slack-client/commits?author=andybergon)
+ - [@szabowexler](https://github.com/szabowexler) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=szabowexler)
+ - [@zklapow](https://github.com/zklapow) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
+ - [@wsorenson](https://github.com/wsorenson) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)
+ - [@darcatron](https://github.com/darcatron) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=darcatron)
+ - [@dylanrb123](https://github.com/dylanrb123) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=dylanrb123)
+ - [@stevegutz](https://github.com/stevegutz) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=stevegutz)
+ - [@BWehner](https://github.com/BWehner) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=BWehner)
+ - [@axiak](https://github.com/axiak) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=axiak)
+ - [@andybergon](https://github.com/andybergon) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=andybergon)
+ - [@mlr46](https://github.com/mlr46) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=mlr46)
+ - [@mindspin311](https://github.com/mindspin311) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=mindspin311)
+ - [@Ulya0302](https://github.com/Ulya0302) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=Ulya0302)
 
 ## License
 
