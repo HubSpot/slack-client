@@ -68,6 +68,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoPa
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
@@ -115,6 +116,7 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
@@ -718,6 +720,51 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(ConversationOpenParams params) {
     return postSlackCommand(SlackMethods.conversations_open, params, ConversationsOpenResponse.class);
+  }
+
+  @Override
+  public Iterable<CompletableFuture<Result<List<String>, SlackError>>> getConversationMembers(ConversationMemberParams params) {
+    return new AbstractPagedIterable<Result<List<String>, SlackError>, String>() {
+      @Override
+      protected String getInitialOffset() {
+        return null;
+      }
+
+      @Override
+      protected LazyLoadingPage<Result<List<String>, SlackError>, String> getPage(String offset) {
+        if (LOG.isTraceEnabled()) {
+          LOG.trace("Fetching slack conversation members page from {}", offset);
+        }
+        ConversationMemberParams.Builder requestBuilder = ConversationMemberParams.builder()
+                .from(params);
+        if (!params.getLimit().isPresent()) {
+            requestBuilder.setLimit(config.getConversationMembersBatchSize().get());
+        }
+        Optional.ofNullable(offset)
+                .ifPresent(requestBuilder::setCursor);
+
+        ConversationMemberParams params = requestBuilder.build();
+        CompletableFuture<Result<ConversationMemberResponse, SlackError>> resultFuture = postSlackCommand(
+                SlackMethods.conversations_members,
+                params,
+                ConversationMemberResponse.class
+        );
+
+        CompletableFuture<Result<List<String>, SlackError>> pageFuture = resultFuture.thenApply(
+                result -> result.mapOk(ConversationMemberResponse::getMemberIds)
+        );
+
+        CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(resultFuture);
+        CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(Optional::isPresent);
+        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
+
+        return new LazyLoadingPage<>(
+                pageFuture,
+                hasMoreFuture,
+                nextCursorFuture
+        );
+      }
+    };
   }
 
   private CompletableFuture<Optional<Conversation>> findConversationByName(String conversationName, ConversationsFilter conversationsFilter) {
