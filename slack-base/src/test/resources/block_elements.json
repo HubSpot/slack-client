@@ -1,0 +1,265 @@
+[
+  {
+    "type": "button",
+    "text": {
+      "type": "plain_text",
+      "text": "Click Me"
+    },
+    "value": "click_me_123",
+    "action_id": "button"
+  },
+  {
+    "type": "button",
+    "text": {
+      "type": "plain_text",
+      "text": "Save"
+    },
+    "style": "primary",
+    "value": "click_me_123",
+    "action_id": "button"
+  },
+  {
+    "type": "button",
+    "text": {
+      "type": "plain_text",
+      "text": "Link Button"
+    },
+    "url": "https://api.slack.com/block-kit"
+  },
+  {
+    "type": "datepicker",
+    "action_id": "datepicker123",
+    "initial_date": "1990-04-28",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select a date"
+    }
+  },
+  {
+    "type": "image",
+    "image_url": "http://placekitten.com/700/500",
+    "alt_text": "Multiple cute kittens"
+  },
+  {
+    "action_id": "text1234",
+    "type": "multi_static_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select items"
+    },
+    "options": [
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-0"
+      },
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-1"
+      },
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-2"
+      }
+    ]
+  },
+  {
+    "action_id": "text1234",
+    "type": "multi_external_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select items"
+    },
+    "min_query_length": 3
+  },
+  {
+    "action_id": "text1234",
+    "type": "multi_users_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select users"
+    }
+  },
+  {
+    "action_id": "text1234",
+    "type": "multi_conversations_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select conversations"
+    }
+  },
+  {
+    "action_id": "text1234",
+    "type": "multi_channels_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select channels"
+    }
+  },
+  {
+    "type": "overflow",
+    "options": [
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-0"
+      },
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-1"
+      },
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-2"
+      },
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-3"
+      },
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-4"
+      }
+    ],
+    "action_id": "overflow"
+  },
+  {
+    "type": "plain_text_input",
+    "action_id": "plain_input",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Enter some plain text"
+    }
+  },
+  {
+    "type": "radio_buttons",
+    "action_id": "this_is_an_action_id",
+    "initial_option": {
+      "value": "A1",
+      "text": {
+        "type": "plain_text",
+        "text": "Radio 1"
+      }
+    },
+    "options": [
+      {
+        "value": "A1",
+        "text": {
+          "type": "plain_text",
+          "text": "Radio 1"
+        }
+      },
+      {
+        "value": "A2",
+        "text": {
+          "type": "plain_text",
+          "text": "Radio 2"
+        }
+      }
+    ]
+  },
+  {
+    "action_id": "text1234",
+    "type": "static_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select an item"
+    },
+    "options": [
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-0"
+      },
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-1"
+      },
+      {
+        "text": {
+          "type": "plain_text",
+          "text": "*this is plain_text text*"
+        },
+        "value": "value-2"
+      }
+    ]
+  },
+  {
+    "action_id": "text1234",
+    "type": "external_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select an item"
+    },
+    "min_query_length": 3
+  },
+  {
+    "action_id": "text1234",
+    "type": "users_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select an item"
+    }
+  },
+  {
+    "action_id": "text1234",
+    "type": "conversations_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select an item"
+    }
+  },
+  {
+    "action_id": "text1234",
+    "type": "channels_select",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select an item"
+    },
+    "confirm": {
+      "title": {
+        "type": "plain_text",
+        "text": "Are you sure?"
+      },
+      "text": {
+        "type": "mrkdwn",
+        "text": "Wouldn't you prefer a good game of _chess_?"
+      },
+      "confirm": {
+        "type": "plain_text",
+        "text": "Do it"
+      },
+      "deny": {
+        "type": "plain_text",
+        "text": "Stop, I've changed my mind!"
+      }
+    }
+  }
+]

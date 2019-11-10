@@ -1,0 +1,193 @@
+[
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "A message *with some bold text* and _some italicized text_."
+    }
+  },
+  {
+    "type": "section",
+    "text": {
+      "text": "A message *with some bold text* and _some italicized text_.",
+      "type": "mrkdwn"
+    },
+    "fields": [
+      {
+        "type": "mrkdwn",
+        "text": "High"
+      },
+      {
+        "type": "plain_text",
+        "emoji": true,
+        "text": "String"
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "text": {
+      "text": "*Sally* has requested you set the deadline for the Nano launch project",
+      "type": "mrkdwn"
+    },
+    "accessory": {
+      "type": "datepicker",
+      "action_id": "datepicker123",
+      "initial_date": "1990-04-28",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Select a date"
+      }
+    }
+  },
+  {
+    "type": "divider"
+  },
+  {
+    "type": "image",
+    "title": {
+      "type": "plain_text",
+      "text": "Please enjoy this photo of a kitten"
+    },
+    "block_id": "image4",
+    "image_url": "http://placekitten.com/500/500",
+    "alt_text": "An incredibly cute kitten."
+  },
+  {
+    "type": "actions",
+    "block_id": "actions1",
+    "elements": [
+      {
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Which witch is the witchiest witch?"
+        },
+        "action_id": "select_2",
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Matilda"
+            },
+            "value": "matilda"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Glinda"
+            },
+            "value": "glinda"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Granny Weatherwax"
+            },
+            "value": "grannyWeatherwax"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Hermione"
+            },
+            "value": "hermione"
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "text": {
+          "type": "plain_text",
+          "text": "Cancel"
+        },
+        "value": "cancel",
+        "action_id": "button_1"
+      }
+    ]
+  },
+  {
+    "type": "actions",
+    "block_id": "actionblock789",
+    "elements": [
+      {
+        "type": "datepicker",
+        "action_id": "datepicker123",
+        "initial_date": "1990-04-28",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a date"
+        }
+      },
+      {
+        "type": "overflow",
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "*this is plain_text text*"
+            },
+            "value": "value-0"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "*this is plain_text text*"
+            },
+            "value": "value-1"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "*this is plain_text text*"
+            },
+            "value": "value-2"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "*this is plain_text text*"
+            },
+            "value": "value-3"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "*this is plain_text text*"
+            },
+            "value": "value-4"
+          }
+        ],
+        "action_id": "overflow"
+      },
+      {
+        "type": "button",
+        "text": {
+          "type": "plain_text",
+          "text": "Click Me"
+        },
+        "value": "click_me_123",
+        "action_id": "button"
+      }
+    ]
+  },
+  {
+    "type": "context",
+    "elements": [
+      {
+        "type": "image",
+        "image_url": "https://image.freepik.com/free-photo/red-drawing-pin_1156-445.jpg",
+        "alt_text": "images"
+      },
+      {
+        "type": "mrkdwn",
+        "text": "Location: **Dogpatch**"
+      }
+    ]
+  },
+  {
+    "type": "file",
+    "external_id": "ABCD1",
+    "source": "remote"
+  }
+]
