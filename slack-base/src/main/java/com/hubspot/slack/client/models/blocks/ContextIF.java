@@ -6,9 +6,10 @@ import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
-import com.hubspot.slack.client.models.blocks.elements.BlockElement;
+import com.hubspot.slack.client.models.blocks.json.ImageOrTextDeserializer;
 
 @Immutable
 @HubSpotStyle
@@ -22,5 +23,6 @@ public interface ContextIF extends Block {
     return TYPE;
   }
 
-  List<BlockElement> getElements();
+  @JsonDeserialize(contentUsing = ImageOrTextDeserializer.class)
+  List<Object> getElements();
 }
