@@ -24,7 +24,8 @@
       "type": "plain_text",
       "text": "Link Button"
     },
-    "url": "https://api.slack.com/block-kit"
+    "url": "https://api.slack.com/block-kit",
+    "action_id": "button"
   },
   {
     "type": "datepicker",

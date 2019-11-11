@@ -26,7 +26,7 @@ public interface ButtonIF extends BlockElement {
 
   Text getText();
 
-  Optional<String> getActionId();
+  String getActionId();
 
   Optional<String> getUrl();
 
