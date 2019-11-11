@@ -24,7 +24,6 @@ public class BlockElementSerializationTest {
   public void testBlockSerialization() throws IOException {
     String rawJson = JsonLoader.loadJsonFromFile("block_elements.json");
     BlockElement[] blockElements = objectMapper.readValue(rawJson, BlockElement[].class);
-//    assertThat(blockElements).hasSize(9);
     String generatedJson = objectMapper.writeValueAsString(blockElements);
     assertThat(objectMapper.readTree(rawJson)).isEqualTo(objectMapper.readTree(generatedJson));
   }
