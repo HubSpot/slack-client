@@ -8,17 +8,18 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.hubspot.slack.client.models.blocks.Image;
+import com.hubspot.slack.client.models.blocks.objects.ImageBlockOrText;
 import com.hubspot.slack.client.models.blocks.objects.Text;
 
-public class ImageOrTextDeserializer extends StdDeserializer<Object> {
+public class ImageBlockOrTextDeserializer extends StdDeserializer<ImageBlockOrText> {
   private static final String TYPE_FIELD = "type";
 
-  protected ImageOrTextDeserializer() {
-    super(Object.class);
+  protected ImageBlockOrTextDeserializer() {
+    super(ImageBlockOrText.class);
   }
 
   @Override
-  public Object deserialize(JsonParser p, DeserializationContext context) throws IOException {
+  public ImageBlockOrText deserialize(JsonParser p, DeserializationContext context) throws IOException {
     ObjectCodec codec = p.getCodec();
     JsonNode node = codec.readTree(p);
 

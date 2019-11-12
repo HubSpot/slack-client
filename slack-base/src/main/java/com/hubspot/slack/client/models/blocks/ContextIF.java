@@ -9,8 +9,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
-import com.hubspot.slack.client.models.blocks.json.ImageOrTextDeserializer;
-import com.hubspot.slack.client.models.blocks.objects.ImageOrText;
+import com.hubspot.slack.client.models.blocks.json.ImageBlockOrTextDeserializer;
+import com.hubspot.slack.client.models.blocks.objects.ImageBlockOrText;
 
 @Immutable
 @HubSpotStyle
@@ -24,6 +24,6 @@ public interface ContextIF extends Block {
     return TYPE;
   }
 
-  @JsonDeserialize(contentUsing = ImageOrTextDeserializer.class)
-  List<ImageOrText> getElements();
+  @JsonDeserialize(contentUsing = ImageBlockOrTextDeserializer.class)
+  List<ImageBlockOrText> getElements();
 }

@@ -12,7 +12,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface TextIF extends CompositionObject, ImageOrText {
+public interface TextIF extends CompositionObject, ImageBlockOrText {
   TextType getType();
 
   Optional<String> getText();
