@@ -29,7 +29,8 @@ public interface ConversationsMultiSelectMenuIF extends BlockElement {
 
   String getActionId();
 
-  List<String> getInitialChannels();
+  @JsonProperty("initial_conversations")
+  List<String> getInitialChannelIds();
 
   @JsonProperty("confirm")
   Optional<ConfirmationDialog> getConfirmationDialog();

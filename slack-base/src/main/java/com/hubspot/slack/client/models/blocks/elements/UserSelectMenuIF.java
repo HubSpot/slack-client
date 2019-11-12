@@ -28,7 +28,8 @@ public interface UserSelectMenuIF extends BlockElement {
 
   String getActionId();
 
-  Optional<String> getInitialUser();
+  @JsonProperty("initial_user")
+  Optional<String> getInitialUserId();
 
   @JsonProperty("confirm")
   Optional<ConfirmationDialog> getConfirmationDialog();

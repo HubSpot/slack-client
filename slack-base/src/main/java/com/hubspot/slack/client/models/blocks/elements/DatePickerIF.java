@@ -1,10 +1,12 @@
 package com.hubspot.slack.client.models.blocks.elements;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -28,7 +30,8 @@ public interface DatePickerIF extends BlockElement {
 
   Optional<Text> getPlaceholder();
 
-  Optional<String> getInitialDate();
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  Optional<LocalDate> getInitialDate();
 
   @JsonProperty("confirm")
   Optional<ConfirmationDialog> getConfirmationDialog();

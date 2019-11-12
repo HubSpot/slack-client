@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.blocks.json.ImageOrTextDeserializer;
+import com.hubspot.slack.client.models.blocks.objects.ImageOrText;
 
 @Immutable
 @HubSpotStyle
@@ -24,5 +25,5 @@ public interface ContextIF extends Block {
   }
 
   @JsonDeserialize(contentUsing = ImageOrTextDeserializer.class)
-  List<Object> getElements();
+  List<ImageOrText> getElements();
 }

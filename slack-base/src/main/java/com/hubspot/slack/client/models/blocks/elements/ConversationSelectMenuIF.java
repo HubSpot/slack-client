@@ -28,7 +28,8 @@ public interface ConversationSelectMenuIF extends BlockElement {
 
   String getActionId();
 
-  Optional<String> getInitialConversation();
+  @JsonProperty("initial_conversation")
+  Optional<String> getInitialConversationId();
 
   @JsonProperty("confirm")
   Optional<ConfirmationDialog> getConfirmationDialog();

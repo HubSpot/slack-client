@@ -28,7 +28,8 @@ public interface ChannelSelectMenuIF extends BlockElement {
 
   String getActionId();
 
-  Optional<String> getInitialChannel();
+  @JsonProperty("initial_channel")
+  Optional<String> getInitialChannelId();
 
   @JsonProperty("confirm")
   Optional<ConfirmationDialog> getConfirmationDialog();
