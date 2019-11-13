@@ -26,8 +26,10 @@ public interface ExternalMultiSelectMenuIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   Text getPlaceholder();
 
+  @Value.Parameter
   String getActionId();
 
   Optional<Integer> getMinQueryLength();

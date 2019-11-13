@@ -24,8 +24,10 @@ public interface InputIF extends Block {
     return TYPE;
   }
 
+  @Value.Parameter
   Text getLabel();
 
+  @Value.Parameter
   BlockElement getElement();
 
   Optional<Text> getHint();

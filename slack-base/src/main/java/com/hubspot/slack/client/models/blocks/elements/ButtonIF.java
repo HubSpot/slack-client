@@ -24,8 +24,10 @@ public interface ButtonIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   Text getText();
 
+  @Value.Parameter
   String getActionId();
 
   Optional<String> getUrl();

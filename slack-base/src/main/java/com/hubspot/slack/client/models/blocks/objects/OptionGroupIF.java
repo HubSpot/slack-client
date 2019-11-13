@@ -2,6 +2,7 @@ package com.hubspot.slack.client.models.blocks.objects;
 
 import java.util.List;
 
+import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
@@ -12,7 +13,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface OptionGroupIF extends OptionOrOptionGroup {
+  @Value.Parameter
   Text getLabel();
 
+  @Value.Parameter
   List<Option> getOptions();
 }

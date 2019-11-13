@@ -26,6 +26,7 @@ public interface DatePickerIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   String getActionId();
 
   Optional<Text> getPlaceholder();

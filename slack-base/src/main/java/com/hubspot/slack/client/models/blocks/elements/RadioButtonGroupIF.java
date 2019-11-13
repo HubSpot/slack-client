@@ -25,8 +25,10 @@ public interface RadioButtonGroupIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   String getActionId();
 
+  @Value.Parameter
   List<Option> getOptions();
 
   Optional<Option> getInitialOption();

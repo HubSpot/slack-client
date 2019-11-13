@@ -25,8 +25,10 @@ public interface ChannelsMultiSelectMenuIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   Text getPlaceholder();
 
+  @Value.Parameter
   String getActionId();
 
   @JsonProperty("initial_channels")

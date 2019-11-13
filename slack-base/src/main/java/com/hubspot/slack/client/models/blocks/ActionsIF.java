@@ -22,5 +22,6 @@ public interface ActionsIF extends Block {
     return TYPE;
   }
 
+  @Value.Parameter
   List<BlockElement> getElements();
 }

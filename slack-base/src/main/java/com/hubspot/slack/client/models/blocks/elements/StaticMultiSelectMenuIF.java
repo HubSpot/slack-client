@@ -28,10 +28,13 @@ public interface StaticMultiSelectMenuIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   Text getPlaceholder();
 
+  @Value.Parameter
   String getActionId();
 
+  @Value.Parameter
   List<Option> getOptions();
 
   List<OptionGroup> getOptionGroups();

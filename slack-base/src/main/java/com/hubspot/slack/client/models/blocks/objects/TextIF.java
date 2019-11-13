@@ -2,6 +2,7 @@ package com.hubspot.slack.client.models.blocks.objects;
 
 import java.util.Optional;
 
+import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,9 +14,11 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface TextIF extends CompositionObject, ImageBlockOrText {
+  @Value.Parameter
   TextType getType();
 
-  Optional<String> getText();
+  @Value.Parameter
+  String getText();
 
   @JsonProperty("emoji")
   Optional<Boolean> isEmoji();

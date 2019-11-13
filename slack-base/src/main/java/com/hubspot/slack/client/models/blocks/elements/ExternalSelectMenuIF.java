@@ -25,8 +25,10 @@ public interface ExternalSelectMenuIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   Text getPlaceholder();
 
+  @Value.Parameter
   String getActionId();
 
   Optional<Option> getInitialOption();

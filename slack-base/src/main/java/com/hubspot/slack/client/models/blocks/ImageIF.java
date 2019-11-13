@@ -23,8 +23,10 @@ public interface ImageIF extends Block, ImageBlockOrText {
     return TYPE;
   }
 
+  @Value.Parameter
   String getImageUrl();
 
+  @Value.Parameter
   String getAltText();
 
   Optional<Text> getTitle();

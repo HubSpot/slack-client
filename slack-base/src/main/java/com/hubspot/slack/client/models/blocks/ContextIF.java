@@ -25,5 +25,6 @@ public interface ContextIF extends Block {
   }
 
   @JsonDeserialize(contentUsing = ImageBlockOrTextDeserializer.class)
+  @Value.Parameter
   List<ImageBlockOrText> getElements();
 }

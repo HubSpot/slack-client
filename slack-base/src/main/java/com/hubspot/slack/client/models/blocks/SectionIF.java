@@ -24,6 +24,7 @@ public interface SectionIF extends Block {
     return TYPE;
   }
 
+  @Value.Parameter
   Text getText();
 
   List<Text> getFields();

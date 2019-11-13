@@ -23,6 +23,7 @@ public interface PlainTextInputIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   String getActionId();
 
   Optional<Text> getPlaceholder();

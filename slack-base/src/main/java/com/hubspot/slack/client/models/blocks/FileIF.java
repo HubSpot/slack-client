@@ -19,7 +19,9 @@ public interface FileIF extends Block {
     return TYPE;
   }
 
+  @Value.Parameter
   String getExternalId();
 
+  @Value.Parameter
   String getSource();
 }

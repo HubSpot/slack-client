@@ -18,15 +18,11 @@ public class Blocks {
   }
 
   public static Section markdownSection(String text) {
-    return Section.builder()
-        .setText(markdownText(text))
-        .build();
+    return Section.of(markdownText(text));
   }
 
   public static Context markdownContext(String text) {
-    return Context.builder()
-        .setElements(Collections.singleton(markdownText(text)))
-        .build();
+    return Context.of(Collections.singleton(markdownText(text)));
   }
 
   public static Divider divider() {
@@ -34,39 +30,22 @@ public class Blocks {
   }
 
   public static Button plainTextButton(String text) {
-    return Button.builder()
-        .setActionId(UUID.randomUUID().toString())
-        .setText(plainText(text))
-        .build();
+    return Button.of(plainText(text), UUID.randomUUID().toString());
   }
 
   public static Text markdownText(String text) {
-    return Text.builder()
-        .setText(text)
-        .setType(TextType.MARKDOWN)
-        .build();
+    return Text.of(TextType.MARKDOWN, text);
   }
 
   public static StaticSelectMenu staticSelectMenu(String placeholder, Option... options) {
-    return StaticSelectMenu.builder()
-        .setActionId(UUID.randomUUID().toString())
-        .setPlaceholder(plainText(placeholder))
-        .setOptions(Arrays.asList(options))
-        .build();
+    return StaticSelectMenu.of(plainText(placeholder), UUID.randomUUID().toString(), Arrays.asList(options));
   }
 
   public static Option option(String text, String value) {
-    return Option.builder()
-        .setText(plainText(text))
-        .setValue(value)
-        .build();
+    return Option.of(plainText(text), value);
   }
 
   public static Text plainText(String text) {
-    return Text.builder()
-        .setText(text)
-        .setType(TextType.PLAIN_TEXT)
-        .build();
+    return Text.of(TextType.PLAIN_TEXT, text);
   }
-
 }

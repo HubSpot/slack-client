@@ -25,8 +25,10 @@ public interface OverflowMenuIF extends BlockElement {
     return TYPE;
   }
 
+  @Value.Parameter
   String getActionId();
 
+  @Value.Parameter
   List<Option> getOptions();
 
   @JsonProperty("confirm")
