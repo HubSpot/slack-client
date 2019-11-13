@@ -14,7 +14,7 @@ public interface DividerIF extends Block {
   String TYPE = "divider";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

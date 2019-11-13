@@ -19,7 +19,7 @@ public interface ContextIF extends Block {
   String TYPE = "context";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

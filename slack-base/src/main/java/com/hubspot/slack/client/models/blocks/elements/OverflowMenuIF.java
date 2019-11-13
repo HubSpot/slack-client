@@ -20,7 +20,7 @@ public interface OverflowMenuIF extends BlockElement {
   String TYPE = "overflow";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

@@ -19,7 +19,7 @@ public interface ConversationSelectMenuIF extends BlockElement {
   String TYPE = "conversations_select";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

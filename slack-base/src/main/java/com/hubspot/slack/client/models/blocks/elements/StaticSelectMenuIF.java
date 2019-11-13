@@ -23,7 +23,7 @@ public interface StaticSelectMenuIF extends BlockElement {
   String TYPE = "static_select";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

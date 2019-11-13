@@ -17,7 +17,7 @@ public interface ActionsIF extends Block {
   String TYPE = "actions";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

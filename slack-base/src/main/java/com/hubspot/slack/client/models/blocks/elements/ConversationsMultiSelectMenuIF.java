@@ -20,7 +20,7 @@ public interface ConversationsMultiSelectMenuIF extends BlockElement {
   String TYPE = "multi_channels_select";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

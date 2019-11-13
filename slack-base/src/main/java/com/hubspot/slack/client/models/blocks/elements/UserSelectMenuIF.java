@@ -19,7 +19,7 @@ public interface UserSelectMenuIF extends BlockElement {
   String TYPE = "users_select";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

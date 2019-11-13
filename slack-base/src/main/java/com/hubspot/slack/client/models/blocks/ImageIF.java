@@ -18,7 +18,7 @@ public interface ImageIF extends Block, ImageBlockOrText {
   String TYPE = "image";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

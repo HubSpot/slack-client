@@ -21,7 +21,7 @@ public interface ExternalMultiSelectMenuIF extends BlockElement {
   String TYPE = "multi_external_select";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

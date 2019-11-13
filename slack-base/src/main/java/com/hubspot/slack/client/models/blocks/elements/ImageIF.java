@@ -14,7 +14,7 @@ public interface ImageIF extends BlockElement {
   String TYPE = "image";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

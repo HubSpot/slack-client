@@ -20,7 +20,7 @@ public interface ExternalSelectMenuIF extends BlockElement {
   String TYPE = "external_select";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

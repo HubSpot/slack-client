@@ -23,7 +23,7 @@ public interface StaticMultiSelectMenuIF extends BlockElement {
   String TYPE = "multi_static_select";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

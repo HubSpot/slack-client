@@ -14,7 +14,7 @@ public interface FileIF extends Block {
   String TYPE = "file";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

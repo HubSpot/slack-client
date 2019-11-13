@@ -18,7 +18,7 @@ public interface PlainTextInputIF extends BlockElement {
   String TYPE = "plain_text_input";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

@@ -20,7 +20,7 @@ public interface UsersMultiSelectMenuIF extends BlockElement {
   String TYPE = "multi_users_select";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

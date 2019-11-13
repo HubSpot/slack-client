@@ -20,7 +20,7 @@ public interface RadioButtonGroupIF extends BlockElement {
   String TYPE = "radio_buttons";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

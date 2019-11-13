@@ -19,7 +19,7 @@ public interface ButtonIF extends BlockElement {
   String TYPE = "button";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

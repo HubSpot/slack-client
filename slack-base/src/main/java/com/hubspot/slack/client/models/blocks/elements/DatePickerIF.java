@@ -21,7 +21,7 @@ public interface DatePickerIF extends BlockElement {
   String TYPE = "datepicker";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }

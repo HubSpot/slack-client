@@ -19,7 +19,7 @@ public interface SectionIF extends Block {
   String TYPE = "section";
 
   @Override
-  @Value.Default
+  @Value.Derived
   default String getType() {
     return TYPE;
   }
