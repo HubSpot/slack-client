@@ -30,7 +30,7 @@ public interface UserProfileIF {
   Optional<String> getSkype();
 
   // Extra custom fields set by your workspace admin
-  Optional<Map<String, String>> getFields();
+  Optional<Map<String, ProfileField>> getFields();
 
   @JsonProperty("team")
   Optional<String> getTeamId();
