@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.users;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.immutables.value.Value.Immutable;
@@ -27,6 +28,9 @@ public interface UserProfileIF {
   Optional<String> getTitle();
   Optional<String> getPhone();
   Optional<String> getSkype();
+
+  // Extra custom fields set by your workspace admin
+  Optional<Map<String, String>> getFields();
 
   @JsonProperty("team")
   Optional<String> getTeamId();
