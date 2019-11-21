@@ -19,7 +19,13 @@
     "image_72": "https:\/\/a.slack-edge.com\/0180\/img\/slackbot_72.png",
     "image_192": "https:\/\/a.slack-edge.com\/66f9\/img\/slackbot_192.png",
     "image_512": "https:\/\/a.slack-edge.com\/1801\/img\/slackbot_512.png",
-    "image_1024": null
+    "image_1024": null,
+    "fields": {
+      "X000000000": {
+        "value": "",
+        "alt": ""
+      }
+    }
   },
   "color": "757575",
   "team_id": "redacted",
