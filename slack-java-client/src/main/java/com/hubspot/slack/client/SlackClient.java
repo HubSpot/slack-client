@@ -163,6 +163,7 @@ public interface SlackClient extends Closeable {
   // emoji
   CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji();
 
+  // views
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
       SlackMethod method,
