@@ -60,6 +60,7 @@ import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationOpenParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
@@ -68,7 +69,6 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoPa
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
-import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
@@ -86,6 +86,9 @@ import com.hubspot.slack.client.methods.params.usergroups.users.UsergroupUsersUp
 import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.methods.params.users.UsersListParams;
+import com.hubspot.slack.client.methods.params.views.OpenViewParams;
+import com.hubspot.slack.client.methods.params.views.PublishViewParams;
+import com.hubspot.slack.client.methods.params.views.UpdateViewParams;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.conversations.Conversation;
@@ -108,6 +111,7 @@ import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageRes
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsHistoryResponse;
@@ -116,7 +120,6 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
-import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
@@ -135,6 +138,8 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
+import com.hubspot.slack.client.models.response.views.HomeTabViewResponse;
+import com.hubspot.slack.client.models.response.views.ModalViewResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.paging.AbstractPagedIterable;
@@ -933,6 +938,26 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji() {
     return postSlackCommand(SlackMethods.emoji_list, Collections.emptyMap(), EmojiListResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewResponse, SlackError>> openView(OpenViewParams params) {
+    return postSlackCommand(SlackMethods.views_open, params, ModalViewResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewResponse, SlackError>> updateView(UpdateViewParams params) {
+    return postSlackCommand(SlackMethods.views_update, params, ModalViewResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewResponse, SlackError>> pushView(OpenViewParams params) {
+    return postSlackCommand(SlackMethods.views_push, params, ModalViewResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<HomeTabViewResponse, SlackError>> publishView(PublishViewParams params) {
+    return postSlackCommand(SlackMethods.views_publish, params, HomeTabViewResponse.class);
   }
 
   @Override
