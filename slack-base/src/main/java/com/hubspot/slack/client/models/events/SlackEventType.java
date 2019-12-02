@@ -13,6 +13,7 @@ import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public enum SlackEventType {
 
+  APP_MENTION(SlackEventMessage.class),
   APP_UNINSTALLED,
   CHANNEL_ARCHIVE(SlackChannelArchiveEvent.class),
   CHANNEL_CREATED(SlackChannelCreatedEvent.class),
