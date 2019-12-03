@@ -19,6 +19,12 @@ import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public class EventDeserializerTest {
   @Test
+  public void itCanDeserAppMentionMessage() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("app_mention_message.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.APP_MENTION);
+  }
+
+  @Test
   public void itCanDeserMessageChanged1() throws IOException {
     SlackEvent event = fetchAndDeserializeSlackEvent("message_change1.json");
     assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);

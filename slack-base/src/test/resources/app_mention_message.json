@@ -1,0 +1,42 @@
+{
+  "token": "redacted",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "client_msg_id": "bf714cbe-cc7b-4c0b-a9fc-87ca63c6ee29",
+    "type": "app_mention",
+    "text": "<@UA22B84GG> hey",
+    "user": "UA227N1MW",
+    "ts": "1575305487.002200",
+    "team": "TA26P468Z",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "GxKF",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "user",
+                "user_id": "UA22B84GG"
+              },
+              {
+                "type": "text",
+                "text": " help"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "channel": "CA3KDNNVC",
+    "event_ts": "1575305487.002200"
+  },
+  "type": "event_callback",
+  "event_id": "EvQUSQG7V1",
+  "event_time": 1575305487,
+  "authed_users": [
+    "UA22B84GG"
+  ]
+}
