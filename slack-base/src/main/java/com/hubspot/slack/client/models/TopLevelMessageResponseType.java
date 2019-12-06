@@ -13,5 +13,3 @@ public enum TopLevelMessageResponseType {
     return name().toLowerCase();
   }
 }
-
-
