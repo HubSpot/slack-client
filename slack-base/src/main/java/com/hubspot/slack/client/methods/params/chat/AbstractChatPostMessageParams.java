@@ -1,8 +1,11 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import static com.hubspot.slack.client.models.TopLevelMessageResponseType.IN_CHANNEL;
+
 import java.util.Optional;
 
 import org.immutables.value.Value.Check;
+import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +14,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.TopLevelMessageResponseType;
 
 @Immutable
 @HubSpotStyle
@@ -18,6 +22,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public abstract class AbstractChatPostMessageParams implements MessageParams {
   @JsonProperty("channel")
   public abstract String getChannelId();
+  public @Default TopLevelMessageResponseType getResponseType() { return IN_CHANNEL; }
   public abstract Optional<String> getText();
   public abstract Optional<String> getThreadTs();
   public abstract Optional<String> getUsername();
