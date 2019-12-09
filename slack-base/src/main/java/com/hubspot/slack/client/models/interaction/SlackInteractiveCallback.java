@@ -11,6 +11,7 @@ import com.hubspot.slack.client.models.users.SlackUserLite;
 
 @JsonTypeInfo(use = Id.NAME, include = As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
+    @Type(value = BlockAction.class, name = "block_action"),
     @Type(value = InteractiveAction.class, name = "interactive_message"),
     @Type(value = DialogSubmission.class, name = "dialog_submission"),
     @Type(value = MessageAction.class, name = "message_action")

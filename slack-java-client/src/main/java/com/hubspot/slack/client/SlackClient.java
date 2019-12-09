@@ -89,8 +89,8 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
-import com.hubspot.slack.client.models.response.views.HomeTabViewResponse;
-import com.hubspot.slack.client.models.response.views.ModalViewResponse;
+import com.hubspot.slack.client.models.response.views.HomeTabViewCommandResponse;
+import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 
@@ -169,10 +169,10 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji();
 
   // views
-  CompletableFuture<Result<ModalViewResponse, SlackError>> openView(OpenViewParams params);
-  CompletableFuture<Result<ModalViewResponse, SlackError>> updateView(UpdateViewParams params);
-  CompletableFuture<Result<ModalViewResponse, SlackError>> pushView(OpenViewParams params);
-  CompletableFuture<Result<HomeTabViewResponse, SlackError>> publishView(PublishViewParams params);
+  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> openView(OpenViewParams params);
+  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> updateView(UpdateViewParams params);
+  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> pushView(OpenViewParams params);
+  CompletableFuture<Result<HomeTabViewCommandResponse, SlackError>> publishView(PublishViewParams params);
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
