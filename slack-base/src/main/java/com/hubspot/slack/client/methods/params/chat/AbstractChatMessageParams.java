@@ -1,23 +1,15 @@
 package com.hubspot.slack.client.methods.params.chat;
 
-import static com.hubspot.slack.client.models.TopLevelMessageResponseType.IN_CHANNEL;
-
 import java.util.Optional;
 
 import org.immutables.value.Value.Check;
-import org.immutables.value.Value.Default;
-import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.hubspot.immutables.style.HubSpotStyle;
-import com.hubspot.slack.client.models.TopLevelMessageResponseType;
 
-@Immutable
-@HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public abstract class AbstractChatMessageParams implements MessageParams {
   @JsonProperty("channel")

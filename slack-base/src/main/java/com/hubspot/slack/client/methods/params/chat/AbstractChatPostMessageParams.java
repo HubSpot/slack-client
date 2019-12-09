@@ -8,6 +8,5 @@ import com.hubspot.immutables.style.HubSpotStyle;
 
 @Immutable
 @HubSpotStyle
-@JsonNaming(SnakeCaseStrategy.class)
 public abstract class AbstractChatPostMessageParams extends AbstractChatMessageParams {
 }
