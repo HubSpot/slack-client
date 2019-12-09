@@ -14,6 +14,7 @@ import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.events.SlackEvent;
 import com.hubspot.slack.client.models.events.SlackEventType;
 import com.hubspot.slack.client.models.events.SlackEventWrapper;
+import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
@@ -118,6 +119,21 @@ public class EventDeserializerTest {
     SlackUserChangeEvent event = fetchAndDeserializeSlackEvent("user_change.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.USER_CHANGE);
     assertThat(event.getUser().isDeleted().isPresent() && event.getUser().isDeleted().get());
+  }
+
+  @Test
+  public void itCanDeserLinkSharedEvent() throws IOException {
+    SlackLinkSharedEvent event = fetchAndDeserializeSlackEvent("link_shared.json").toDetailedEvent();
+    assertThat(event.getType()).isEqualTo(SlackEventType.LINK_SHARED);
+    assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackLinkSharedEvent.class)).isEqualTo(event);
+  }
+
+  @Test
+  public void itCanDeserLinkSharedEventWithThreadTs() throws IOException {
+    SlackLinkSharedEvent event = fetchAndDeserializeSlackEvent("link_shared_with_thread_ts.json").toDetailedEvent();
+    assertThat(event.getType()).isEqualTo(SlackEventType.LINK_SHARED);
+    assertTrue(event.getThreadTs().isPresent());
+    assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackLinkSharedEvent.class)).isEqualTo(event);
   }
 
   private SlackEvent fetchAndDeserializeSlackEvent(String jsonFileName) throws IOException {
