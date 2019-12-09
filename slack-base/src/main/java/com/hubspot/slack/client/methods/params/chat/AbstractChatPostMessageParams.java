@@ -22,7 +22,10 @@ import com.hubspot.slack.client.models.TopLevelMessageResponseType;
 public abstract class AbstractChatPostMessageParams implements MessageParams {
   @JsonProperty("channel")
   public abstract String getChannelId();
-  public @Default TopLevelMessageResponseType getResponseType() { return IN_CHANNEL; }
+  @Default
+  public TopLevelMessageResponseType getResponseType() {
+    return IN_CHANNEL;
+  }
   public abstract Optional<String> getText();
   public abstract Optional<String> getThreadTs();
   public abstract Optional<String> getUsername();
