@@ -1,10 +1,12 @@
 package com.hubspot.slack.client;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -20,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
@@ -29,6 +32,8 @@ import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpRequest.ContentType;
 import com.hubspot.horizon.HttpRequest.Method;
 import com.hubspot.horizon.HttpResponse;
+import com.hubspot.horizon.MultipartHttpRequest;
+import com.hubspot.horizon.MultipartHttpRequest.Builder;
 import com.hubspot.horizon.ning.NingAsyncHttpClient;
 import com.hubspot.slack.client.concurrency.CloseableExecutorService;
 import com.hubspot.slack.client.concurrency.MoreExecutors;
@@ -60,6 +65,7 @@ import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationOpenParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
@@ -68,7 +74,6 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoPa
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
-import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
@@ -108,6 +113,7 @@ import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageRes
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsHistoryResponse;
@@ -116,7 +122,6 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
-import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
@@ -874,7 +879,32 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(FilesUploadParams params) {
-    return postSlackCommand(SlackMethods.files_upload, params, FilesUploadResponse.class);
+    if (params.getContent().isPresent()) {
+      return postSlackCommand(SlackMethods.files_upload, params, FilesUploadResponse.class);
+    }
+
+    ImmutableMap.Builder<String, String> stringParts = ImmutableMap.builder();
+    ImmutableMap.Builder<String, File> fileParts = ImmutableMap.builder();
+    ImmutableMap.Builder<String, byte[]> byteArrayParts = ImmutableMap.builder();
+    stringParts.put("token", config.getTokenSupplier().get());
+    if (!params.getChannels().isEmpty()) {
+      stringParts.put("channels", params.getChannels().stream().collect(Collectors.joining(",")));
+    }
+    params.getFilename().ifPresent(filename -> stringParts.put("filename", filename));
+    params.getFiletype().ifPresent(type -> stringParts.put("filetype", type.getType()));
+    params.getInitialComment().ifPresent(comment -> stringParts.put("initial_comment", comment));
+    params.getThreadTs().ifPresent(thread -> stringParts.put("thread_ts", thread));
+    params.getTitle().ifPresent(title -> stringParts.put("title", title));
+    params.getFile().ifPresent(file -> fileParts.put("file", file));
+
+
+    return postSlackCommandMultipartEncoded(
+        SlackMethods.files_upload,
+        stringParts.build(),
+        fileParts.build(),
+        byteArrayParts.build(),
+        FilesUploadResponse.class
+    );
   }
 
   @Override
@@ -1062,6 +1092,24 @@ public class SlackWebClient implements SlackClient {
     });
 
     return responseFuture;
+  }
+
+  private <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommandMultipartEncoded(
+    SlackMethod method,
+    Map<String, String> stringParts,
+    Map<String, File> fileParts,
+    Map<String, byte[]> byteArrayParts,
+    Class<T> responseType
+  ) {
+    Builder requestBuilder = MultipartHttpRequest.newBuilder()
+        .setMethod(Method.POST)
+        .setUrl(config.getSlackApiBasePath().get() + "/" + method.getMethod());
+
+    stringParts.forEach(requestBuilder::addStringPart);
+    fileParts.forEach(requestBuilder::addFilePart);
+    byteArrayParts.forEach(requestBuilder::addByteArrayPart);
+
+    return executeLoggedAs(method, requestBuilder.build(), responseType);
   }
 
   private double acquirePermit(SlackMethod method) {
