@@ -6,6 +6,7 @@ import org.immutables.value.Value;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Immutable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
@@ -16,6 +17,7 @@ import com.hubspot.slack.client.models.views.ModalViewPayload;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface UpdateViewParamsIF {
   @Value.Parameter
   ModalViewPayload getView();
