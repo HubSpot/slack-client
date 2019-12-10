@@ -100,6 +100,11 @@ We currently support:
  - users.info (findUser)
  - users.list
  - users.lookupByEmail
+#### views
+ - views.open
+ - views.update
+ - views.push
+ - views.publish
 #### Utility Methods
  - getConversationByName
  - getChannelByName
