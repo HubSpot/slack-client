@@ -16,7 +16,6 @@ import com.google.common.collect.Multimap;
 import com.hubspot.horizon.Compression;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpRequest.Method;
-import com.hubspot.horizon.ning.TerminatingMultipartRequestEntity;
 import com.ning.http.client.FluentCaseInsensitiveStringsMap;
 import com.ning.http.client.multipart.ByteArrayPart;
 import com.ning.http.client.multipart.FilePart;
