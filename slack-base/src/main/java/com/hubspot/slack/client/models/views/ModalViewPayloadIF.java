@@ -9,5 +9,5 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public interface ModalViewPayloadIF extends ModalViewPayloadBase {
+public interface ModalViewPayloadIF extends ModalViewPayloadBase, ViewPayloadJsonBase {
 }

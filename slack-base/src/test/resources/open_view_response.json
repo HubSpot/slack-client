@@ -32,7 +32,18 @@
     "callback_id": "identify_your_modals",
     "external_id": "",
     "state": {
-      "values": []
+      "values": {
+        "my-block-1": {
+          "my-action-1-1": {
+            "type": "my-block-element-type-1-1",
+            "value": "my-block-element-value-1-1"
+          },
+          "my-action-1-2": {
+            "type": "my-block-element-type-1-2",
+            "value": "my-block-element-value-1-2"
+          }
+        }
+      }
     },
     "hash": "156772938.1827394",
     "clear_on_close": false,
