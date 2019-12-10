@@ -22,6 +22,8 @@
 
   <properties>
     <dep.immutables.version>2.2.10</dep.immutables.version>
+    <dep.netty3.version>3.10.6.Final</dep.netty3.version>
+    <dep.slf4j.version>1.7.26</dep.slf4j.version>
   </properties>
 
   <dependencyManagement>
