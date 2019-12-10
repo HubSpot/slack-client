@@ -1,31 +1,15 @@
 package com.hubspot.slack.client.models.views;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.io.IOException;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hubspot.slack.client.jackson.ObjectMapperUtils;
-import com.hubspot.slack.client.models.JsonLoader;
+import com.hubspot.slack.client.SerializationTestBase;
 
-public class ViewPayloadSerializationTest {
-
-  private ObjectMapper objectMapper;
-
-  @Before
-  public void setup() {
-    objectMapper = ObjectMapperUtils.mapper();
-  }
+public class ViewPayloadSerializationTest extends SerializationTestBase {
 
   @Test
   public void testViewPayloadSerialization() throws IOException {
-    String rawJson = JsonLoader.loadJsonFromFile("view_payloads.json");
-    ViewPayloadJsonBase[] viewPayloads = objectMapper.readValue(rawJson, ViewPayloadJsonBase[].class);
-    assertThat(viewPayloads).hasSize(2);
-    String generatedJson = objectMapper.writeValueAsString(viewPayloads);
-    assertThat(objectMapper.readTree(rawJson)).isEqualTo(objectMapper.readTree(generatedJson));
+    testSerialization("view_payloads.json", ViewPayloadJsonBase[].class);
   }
 }

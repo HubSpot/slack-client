@@ -2,6 +2,7 @@ package com.hubspot.slack.client.methods.params.views;
 
 import java.util.Optional;
 
+import org.immutables.value.Value;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Immutable;
 
@@ -16,6 +17,7 @@ import com.hubspot.slack.client.models.views.ModalViewPayload;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface UpdateViewParamsIF {
+  @Value.Parameter
   ModalViewPayload getView();
   Optional<String> getExternalId();
   Optional<String> getHash();

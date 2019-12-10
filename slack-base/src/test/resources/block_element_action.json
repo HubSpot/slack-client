@@ -1,0 +1,11 @@
+{
+  "action_id": "ea29ed18-fa8f-427c-8c6e-83cd3338383b",
+  "block_id": "kSEI",
+  "text": {
+    "type": "plain_text",
+    "text": "Learn More",
+    "emoji": true
+  },
+  "type": "button",
+  "action_ts": "1575983460.359868"
+}
