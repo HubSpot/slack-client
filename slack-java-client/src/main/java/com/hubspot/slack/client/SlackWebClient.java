@@ -897,7 +897,6 @@ public class SlackWebClient implements SlackClient {
     params.getTitle().ifPresent(title -> stringParts.put("title", title));
     params.getFile().ifPresent(file -> fileParts.put("file", file));
 
-
     return postSlackCommandMultipartEncoded(
         SlackMethods.files_upload,
         stringParts.build(),
