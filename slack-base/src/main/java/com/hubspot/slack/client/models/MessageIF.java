@@ -16,7 +16,7 @@ public interface MessageIF {
   String getTeam();
   SlackChannel getChannel();
 
-  String getUser();
+  Optional<String> getUser();
   String getUsername();
 
   @JsonProperty("ts")
