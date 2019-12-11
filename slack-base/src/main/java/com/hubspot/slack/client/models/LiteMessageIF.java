@@ -9,6 +9,7 @@ import org.immutables.value.Value.Immutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -39,6 +40,9 @@ public interface LiteMessageIF {
 
   List<SlackFile> getFiles();
 
+  // Slack has some undocumented goodness (mentioned here: https://api.slack.com/changelog/2019-09-what-they-see-is-what-you-get-and-more-and-less)
+  // We're going to ignore blocks on messages for now until they update docs or we can verify all rich elements deserialize correctly
+  @JsonIgnore
   List<Block> getBlocks();
 
   @JsonProperty("ts")
