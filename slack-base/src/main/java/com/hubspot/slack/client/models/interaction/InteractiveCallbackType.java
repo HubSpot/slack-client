@@ -8,6 +8,7 @@ public enum InteractiveCallbackType {
   INTERACTIVE_MESSAGE,
   DIALOG_SUBMISSION,
   MESSAGE_ACTION,
+  BLOCK_ACTIONS,
   UNKNOWN
   ;
 

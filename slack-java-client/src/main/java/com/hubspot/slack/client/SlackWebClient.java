@@ -91,6 +91,9 @@ import com.hubspot.slack.client.methods.params.usergroups.users.UsergroupUsersUp
 import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.methods.params.users.UsersListParams;
+import com.hubspot.slack.client.methods.params.views.OpenViewParams;
+import com.hubspot.slack.client.methods.params.views.PublishViewParams;
+import com.hubspot.slack.client.methods.params.views.UpdateViewParams;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.conversations.Conversation;
@@ -140,6 +143,8 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
+import com.hubspot.slack.client.models.response.views.HomeTabViewCommandResponse;
+import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.paging.AbstractPagedIterable;
@@ -962,6 +967,26 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji() {
     return postSlackCommand(SlackMethods.emoji_list, Collections.emptyMap(), EmojiListResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewCommandResponse, SlackError>> openView(OpenViewParams params) {
+    return postSlackCommand(SlackMethods.views_open, params, ModalViewCommandResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewCommandResponse, SlackError>> updateView(UpdateViewParams params) {
+    return postSlackCommand(SlackMethods.views_update, params, ModalViewCommandResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewCommandResponse, SlackError>> pushView(OpenViewParams params) {
+    return postSlackCommand(SlackMethods.views_push, params, ModalViewCommandResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<HomeTabViewCommandResponse, SlackError>> publishView(PublishViewParams params) {
+    return postSlackCommand(SlackMethods.views_publish, params, HomeTabViewCommandResponse.class);
   }
 
   @Override

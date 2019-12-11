@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.blocks.Block;
 import com.hubspot.slack.client.models.files.SlackFile;
 
 @Immutable
@@ -37,6 +38,8 @@ public interface LiteMessageIF {
   List<Attachment> getAttachments();
 
   List<SlackFile> getFiles();
+
+  List<Block> getBlocks();
 
   @JsonProperty("ts")
   String getTimestamp();

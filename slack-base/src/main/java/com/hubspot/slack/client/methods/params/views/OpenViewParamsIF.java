@@ -1,19 +1,19 @@
-package com.hubspot.slack.client.models.interaction;
+package com.hubspot.slack.client.methods.params.views;
 
+import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
-import com.hubspot.slack.client.models.LiteMessage;
+import com.hubspot.slack.client.models.views.ModalViewPayload;
 
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface MessageActionIF extends SlackInteractiveCallback {
-  String getActionTs();
-  String getCallbackId();
+public interface OpenViewParamsIF {
+  @Value.Parameter
   String getTriggerId();
-  String getResponseUrl();
-  LiteMessage getMessage();
+  @Value.Parameter
+  ModalViewPayload getView();
 }

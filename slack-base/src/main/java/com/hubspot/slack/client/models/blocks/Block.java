@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = Divider.class, name = Divider.TYPE),
     @JsonSubTypes.Type(value = File.class, name = File.TYPE),
     @JsonSubTypes.Type(value = Image.class, name = Image.TYPE),
+    @JsonSubTypes.Type(value = Input.class, name = Input.TYPE),
     @JsonSubTypes.Type(value = Section.class, name = Section.TYPE),
 })
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
