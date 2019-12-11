@@ -20,8 +20,10 @@ import com.hubspot.slack.client.models.users.SlackUserLite;
 })
 public interface SlackInteractiveCallback {
   InteractiveCallbackType getType();
+  String getCallbackId();
+  String getActionTs();
   String getToken();
   SlackTeam getTeam();
   SlackUserLite getUser();
-  Optional<SlackChannel> getChannel();
+  SlackChannel getChannel();
 }

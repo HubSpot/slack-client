@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.LiteMessage;
+import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.response.views.ViewResponseBase;
 
 @Immutable
@@ -24,4 +25,19 @@ public interface BlockActionsIF extends SlackInteractiveCallback {
   Optional<ViewResponseBase> getView();
   @JsonProperty("actions")
   List<BlockElementAction> getElementActions();
+
+  @Override
+  default String getCallbackId() {
+    return null;
+  }
+
+  @Override
+  default String getActionTs() {
+    return null;
+  }
+
+  @Override
+  default SlackChannel getChannel() {
+    return null;
+  }
 }
