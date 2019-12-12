@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", defaultImpl = UnknownBlock.class)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Actions.class, name = Actions.TYPE),
     @JsonSubTypes.Type(value = Context.class, name = Context.TYPE),
