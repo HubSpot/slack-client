@@ -17,6 +17,7 @@ import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
 import com.hubspot.slack.client.methods.params.chat.ChatGetPermalinkParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostEphemeralMessageParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostMessageParams;
+import com.hubspot.slack.client.methods.params.chat.ChatUnfurlParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
@@ -65,6 +66,7 @@ import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
+import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
@@ -127,6 +129,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<ChatUpdateMessageResponse, SlackError>> updateMessage(ChatUpdateMessageParams params);
   CompletableFuture<Result<ChatGetPermalinkResponse, SlackError>> getPermalink(ChatGetPermalinkParams params);
   CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(ChatDeleteParams params);
+  CompletableFuture<Result<ChatUnfurlResponse, SlackError>> unfurlLinks(ChatUnfurlParams params);
 
   // conversations
   Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> listConversations(ConversationsListParams params);

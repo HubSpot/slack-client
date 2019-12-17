@@ -61,6 +61,7 @@ import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
 import com.hubspot.slack.client.methods.params.chat.ChatGetPermalinkParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostEphemeralMessageParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostMessageParams;
+import com.hubspot.slack.client.methods.params.chat.ChatUnfurlParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
@@ -114,6 +115,7 @@ import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
+import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
@@ -541,6 +543,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(ChatDeleteParams params) {
     return postSlackCommand(SlackMethods.chat_delete, params, ChatDeleteResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatUnfurlResponse, SlackError>> unfurlLinks(ChatUnfurlParams params) {
+    return postSlackCommand(SlackMethods.chat_unfurl, params, ChatUnfurlResponse.class);
   }
 
   @Override
