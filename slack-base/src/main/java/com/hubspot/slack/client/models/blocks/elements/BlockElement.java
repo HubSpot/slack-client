@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", defaultImpl = UnknownBlockElement.class)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Button.class, name = Button.TYPE),
     @JsonSubTypes.Type(value = DatePicker.class, name = DatePicker.TYPE),
