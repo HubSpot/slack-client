@@ -15,7 +15,7 @@ import com.hubspot.slack.client.models.actions.Action;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface AttachmentIF {
+public interface AttachmentIF extends BlockOrAttachment{
   Optional<String> getFallback();
   Optional<String> getColor();
   Optional<String> getPretext();

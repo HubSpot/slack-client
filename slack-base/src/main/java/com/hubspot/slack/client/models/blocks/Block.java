@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.hubspot.slack.client.models.BlockOrAttachment;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = Section.class, name = Section.TYPE),
 })
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public interface Block {
+public interface Block extends BlockOrAttachment {
   String getType();
 
   Optional<String> getBlockId();

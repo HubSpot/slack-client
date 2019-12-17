@@ -10,18 +10,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
-import com.hubspot.slack.client.models.Attachment;
+import com.hubspot.slack.client.methods.interceptor.HasChannel;
+import com.hubspot.slack.client.models.BlockOrAttachment;
 
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ChatUnfurlParamsIF {
+public interface ChatUnfurlParamsIF extends HasChannel {
+  @Override
   @JsonProperty("channel")
   String getChannelId();
 
   String getTs();
 
-  Map<String, Attachment> getUnfurls();
+  Map<String, BlockOrAttachment> getUnfurls();
 
   Optional<Boolean> isUserAuthRequired();
 
