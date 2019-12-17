@@ -18,6 +18,8 @@ public interface SlackChannelIF {
   String getName();
   Optional<Boolean> getIsArchived();
   Optional<Boolean> getIsGeneral();
+  Optional<Boolean> getIsPrivate();
+  Optional<Boolean> getIsMember();
 
   @Derived
   @JsonIgnore
