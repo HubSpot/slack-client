@@ -8,10 +8,12 @@ import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.methods.interceptor.HasChannel;
 import com.hubspot.slack.client.models.BlockOrAttachment;
+import com.hubspot.slack.client.models.json.BlockOrAttachmentDeserializer;
 
 @Immutable
 @HubSpotStyle
@@ -23,6 +25,7 @@ public interface ChatUnfurlParamsIF extends HasChannel {
 
   String getTs();
 
+  @JsonDeserialize(contentUsing = BlockOrAttachmentDeserializer.class)
   Map<String, BlockOrAttachment> getUnfurls();
 
   Optional<Boolean> isUserAuthRequired();
