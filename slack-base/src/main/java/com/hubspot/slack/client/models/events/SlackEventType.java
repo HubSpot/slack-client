@@ -3,6 +3,7 @@ package com.hubspot.slack.client.models.events;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
+import com.hubspot.slack.client.models.events.bot.SlackAppHomeOpenedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelArchiveEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
@@ -14,6 +15,7 @@ import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public enum SlackEventType {
 
+  APP_HOME_OPENED(SlackAppHomeOpenedEvent.class),
   APP_MENTION(SlackEventMessage.class),
   APP_UNINSTALLED,
   CHANNEL_ARCHIVE(SlackChannelArchiveEvent.class),
