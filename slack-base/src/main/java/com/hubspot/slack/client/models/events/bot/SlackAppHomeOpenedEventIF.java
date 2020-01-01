@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.methods.interceptor.HasUser;
 import com.hubspot.slack.client.models.events.SlackEvent;
 import com.hubspot.slack.client.models.response.views.HomeTabViewResponseIF;
 import org.immutables.value.Value;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackAppHomeOpenedEvent.class)
-public interface SlackAppHomeOpenedEventIF extends SlackEvent {
+public interface SlackAppHomeOpenedEventIF extends SlackEvent, HasUser {
     String getTab();
 
     Optional<HomeTabViewResponseIF> getView();
