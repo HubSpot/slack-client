@@ -3,6 +3,8 @@ package com.hubspot.slack.client.models.blocks.elements;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.hubspot.slack.client.models.blocks.json.OptionOrOptionGroupDeserializer;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
@@ -34,6 +36,7 @@ public interface ExternalMultiSelectMenuIF extends BlockElement {
 
   Optional<Integer> getMinQueryLength();
 
+  @JsonDeserialize(using = OptionOrOptionGroupDeserializer.class)
   List<OptionOrOptionGroup> getInitialOptions();
 
   @JsonProperty("confirm")
