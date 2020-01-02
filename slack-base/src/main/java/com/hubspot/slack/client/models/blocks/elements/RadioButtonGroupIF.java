@@ -16,7 +16,7 @@ import com.hubspot.slack.client.models.blocks.objects.Option;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface RadioButtonGroupIF extends BlockElement {
+public interface RadioButtonGroupIF extends BlockElement, HasActionId {
   String TYPE = "radio_buttons";
 
   @Override
