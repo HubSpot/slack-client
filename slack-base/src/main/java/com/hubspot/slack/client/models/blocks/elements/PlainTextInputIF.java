@@ -14,7 +14,7 @@ import com.hubspot.slack.client.models.blocks.objects.Text;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface PlainTextInputIF extends BlockElement {
+public interface PlainTextInputIF extends BlockElement, HasActionId {
   String TYPE = "plain_text_input";
 
   @Override
