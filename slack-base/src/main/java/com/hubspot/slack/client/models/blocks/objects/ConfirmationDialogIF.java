@@ -11,7 +11,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ConfirmationDialogIF extends OptionOrOptionGroup {
+public interface ConfirmationDialogIF extends CompositionObject {
   @Value.Parameter
   Text getTitle();
 
