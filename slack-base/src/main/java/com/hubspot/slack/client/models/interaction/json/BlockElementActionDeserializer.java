@@ -26,7 +26,14 @@ public class BlockElementActionDeserializer extends StdDeserializer<BlockElement
     ObjectCodec codec = p.getCodec();
     JsonNode node = codec.readTree(p);
     builder.setBlockId(node.get(BLOCK_ID_FIELD).asText());
-    builder.setSelectedValue(readOptionalString(node, VALUE_FIELD));
+
+    // select menu elements don't send a value field, they send a `selected_option` object that has a value field
+    if (node.has("selected_option")) {
+      builder.setSelectedValue(readOptionalString(node.get("selected_option"), VALUE_FIELD));
+    } else {
+      builder.setSelectedValue(readOptionalString(node, VALUE_FIELD));
+    }
+
     builder.setActionTs(readOptionalString(node, ACTION_TS_FIELD));
     BlockElement element = codec.treeToValue(node, BlockElement.class);
     builder.setElement(element);
