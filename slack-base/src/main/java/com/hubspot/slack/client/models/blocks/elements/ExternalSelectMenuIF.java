@@ -16,7 +16,7 @@ import com.hubspot.slack.client.models.blocks.objects.Text;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ExternalSelectMenuIF extends BlockElement {
+public interface ExternalSelectMenuIF extends BlockElement, HasActionId {
   String TYPE = "external_select";
 
   @Override

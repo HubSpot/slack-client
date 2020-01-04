@@ -16,7 +16,7 @@ import com.hubspot.slack.client.models.blocks.objects.Option;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface OverflowMenuIF extends BlockElement {
+public interface OverflowMenuIF extends BlockElement, HasActionId {
   String TYPE = "overflow";
 
   @Override
