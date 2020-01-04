@@ -13,6 +13,7 @@ import com.hubspot.slack.client.models.interaction.BlockElementAction;
 
 public class BlockElementActionDeserializer extends StdDeserializer<BlockElementAction> {
   private static final String BLOCK_ID_FIELD = "block_id";
+  private static final String SELECTED_OPTION_FIELD = "selected_option";
   private static final String VALUE_FIELD = "value";
   private static final String ACTION_TS_FIELD = "action_ts";
 
@@ -28,7 +29,7 @@ public class BlockElementActionDeserializer extends StdDeserializer<BlockElement
     builder.setBlockId(node.get(BLOCK_ID_FIELD).asText());
 
     // select menu elements don't send a value field, they send a `selected_option` object that has a value field
-    if (node.has("selected_option")) {
+    if (node.has(SELECTED_OPTION_FIELD)) {
       builder.setSelectedValue(readOptionalString(node.get("selected_option"), VALUE_FIELD));
     } else {
       builder.setSelectedValue(readOptionalString(node, VALUE_FIELD));
