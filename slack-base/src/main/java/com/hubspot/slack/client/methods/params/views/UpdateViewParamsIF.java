@@ -27,7 +27,7 @@ public interface UpdateViewParamsIF {
 
   @Check
   default void check() {
-    Preconditions.checkState(Strings.isNullOrEmpty(getExternalId().orElse(null)) && Strings.isNullOrEmpty(getViewId().orElse(null)),
+    Preconditions.checkState(!Strings.isNullOrEmpty(getExternalId().orElse(null)) || !Strings.isNullOrEmpty(getViewId().orElse(null)),
         "Must include either view_id or external_id");
   }
 }
