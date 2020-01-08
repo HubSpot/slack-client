@@ -17,7 +17,7 @@ import com.hubspot.slack.client.models.blocks.objects.Text;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface DatePickerIF extends BlockElement {
+public interface DatePickerIF extends BlockElement, HasActionId {
   String TYPE = "datepicker";
 
   @Override

@@ -21,7 +21,7 @@ import com.hubspot.slack.client.models.blocks.objects.Text;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface StaticMultiSelectMenuIF extends BlockElement {
+public interface StaticMultiSelectMenuIF extends BlockElement, HasActionId {
   String TYPE = "multi_static_select";
 
   @Override
