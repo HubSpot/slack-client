@@ -6,6 +6,8 @@ import com.hubspot.slack.client.enums.EnumIndex;
 import com.hubspot.slack.client.models.events.app.SlackAppUninstalledEvent;
 import com.hubspot.slack.client.models.events.app.SlackTokensRevokedEvent;
 import com.hubspot.slack.client.models.events.bot.SlackAppHomeOpenedEvent;
+import com.hubspot.slack.client.models.events.app.SlackAppUninstalledEvent;
+import com.hubspot.slack.client.models.events.app.SlackTokensRevokedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelArchiveEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
