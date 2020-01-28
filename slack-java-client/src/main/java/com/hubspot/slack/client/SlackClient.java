@@ -96,6 +96,7 @@ import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 
+// See https://api.slack.com/changelog/2020-01-deprecating-antecedents-to-the-conversations-api for details on deprecations starting 7 January 2020
 public interface SlackClient extends Closeable {
   // auth
   CompletableFuture<Result<AuthTestResponse, SlackError>> testAuth();
@@ -112,17 +113,57 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params);
 
   // channels
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #listConversations(ConversationsListParams)}
+   */
+  @Deprecated
   Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #getConversationHistory(ConversationsHistoryParams)}
+   */
+  @Deprecated
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> channelHistory(ChannelsHistoryParams params);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #getConversationByName(String, ConversationsFilter)}
+   */
+  @Deprecated
   CompletableFuture<Result<SlackChannel, SlackError>> getChannelByName(String channelName, ChannelsFilter channelsFilter);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #getConversationInfo(ConversationsInfoParams)}
+   */
+  @Deprecated
   CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(ChannelsInfoParams params);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated need to implement conversations.kick to mimic this functionality
+   */
+  @Deprecated
   CompletableFuture<Result<ChannelsKickResponse, SlackError>> kickUserFromChannel(ChannelsKickParams channelKickParams);
 
   // groups
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #listConversations(ConversationsListParams)}
+   */
+  @Deprecated
   Iterable<CompletableFuture<Result<List<SlackGroup>, SlackError>>> listGroups(GroupsListParams filter);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated need to implement conversations.kick to mimic this functionality
+   */
+  @Deprecated
   CompletableFuture<Result<GroupsKickResponse, SlackError>> kickUserFromGroup(GroupsKickParams params);
 
   // messaging
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #openConversation(ConversationOpenParams)}
+   */
+  @Deprecated
   CompletableFuture<Result<ImOpenResponse, SlackError>> openIm(ImOpenParams params);
   CompletableFuture<Result<ChatPostMessageResponse, SlackError>> postMessage(ChatPostMessageParams params);
   CompletableFuture<Result<ChatPostEphemeralMessageResponse, SlackError>> postEphemeralMessage(ChatPostEphemeralMessageParams params);
