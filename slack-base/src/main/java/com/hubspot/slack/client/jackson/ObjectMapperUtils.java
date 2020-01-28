@@ -3,6 +3,7 @@ package com.hubspot.slack.client.jackson;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -28,6 +29,7 @@ public final class ObjectMapperUtils {
     mapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
     mapper.configure(JsonGenerator.Feature.AUTO_CLOSE_TARGET, true);
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    mapper.setSerializationInclusion(Include.NON_NULL);
 
     return mapper;
   }
