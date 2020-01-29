@@ -17,7 +17,7 @@ import java.util.Optional;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackAppHomeOpenedEvent.class)
 public interface SlackAppHomeOpenedEventIF extends SlackEvent, HasUser {
-    String getTab();
+    Optional<String> getTab();
 
     Optional<HomeTabViewResponseIF> getView();
 
