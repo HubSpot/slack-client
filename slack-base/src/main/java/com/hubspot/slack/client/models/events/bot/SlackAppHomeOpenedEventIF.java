@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.methods.interceptor.HasUser;
 import com.hubspot.slack.client.models.events.SlackEvent;
-import com.hubspot.slack.client.models.response.views.HomeTabViewResponse;
+import com.hubspot.slack.client.models.response.views.HomeTabViewResponseIF;
 import org.immutables.value.Value;
 
 import java.util.Optional;
@@ -17,9 +17,9 @@ import java.util.Optional;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackAppHomeOpenedEvent.class)
 public interface SlackAppHomeOpenedEventIF extends SlackEvent, HasUser {
-    String getTab();
+    Optional<String> getTab();
 
-    Optional<HomeTabViewResponse> getView();
+    Optional<HomeTabViewResponseIF> getView();
 
     @JsonProperty("user")
     String getUserId();
