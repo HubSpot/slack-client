@@ -21,11 +21,8 @@ public interface ChatPostEphemeralMessageParamsIF extends MessageParams {
   @JsonProperty("user")
   String getUserToSendTo();
 
-  @Default
   @JsonProperty("as_user")
-  default boolean getSendAsUser() {
-    return false;
-  }
+  Optional<Boolean> getSendAsUser();
 
   @JsonProperty("thread_ts")
   Optional<String> getThreadTs();
