@@ -2,6 +2,7 @@ package com.hubspot.slack.client.methods.params.conversations;
 
 import org.immutables.value.Value.Immutable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -11,8 +12,6 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ConversationsJoinParamsIF {
 
-  /*
-   * ID of channel to join
-   */
-  String getChannel();
+  @JsonProperty("channel")
+  String getChannelId();
 }
