@@ -72,6 +72,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchi
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsJoinParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
@@ -256,6 +257,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ConversationsRepliesResponse, SlackError>> getConversationReplies(ConversationsRepliesParams params) {
     return postSlackCommand(SlackMethods.conversations_replies, params, ConversationsRepliesResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationsInfoResponse, SlackError>> joinConversation(ConversationsJoinParams params) {
+    return postSlackCommand(SlackMethods.conversations_join, params, ConversationsInfoResponse.class);
   }
 
   @Override
