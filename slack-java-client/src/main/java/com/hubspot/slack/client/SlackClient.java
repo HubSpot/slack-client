@@ -28,6 +28,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchi
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsJoinParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
@@ -144,6 +145,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter);
   CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(ConversationOpenParams params);
   Iterable<CompletableFuture<Result<List<String>, SlackError>>> getConversationMembers(ConversationMemberParams params);
+  CompletableFuture<Result<ConversationsInfoResponse, SlackError>> joinConversation(ConversationsJoinParams params);
 
   // usergroups
   CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(UsergroupCreateParams params);
