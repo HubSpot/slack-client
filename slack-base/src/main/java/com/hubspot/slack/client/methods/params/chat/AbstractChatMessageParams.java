@@ -15,6 +15,7 @@ import com.google.common.base.Strings;
 public abstract class AbstractChatMessageParams implements MessageParams {
   @JsonProperty("channel")
   public abstract String getChannelId();
+  public abstract String getToken();
   public abstract Optional<String> getText();
   public abstract Optional<String> getThreadTs();
   public abstract Optional<String> getUsername();
