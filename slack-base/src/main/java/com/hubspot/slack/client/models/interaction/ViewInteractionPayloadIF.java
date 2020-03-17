@@ -13,5 +13,6 @@ import com.hubspot.slack.client.models.views.ViewPayloadBase;
 public interface ViewInteractionPayloadIF extends ViewPayloadBase {
 
   ViewStateValuesPayload getState();
+  String getHash();
 
 }
