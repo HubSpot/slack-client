@@ -70,6 +70,8 @@ We currently support:
  - conversations.members
  - conversations.open
  - conversations.unarchive
+ - conversations.setTopic
+ - conversations.setPurpose
 #### dialog
  - dialog.open
 #### files
