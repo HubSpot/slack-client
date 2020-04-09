@@ -72,6 +72,7 @@ public enum SlackErrorType {
   USERS_NOT_FOUND("users_not_found"), // users.lookupByEmail
   USERS_NOT_VISIBLE("user_not_visible"),
   USER_NOT_IN_CHANNEL("user_not_in_channel"),
+  USER_ALREADY_IN_CHANNEL("already_in_channel"),
   USER_IS_BOT("user_is_bot"),
   USER_IS_RESTRICTED("user_is_restricted"),
   USER_DISABLED("user_disabled"),
