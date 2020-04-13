@@ -8,5 +8,4 @@ import com.hubspot.slack.client.models.response.SlackResponse;
 @Immutable
 @HubSpotStyle
 public interface ConversationSetTopicResponseIF extends SlackResponse {
-  String getTopic();
 }
