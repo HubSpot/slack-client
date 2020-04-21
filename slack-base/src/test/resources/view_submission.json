@@ -74,7 +74,8 @@
         },
         "Nn5J": {
           "comms-assignee": {
-            "type": "users_select"
+            "type": "users_select",
+            "selected_user" : "adsdss"
           }
         }
       }
