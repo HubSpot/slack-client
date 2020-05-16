@@ -2,6 +2,7 @@ package com.hubspot.slack.client.methods.params.chat;
 
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.immutables.value.Value.Check;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +18,7 @@ public abstract class AbstractChatMessageParams implements MessageParams {
   public abstract Optional<String> getText();
   public abstract Optional<String> getThreadTs();
   public abstract Optional<String> getUsername();
+  @JsonInclude(JsonInclude.Include.NON_ABSENT)
   public abstract Optional<Boolean> getAsUser();
   public abstract Optional<String> getIconEmoji();
   public abstract Optional<String> getIconUrl();

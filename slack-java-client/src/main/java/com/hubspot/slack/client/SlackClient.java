@@ -24,10 +24,13 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationCreateP
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationOpenParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationSetPurposeParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationSetTopicParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsJoinParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
@@ -68,6 +71,8 @@ import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageRes
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationSetPurposeResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationSetTopicResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsInfoResponse;
@@ -96,6 +101,7 @@ import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 
+// See https://api.slack.com/changelog/2020-01-deprecating-antecedents-to-the-conversations-api for details on deprecations starting 7 January 2020
 public interface SlackClient extends Closeable {
   // auth
   CompletableFuture<Result<AuthTestResponse, SlackError>> testAuth();
@@ -112,17 +118,57 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params);
 
   // channels
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #listConversations(ConversationsListParams)}
+   */
+  @Deprecated
   Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #getConversationHistory(ConversationsHistoryParams)}
+   */
+  @Deprecated
   Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> channelHistory(ChannelsHistoryParams params);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #getConversationByName(String, ConversationsFilter)}
+   */
+  @Deprecated
   CompletableFuture<Result<SlackChannel, SlackError>> getChannelByName(String channelName, ChannelsFilter channelsFilter);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #getConversationInfo(ConversationsInfoParams)}
+   */
+  @Deprecated
   CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(ChannelsInfoParams params);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated need to implement conversations.kick to mimic this functionality
+   */
+  @Deprecated
   CompletableFuture<Result<ChannelsKickResponse, SlackError>> kickUserFromChannel(ChannelsKickParams channelKickParams);
 
   // groups
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #listConversations(ConversationsListParams)}
+   */
+  @Deprecated
   Iterable<CompletableFuture<Result<List<SlackGroup>, SlackError>>> listGroups(GroupsListParams filter);
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated need to implement conversations.kick to mimic this functionality
+   */
+  @Deprecated
   CompletableFuture<Result<GroupsKickResponse, SlackError>> kickUserFromGroup(GroupsKickParams params);
 
   // messaging
+  /**
+   * Will be removed on or after November 25, 2020
+   * @deprecated use {@link #openConversation(ConversationOpenParams)}
+   */
+  @Deprecated
   CompletableFuture<Result<ImOpenResponse, SlackError>> openIm(ImOpenParams params);
   CompletableFuture<Result<ChatPostMessageResponse, SlackError>> postMessage(ChatPostMessageParams params);
   CompletableFuture<Result<ChatPostEphemeralMessageResponse, SlackError>> postEphemeralMessage(ChatPostEphemeralMessageParams params);
@@ -144,6 +190,9 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter);
   CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(ConversationOpenParams params);
   Iterable<CompletableFuture<Result<List<String>, SlackError>>> getConversationMembers(ConversationMemberParams params);
+  CompletableFuture<Result<ConversationsInfoResponse, SlackError>> joinConversation(ConversationsJoinParams params);
+  CompletableFuture<Result<ConversationSetPurposeResponse, SlackError>> setConversationPurpose(ConversationSetPurposeParams params);
+  CompletableFuture<Result<ConversationSetTopicResponse, SlackError>> setConversationTopic(ConversationSetTopicParams params);
 
   // usergroups
   CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(UsergroupCreateParams params);

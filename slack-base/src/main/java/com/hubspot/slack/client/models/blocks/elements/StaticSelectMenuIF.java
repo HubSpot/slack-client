@@ -3,15 +3,15 @@ package com.hubspot.slack.client.models.blocks.elements;
 import java.util.List;
 import java.util.Optional;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.hubspot.slack.client.models.blocks.json.OptionalOptionOrOptionGroupDeserializer;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.blocks.json.OptionOrOptionGroupDeserializer;
 import com.hubspot.slack.client.models.blocks.objects.ConfirmationDialog;
 import com.hubspot.slack.client.models.blocks.objects.Option;
 import com.hubspot.slack.client.models.blocks.objects.OptionGroup;
@@ -41,7 +41,7 @@ public interface StaticSelectMenuIF extends BlockElement, HasActionId {
 
   List<OptionGroup> getOptionGroups();
 
-  @JsonDeserialize(using = OptionalOptionOrOptionGroupDeserializer.class)
+  @JsonDeserialize(contentUsing = OptionOrOptionGroupDeserializer.class)
   Optional<OptionOrOptionGroup> getInitialOption();
 
   @JsonProperty("confirm")

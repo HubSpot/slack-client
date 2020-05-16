@@ -68,10 +68,13 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationCreateP
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationOpenParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationSetPurposeParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationSetTopicParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsJoinParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
@@ -119,6 +122,8 @@ import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationSetPurposeResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationSetTopicResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsHistoryResponse;
@@ -256,6 +261,21 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ConversationsRepliesResponse, SlackError>> getConversationReplies(ConversationsRepliesParams params) {
     return postSlackCommand(SlackMethods.conversations_replies, params, ConversationsRepliesResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationsInfoResponse, SlackError>> joinConversation(ConversationsJoinParams params) {
+    return postSlackCommand(SlackMethods.conversations_join, params, ConversationsInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationSetPurposeResponse, SlackError>> setConversationPurpose(ConversationSetPurposeParams params) {
+    return postSlackCommand(SlackMethods.conversations_setPurpose, params, ConversationSetPurposeResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationSetTopicResponse, SlackError>> setConversationTopic(ConversationSetTopicParams params) {
+    return postSlackCommand(SlackMethods.conversations_setTopic, params, ConversationSetTopicResponse.class);
   }
 
   @Override

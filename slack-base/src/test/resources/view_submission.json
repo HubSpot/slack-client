@@ -1,0 +1,105 @@
+{
+  "type": "view_submission",
+  "team": {
+    "id": "id1",
+    "domain": "hubspot"
+  },
+  "user": {
+    "id": "U1223",
+    "username": "frank",
+    "name": "frank",
+    "team_id": "T1234"
+  },
+  "api_app_id": "A12345",
+  "token": "a",
+  "trigger_id": "123.db",
+  "view": {
+    "id": "V12345",
+    "team_id": "T12345",
+    "type": "modal",
+    "blocks": [
+      {
+        "type": "input",
+        "block_id": "CkO",
+        "label": {
+          "type": "plain_text",
+          "text": "Jira",
+          "emoji": true
+        },
+        "optional": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "existing-uri-thing",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "give me a uri",
+            "emoji": true
+          }
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "Nn5J",
+        "label": {
+          "type": "plain_text",
+          "text": "Assignee",
+          "emoji": true
+        },
+        "hint": {
+          "type": "plain_text",
+          "text": "This person is an assignee",
+          "emoji": true
+        },
+        "optional": true,
+        "element": {
+          "type": "users_select",
+          "action_id": "comms-assignee",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "some placeholder text",
+            "emoji": true
+          }
+        }
+      }
+    ],
+    "private_metadata": "",
+    "callback_id": "",
+    "state": {
+      "values": {
+        "CkO": {
+          "existing-uri-thing": {
+            "type": "plain_text_input",
+            "value": "asgsdg"
+          }
+        },
+        "Nn5J": {
+          "comms-assignee": {
+            "type": "users_select",
+            "selected_user" : "adsdss"
+          }
+        }
+      }
+    },
+    "hash": "123.db",
+    "title": {
+      "type": "plain_text",
+      "text": "Declare new thing",
+      "emoji": true
+    },
+    "clear_on_close": false,
+    "notify_on_close": false,
+    "close": null,
+    "submit": {
+      "type": "plain_text",
+      "text": "Open",
+      "emoji": true
+    },
+    "previous_view_id": null,
+    "root_view_id": "V12345",
+    "app_id": "A12345",
+    "external_id": "",
+    "app_installed_team_id": "T12345",
+    "bot_id": "B12345"
+  },
+  "response_urls": []
+}

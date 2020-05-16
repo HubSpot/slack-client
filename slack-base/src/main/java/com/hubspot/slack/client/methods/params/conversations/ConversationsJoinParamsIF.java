@@ -10,9 +10,8 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ConversationCreateParamsIF {
-  String getName();
+public interface ConversationsJoinParamsIF {
 
-  @JsonProperty("is_private")
-  boolean isPrivate();
+  @JsonProperty("channel")
+  String getChannelId();
 }
