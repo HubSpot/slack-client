@@ -77,6 +77,12 @@
             "type": "users_select",
             "selected_user" : "adsdss"
           }
+        },
+        "MMeL": {
+          "some-date-thing": {
+            "type": "datepicker",
+            "selected_date" : "2011-09-17"
+          }
         }
       }
     },
