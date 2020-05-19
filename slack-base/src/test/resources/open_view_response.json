@@ -37,10 +37,25 @@
           "my-action-1-1": {
             "type": "my-block-element-type-1-1",
             "value": "my-block-element-value-1-1"
-          },
-          "my-action-1-2": {
+          }
+        },
+        "my-block-2": {
+          "my-action-2-1": {
             "type": "datepicker",
             "selected_date": "2020-05-19"
+          }
+        },
+        "my-block-3": {
+          "my-action-3-1": {
+            "type": "radio_buttons",
+            "selected_option" : {
+              "text" : {
+                "type" : "mrkdwn",
+                "text" : "🔍 Emoji thing!",
+                "verbatim" : false
+              },
+              "value" : "VALUE"
+            }
           }
         }
       }

@@ -83,6 +83,19 @@
             "type": "datepicker",
             "selected_date" : "2011-09-17"
           }
+        },
+        "rPaL": {
+          "some-radio-thing": {
+            "type": "radio_buttons",
+            "selected_option" : {
+              "text" : {
+                "type" : "mrkdwn",
+                "text" : "🔍 Emoji thing!",
+                "verbatim" : false
+              },
+              "value" : "VALUE"
+            }
+          }
         }
       }
     },

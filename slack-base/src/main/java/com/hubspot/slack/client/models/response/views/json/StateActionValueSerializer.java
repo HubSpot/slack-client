@@ -23,6 +23,8 @@ public class StateActionValueSerializer extends StdSerializer<StateActionValue> 
 
     if ("datepicker".equals(type)) {
       gen.writeStringField("selected_date", ((LocalDate) value).toString());
+    } else if ("radio_buttons".equals(type)) {
+      gen.writeObjectField("selected_option", value);
     } else {
       gen.writeStringField("value", (String) value);
     }

@@ -1,0 +1,29 @@
+{
+  "response_action": "errors",
+  "view": {
+    "type": "modal",
+    "title": {
+      "type": "plain_text",
+      "text": "Updated view"
+    },
+    "blocks": [
+      {
+        "type": "image",
+        "image_url": "https://api.slack.com/img/blocks/bkb_template_images/plants.png",
+        "alt_text": "Plants"
+      },
+      {
+        "type": "context",
+        "elements": [
+          {
+            "type": "mrkdwn",
+            "text": "_Two of the author's cats sit aloof from the austere challenges of modern society_"
+          }
+        ]
+      }
+    ]
+  },
+  "errors": {
+    "ticket-due-date": "You may not select a due date in the past"
+  }
+}
