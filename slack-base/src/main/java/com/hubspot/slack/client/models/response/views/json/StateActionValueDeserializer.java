@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.hubspot.slack.client.models.blocks.objects.Option;
 import com.hubspot.slack.client.models.response.views.StateActionValue;
 
 import java.io.IOException;
@@ -30,6 +31,10 @@ public class StateActionValueDeserializer extends StdDeserializer<StateActionVal
 
     if (node.has("value")) {
       builder.setBlockElementValue(node.get("value").asText());
+    } else if (node.has("selected_option")) {
+      final JsonNode selectedOption = node.get("selected_option");
+      final Option option = codec.treeToValue(selectedOption, Option.class);
+      builder.setBlockElementValue(option);
     } else if (node.has("selected_date")) {
       builder.setBlockElementValue(LocalDate.parse(node.get("selected_date").asText()));
     }
