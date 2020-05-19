@@ -3,8 +3,6 @@ package com.hubspot.slack.client.models.events;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
-import com.hubspot.slack.client.models.events.app.SlackAppUninstalledEvent;
-import com.hubspot.slack.client.models.events.app.SlackTokensRevokedEvent;
 import com.hubspot.slack.client.models.events.bot.SlackAppHomeOpenedEvent;
 import com.hubspot.slack.client.models.events.app.SlackAppUninstalledEvent;
 import com.hubspot.slack.client.models.events.app.SlackTokensRevokedEvent;
