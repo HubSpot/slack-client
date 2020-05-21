@@ -22,8 +22,8 @@
     "image_1024": null,
     "fields": {
       "X000000000": {
-        "value": "",
-        "alt": ""
+        "value": "test123",
+        "alt": "alt"
       }
     }
   },
