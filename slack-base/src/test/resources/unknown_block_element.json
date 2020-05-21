@@ -1,0 +1,16 @@
+{
+  "type": "section",
+  "text": {
+    "type": "mrkdwn",
+    "text": "A section with an _unknown_ accessory type."
+  },
+  "accessory": {
+    "type": "rich_text_section",
+    "elements": [
+      {
+        "type": "text",
+        "text": "blah"
+      }
+    ]
+  }
+}

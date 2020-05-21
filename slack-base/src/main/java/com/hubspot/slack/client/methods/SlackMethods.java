@@ -168,6 +168,11 @@ public enum SlackMethods implements SlackMethod {
   users_profile_get(MethodWriteMode.READ, RateLimitingTiers.TIER_4, JsonStatus.FORM_ENCODING_ONLY),
   users_profile_set(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
 
+  views_open(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
+  views_update(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
+  views_push(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
+  views_publish(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
+
   ;
 
   private final MethodWriteMode writeMode;

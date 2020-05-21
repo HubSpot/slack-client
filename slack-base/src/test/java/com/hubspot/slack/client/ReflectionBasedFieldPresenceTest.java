@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ class ReflectionBasedFieldPresenceTest {
   private static final String DEFAULT_STRING = "default";
   private static final Optional<String> DEFAULT_OPTIONAL_STRING = Optional.of("defaultOptional");
   private static final Set<String> OPTIONAL_STRING_METHODS_TO_BUILD = Collections.singleton("setText");
+  private static final Map DEFAULT_MAP = Collections.emptyMap();
 
   private static final Reflections SLACK_CLIENT_REFLECTOR = new Reflections("com.hubspot.slack.client");
 
@@ -84,6 +86,9 @@ class ReflectionBasedFieldPresenceTest {
         Object firstEnumConstant = singletonParamType.getEnumConstants()[0];
         LOG.debug("Calling {} with default of {}", builderMethod.getName(), firstEnumConstant);
         builderMethod.invoke(builder, firstEnumConstant);
+      } else if (Map.class.isAssignableFrom(singletonParamType)) {
+        LOG.debug("Calling {} with default of {}", builderMethod.getName(), DEFAULT_MAP);
+        builderMethod.invoke(builder, DEFAULT_MAP);
       } else {
         LOG.debug("Recursively constructing test instance for {}", builderMethod.getName());
         builderMethod.invoke(builder, buildTestInstance(singletonParamType));

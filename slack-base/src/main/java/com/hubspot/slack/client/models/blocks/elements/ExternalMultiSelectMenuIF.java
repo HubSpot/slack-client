@@ -8,8 +8,10 @@ import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.blocks.json.OptionOrOptionGroupDeserializer;
 import com.hubspot.slack.client.models.blocks.objects.ConfirmationDialog;
 import com.hubspot.slack.client.models.blocks.objects.OptionOrOptionGroup;
 import com.hubspot.slack.client.models.blocks.objects.Text;
@@ -17,7 +19,7 @@ import com.hubspot.slack.client.models.blocks.objects.Text;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ExternalMultiSelectMenuIF extends BlockElement {
+public interface ExternalMultiSelectMenuIF extends BlockElement, HasActionId {
   String TYPE = "multi_external_select";
 
   @Override
@@ -34,6 +36,7 @@ public interface ExternalMultiSelectMenuIF extends BlockElement {
 
   Optional<Integer> getMinQueryLength();
 
+  @JsonDeserialize(contentUsing = OptionOrOptionGroupDeserializer.class)
   List<OptionOrOptionGroup> getInitialOptions();
 
   @JsonProperty("confirm")

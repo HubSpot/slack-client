@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.methods.params.files;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.files.SlackFileType;
 
 @Immutable
 @HubSpotStyle
@@ -17,7 +19,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public interface FilesUploadParamsIF {
   List<String> getChannels();
   Optional<String> getContent();
+  Optional<File> getFile();
   Optional<String> getFilename();
+  Optional<SlackFileType> getFiletype();
   Optional<String> getInitialComment();
   Optional<String> getThreadTs();
   Optional<String> getTitle();
@@ -25,10 +29,8 @@ public interface FilesUploadParamsIF {
   @Check
   @JsonIgnore
   default void hasContent() {
-    if (!getContent().isPresent()) {
-      // We don't support multipart/form-data yet, so content has to be present.
-      // But we will eventually, so the signature should have content as Optional
-      throw new IllegalStateException("Must provide some content to upload a file");
+    if (!getContent().isPresent() && !getFile().isPresent()) {
+      throw new IllegalStateException("Must provide either content or raw file");
     }
   }
 }

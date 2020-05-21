@@ -1,0 +1,32 @@
+{
+  "token": "redacted",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "link_shared",
+    "user": "redacted",
+    "channel": "redacted",
+    "message_ts": "123456789.9875",
+    "thread_ts": "123456621.1855",
+    "links": [
+      {
+        "domain": "example.com",
+        "url": "https://example.com/12345"
+      },
+      {
+        "domain": "example.com",
+        "url": "https://example.com/67890"
+      },
+      {
+        "domain": "another-example.com",
+        "url": "https://yet.another-example.com/v/abcde"
+      }
+    ]
+  },
+  "type": "event_callback",
+  "event_id": "EvDQSNTKPX",
+  "event_time": 1540822163,
+  "authed_users": [
+    "redacted"
+  ]
+}

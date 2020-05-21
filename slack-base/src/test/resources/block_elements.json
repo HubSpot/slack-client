@@ -48,6 +48,21 @@
       "type": "plain_text",
       "text": "Select items"
     },
+    "initial_options": [{
+      "label": {
+        "type": "plain_text",
+        "text": "This is a label"
+      },
+      "options": [
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "*this is plain_text text*"
+          },
+          "value": "value-0"
+        }
+      ]
+    }],
     "options": [
       {
         "text": {
@@ -210,7 +225,14 @@
         },
         "value": "value-2"
       }
-    ]
+    ],
+    "initial_option": {
+      "text": {
+        "type": "plain_text",
+        "text": "*this is plain_text text*"
+      },
+      "value": "value-0"
+    }
   },
   {
     "action_id": "text1234",

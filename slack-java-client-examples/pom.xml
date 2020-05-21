@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.hubspot.slack</groupId>
     <artifactId>slack-client</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
   </parent>
 
   <artifactId>slack-java-client-examples</artifactId>
@@ -24,6 +24,14 @@
       <artifactId>HorizonCore</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.hubspot</groupId>
+      <artifactId>HorizonNing</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
     </dependency>
@@ -34,6 +42,11 @@
     <dependency>
       <groupId>com.hubspot</groupId>
       <artifactId>algebra</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
 </project>

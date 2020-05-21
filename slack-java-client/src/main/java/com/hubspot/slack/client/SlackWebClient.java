@@ -1,10 +1,12 @@
 package com.hubspot.slack.client;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -20,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
@@ -34,6 +37,8 @@ import com.hubspot.slack.client.concurrency.CloseableExecutorService;
 import com.hubspot.slack.client.concurrency.MoreExecutors;
 import com.hubspot.slack.client.http.NioHttpClient;
 import com.hubspot.slack.client.http.NioHttpClientFactory;
+import com.hubspot.slack.client.http.ning.MultipartHttpRequest;
+import com.hubspot.slack.client.http.ning.MultipartHttpRequest.Builder;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpRequestDebugger;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpResponseDebugger;
@@ -56,19 +61,23 @@ import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
 import com.hubspot.slack.client.methods.params.chat.ChatGetPermalinkParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostEphemeralMessageParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostMessageParams;
+import com.hubspot.slack.client.methods.params.chat.ChatUnfurlParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationOpenParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationSetPurposeParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationSetTopicParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationUnarchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsFilter;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsHistoryParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsInfoParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationsJoinParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsListParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
-import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
@@ -86,6 +95,9 @@ import com.hubspot.slack.client.methods.params.usergroups.users.UsergroupUsersUp
 import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.methods.params.users.UsersListParams;
+import com.hubspot.slack.client.methods.params.views.OpenViewParams;
+import com.hubspot.slack.client.methods.params.views.PublishViewParams;
+import com.hubspot.slack.client.methods.params.views.UpdateViewParams;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.conversations.Conversation;
@@ -106,8 +118,12 @@ import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
+import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationSetPurposeResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationSetTopicResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsCreateResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsHistoryResponse;
@@ -116,7 +132,6 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsInvit
 import com.hubspot.slack.client.models.response.conversations.ConversationsOpenResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
-import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
@@ -135,6 +150,8 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
+import com.hubspot.slack.client.models.response.views.HomeTabViewCommandResponse;
+import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.paging.AbstractPagedIterable;
@@ -244,6 +261,21 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ConversationsRepliesResponse, SlackError>> getConversationReplies(ConversationsRepliesParams params) {
     return postSlackCommand(SlackMethods.conversations_replies, params, ConversationsRepliesResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationsInfoResponse, SlackError>> joinConversation(ConversationsJoinParams params) {
+    return postSlackCommand(SlackMethods.conversations_join, params, ConversationsInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationSetPurposeResponse, SlackError>> setConversationPurpose(ConversationSetPurposeParams params) {
+    return postSlackCommand(SlackMethods.conversations_setPurpose, params, ConversationSetPurposeResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationSetTopicResponse, SlackError>> setConversationTopic(ConversationSetTopicParams params) {
+    return postSlackCommand(SlackMethods.conversations_setTopic, params, ConversationSetTopicResponse.class);
   }
 
   @Override
@@ -531,6 +563,11 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(ChatDeleteParams params) {
     return postSlackCommand(SlackMethods.chat_delete, params, ChatDeleteResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatUnfurlResponse, SlackError>> unfurlLinks(ChatUnfurlParams params) {
+    return postSlackCommand(SlackMethods.chat_unfurl, params, ChatUnfurlResponse.class);
   }
 
   @Override
@@ -874,7 +911,31 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(FilesUploadParams params) {
-    return postSlackCommand(SlackMethods.files_upload, params, FilesUploadResponse.class);
+    if (params.getContent().isPresent()) {
+      return postSlackCommand(SlackMethods.files_upload, params, FilesUploadResponse.class);
+    }
+
+    ImmutableMap.Builder<String, String> stringParts = ImmutableMap.builder();
+    ImmutableMap.Builder<String, File> fileParts = ImmutableMap.builder();
+    ImmutableMap.Builder<String, byte[]> byteArrayParts = ImmutableMap.builder();
+    stringParts.put("token", config.getTokenSupplier().get());
+    if (!params.getChannels().isEmpty()) {
+      stringParts.put("channels", params.getChannels().stream().collect(Collectors.joining(",")));
+    }
+    params.getFilename().ifPresent(filename -> stringParts.put("filename", filename));
+    params.getFiletype().ifPresent(type -> stringParts.put("filetype", type.getType()));
+    params.getInitialComment().ifPresent(comment -> stringParts.put("initial_comment", comment));
+    params.getThreadTs().ifPresent(thread -> stringParts.put("thread_ts", thread));
+    params.getTitle().ifPresent(title -> stringParts.put("title", title));
+    params.getFile().ifPresent(file -> fileParts.put("file", file));
+
+    return postSlackCommandMultipartEncoded(
+        SlackMethods.files_upload,
+        stringParts.build(),
+        fileParts.build(),
+        byteArrayParts.build(),
+        FilesUploadResponse.class
+    );
   }
 
   @Override
@@ -933,6 +994,26 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji() {
     return postSlackCommand(SlackMethods.emoji_list, Collections.emptyMap(), EmojiListResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewCommandResponse, SlackError>> openView(OpenViewParams params) {
+    return postSlackCommand(SlackMethods.views_open, params, ModalViewCommandResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewCommandResponse, SlackError>> updateView(UpdateViewParams params) {
+    return postSlackCommand(SlackMethods.views_update, params, ModalViewCommandResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<ModalViewCommandResponse, SlackError>> pushView(OpenViewParams params) {
+    return postSlackCommand(SlackMethods.views_push, params, ModalViewCommandResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<HomeTabViewCommandResponse, SlackError>> publishView(PublishViewParams params) {
+    return postSlackCommand(SlackMethods.views_publish, params, HomeTabViewCommandResponse.class);
   }
 
   @Override
@@ -1062,6 +1143,24 @@ public class SlackWebClient implements SlackClient {
     });
 
     return responseFuture;
+  }
+
+  private <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommandMultipartEncoded(
+    SlackMethod method,
+    Map<String, String> stringParts,
+    Map<String, File> fileParts,
+    Map<String, byte[]> byteArrayParts,
+    Class<T> responseType
+  ) {
+    Builder requestBuilder = MultipartHttpRequest.newBuilder()
+        .setMethod(Method.POST)
+        .setUrl(config.getSlackApiBasePath().get() + "/" + method.getMethod());
+
+    stringParts.forEach(requestBuilder::addStringPart);
+    fileParts.forEach(requestBuilder::addFilePart);
+    byteArrayParts.forEach(requestBuilder::addByteArrayPart);
+
+    return executeLoggedAs(method, requestBuilder.build(), responseType);
   }
 
   private double acquirePermit(SlackMethod method) {

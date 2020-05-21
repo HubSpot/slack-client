@@ -1,0 +1,16 @@
+{
+  "channel": "C123456",
+  "ts": "123456789.9875",
+  "unfurls": {
+    "https://example.com/": {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "A message *with some bold text* and _some italicized text_."
+      }
+    }
+  },
+  "user_auth_message": null,
+  "user_auth_url": null,
+  "is_user_auth_required": null
+}

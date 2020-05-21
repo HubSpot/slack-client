@@ -1,0 +1,91 @@
+[
+  {
+    "type": "modal",
+    "title": {
+      "type": "plain_text",
+      "text": "Modal title"
+    },
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "It's Block Kit...but _in a modal_"
+        },
+        "block_id": "section1",
+        "accessory": {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Click me"
+          },
+          "action_id": "button_abc",
+          "value": "Button value",
+          "style": "danger"
+        }
+      },
+      {
+        "type": "input",
+        "label": {
+          "type": "plain_text",
+          "text": "Input label"
+        },
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "input1",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Type in here"
+          },
+          "multiline": false
+        },
+        "optional": false
+      }
+    ],
+    "close": {
+      "type": "plain_text",
+      "text": "Cancel"
+    },
+    "submit": {
+      "type": "plain_text",
+      "text": "Save"
+    },
+    "private_metadata": "Shhhhhhhh",
+    "callback_id": "view_identifier_12"
+  },
+  {
+    "type": "home",
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "A simple stack of blocks for the simple sample Block Kit Home tab."
+        }
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": "Action A",
+              "emoji": true
+            },
+            "action_id": "button_abc"
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": "Action B",
+              "emoji": true
+            },
+            "action_id": "button_abc"
+          }
+        ]
+      }
+    ]
+  }
+]

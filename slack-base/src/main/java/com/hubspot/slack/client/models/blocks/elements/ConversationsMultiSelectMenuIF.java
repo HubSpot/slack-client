@@ -16,7 +16,7 @@ import com.hubspot.slack.client.models.blocks.objects.Text;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ConversationsMultiSelectMenuIF extends BlockElement {
+public interface ConversationsMultiSelectMenuIF extends BlockElement, HasActionId {
   String TYPE = "multi_channels_select";
 
   @Override

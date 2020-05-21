@@ -1,0 +1,22 @@
+{
+  "my-block-1": {
+    "my-action-1-1": {
+      "type": "my-block-element-type-1-1",
+      "value": "my-block-element-value-1-1"
+    },
+    "my-action-1-2": {
+      "type": "my-block-element-type-1-2",
+      "value": "my-block-element-value-1-2"
+    }
+  },
+  "my-block-2": {
+    "my-action-2-1": {
+      "type": "my-block-element-type-2-1",
+      "value": "my-block-element-value-2-1"
+    },
+    "my-action-2-2": {
+      "type": "my-block-element-type-2-2",
+      "value": "my-block-element-value-2-2"
+    }
+  }
+}

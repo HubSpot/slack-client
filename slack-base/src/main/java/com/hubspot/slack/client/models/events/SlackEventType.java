@@ -3,16 +3,20 @@ package com.hubspot.slack.client.models.events;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
+import com.hubspot.slack.client.models.events.bot.SlackAppHomeOpenedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelArchiveEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelRenameEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelUnarchiveEvent;
+import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public enum SlackEventType {
 
+  APP_HOME_OPENED(SlackAppHomeOpenedEvent.class),
+  APP_MENTION(SlackEventMessage.class),
   APP_UNINSTALLED,
   CHANNEL_ARCHIVE(SlackChannelArchiveEvent.class),
   CHANNEL_CREATED(SlackChannelCreatedEvent.class),
@@ -45,7 +49,7 @@ public enum SlackEventType {
   IM_CREATED,
   IM_HISTORY_CHANGED,
   IM_OPEN,
-  LINK_SHARED,
+  LINK_SHARED(SlackLinkSharedEvent.class),
   MEMBER_JOINED_CHANNEL(SlackMemberJoinedChannelEvent.class),
   MEMBER_LEFT_CHANNEL,
   MESSAGE(SlackEventMessage.class),

@@ -5,12 +5,16 @@
   <parent>
     <groupId>com.hubspot.slack</groupId>
     <artifactId>slack-client</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
   </parent>
 
   <artifactId>slack-java-client</artifactId>
 
   <dependencies>
+    <dependency>
+      <groupId>com.ning</groupId>
+      <artifactId>async-http-client</artifactId>
+    </dependency>
     <dependency>
       <groupId>com.hubspot</groupId>
       <artifactId>algebra</artifactId>

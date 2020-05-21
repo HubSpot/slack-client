@@ -22,7 +22,6 @@ public class ConversationsRepliesResponseTest {
     assertThat(response.getMessages().get(0).getReplyUserIds()).isEmpty();
     assertThat(response.getMessages().get(0).getReplyUsersCount()).isEmpty();
     assertThat(response.getMessages().get(0).getLatestReplyTimestamp()).isEmpty();
-    assertThat(response.getMessages().get(0).getReplies()).isNotEmpty();
   }
 
   @Test
@@ -34,7 +33,6 @@ public class ConversationsRepliesResponseTest {
     assertThat(response.getMessages().get(0).getReplyUserIds().get()).isEqualTo(Arrays.asList("U061F7AUR", "U061F7AUR", "U061F7AUR"));
     assertThat(response.getMessages().get(0).getReplyUsersCount().get()).isEqualTo(3);
     assertThat(response.getMessages().get(0).getLatestReplyTimestamp().get()).isEqualTo("1483125339.020269");
-    assertThat(response.getMessages().get(0).getReplies()).isNotEmpty();
   }
 
   @Test
@@ -46,7 +44,6 @@ public class ConversationsRepliesResponseTest {
     assertThat(response.getMessages().get(0).getReplyUserIds().get()).isEqualTo(Arrays.asList("U061F7AUR", "U061F7AUR", "U061F7AUR"));
     assertThat(response.getMessages().get(0).getReplyUsersCount().get()).isEqualTo(3);
     assertThat(response.getMessages().get(0).getLatestReplyTimestamp().get()).isEqualTo("1483125339.020269");
-    assertThat(response.getMessages().get(0).getReplies()).isEmpty();
   }
 
   private ConversationsRepliesResponse fetchAndDeserializeModel(String jsonFileName) throws IOException {

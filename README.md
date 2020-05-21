@@ -70,6 +70,8 @@ We currently support:
  - conversations.members
  - conversations.open
  - conversations.unarchive
+ - conversations.setTopic
+ - conversations.setPurpose
 #### dialog
  - dialog.open
 #### files
@@ -100,6 +102,11 @@ We currently support:
  - users.info (findUser)
  - users.list
  - users.lookupByEmail
+#### views
+ - views.open
+ - views.update
+ - views.push
+ - views.publish
 #### Utility Methods
  - getConversationByName
  - getChannelByName
@@ -167,6 +174,7 @@ If you're not familiar with Java 8's `CompletableFuture` API, know that you can 
 
 ## Contributors
  - [@johnnyleitrim](https://github.com/johnnyleitrim) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=johnnyleitrim)
+ - [@kecarroll](https://github.com/kecarroll) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=kecarroll)
  - [@szabowexler](https://github.com/szabowexler) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=szabowexler)
  - [@zklapow](https://github.com/zklapow) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=zklapow)
  - [@wsorenson](https://github.com/wsorenson) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=wsorenson)

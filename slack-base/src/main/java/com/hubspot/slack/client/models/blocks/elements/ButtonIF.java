@@ -15,7 +15,7 @@ import com.hubspot.slack.client.models.blocks.objects.Text;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ButtonIF extends BlockElement {
+public interface ButtonIF extends BlockElement, HasActionId {
   String TYPE = "button";
 
   @Override

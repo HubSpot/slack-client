@@ -11,6 +11,8 @@ import com.hubspot.slack.client.models.LiteMessage;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface MessageActionIF extends SlackInteractiveCallback {
+  String getActionTs();
+  String getCallbackId();
   String getTriggerId();
   String getResponseUrl();
   LiteMessage getMessage();
