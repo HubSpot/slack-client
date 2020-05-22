@@ -10,7 +10,7 @@
 
   <groupId>com.hubspot.slack</groupId>
   <artifactId>slack-client</artifactId>
-  <version>1.9-SNAPSHOT</version>
+  <version>1.10-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
