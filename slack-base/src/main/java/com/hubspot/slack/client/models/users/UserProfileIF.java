@@ -7,8 +7,10 @@ import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.users.json.UserProfileFieldsDeserializer;
 
 @Immutable
 @HubSpotStyle
@@ -30,6 +32,7 @@ public interface UserProfileIF {
   Optional<String> getSkype();
 
   // Extra custom fields set by your workspace admin
+  @JsonDeserialize(using = UserProfileFieldsDeserializer.class)
   Optional<Map<String, ProfileField>> getFields();
 
   @JsonProperty("team")
