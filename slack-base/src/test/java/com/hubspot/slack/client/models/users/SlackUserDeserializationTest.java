@@ -24,7 +24,20 @@ public class SlackUserDeserializationTest {
     assertThat(userDeserialized).isEqualTo(user);
   }
 
+  @Test
+  public void usersWithArrayProfileFieldsDeserializeCorrectly() throws IOException {
+    SlackUser user = getUserWithArrayProfileFieldsType();
+    assertThat(user.getProfile())
+        .isPresent()
+        .describedAs("User profile is missing");
+    assertThat(user.getProfile().get().getFields()).isEmpty();
+  }
+
   private SlackUser getSlackUser() throws IOException {
     return ObjectMapperUtils.mapper().readValue(JsonLoader.loadJsonFromFile("deleted_slack_user.json"), SlackUser.class);
+  }
+
+  private SlackUser getUserWithArrayProfileFieldsType() throws IOException {
+    return ObjectMapperUtils.mapper().readValue(JsonLoader.loadJsonFromFile("slack_user_with_array_profile_fields.json"), SlackUser.class);
   }
 }
