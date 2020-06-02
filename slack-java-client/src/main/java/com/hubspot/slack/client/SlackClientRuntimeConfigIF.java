@@ -1,18 +1,17 @@
 package com.hubspot.slack.client;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-
-import org.immutables.value.Value.Default;
-import org.immutables.value.Value.Immutable;
-
 import com.hubspot.horizon.HttpConfig;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.http.NioHttpClient;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.RequestDebugger;
 import com.hubspot.slack.client.interceptors.http.ResponseDebugger;
 import com.hubspot.slack.client.ratelimiting.ByMethodRateLimiter;
 import com.hubspot.slack.client.ratelimiting.SlackRateLimiter;
+import java.util.Optional;
+import java.util.function.Supplier;
+import org.immutables.value.Value.Default;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
@@ -45,11 +44,14 @@ public interface SlackClientRuntimeConfigIF {
   }
 
   @Default
-  default Supplier<Integer> getConversationMembersBatchSize() {return () -> 1000;}
+  default Supplier<Integer> getConversationMembersBatchSize() {
+    return () -> 1000;
+  }
 
   Optional<SlackRateLimiter> getSlackRateLimiter();
 
   Optional<HttpConfig> getHttpConfig();
+  Optional<NioHttpClient> getHttpClient();
 
   Optional<SlackMethodAcceptor> getMethodFilter();
 
