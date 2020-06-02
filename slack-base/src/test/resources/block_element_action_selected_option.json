@@ -7,6 +7,8 @@
     "emoji": true
   },
   "type": "button",
-  "value": "value",
+  "selected_option": {
+    "value": "value"
+  },
   "action_ts": "1575983460.359868"
 }

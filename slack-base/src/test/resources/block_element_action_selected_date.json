@@ -6,7 +6,8 @@
     "text": "Learn More",
     "emoji": true
   },
-  "type": "button",
-  "value": "value",
+  "type": "datepicker",
+  "selected_date": "2020-05-25",
+  "initial_date": "2020-05-24",
   "action_ts": "1575983460.359868"
 }

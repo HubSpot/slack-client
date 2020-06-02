@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.interaction;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.immutables.value.Value.Immutable;
@@ -24,8 +25,10 @@ public interface BlockElementActionIF {
 
   BlockElement getElement();
 
-  @JsonProperty("value")
   Optional<String> getSelectedValue();
+
+  @JsonProperty("selected_date")
+  Optional<LocalDate> getSelectedDate();
 
   Optional<String> getActionTs();
 }

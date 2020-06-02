@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonSubTypes(
   {
     @Type(value = ViewPlainTextInput.class, name = "plain_text_input"),
+    @Type(value = ViewDatePicker.class, name = "datepicker"),
+    @Type(value = ViewRadioButtonGroup.class, name = "radio_buttons"),
     @Type(value = UsersSelectInput.class, name = "users_select")
   }
 )

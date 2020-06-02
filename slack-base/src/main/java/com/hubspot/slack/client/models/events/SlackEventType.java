@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
 import com.hubspot.slack.client.models.events.bot.SlackAppHomeOpenedEvent;
+import com.hubspot.slack.client.models.events.app.SlackAppUninstalledEvent;
+import com.hubspot.slack.client.models.events.app.SlackTokensRevokedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelArchiveEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
@@ -17,7 +19,7 @@ public enum SlackEventType {
 
   APP_HOME_OPENED(SlackAppHomeOpenedEvent.class),
   APP_MENTION(SlackEventMessage.class),
-  APP_UNINSTALLED,
+  APP_UNINSTALLED(SlackAppUninstalledEvent.class),
   CHANNEL_ARCHIVE(SlackChannelArchiveEvent.class),
   CHANNEL_CREATED(SlackChannelCreatedEvent.class),
   CHANNEL_DELETED(SlackChannelDeletedEvent.class),
@@ -71,7 +73,7 @@ public enum SlackEventType {
   TEAM_DOMAIN_CHANGE,
   TEAM_JOIN,
   TEAM_RENAME,
-  TOKENS_REVOKED,
+  TOKENS_REVOKED(SlackTokensRevokedEvent.class),
   URL_VERIFICATION,
   USER_CHANGE(SlackUserChangeEvent.class),
   UNKNOWN
