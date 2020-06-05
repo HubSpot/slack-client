@@ -10,6 +10,7 @@ public enum InteractiveCallbackType {
   MESSAGE_ACTION,
   BLOCK_ACTIONS,
   VIEW_SUBMISSION,
+  SHORTCUT,
   UNKNOWN
   ;
 
