@@ -71,6 +71,7 @@ import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageRes
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationSetPurposeResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationSetTopicResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
@@ -179,6 +180,7 @@ public interface SlackClient extends Closeable {
 
   // conversations
   Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> listConversations(ConversationsListParams params);
+  CompletableFuture<Result<ConversationListResponse, SlackError>> listConversationsPaginated(ConversationsListParams params);
   Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> usersConversations(ConversationsUserParams params);
   CompletableFuture<Result<ConversationsCreateResponse, SlackError>> createConversation(ConversationCreateParams params);
   CompletableFuture<Result<ConversationsInviteResponse, SlackError>> inviteToConversation(ConversationInviteParams params);

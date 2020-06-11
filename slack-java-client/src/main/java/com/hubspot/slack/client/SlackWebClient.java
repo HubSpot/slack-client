@@ -777,6 +777,13 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  public CompletableFuture<Result<ConversationListResponse, SlackError>> listConversationsPaginated(
+    ConversationsListParams params
+  ) {
+    return postSlackCommand(SlackMethods.conversations_list, params, ConversationListResponse.class);
+  }
+
+  @Override
   public Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> usersConversations(
     ConversationsUserParams params
   ) {
