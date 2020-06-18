@@ -130,7 +130,7 @@ public class EventDeserializerTest {
 
   @Test
   public void itCanDeserMemberLeftPrivateChannelEvent() throws IOException {
-    SlackMemberLeftChannelEvent event = fetchAndDeserializeSlackEvent("member_left_public_channel.json").toDetailedEvent();
+    SlackMemberLeftChannelEvent event = fetchAndDeserializeSlackEvent("member_left_private_channel.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_LEFT_CHANNEL);
     assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberLeftChannelEvent.class)).isEqualTo(event);
   }
