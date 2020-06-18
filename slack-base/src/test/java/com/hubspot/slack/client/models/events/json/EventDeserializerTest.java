@@ -16,6 +16,7 @@ import com.hubspot.slack.client.models.events.SlackEventType;
 import com.hubspot.slack.client.models.events.SlackEventWrapper;
 import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
+import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public class EventDeserializerTest {
@@ -118,6 +119,20 @@ public class EventDeserializerTest {
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_JOINED_CHANNEL);
     assertThat(event.getChannelType()).isEqualTo(ChannelType.GROUP);
     assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberJoinedChannelEvent.class)).isEqualTo(event);
+  }
+
+  @Test
+  public void itCanDeserMemberLeftPublicChannelEvent() throws IOException {
+    SlackMemberLeftChannelEvent event = fetchAndDeserializeSlackEvent("member_left_public_channel.json").toDetailedEvent();
+    assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_LEFT_CHANNEL);
+    assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberLeftChannelEvent.class)).isEqualTo(event);
+  }
+
+  @Test
+  public void itCanDeserMemberLeftPrivateChannelEvent() throws IOException {
+    SlackMemberLeftChannelEvent event = fetchAndDeserializeSlackEvent("member_left_public_channel.json").toDetailedEvent();
+    assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_LEFT_CHANNEL);
+    assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberLeftChannelEvent.class)).isEqualTo(event);
   }
 
   @Test
