@@ -1046,6 +1046,13 @@ public class SlackWebClient implements SlackClient {
     };
   }
 
+  @Override
+  public CompletableFuture<Result<ConversationMemberResponse, SlackError>> getConversationMembersPaginated(
+      ConversationMemberParams params
+  ) {
+    return postSlackCommand(SlackMethods.conversations_members, params, ConversationMemberResponse.class);
+  }
+
   private CompletableFuture<Optional<Conversation>> findConversationByName(
     String conversationName,
     ConversationsFilter conversationsFilter
