@@ -13,4 +13,5 @@ public interface ConversationsInfoParamsIF {
   @JsonProperty("channel")  // could be a channel ID, group ID, IM ID
   String getConversationId();
   Optional<Boolean> getIncludeLocale();
+  Optional<Boolean> getIncludeNumMembers();
 }
