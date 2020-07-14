@@ -133,6 +133,7 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
+import com.hubspot.slack.client.models.response.users.UsersProfileResponse;
 import com.hubspot.slack.client.models.response.views.HomeTabViewCommandResponse;
 import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
@@ -426,6 +427,17 @@ public class SlackWebClient implements SlackClient {
     UsersInfoParams params
   ) {
     return postSlackCommand(SlackMethods.users_info, params, UsersInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<UsersProfileResponse, SlackError>> getUserProfile(
+    UsersInfoParams params
+  ) {
+    return postSlackCommand(
+        SlackMethods.users_profile_get,
+        params,
+        UsersProfileResponse.class
+    );
   }
 
   @Override
