@@ -48,8 +48,8 @@ public interface SlackDialogIF {
       throw new IllegalStateException("At least one form element required");
     }
 
-    if (getElements().size() > 5) {
-      throw new IllegalStateException("At most 5 form elements allowed, got " + getElements().size());
+    if (getElements().size() > 10) {
+      throw new IllegalStateException("At most 10 form elements allowed, got " + getElements().size());
     }
 
     getState().ifPresent(state -> {
