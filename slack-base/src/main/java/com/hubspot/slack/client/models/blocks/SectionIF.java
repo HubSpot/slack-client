@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.blocks;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
@@ -9,12 +11,15 @@ import com.hubspot.slack.client.models.blocks.elements.BlockElement;
 import com.hubspot.slack.client.models.blocks.objects.Text;
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.Nullable;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Check;
+import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
+@JsonInclude(Include.NON_NULL)
 @JsonNaming(SnakeCaseStrategy.class)
 public interface SectionIF extends Block {
   String TYPE = "section";
@@ -25,8 +30,12 @@ public interface SectionIF extends Block {
     return TYPE;
   }
 
+  @Default
+  @Nullable
   @Value.Parameter
-  Optional<Text> getText();
+  default Text getText() {
+    return null;
+  }
 
   List<Text> getFields();
 
@@ -35,7 +44,7 @@ public interface SectionIF extends Block {
   @Check
   default void check() {
     boolean hasNonEmptyTextField =
-      getText().isPresent() && !Strings.isNullOrEmpty(getText().get().getText());
+      getText() != null && !Strings.isNullOrEmpty(getText().getText());
     boolean hasFields = !getFields().isEmpty();
     Preconditions.checkState(
       hasNonEmptyTextField || hasFields,
