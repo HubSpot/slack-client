@@ -1,7 +1,5 @@
 package com.hubspot.slack.client.models.blocks;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
@@ -19,7 +17,6 @@ import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
-@JsonInclude(Include.NON_NULL)
 @JsonNaming(SnakeCaseStrategy.class)
 public interface SectionIF extends Block {
   String TYPE = "section";
