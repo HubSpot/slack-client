@@ -34,7 +34,9 @@ public class StateActionValueDeserializer extends StdDeserializer<StateActionVal
     } else if (node.has("selected_option")) {
       final JsonNode selectedOption = node.get("selected_option");
       final Option option = codec.treeToValue(selectedOption, Option.class);
-      builder.setBlockElementValue(option);
+      if (option != null) {
+        builder.setBlockElementValue(option);
+      }
     } else if (node.has("selected_date")) {
       builder.setBlockElementValue(LocalDate.parse(node.get("selected_date").asText()));
     }
