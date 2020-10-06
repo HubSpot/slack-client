@@ -71,6 +71,8 @@ import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageRes
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
+import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationSetPurposeResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationSetTopicResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsArchiveResponse;
@@ -96,6 +98,7 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
+import com.hubspot.slack.client.models.response.users.UsersProfileResponse;
 import com.hubspot.slack.client.models.response.views.HomeTabViewCommandResponse;
 import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
@@ -112,6 +115,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<FindRepliesResponse, SlackError>> findReplies(FindRepliesParams params);
   CompletableFuture<Result<UsersInfoResponse, SlackError>> findUser(UsersInfoParams params);
   CompletableFuture<Result<UsersInfoResponse, SlackError>> lookupUserByEmail(UserEmailParams email);
+  CompletableFuture<Result<UsersProfileResponse, SlackError>> getUserProfile(UsersInfoParams params);
 
   // users
   Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
@@ -179,7 +183,9 @@ public interface SlackClient extends Closeable {
 
   // conversations
   Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> listConversations(ConversationsListParams params);
+  CompletableFuture<Result<ConversationListResponse, SlackError>> listConversationsPaginated(ConversationsListParams params);
   Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> usersConversations(ConversationsUserParams params);
+  CompletableFuture<Result<ConversationListResponse, SlackError>> usersConversationsPaginated(ConversationsUserParams params);
   CompletableFuture<Result<ConversationsCreateResponse, SlackError>> createConversation(ConversationCreateParams params);
   CompletableFuture<Result<ConversationsInviteResponse, SlackError>> inviteToConversation(ConversationInviteParams params);
   CompletableFuture<Result<ConversationsUnarchiveResponse, SlackError>> unarchiveConversation(ConversationUnarchiveParams params);
@@ -190,6 +196,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter);
   CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(ConversationOpenParams params);
   Iterable<CompletableFuture<Result<List<String>, SlackError>>> getConversationMembers(ConversationMemberParams params);
+  CompletableFuture<Result<ConversationMemberResponse, SlackError>> getConversationMembersPaginated(ConversationMemberParams params);
   CompletableFuture<Result<ConversationsInfoResponse, SlackError>> joinConversation(ConversationsJoinParams params);
   CompletableFuture<Result<ConversationSetPurposeResponse, SlackError>> setConversationPurpose(ConversationSetPurposeParams params);
   CompletableFuture<Result<ConversationSetTopicResponse, SlackError>> setConversationTopic(ConversationSetTopicParams params);

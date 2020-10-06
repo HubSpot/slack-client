@@ -1,0 +1,19 @@
+{
+  "token": "redacted",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "member_left_channel",
+    "user": "redacted",
+    "channel": "redacted",
+    "channel_type": "C",
+    "team": "redacted",
+    "event_ts": "1540822163.000100"
+  },
+  "type": "event_callback",
+  "event_id": "FvDQSNTLQY",
+  "event_time": 1540822163,
+  "authed_users": [
+    "redacted"
+  ]
+}

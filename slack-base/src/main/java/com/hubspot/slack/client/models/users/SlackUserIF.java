@@ -25,6 +25,7 @@ public interface SlackUserIF extends SlackUserCore {
   Optional<Boolean> isPrimaryOwner();
   Optional<Boolean> isRestricted();
   Optional<Boolean> isUltraRestricted();
+  @JsonProperty("is_bot")
   Optional<Boolean> isBot();
   Optional<Boolean> isAppUser();
 

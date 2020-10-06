@@ -1,10 +1,5 @@
 package com.hubspot.slack.client.models.interaction;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
-import org.immutables.value.Value.Immutable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -14,6 +9,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.blocks.elements.BlockElement;
 import com.hubspot.slack.client.models.interaction.json.BlockElementActionDeserializer;
 import com.hubspot.slack.client.models.interaction.json.BlockElementActionSerializer;
+import java.time.LocalDate;
+import java.util.Optional;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
@@ -22,6 +20,7 @@ import com.hubspot.slack.client.models.interaction.json.BlockElementActionSerial
 @JsonSerialize(using = BlockElementActionSerializer.class)
 public interface BlockElementActionIF {
   String getBlockId();
+  String getActionId();
 
   BlockElement getElement();
 

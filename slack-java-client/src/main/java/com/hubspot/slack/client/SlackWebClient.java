@@ -133,6 +133,7 @@ import com.hubspot.slack.client.models.response.usergroups.UsergroupUpdateRespon
 import com.hubspot.slack.client.models.response.usergroups.users.UsergroupUsersUpdateResponse;
 import com.hubspot.slack.client.models.response.users.UsersInfoResponse;
 import com.hubspot.slack.client.models.response.users.UsersListResponse;
+import com.hubspot.slack.client.models.response.users.UsersProfileResponse;
 import com.hubspot.slack.client.models.response.views.HomeTabViewCommandResponse;
 import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.usergroups.SlackUsergroup;
@@ -426,6 +427,17 @@ public class SlackWebClient implements SlackClient {
     UsersInfoParams params
   ) {
     return postSlackCommand(SlackMethods.users_info, params, UsersInfoResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<UsersProfileResponse, SlackError>> getUserProfile(
+    UsersInfoParams params
+  ) {
+    return postSlackCommand(
+        SlackMethods.users_profile_get,
+        params,
+        UsersProfileResponse.class
+    );
   }
 
   @Override
@@ -777,6 +789,13 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  public CompletableFuture<Result<ConversationListResponse, SlackError>> listConversationsPaginated(
+    ConversationsListParams params
+  ) {
+    return postSlackCommand(SlackMethods.conversations_list, params, ConversationListResponse.class);
+  }
+
+  @Override
   public Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> usersConversations(
     ConversationsUserParams params
   ) {
@@ -824,6 +843,13 @@ public class SlackWebClient implements SlackClient {
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
     };
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationListResponse, SlackError>> usersConversationsPaginated(
+      ConversationsUserParams params
+  ) {
+    return postSlackCommand(SlackMethods.users_conversations, params, ConversationListResponse.class);
   }
 
   @Override
@@ -1030,6 +1056,13 @@ public class SlackWebClient implements SlackClient {
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
     };
+  }
+
+  @Override
+  public CompletableFuture<Result<ConversationMemberResponse, SlackError>> getConversationMembersPaginated(
+      ConversationMemberParams params
+  ) {
+    return postSlackCommand(SlackMethods.conversations_members, params, ConversationMemberResponse.class);
   }
 
   private CompletableFuture<Optional<Conversation>> findConversationByName(

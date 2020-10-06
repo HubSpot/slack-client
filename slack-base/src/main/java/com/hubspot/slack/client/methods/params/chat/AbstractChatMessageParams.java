@@ -30,7 +30,7 @@ public abstract class AbstractChatMessageParams implements MessageParams {
   @Check
   public void check() {
     Preconditions.checkState((getText().isPresent() && !Strings.isNullOrEmpty(getText().get())) ||
-            !getAttachments().isEmpty(),
-        "Must include text if not providing attachments");
+            !getAttachments().isEmpty() || !getBlocks().isEmpty(),
+        "Must include text if not providing attachments or blocks");
   }
 }
