@@ -6,10 +6,11 @@ import com.hubspot.immutables.style.HubSpotStyle;
 import org.immutables.value.Value;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public interface ViewDatePickerIF extends ViewInput {
-  LocalDate getSelectedDate();
+  Optional<LocalDate> getSelectedDate();
 }

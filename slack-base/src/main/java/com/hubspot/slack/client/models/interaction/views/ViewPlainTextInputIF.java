@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import org.immutables.value.Value.Immutable;
 
+import java.util.Optional;
+
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ViewPlainTextInputIF extends ViewInput {
-  String getValue();
+  Optional<String> getValue();
 }
