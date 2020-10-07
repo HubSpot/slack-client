@@ -21,7 +21,8 @@ import com.hubspot.slack.client.models.users.SlackUserLite;
     @Type(value = InteractiveAction.class, name = "interactive_message"),
     @Type(value = DialogSubmission.class, name = "dialog_submission"),
     @Type(value = ViewSubmission.class, name = "view_submission"),
-    @Type(value = MessageAction.class, name = "message_action")
+    @Type(value = MessageAction.class, name = "message_action"),
+    @Type(value = Shortcut.class, name = "shortcut")
   }
 )
 public interface SlackInteractiveCallback {

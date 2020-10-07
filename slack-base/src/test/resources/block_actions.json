@@ -32,7 +32,26 @@
     "private_metadata": "",
     "callback_id": "",
     "state": {
-      "values": {}
+      "values": {
+        "state-action": {
+          "action-value-1": {
+            "type": "text",
+            "value": "this is a text value"
+          },
+          "action-value-2": {
+            "type": "radio_buttons",
+            "selected_option": null
+          },
+          "action-value-3": {
+            "type": "external_select",
+            "selected_option": null
+          },
+          "action-value-4": {
+            "type": "datepicker",
+            "selected_date": "2020-11-03"
+          }
+        }
+      }
     },
     "hash": "1576003032.b99e0143",
     "title": {
