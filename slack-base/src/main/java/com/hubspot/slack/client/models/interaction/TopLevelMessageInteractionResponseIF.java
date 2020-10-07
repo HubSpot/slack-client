@@ -3,6 +3,7 @@ package com.hubspot.slack.client.models.interaction;
 import java.util.List;
 import java.util.Optional;
 
+import com.hubspot.slack.client.models.blocks.Block;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
@@ -29,6 +30,8 @@ public interface TopLevelMessageInteractionResponseIF {
   Optional<String> getText();
 
   List<Attachment> getAttachments();
+
+  List<Block> getBlocks();
 
   @Check
   default void check() {
