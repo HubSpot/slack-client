@@ -21,8 +21,6 @@ public abstract class OAuthV2CredentialsIF {
   public abstract SlackTeamLite getSlackTeamLite();
   public abstract Optional<String> getScope();
   public abstract SlackUserLite getAuthedUser();
-  public abstract Optional<BotCredentials> getBot();
-  public abstract Optional<IncomingWebhook> getIncomingWebhook();
 
   public String getTeamId() {
     return getSlackTeamLite().getId();
