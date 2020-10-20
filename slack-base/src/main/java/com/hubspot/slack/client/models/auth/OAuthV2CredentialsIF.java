@@ -15,19 +15,19 @@ import com.hubspot.slack.client.models.users.SlackUserLite;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public abstract class OAuthV2CredentialsIF {
-  public abstract String getAccessToken();
-
-  @JsonProperty("team")
-  public abstract SlackTeamLite getSlackTeamLite();
+  @JsonProperty("access_token")
+  public abstract String getBotAccessToken();
+  public abstract SlackTeamLite getTeam();
   public abstract Optional<String> getScope();
   public abstract SlackUserLite getAuthedUser();
+  public abstract String getBotUserId();
 
   public String getTeamId() {
-    return getSlackTeamLite().getId();
+    return getTeam().getId();
   }
 
   public String getTeamName() {
-    return getSlackTeamLite().getName();
+    return getTeam().getName();
   }
 
   public String getUserId () {
