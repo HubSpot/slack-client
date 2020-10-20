@@ -30,7 +30,7 @@ public abstract class OAuthV2CredentialsIF {
     return getTeam().getName();
   }
 
-  public String getUserId () {
+  public String getUserId() {
     return getAuthedUser().getId();
   }
 }
