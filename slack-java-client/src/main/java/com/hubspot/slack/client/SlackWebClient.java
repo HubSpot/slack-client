@@ -43,9 +43,11 @@ import com.hubspot.slack.client.methods.params.channels.PagingDirection;
 import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
 import com.hubspot.slack.client.methods.params.chat.ChatGetPermalinkParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostEphemeralMessageParams;
+import com.hubspot.slack.client.methods.params.chat.ChatPostEphemeralMessageParamsV2;
 import com.hubspot.slack.client.methods.params.chat.ChatPostMessageParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUnfurlParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
+import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParamsV2;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
@@ -703,6 +705,17 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  public CompletableFuture<Result<ChatPostEphemeralMessageResponse, SlackError>> postEphemeralMessage(
+      ChatPostEphemeralMessageParamsV2 params
+  ) {
+    return postSlackCommand(
+        SlackMethods.chat_postEphemeral,
+        params,
+        ChatPostEphemeralMessageResponse.class
+    );
+  }
+
+  @Override
   public CompletableFuture<Result<ChatUpdateMessageResponse, SlackError>> updateMessage(
     ChatUpdateMessageParams params
   ) {
@@ -710,6 +723,17 @@ public class SlackWebClient implements SlackClient {
       SlackMethods.chat_update,
       params,
       ChatUpdateMessageResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatUpdateMessageResponse, SlackError>> updateMessage(
+      ChatUpdateMessageParamsV2 params
+  ) {
+    return postSlackCommand(
+        SlackMethods.chat_update,
+        params,
+        ChatUpdateMessageResponse.class
     );
   }
 
