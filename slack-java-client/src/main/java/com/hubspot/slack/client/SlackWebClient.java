@@ -727,17 +727,6 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<ChatUpdateMessageResponse, SlackError>> updateMessage(
-      ChatUpdateMessageParamsV2 params
-  ) {
-    return postSlackCommand(
-        SlackMethods.chat_update,
-        params,
-        ChatUpdateMessageResponse.class
-    );
-  }
-
-  @Override
   public CompletableFuture<Result<ChatGetPermalinkResponse, SlackError>> getPermalink(
     ChatGetPermalinkParams params
   ) {
