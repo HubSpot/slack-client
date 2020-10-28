@@ -18,4 +18,10 @@ public interface SlackGroupOpenEventIF extends SlackEvent {
 
   @JsonProperty("user")
   String getUserId();
+
+  //Group open events do not have a ts, so we manually set it as null
+  @Override
+  default String getTs() {
+    return null;
+  }
 }

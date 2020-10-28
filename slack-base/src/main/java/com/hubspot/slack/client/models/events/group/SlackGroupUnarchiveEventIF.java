@@ -15,4 +15,10 @@ import org.immutables.value.Value;
 public interface SlackGroupUnarchiveEventIF extends SlackEvent {
   @JsonProperty("channel")
   String getChannelId();
+
+  //Group unarchived events do not have a ts, so we manually set it as null
+  @Override
+  default String getTs() {
+    return null;
+  }
 }

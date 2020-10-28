@@ -14,4 +14,10 @@ import org.immutables.value.Value;
 @HubSpotStyle
 public interface SlackGroupRenameEventIF extends SlackEvent {
   SlackChannel getChannel();
+
+  //Group rename events do not have a ts, so we manually set it as null
+  @Override
+  default String getTs() {
+    return null;
+  }
 }
