@@ -33,4 +33,8 @@ public abstract class OAuthV2CredentialsIF {
   public String getUserId() {
     return getAuthedUser().getId();
   }
+
+  public String getUserAccessToken() {
+    return getAuthedUser().getAccessToken().get();
+  }
 }
