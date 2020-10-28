@@ -3,14 +3,19 @@ package com.hubspot.slack.client.models.events;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
-import com.hubspot.slack.client.models.events.bot.SlackAppHomeOpenedEvent;
 import com.hubspot.slack.client.models.events.app.SlackAppUninstalledEvent;
 import com.hubspot.slack.client.models.events.app.SlackTokensRevokedEvent;
+import com.hubspot.slack.client.models.events.bot.SlackAppHomeOpenedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelArchiveEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelRenameEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelUnarchiveEvent;
+import com.hubspot.slack.client.models.events.group.SlackGroupArchiveEvent;
+import com.hubspot.slack.client.models.events.group.SlackGroupDeletedEvent;
+import com.hubspot.slack.client.models.events.group.SlackGroupOpenEvent;
+import com.hubspot.slack.client.models.events.group.SlackGroupRenameEvent;
+import com.hubspot.slack.client.models.events.group.SlackGroupUnarchiveEvent;
 import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
@@ -42,12 +47,13 @@ public enum SlackEventType {
   FILE_UNSHARED,
   GRID_MIGRATION_FINISHED,
   GRID_MIGRATION_STARTED,
-  GROUP_ARCHIVE,
+  GROUP_ARCHIVE(SlackGroupArchiveEvent.class),
   GROUP_CLOSE,
   GROUP_HISTORY_CHANGED,
-  GROUP_OPEN,
-  GROUP_RENAME,
-  GROUP_UNARCHIVE,
+  GROUP_OPEN(SlackGroupOpenEvent.class),
+  GROUP_RENAME(SlackGroupRenameEvent.class),
+  GROUP_UNARCHIVE(SlackGroupUnarchiveEvent.class),
+  GROUP_DELETED(SlackGroupDeletedEvent.class),
   IM_CLOSE,
   IM_CREATED,
   IM_HISTORY_CHANGED,
