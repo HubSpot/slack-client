@@ -12,13 +12,5 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = SlackGroupDeletedEvent.class)
 @Value.Immutable
 @HubSpotStyle
-public interface SlackGroupDeletedEventIF extends SlackEvent {
-  @JsonProperty("channel")
-  String getChannelId();
-
-  //Group deleted events do not have a ts, so we manually set it as null
-  @Override
-  default String getTs() {
-    return null;
-  }
+public interface SlackGroupDeletedEventIF extends SlackGroupEventCore {
 }

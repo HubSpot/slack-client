@@ -12,16 +12,7 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = SlackGroupOpenEvent.class)
 @Value.Immutable
 @HubSpotStyle
-public interface SlackGroupOpenEventIF extends SlackEvent {
-  @JsonProperty("channel")
-  String getChannelId();
-
+public interface SlackGroupOpenEventIF extends SlackGroupEventCore {
   @JsonProperty("user")
   String getUserId();
-
-  //Group open events do not have a ts, so we manually set it as null
-  @Override
-  default String getTs() {
-    return null;
-  }
 }
