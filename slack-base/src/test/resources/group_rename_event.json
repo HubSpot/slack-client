@@ -1,0 +1,20 @@
+{
+  "token": "uWopedqK86MJfjUeq8v9pUAD",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "group_rename",
+    "channel": {
+      "id": "GCX8BFXED",
+      "name": "knightwhosayni",
+      "created": 1537468268
+    },
+    "event_ts": "1537543256.000100"
+  },
+  "type": "event_callback",
+  "event_id": "EvCXQ1LM0Q",
+  "event_time": 1537543256,
+  "authed_users": [
+    "UBRFHDFGA"
+  ]
+}
