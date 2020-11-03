@@ -1,12 +1,5 @@
 package com.hubspot.slack.client.models.events.json;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.io.IOException;
-
-import org.junit.Test;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.ChannelType;
@@ -18,6 +11,12 @@ import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
+import org.junit.Test;
+
+import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class EventDeserializerTest {
   @Test
@@ -99,6 +98,36 @@ public class EventDeserializerTest {
   }
 
   @Test
+  public void itCanDeserializeGroupArchiveEvent() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("group_archive_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.GROUP_ARCHIVE);
+  }
+
+  @Test
+  public void itCanDeserializeGroupDeletedEvent() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("group_deleted_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.GROUP_DELETED);
+  }
+
+  @Test
+  public void itCanDeserializeGroupOpenEvent() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("group_open_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.GROUP_OPEN);
+  }
+
+  @Test
+  public void itCanDeserializeGroupRenameEvent() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("group_rename_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.GROUP_RENAME);
+  }
+
+  @Test
+  public void itCanDeserializeGroupUnArchiveEvent() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("group_unarchive_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.GROUP_UNARCHIVE);
+  }
+
+  @Test
   public void itCanDeserMemberJoinedChannelEventWithoutInviter() throws IOException {
     SlackMemberJoinedChannelEvent event = fetchAndDeserializeSlackEvent("member_joined_channel.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_JOINED_CHANNEL);
@@ -164,9 +193,10 @@ public class EventDeserializerTest {
 
   private SlackEvent deserializeSlackEvent(String rawJson) throws IOException {
     SlackEventWrapper<? extends SlackEvent> eventWrapper = ObjectMapperUtils.mapper().readValue(
-        rawJson, new TypeReference<SlackEventWrapper<? extends SlackEvent>>() {
-        }
+            rawJson, new TypeReference<SlackEventWrapper<? extends SlackEvent>>() {
+            }
     );
     return eventWrapper.getEvent().toDetailedEvent();
   }
 }
+
