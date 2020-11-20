@@ -75,6 +75,7 @@ import com.hubspot.slack.client.methods.params.usergroups.UsergroupEnableParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupListParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupUpdateParams;
 import com.hubspot.slack.client.methods.params.usergroups.users.UsergroupUsersUpdateParams;
+import com.hubspot.slack.client.methods.params.users.SetUserProfileParams;
 import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.methods.params.users.UsersListParams;
@@ -437,6 +438,17 @@ public class SlackWebClient implements SlackClient {
         SlackMethods.users_profile_get,
         params,
         UsersProfileResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<UsersProfileResponse, SlackError>> setUserProfile(
+          SetUserProfileParams params
+  ) {
+    return postSlackCommand(
+            SlackMethods.users_profile_set,
+            params,
+            UsersProfileResponse.class
     );
   }
 

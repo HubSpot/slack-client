@@ -3,6 +3,7 @@ package com.hubspot.slack.client.models.users;
 import java.util.Map;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,6 +16,7 @@ import com.hubspot.slack.client.models.users.json.UserProfileFieldsDeserializer;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface UserProfileIF {
   @JsonProperty("display_name")
   Optional<String> getUsername();
@@ -27,6 +29,7 @@ public interface UserProfileIF {
   Optional<String> getEmail();
   Optional<String> getStatusText();
   Optional<String> getStatusEmoji();
+  Optional<Integer> getStatusExpiration();
   Optional<String> getTitle();
   Optional<String> getPhone();
   Optional<String> getSkype();

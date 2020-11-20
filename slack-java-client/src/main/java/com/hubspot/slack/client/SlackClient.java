@@ -48,6 +48,7 @@ import com.hubspot.slack.client.methods.params.usergroups.UsergroupEnableParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupListParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupUpdateParams;
 import com.hubspot.slack.client.methods.params.usergroups.users.UsergroupUsersUpdateParams;
+import com.hubspot.slack.client.methods.params.users.SetUserProfileParams;
 import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.methods.params.users.UsersListParams;
@@ -116,6 +117,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<UsersInfoResponse, SlackError>> findUser(UsersInfoParams params);
   CompletableFuture<Result<UsersInfoResponse, SlackError>> lookupUserByEmail(UserEmailParams email);
   CompletableFuture<Result<UsersProfileResponse, SlackError>> getUserProfile(UsersInfoParams params);
+  CompletableFuture<Result<UsersProfileResponse, SlackError>> setUserProfile(SetUserProfileParams params);
 
   // users
   Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
