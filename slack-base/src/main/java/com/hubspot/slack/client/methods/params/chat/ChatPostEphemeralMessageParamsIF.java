@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -19,6 +20,7 @@ public interface ChatPostEphemeralMessageParamsIF extends MessageParams {
   @JsonProperty("user")
   String getUserToSendTo();
 
+  @JsonInclude(JsonInclude.Include.NON_ABSENT)
   @JsonProperty("as_user")
   Optional<Boolean> getSendAsUser();
 

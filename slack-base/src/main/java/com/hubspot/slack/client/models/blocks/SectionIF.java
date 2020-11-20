@@ -44,8 +44,10 @@ public interface SectionIF extends Block {
       getText() != null && !Strings.isNullOrEmpty(getText().getText());
     boolean hasFields = !getFields().isEmpty();
     Preconditions.checkState(
-      hasNonEmptyTextField || hasFields,
-      "Must include text if not providing a list of fields"
+        hasNonEmptyTextField || hasFields,
+        "Must include text if not providing a list of fields"
     );
+    boolean isTextLengthValid = getText().getText().length() <= 3000;
+    Preconditions.checkState(isTextLengthValid, "The text length of a Section block cannot exceed 3000 characters");
   }
 }

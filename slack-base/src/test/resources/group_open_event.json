@@ -1,0 +1,17 @@
+{
+  "token": "uWopedqK86MJfjUeq8v9pUAD",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "group_open",
+    "channel": "GCXF9BDV1",
+    "user": "UBRFHDFGA",
+    "event_ts": "1537452804.000100"
+  },
+  "type": "event_callback",
+  "event_id": "EvCXCPK952",
+  "event_time": 1537452804,
+  "authed_users": [
+    "UBRFHDFGA"
+  ]
+}

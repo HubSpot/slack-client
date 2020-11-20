@@ -6,7 +6,8 @@
   },
   "user": {
     "id": "USER_ID",
-    "name": "auser"
+    "name": "auser",
+    "access_token": "xoxp-507412329303-981238771351-1412370955013-fce9dc6b782f54549b5b2d435afe229e"
   },
   "token": "ITS_A_SECRET",
   "trigger_id": "869524640327.819832772087.67c795e952f7b500a9cd55d2d1830d6c",
@@ -32,7 +33,26 @@
     "private_metadata": "",
     "callback_id": "",
     "state": {
-      "values": {}
+      "values": {
+        "state-action": {
+          "action-value-1": {
+            "type": "text",
+            "value": "this is a text value"
+          },
+          "action-value-2": {
+            "type": "radio_buttons",
+            "selected_option": null
+          },
+          "action-value-3": {
+            "type": "external_select",
+            "selected_option": null
+          },
+          "action-value-4": {
+            "type": "datepicker",
+            "selected_date": "2020-11-03"
+          }
+        }
+      }
     },
     "hash": "1576003032.b99e0143",
     "title": {

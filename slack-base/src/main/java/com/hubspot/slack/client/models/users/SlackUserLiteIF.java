@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.users;
 
+import java.util.Optional;
+
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
@@ -10,5 +12,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface SlackUserLiteIF extends SlackUserCore {
+
+  Optional<String> getAccessToken();
 
 }
