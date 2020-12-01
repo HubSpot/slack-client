@@ -35,6 +35,8 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsListPa
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
+import com.hubspot.slack.client.methods.params.dnd.DndInfoParams;
+import com.hubspot.slack.client.methods.params.dnd.DndSetSnoozeParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.group.GroupsKickParams;
@@ -60,6 +62,7 @@ import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.conversations.Conversation;
 import com.hubspot.slack.client.models.group.SlackGroup;
 import com.hubspot.slack.client.models.response.FindRepliesResponse;
+import com.hubspot.slack.client.models.response.SimpleSlackResponse;
 import com.hubspot.slack.client.models.response.SlackError;
 import com.hubspot.slack.client.models.response.SlackResponse;
 import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
@@ -84,6 +87,8 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsOpenR
 import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
+import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
+import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
@@ -124,6 +129,19 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params);
 
   // channels
+
+  CompletableFuture<Result<DndInfoResponse, SlackError>> getDndInfo(
+          DndInfoParams params
+  );
+
+  CompletableFuture<Result<SimpleSlackResponse, SlackError>> endDnd();
+
+  CompletableFuture<Result<DndSnoozeResponse, SlackError>> setDndSnooze(
+          DndSetSnoozeParams params
+  );
+
+  CompletableFuture<Result<DndInfoResponse, SlackError>> endDndSnooze();
+
   /**
    * Will be removed on or after November 25, 2020
    * @deprecated use {@link #listConversations(ConversationsListParams)}
