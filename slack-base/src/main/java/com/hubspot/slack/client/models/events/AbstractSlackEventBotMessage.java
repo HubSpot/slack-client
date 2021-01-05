@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.Attachment;
+import com.hubspot.slack.client.models.blocks.Block;
 
 @Immutable
 @HubSpotStyle
@@ -23,4 +24,5 @@ public abstract class AbstractSlackEventBotMessage extends SlackEventMessageBase
   public abstract Optional<String> getText();
   public abstract List<Attachment> getAttachments();
   public abstract String getBotId();
+  public abstract List<Block> getBlocks();
 }
