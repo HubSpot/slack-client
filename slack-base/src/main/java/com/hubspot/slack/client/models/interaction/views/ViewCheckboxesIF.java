@@ -8,12 +8,12 @@ import com.hubspot.slack.client.models.blocks.json.OptionOrOptionGroupDeserializ
 import com.hubspot.slack.client.models.blocks.objects.Option;
 import org.immutables.value.Value;
 
-import java.util.Optional;
+import java.util.List;
 
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public interface ViewCheckboxesIF extends ViewInput {
   @JsonDeserialize(contentUsing = OptionOrOptionGroupDeserializer.class)
-  Optional<Option> getSelectedOption();
+  List<Option> getSelectedOptions();
 }
