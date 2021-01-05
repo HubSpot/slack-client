@@ -19,5 +19,7 @@ public interface OptionIF extends OptionOrOptionGroup{
   @Value.Parameter
   String getValue();
 
+  Optional<Text> getDescription();
+
   Optional<String> getUrl();
 }
