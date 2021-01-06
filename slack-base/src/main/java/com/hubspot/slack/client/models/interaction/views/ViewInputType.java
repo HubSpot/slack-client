@@ -9,6 +9,7 @@ public enum ViewInputType {
   DATEPICKER,
   RADIO_BUTTONS,
   USERS_SELECT,
+  CHECKBOXES,
   UNKNOWN;
 
   private static final EnumIndex<String, ViewInputType> INDEX = new EnumIndex<>(
