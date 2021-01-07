@@ -32,7 +32,7 @@ public interface CheckboxesIF extends BlockElement, HasActionId {
   List<Option> getOptions();
 
   @JsonDeserialize(contentUsing = OptionOrOptionGroupDeserializer.class)
-  Optional<Option> getInitialOption();
+  Optional<Option> getInitialOptions();
 
   @JsonProperty("confirm")
   Optional<ConfirmationDialog> getConfirmationDialog();
