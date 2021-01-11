@@ -5,6 +5,7 @@ import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.ChannelType;
 import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.events.SlackEvent;
+import com.hubspot.slack.client.models.events.SlackEventMessage;
 import com.hubspot.slack.client.models.events.SlackEventType;
 import com.hubspot.slack.client.models.events.SlackEventWrapper;
 import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
@@ -176,6 +177,22 @@ public class EventDeserializerTest {
     SlackLinkSharedEvent event = fetchAndDeserializeSlackEvent("link_shared.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.LINK_SHARED);
     assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackLinkSharedEvent.class)).isEqualTo(event);
+  }
+
+  @Test
+  public void itCanDeserBotMessageEventCallbacks() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("bot_message_event_callback.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);
+    assertThat(event.toDetailedEvent().getClass())
+        .describedAs("It should deserialize the new format into a message")
+        .isEqualTo(SlackEventMessage.class);
+    SlackEventMessage typedMessage = (SlackEventMessage) event.toDetailedEvent();
+    assertThat(typedMessage.getAttachments())
+        .describedAs("It should deser the attachments")
+        .hasSize(1);
+    assertThat(typedMessage.getBotId())
+        .describedAs("It should deser the bot id")
+        .contains("B00000000");
   }
 
   @Test
