@@ -36,6 +36,11 @@ public enum SlackEventType {
   DND_UPDATED_USER,
   EMAIL_DOMAIN_CHANGED,
   EMOJI_CHANGED,
+  /**
+   * This is the "new" shape for slack events, with the details/varience encoded in the actual
+   * event payload rather than the top level field.
+   */
+  EVENT_CALLBACK,
   FILE_CHANGE,
   FILE_COMMENT_ADDED,
   FILE_COMMENT_DELETED,

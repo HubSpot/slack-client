@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.events;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.immutables.value.Value.Immutable;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.methods.interceptor.HasUser;
+import com.hubspot.slack.client.models.Attachment;
 
 @Immutable
 @HubSpotStyle
