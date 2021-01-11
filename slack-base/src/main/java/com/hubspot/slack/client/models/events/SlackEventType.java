@@ -38,7 +38,7 @@ public enum SlackEventType {
   EMOJI_CHANGED,
   /**
    * This is the "new" shape for slack events, with the details/varience encoded in the actual
-   * event payload rather than the top level field.
+   * event payload rather than the top level field
    */
   EVENT_CALLBACK,
   FILE_CHANGE,
