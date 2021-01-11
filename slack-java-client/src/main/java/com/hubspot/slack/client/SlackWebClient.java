@@ -62,6 +62,8 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsListPa
 import com.hubspot.slack.client.methods.params.conversations.ConversationsRepliesParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationsUserParams;
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
+import com.hubspot.slack.client.methods.params.dnd.DndInfoParams;
+import com.hubspot.slack.client.methods.params.dnd.DndSetSnoozeParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.group.GroupsKickParams;
@@ -75,6 +77,7 @@ import com.hubspot.slack.client.methods.params.usergroups.UsergroupEnableParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupListParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupUpdateParams;
 import com.hubspot.slack.client.methods.params.usergroups.users.UsergroupUsersUpdateParams;
+import com.hubspot.slack.client.methods.params.users.SetUserProfileParams;
 import com.hubspot.slack.client.methods.params.users.UserEmailParams;
 import com.hubspot.slack.client.methods.params.users.UsersInfoParams;
 import com.hubspot.slack.client.methods.params.users.UsersListParams;
@@ -87,6 +90,7 @@ import com.hubspot.slack.client.models.conversations.Conversation;
 import com.hubspot.slack.client.models.group.SlackGroup;
 import com.hubspot.slack.client.models.response.FindRepliesResponse;
 import com.hubspot.slack.client.models.response.ResponseMetadata;
+import com.hubspot.slack.client.models.response.SimpleSlackResponse;
 import com.hubspot.slack.client.models.response.SlackError;
 import com.hubspot.slack.client.models.response.SlackErrorResponse;
 import com.hubspot.slack.client.models.response.SlackErrorType;
@@ -116,6 +120,8 @@ import com.hubspot.slack.client.models.response.conversations.ConversationsOpenR
 import com.hubspot.slack.client.models.response.conversations.ConversationsRepliesResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationsUnarchiveResponse;
 import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
+import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
+import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
@@ -437,6 +443,57 @@ public class SlackWebClient implements SlackClient {
         SlackMethods.users_profile_get,
         params,
         UsersProfileResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<UsersProfileResponse, SlackError>> setUserProfile(
+          SetUserProfileParams params
+  ) {
+    return postSlackCommand(
+            SlackMethods.users_profile_set,
+            params,
+            UsersProfileResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<DndInfoResponse, SlackError>> getDndInfo(
+          DndInfoParams params
+  ) {
+    return postSlackCommand(
+            SlackMethods.dnd_info,
+            params,
+            DndInfoResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<SimpleSlackResponse, SlackError>> endDnd() {
+    return postSlackCommand(
+            SlackMethods.dnd_endDnd,
+            Collections.emptyMap(),
+            SimpleSlackResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<DndSnoozeResponse, SlackError>> setDndSnooze(
+          DndSetSnoozeParams params
+          ) {
+    return postSlackCommand(
+            SlackMethods.dnd_setSnooze,
+            params,
+            DndSnoozeResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<DndInfoResponse, SlackError>> endDndSnooze() {
+    return postSlackCommand(
+            SlackMethods.dnd_endSnooze,
+            Collections.emptyMap(),
+            DndInfoResponse.class
     );
   }
 

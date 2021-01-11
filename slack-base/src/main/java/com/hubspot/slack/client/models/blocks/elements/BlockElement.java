@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = DatePicker.class, name = DatePicker.TYPE),
     @JsonSubTypes.Type(value = ChannelSelectMenu.class, name = ChannelSelectMenu.TYPE),
     @JsonSubTypes.Type(value = ChannelsMultiSelectMenu.class, name = ChannelsMultiSelectMenu.TYPE),
+    @JsonSubTypes.Type(value = Checkboxes.class, name = Checkboxes.TYPE),
     @JsonSubTypes.Type(value = ConversationSelectMenu.class, name = ConversationSelectMenu.TYPE),
     @JsonSubTypes.Type(value = ConversationsMultiSelectMenu.class, name = ConversationsMultiSelectMenu.TYPE),
     @JsonSubTypes.Type(value = ExternalMultiSelectMenu.class, name = ExternalMultiSelectMenu.TYPE),

@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "dnd_enabled": true,
+  "next_dnd_start_ts": 1606804061,
+  "next_dnd_end_ts": 1606805861,
+  "snooze_enabled": true,
+  "snooze_endtime": 1606805861,
+  "snooze_remaining": 1797
+}

@@ -284,5 +284,22 @@
         "text": "Stop, I've changed my mind!"
       }
     }
+  },
+  {
+    "type": "checkboxes",
+    "options": [
+      {
+        "text": {
+          "type": "mrkdwn",
+          "text": "*this is mrkdwn text*"
+        },
+        "description": {
+          "type": "mrkdwn",
+          "text": "*this is mrkdwn text*"
+        },
+        "value": "checkboxes-value"
+      }
+    ],
+    "action_id": "checkboxes-1"
   }
 ]

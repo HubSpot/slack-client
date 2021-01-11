@@ -96,6 +96,21 @@
               "value" : "VALUE"
             }
           }
+        },
+        "nVmE": {
+          "some-checkbox-thing": {
+            "type": "checkboxes",
+            "selected_options": [
+              {
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "The checkbox label",
+                  "verbatim": false
+                },
+                "value": "true"
+              }
+            ]
+          }
         }
       }
     },
