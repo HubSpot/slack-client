@@ -23,4 +23,4 @@ jobs:
     - name: print Java version
       run: java -version
     - name: Run tests
-      run: mvn --batch-mode --no-transfer-progress clean test
+      run: mvn --batch-mode -X --no-transfer-progress clean test
