@@ -291,7 +291,7 @@ public class SlackWebClient implements SlackClient {
         );
       case CHANNEL:
         return postSlackCommand(
-          SlackMethods.channels_replies,
+          SlackMethods.conversations_replies,
           params,
           FindRepliesResponse.class
         );
