@@ -93,6 +93,14 @@ public class EventDeserializerTest {
   }
 
   @Test
+  public void itCanDeserChannelSharedEvent() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("channel_shared_event.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_SHARED);
+
+    System.out.println(event);
+  }
+
+  @Test
   public void itCanDeserChannelUnarchivedEvent() throws IOException {
     SlackEvent event = fetchAndDeserializeSlackEvent("channel_unarchived_event.json");
     assertThat(event.getType()).isEqualTo(SlackEventType.CHANNEL_UNARCHIVE);
