@@ -41,7 +41,7 @@ public interface SectionIF extends Block {
   @Check
   default void check() {
     boolean hasNonEmptyTextField =
-      getText() != null && !Strings.isNullOrEmpty(getText().getText());
+      (getText() != null && !Strings.isNullOrEmpty(getText().getText())) || (getFields().stream().allMatch(item -> !Strings.isNullOrEmpty(item.getText())));
     boolean hasFields = !getFields().isEmpty();
     Preconditions.checkState(
         hasNonEmptyTextField || hasFields,
