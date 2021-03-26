@@ -10,5 +10,5 @@ public interface SlackTextFileCore extends SlackFile {
   Optional<String> getLinesMore();
 
   @JsonProperty("preview_is_truncated")
-  boolean isPreviewTruncated();
+  Optional<Boolean> isPreviewTruncated();
 }
