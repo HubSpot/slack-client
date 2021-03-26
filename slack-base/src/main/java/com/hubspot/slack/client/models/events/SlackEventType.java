@@ -10,6 +10,7 @@ import com.hubspot.slack.client.models.events.channel.SlackChannelArchiveEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelCreatedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelDeletedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelRenameEvent;
+import com.hubspot.slack.client.models.events.channel.SlackChannelSharedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelUnarchiveEvent;
 import com.hubspot.slack.client.models.events.group.SlackGroupArchiveEvent;
 import com.hubspot.slack.client.models.events.group.SlackGroupDeletedEvent;
@@ -32,6 +33,7 @@ public enum SlackEventType {
   CHANNEL_HISTORY_CHANGED,
   CHANNEL_RENAME(SlackChannelRenameEvent.class),
   CHANNEL_UNARCHIVE(SlackChannelUnarchiveEvent.class),
+  CHANNEL_SHARED(SlackChannelSharedEvent.class),
   DND_UPDATED,
   DND_UPDATED_USER,
   EMAIL_DOMAIN_CHANGED,
