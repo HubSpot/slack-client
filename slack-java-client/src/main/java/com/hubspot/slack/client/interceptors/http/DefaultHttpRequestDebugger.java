@@ -15,6 +15,6 @@ public class DefaultHttpRequestDebugger implements RequestDebugger {
       SlackMethod method,
       HttpRequest request
   ) {
-    LOG.debug("REQ<{}> [{}]: Issuing request \n\n{}", requestId, method.getMethod(), HttpFormatter.formatRequest(request));
+    LOG.debug("REQ<{}> [{}]: Issuing request \n\n{}", requestId, method.getMethod(), request);
   }
 }
