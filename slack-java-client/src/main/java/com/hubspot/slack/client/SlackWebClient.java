@@ -1,5 +1,22 @@
 package com.hubspot.slack.client;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.annotations.VisibleForTesting;
@@ -148,21 +165,6 @@ import com.hubspot.slack.client.paging.AbstractPagedIterable;
 import com.hubspot.slack.client.paging.LazyLoadingPage;
 import com.hubspot.slack.client.ratelimiting.ByMethodRateLimiter;
 import com.hubspot.slack.client.ratelimiting.SlackRateLimiter;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class SlackWebClient implements SlackClient {
   public static final int RATE_LIMIT_SENTINEL_VALUE = -1;
@@ -1579,11 +1581,11 @@ public class SlackWebClient implements SlackClient {
     Class<T> responseType
   ) {
     HttpRequest.Builder requestBuilder = buildBaseSlackPost(method)
-      .setContentType(ContentType.FORM);
+      .setContentType(ContentType.FORM)
+      .addHeader("Authorization", "Bearer " + config.getTokenSupplier().get());
     params
       .entries()
       .forEach(param -> requestBuilder.setFormParam(param.getKey()).to(param.getValue()));
-    requestBuilder.setQueryParam("token").to(config.getTokenSupplier().get());
     return executeLoggedAs(method, requestBuilder.build(), responseType);
   }
 
