@@ -13,7 +13,6 @@ import com.hubspot.slack.client.methods.params.channels.ChannelsInfoParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsKickParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsListParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
-import com.hubspot.slack.client.methods.params.chat.AbstractChatDeleteParamsBase;
 import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
 import com.hubspot.slack.client.methods.params.chat.ChatGetPermalinkParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostEphemeralMessageParams;
@@ -199,7 +198,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<ChatPostEphemeralMessageResponse, SlackError>> postEphemeralMessage(ChatPostEphemeralMessageParams params);
   CompletableFuture<Result<ChatUpdateMessageResponse, SlackError>> updateMessage(ChatUpdateMessageParams params);
   CompletableFuture<Result<ChatGetPermalinkResponse, SlackError>> getPermalink(ChatGetPermalinkParams params);
-  CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(AbstractChatDeleteParamsBase params);
+  CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(ChatDeleteParams params);
   CompletableFuture<Result<ChatUnfurlResponse, SlackError>> unfurlLinks(ChatUnfurlParams params);
 
   // conversations
