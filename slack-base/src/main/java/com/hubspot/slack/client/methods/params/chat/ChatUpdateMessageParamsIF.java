@@ -25,6 +25,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
 
   String getTs();
 
+  @JsonInclude(JsonInclude.Include.NON_ABSENT)
   @JsonProperty("as_user")
   Optional<Boolean> getAsUser();
 
