@@ -20,4 +20,15 @@ public class ChatDeleteParamsTest extends SerializationTestBase {
     String chatDeleteParamsSerialized = ObjectMapperUtils.mapper().writeValueAsString(chatDeleteParams);
     assertThat(chatDeleteParamsSerialized).doesNotContain("as_user");
   }
+
+  @Test
+  public void itSerializesAsUserFieldIfItEquelsTrue() throws IOException {
+    ChatDeleteParams chatDeleteParams = ChatDeleteParams.builder()
+        .setChannelId("C1234567890")
+        .setMessageToDeleteTs("123456789.9875")
+        .setAsUser(true)
+        .build();
+    String chatDeleteParamsSerialized = ObjectMapperUtils.mapper().writeValueAsString(chatDeleteParams);
+    assertThat(chatDeleteParamsSerialized).contains("as_user");
+  }
 }
