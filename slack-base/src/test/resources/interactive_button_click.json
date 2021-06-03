@@ -10,6 +10,7 @@
   "callback_id": "test",
   "team": {
     "id": "T024G0P55",
+    "name": "team_name",
     "domain": "hubspot"
   },
   "channel": {
