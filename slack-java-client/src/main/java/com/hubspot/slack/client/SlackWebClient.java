@@ -1389,7 +1389,7 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo() {
-    return postSlackCommand(SlackMethods.team_info, new Object(), TeamInfoResponse.class);
+    return postSlackCommand(SlackMethods.team_info, Collections.emptyMap(), TeamInfoResponse.class);
   }
 
   @Override
