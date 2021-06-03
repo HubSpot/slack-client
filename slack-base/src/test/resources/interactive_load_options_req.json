@@ -5,6 +5,7 @@
   "callback_id": "kepler",
   "team": {
     "id": "T024G0P55",
+    "name": "team_name",
     "domain": "hubspot"
   },
   "channel": {

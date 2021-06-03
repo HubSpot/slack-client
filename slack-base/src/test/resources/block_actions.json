@@ -2,6 +2,7 @@
   "type": "block_actions",
   "team": {
     "id": "TEAM_ID",
+    "name": "TEAM_NAME",
     "domain": "slackhubspoti-et16299"
   },
   "user": {

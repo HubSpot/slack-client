@@ -2,6 +2,7 @@
   "type": "view_submission",
   "team": {
     "id": "id1",
+    "name": "team_name",
     "domain": "hubspot"
   },
   "user": {

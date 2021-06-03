@@ -13,6 +13,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public interface SlackTeamIF {
   String getId();
   String getDomain();
+  Optional<String> getName();
   Optional<String> getEnterpriseId();
   Optional<String> getEnterpriseName();
 }
