@@ -16,4 +16,5 @@ public interface SlackTeamIF {
   Optional<String> getName();
   Optional<String> getEnterpriseId();
   Optional<String> getEnterpriseName();
+  Optional<SlackTeamIcon> getIcon();
 }
