@@ -1,0 +1,25 @@
+package com.hubspot.slack.client.models.response.migration;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.immutables.value.Value.Immutable;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.response.SlackResponse;
+
+@Immutable
+@HubSpotStyle
+@JsonNaming(SnakeCaseStrategy.class)
+public interface MigrationExchangeResponseIF extends SlackResponse {
+  String getTeamId();
+
+  String getEnterpriseId();
+
+  Map<String, String> getUserIdMap();
+
+  Optional<List<String>> getInvalidUserIds();
+}
