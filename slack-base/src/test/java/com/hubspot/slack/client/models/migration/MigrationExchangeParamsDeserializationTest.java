@@ -1,11 +1,9 @@
 package com.hubspot.slack.client.models.migration;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Test;
@@ -25,10 +23,10 @@ public class MigrationExchangeParamsDeserializationTest {
     MigrationExchangeResponse migrationExchangeResponse =
         fetchAndDeserializeMigrationExchangeResponse("migration_exchange_response_with_valid_and_invalid_user_ids.json");
     Map<String, String> userIdMap = migrationExchangeResponse.getUserIdMap();
-    Optional<Set<String>> invalidUserIds = migrationExchangeResponse.getInvalidUserIds();
+    Set<String> invalidUserIds = migrationExchangeResponse.getInvalidUserIds();
     assertTrue(doesMainParamsPresent(migrationExchangeResponse));
     assertTrue(userIdMap.containsKey(VALID_USER_OLD_ID) && userIdMap.containsValue(VALID_USER_MIGRATED_ID));
-    assertTrue(invalidUserIds.isPresent() && invalidUserIds.get().contains(INVALID_USER_ID));
+    assertTrue(invalidUserIds.contains(INVALID_USER_ID));
   }
 
   @Test
@@ -36,10 +34,10 @@ public class MigrationExchangeParamsDeserializationTest {
     MigrationExchangeResponse migrationExchangeResponse =
         fetchAndDeserializeMigrationExchangeResponse("migration_exchange_response_with_only_valid_user_ids.json");
     Map<String, String> userIdMap = migrationExchangeResponse.getUserIdMap();
-    Optional<Set<String>> invalidUserIds = migrationExchangeResponse.getInvalidUserIds();
+    Set<String> invalidUserIds = migrationExchangeResponse.getInvalidUserIds();
     assertTrue(doesMainParamsPresent(migrationExchangeResponse));
     assertTrue(userIdMap.containsKey(VALID_USER_OLD_ID) && userIdMap.containsValue(VALID_USER_MIGRATED_ID));
-    assertFalse(invalidUserIds.isPresent());
+    assertTrue(invalidUserIds.isEmpty());
   }
 
   @Test
@@ -47,10 +45,10 @@ public class MigrationExchangeParamsDeserializationTest {
     MigrationExchangeResponse migrationExchangeResponse =
         fetchAndDeserializeMigrationExchangeResponse("migration_exchange_response_with_only_invalid_user_ids.json");
     Map<String, String> userIdMap = migrationExchangeResponse.getUserIdMap();
-    Optional<Set<String>> invalidUserIds = migrationExchangeResponse.getInvalidUserIds();
+    Set<String> invalidUserIds = migrationExchangeResponse.getInvalidUserIds();
     assertTrue(doesMainParamsPresent(migrationExchangeResponse));
     assertTrue(userIdMap.isEmpty());
-    assertTrue(invalidUserIds.isPresent() && invalidUserIds.get().contains(INVALID_USER_ID));
+    assertTrue(invalidUserIds.contains(INVALID_USER_ID));
   }
 
   private MigrationExchangeResponse fetchAndDeserializeMigrationExchangeResponse(String jsonFileName) throws IOException {
