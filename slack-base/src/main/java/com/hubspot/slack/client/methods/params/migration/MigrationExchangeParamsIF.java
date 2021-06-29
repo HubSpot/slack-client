@@ -1,10 +1,11 @@
 package com.hubspot.slack.client.methods.params.migration;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.immutables.value.Value;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -13,7 +14,8 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface MigrationExchangeParamsIF {
-  List<String> getUsers();
+  @JsonProperty("users")
+  Set<String> getUserIds();
 
   Optional<String> getTeamId();
 

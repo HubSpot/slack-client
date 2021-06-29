@@ -1,8 +1,8 @@
 package com.hubspot.slack.client.models.response.migration;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.immutables.value.Value.Immutable;
 
@@ -21,5 +21,5 @@ public interface MigrationExchangeResponseIF extends SlackResponse {
 
   Map<String, String> getUserIdMap();
 
-  Optional<List<String>> getInvalidUserIds();
+  Optional<Set<String>> getInvalidUserIds();
 }
