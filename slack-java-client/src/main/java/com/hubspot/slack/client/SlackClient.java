@@ -42,6 +42,7 @@ import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.group.GroupsKickParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
+import com.hubspot.slack.client.methods.params.migration.MigrationExchangeParams;
 import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
 import com.hubspot.slack.client.methods.params.search.SearchMessagesParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupCreateParams;
@@ -94,6 +95,7 @@ import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlRespon
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.group.GroupsKickResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
+import com.hubspot.slack.client.models.response.migration.MigrationExchangeResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
 import com.hubspot.slack.client.models.response.team.TeamInfoResponse;
@@ -252,6 +254,9 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<ModalViewCommandResponse, SlackError>> updateView(UpdateViewParams params);
   CompletableFuture<Result<ModalViewCommandResponse, SlackError>> pushView(OpenViewParams params);
   CompletableFuture<Result<HomeTabViewCommandResponse, SlackError>> publishView(PublishViewParams params);
+
+  // migration.exchange
+  CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(MigrationExchangeParams params);
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
