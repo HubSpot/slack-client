@@ -6,7 +6,6 @@ import java.util.concurrent.CompletableFuture;
 
 import com.hubspot.algebra.Result;
 import com.hubspot.slack.client.methods.SlackMethod;
-import com.hubspot.slack.client.methods.SlackMethods;
 import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
