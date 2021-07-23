@@ -66,6 +66,7 @@ import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
+import com.hubspot.slack.client.methods.params.conversations.ConversationInviteSharedParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationMemberParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationOpenParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationSetPurposeParams;
@@ -119,6 +120,7 @@ import com.hubspot.slack.client.models.response.channels.ChannelsHistoryResponse
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsKickResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsListResponse;
+import com.hubspot.slack.client.models.response.channels.SharedChannelInviteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageResponse;
@@ -933,6 +935,13 @@ public class SlackWebClient implements SlackClient {
       params,
       ConversationsInviteResponse.class
     );
+  }
+
+  @Override
+  public CompletableFuture<Result<SharedChannelInviteResponse, SlackError>>  inviteToSharedConversation(
+      ConversationInviteSharedParams params
+  ) {
+    return postSlackCommand(SlackMethods.conversations_inviteShared, params, SharedChannelInviteResponse.class);
   }
 
   @Override

@@ -45,6 +45,7 @@ public enum SlackMethods implements SlackMethod {
   conversations_history(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
   conversations_info(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
   conversations_invite(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
+  conversations_inviteShared(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.FORM_ENCODING_ONLY),
   conversations_join(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   conversations_kick(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   conversations_leave(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
