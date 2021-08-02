@@ -35,7 +35,19 @@
       "text": "Shutters shut and shutters and so shutters shut and shutters and so and so shutters and so shutters shut and so shutters shut and shutters and so.",
       "thread_ts": "1482960137.003543",
       "parent_user_id": "U061F7AUR",
-      "ts": "1483037603.017503"
+      "ts": "1483037603.017503",
+      "reactions": [
+        {
+          "name": "astonished",
+          "count": 3,
+          "users": [ "U061F7AUR", "U062F7AUR", "U063F7AUR"]
+        },
+        {
+          "name": "facepalm",
+          "count": 34,
+          "users": [ "U061F7AUR", "U062F7AUR", "U063F7AUR", "U064F7AUR", "U065F7AUR" ]
+        }
+      ]
     },
     {
       "type": "message",
@@ -51,7 +63,19 @@
       "text": "I love you Alice B. Toklas and so does Gertrude Stein.",
       "thread_ts": "1482960137.003543",
       "parent_user_id": "U061F7AUR",
-      "ts": "1483125339.020269"
+      "ts": "1483125339.020269",
+      "reactions": [
+        {
+          "name": "grin",
+          "count": 2,
+          "users": [ "U061F7AUR", "U062F7AUR"]
+        },
+        {
+          "name": "wink",
+          "count": 50,
+          "users": [ "U061F7AUR", "U062F7AUR", "U063F7AUR" ]
+        }
+      ]
     }
   ],
   "has_more": true,
