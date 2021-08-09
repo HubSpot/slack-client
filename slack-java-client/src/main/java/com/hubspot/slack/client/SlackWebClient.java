@@ -58,9 +58,12 @@ import com.hubspot.slack.client.methods.params.channels.ChannelsListParams;
 import com.hubspot.slack.client.methods.params.channels.FindRepliesParams;
 import com.hubspot.slack.client.methods.params.channels.PagingDirection;
 import com.hubspot.slack.client.methods.params.chat.ChatDeleteParams;
+import com.hubspot.slack.client.methods.params.chat.ChatDeleteScheduledMessageParams;
 import com.hubspot.slack.client.methods.params.chat.ChatGetPermalinkParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostEphemeralMessageParams;
 import com.hubspot.slack.client.methods.params.chat.ChatPostMessageParams;
+import com.hubspot.slack.client.methods.params.chat.ChatScheduleMessageParams;
+import com.hubspot.slack.client.methods.params.chat.ChatScheduledMessagesListParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUnfurlParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
@@ -122,9 +125,12 @@ import com.hubspot.slack.client.models.response.channels.ChannelsKickResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsListResponse;
 import com.hubspot.slack.client.models.response.channels.SharedChannelInviteResponse;
 import com.hubspot.slack.client.models.response.chat.ChatDeleteResponse;
+import com.hubspot.slack.client.models.response.chat.ChatDeleteScheduledMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatGetPermalinkResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
+import com.hubspot.slack.client.models.response.chat.ChatScheduleMessageResponse;
+import com.hubspot.slack.client.models.response.chat.ChatScheduledMessagesListResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
@@ -773,6 +779,33 @@ public class SlackWebClient implements SlackClient {
       SlackMethods.chat_update,
       params,
       ChatUpdateMessageResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatScheduleMessageResponse, SlackError>> scheduleMessage(ChatScheduleMessageParams params) {
+    return postSlackCommand(
+        SlackMethods.chat_scheduleMessage,
+        params,
+        ChatScheduleMessageResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatScheduledMessagesListResponse, SlackError>> scheduledMessageList(ChatScheduledMessagesListParams params) {
+    return postSlackCommand(
+        SlackMethods.chat_scheduledMessages_list,
+        params,
+        ChatScheduledMessagesListResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatDeleteScheduledMessageResponse, SlackError>> deleteScheduledMessage(ChatDeleteScheduledMessageParams params) {
+    return postSlackCommand(
+        SlackMethods.chat_deleteScheduledMessage,
+        params,
+        ChatDeleteScheduledMessageResponse.class
     );
   }
 

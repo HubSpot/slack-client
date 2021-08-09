@@ -114,6 +114,7 @@ class ReflectionBasedFieldPresenceTest {
   private static boolean isNumeric(Class<?> clazz) {
     return Number.class.isAssignableFrom(clazz)
         || int.class.isAssignableFrom(clazz)
+        || long.class.isAssignableFrom(clazz)
         || double.class.isAssignableFrom(clazz)
         || float.class.isAssignableFrom(clazz);
   }
