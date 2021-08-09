@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "scheduled_messages": [
+    {
+      "id": "Q029Z55TT7G",
+      "channel_id": "C010YD9600Z",
+      "post_at": 1628091337,
+      "date_created": 1628085547,
+      "text": "Test Message"
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": ""
+  }
+}
