@@ -35,6 +35,8 @@ public interface LiteMessageIF {
 
   List<Block> getBlocks();
 
+  List<Reaction> getReactions();
+
   @JsonProperty("ts")
   String getTimestamp();
 
