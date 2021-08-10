@@ -13,7 +13,7 @@ import com.hubspot.slack.client.models.response.chat.ChatScheduleMessageResponse
 
 public class ChatScheduleMessageResponseDeserializationTest {
   @Test
-  public void itDeserializesMigrationExchangeResponseWithValidAndinvalidUserIds() throws IOException {
+  public void itDeserializesChatScheduleMessageResponse() throws IOException {
     ChatScheduleMessageResponse chatScheduleMessageParams =
         fetchAndDeserializeChatScheduleMessageResponse("chat_schedule_message_response.json");
 

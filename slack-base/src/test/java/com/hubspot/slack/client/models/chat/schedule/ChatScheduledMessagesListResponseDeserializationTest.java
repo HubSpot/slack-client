@@ -14,7 +14,7 @@ import com.hubspot.slack.client.models.response.chat.ChatScheduledMessagesListRe
 
 public class ChatScheduledMessagesListResponseDeserializationTest {
   @Test
-  public void itDeserializesMigrationExchangeResponseWithValidAndinvalidUserIds() throws IOException {
+  public void itDeserializesChatScheduledMessagesListResponse() throws IOException {
     ChatScheduledMessagesListResponse chatScheduledMessagesListResponse =
         fetchAndDeserializeChatScheduledMessagesListResponse("chat_scheduled_message_list_response.json");
 
