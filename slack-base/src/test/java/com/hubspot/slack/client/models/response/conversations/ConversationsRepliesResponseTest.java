@@ -36,7 +36,9 @@ public class ConversationsRepliesResponseTest {
     assertThat(response.getMessages().get(1).getReactions().size()).isEqualTo(2);
     assertThat(response.getMessages().get(1).getReactions().get(0).getName()).isEqualTo("astonished");
     assertThat(response.getMessages().get(1).getReactions().get(0).getCount()).isEqualTo(3);
-    assertThat(response.getMessages().get(3).getReactions().get(1).getUsers()).isEqualTo(Arrays.asList("U061F7AUR", "U062F7AUR", "U063F7AUR"));
+    assertThat(response.getMessages().get(1).getReactions().get(1).getName()).isEqualTo("facepalm");
+    assertThat(response.getMessages().get(1).getReactions().get(1).getCount()).isEqualTo(34);
+    assertThat(response.getMessages().get(1).getReactions().get(1).getUsers()).isEqualTo(Arrays.asList("U061F7AUR", "U062F7AUR", "U063F7AUR", "U064F7AUR", "U065F7AUR"));
   }
 
   @Test
