@@ -18,7 +18,6 @@ public interface ChatDeleteScheduledMessageParamsIF extends HasChannel {
 
   String getScheduledMessageId();
 
-  @JsonProperty("as_user")
   default boolean getAsUser() {
     return true;
   }
