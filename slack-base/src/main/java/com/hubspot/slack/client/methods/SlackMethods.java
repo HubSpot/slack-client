@@ -38,6 +38,9 @@ public enum SlackMethods implements SlackMethod {
   chat_postMessage(MethodWriteMode.WRITE, SpecialTier.of(300), JsonStatus.ACCEPTS_JSON),
   chat_unfurl(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   chat_update(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
+  chat_scheduleMessage(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
+  chat_scheduledMessages_list(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
+  chat_deleteScheduledMessage(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
 
   conversations_archive(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
   conversations_close(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),

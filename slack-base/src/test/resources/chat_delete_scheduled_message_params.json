@@ -1,0 +1,5 @@
+{
+  "channel":"channel id",
+  "scheduled_message_id":"message id",
+  "as_user":true
+}

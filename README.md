@@ -60,6 +60,9 @@ We currently support:
  - chat.postEphemeral
  - chat.postMessage
  - chat.update
+ - chat.scheduleMessage
+ - chat.deleteScheduledMessage
+ - chat.scheduledMessages.list
 #### conversations
  - conversations.archive
  - conversations.create
@@ -110,6 +113,8 @@ We currently support:
 #### Utility Methods
  - getConversationByName
  - getChannelByName
+#### Migration
+ - migration.exchange
 
 We happily welcome any PRs for APIs that haven't yet been implemented!
 
