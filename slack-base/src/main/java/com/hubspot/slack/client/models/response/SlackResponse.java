@@ -8,5 +8,5 @@ public interface SlackResponse {
   boolean isOk();
 
   @JsonProperty("response_metadata")
-  Optional<com.hubspot.slack.client.models.response.ResponseMetadata> getResponseMetadata();
+  Optional<ResponseMetadata> getResponseMetadata();
 }
