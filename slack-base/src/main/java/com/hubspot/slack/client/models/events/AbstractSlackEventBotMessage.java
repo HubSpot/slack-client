@@ -21,6 +21,8 @@ public abstract class AbstractSlackEventBotMessage extends SlackEventMessageBase
   @JsonProperty("channel")
   public abstract String getChannelId();
 
+  public abstract Optional<String> getThreadTs();
+
   public abstract Optional<String> getText();
   public abstract List<Attachment> getAttachments();
   public abstract String getBotId();
