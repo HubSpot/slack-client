@@ -1583,7 +1583,7 @@ public class SlackWebClient implements SlackClient {
     params
       .entries()
       .forEach(param -> requestBuilder.setFormParam(param.getKey()).to(param.getValue()));
-    requestBuilder.setQueryParam("token").to(config.getTokenSupplier().get());
+    requestBuilder.addHeader("Authorization", "Bearer " + config.getTokenSupplier().get());
     return executeLoggedAs(method, requestBuilder.build(), responseType);
   }
 
