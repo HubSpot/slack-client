@@ -11,6 +11,6 @@ import com.hubspot.immutables.style.HubSpotStyle;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ConversationsSelectMenuInputIF extends ViewInput {
+public interface ViewConversationsSelectIF extends ViewInput {
   Optional<String> getSelectedConversation();
 }

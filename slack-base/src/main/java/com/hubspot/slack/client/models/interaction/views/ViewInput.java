@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
     @Type(value = ViewRadioButtonGroup.class, name = "radio_buttons"),
     @Type(value = UsersSelectInput.class, name = "users_select"),
     @Type(value = ViewCheckboxes.class, name = "checkboxes"),
-    @Type(value = ConversationsSelectMenuInput.class, name = "conversations_select")
+    @Type(value = ViewConversationsSelect.class, name = "conversations_select")
   }
 )
 public interface ViewInput {
