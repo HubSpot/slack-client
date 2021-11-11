@@ -21,7 +21,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
     @Type(value = ViewDatePicker.class, name = "datepicker"),
     @Type(value = ViewRadioButtonGroup.class, name = "radio_buttons"),
     @Type(value = UsersSelectInput.class, name = "users_select"),
-    @Type(value = ViewCheckboxes.class, name = "checkboxes")
+    @Type(value = ViewCheckboxes.class, name = "checkboxes"),
+    @Type(value = ViewConversationsSelect.class, name = "conversations_select")
   }
 )
 public interface ViewInput {

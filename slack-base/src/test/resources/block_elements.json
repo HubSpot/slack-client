@@ -254,6 +254,8 @@
   {
     "action_id": "text1234",
     "type": "conversations_select",
+    "response_url_enabled": true,
+    "default_to_current_conversation": true,
     "placeholder": {
       "type": "plain_text",
       "text": "Select an item"

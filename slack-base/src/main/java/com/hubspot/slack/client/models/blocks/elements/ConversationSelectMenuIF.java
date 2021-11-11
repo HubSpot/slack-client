@@ -35,4 +35,14 @@ public interface ConversationSelectMenuIF extends BlockElement, HasActionId {
 
   @JsonProperty("confirm")
   Optional<ConfirmationDialog> getConfirmationDialog();
+
+  @Value.Derived
+  default boolean getResponseUrlEnabled() {
+    return true;
+  }
+
+  @Value.Derived
+  default boolean getDefaultToCurrentConversation() {
+    return true;
+  }
 }
