@@ -10,6 +10,7 @@ public enum ViewInputType {
   RADIO_BUTTONS,
   USERS_SELECT,
   CHECKBOXES,
+  CONVERSATIONS_SELECT,
   UNKNOWN;
 
   private static final EnumIndex<String, ViewInputType> INDEX = new EnumIndex<>(
