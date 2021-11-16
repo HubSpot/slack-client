@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.interaction;
 
+import javax.annotation.Nullable;
+
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
@@ -15,12 +17,10 @@ public interface ViewSubmissionIF extends SlackInteractiveCallback {
   ViewInteractionPayload getView();
 
   @Override
-  default SlackChannel getChannel() {
-    return null;
-  }
+  @Nullable String getCallbackId();
 
   @Override
-  default String getCallbackId() {
+  default SlackChannel getChannel() {
     return null;
   }
 
