@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.dialog.form.elements;
 
+import java.util.Optional;
+
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.dialog.form.SlackFormElementTypes;
+import com.hubspot.slack.client.models.dialog.form.elements.helper.SlackDialogElementNormalizer;
 
 @Immutable
 @HubSpotStyle
@@ -23,19 +26,24 @@ public abstract class AbstractSlackFormTextElement extends AbstractSlackDialogFo
   }
 
   @Check
-  public void validate() {
-    super.validateBaseTextElementProps();
+  public AbstractSlackFormTextElement validate() {
+    AbstractSlackFormTextElement normalized = SlackDialogElementNormalizer.normalize(this);
+    super.validateBaseTextElementProps(normalized);
 
-    if (getMaxLength() > 150) {
-      throw new IllegalStateException("Form text element cannot have max length > 150 chars, got " + getMaxLength());
+    int normalizedMaxLength = normalized.getMaxLength();
+    if (normalizedMaxLength > SlackDialogFormElementLengthLimits.MAX_TEXT_ELEMENT_VALUE_LENGTH.getLimit()) {
+      throw new IllegalStateException("Form text element cannot have max length > 150 chars, got " + normalizedMaxLength);
     }
 
-    if (getMinLength() > 150) {
-      throw new IllegalStateException("Form text element cannot have min length > 150 chars, got " + getMinLength());
+    int normalizedMinLength = normalized.getMinLength();
+    if (normalizedMinLength > SlackDialogFormElementLengthLimits.MAX_TEXT_ELEMENT_VALUE_LENGTH.getLimit()) {
+      throw new IllegalStateException("Form text element cannot have min length > 150 chars, got " + normalizedMinLength);
     }
 
-    if (getValue().isPresent() && getValue().get().length() > 150) {
-      throw new IllegalStateException("Value cannot exceed 150 chars, got '" + getValue().get() + "'");
+    Optional<String> value = normalized.getValue();
+    if (value.isPresent() && value.get().length() > SlackDialogFormElementLengthLimits.MAX_TEXT_ELEMENT_VALUE_LENGTH.getLimit()) {
+      throw new IllegalStateException("Value cannot exceed 150 chars, got '" + value.get() + "'");
     }
+    return normalized;
   }
 }
