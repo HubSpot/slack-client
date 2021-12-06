@@ -26,15 +26,11 @@ public class SlackDialogElementNormalizer {
   public static AbstractSlackFormTextElement normalize(AbstractSlackFormTextElement element) {
     if (shouldNormalizePlaceholder(element, SlackDialogFormElementLengthLimits.MAX_PLACEHOLDER_LENGTH)
         || shouldNormalizeLabel(element, SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH)
-        || shouldNormalizeName(element)
-        || shouldNormalize(element.getHint(), SlackDialogFormElementLengthLimits.MAX_HINT_LENGTH)
-        || shouldNormalize(element.getValue(), SlackDialogFormElementLengthLimits.MAX_TEXT_ELEMENT_VALUE_LENGTH)) {
+        || shouldNormalize(element.getHint(), SlackDialogFormElementLengthLimits.MAX_HINT_LENGTH)) {
       return SlackFormTextElement.copyOf(element)
           .withPlaceholder(normalizePlaceholder(element))
           .withLabel(normalizeLabel(element))
-          .withName(normalizeName(element))
-          .withHint(normalizeHint(element))
-          .withValue(normalizeTextElementValue(element));
+          .withHint(normalizeHint(element));
     }
     return element;
   }
@@ -42,15 +38,11 @@ public class SlackDialogElementNormalizer {
   public static AbstractSlackFormTextareaElement normalize(AbstractSlackFormTextareaElement element) {
     if (shouldNormalizePlaceholder(element, SlackDialogFormElementLengthLimits.MAX_PLACEHOLDER_LENGTH)
         || shouldNormalizeLabel(element, SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH)
-        || shouldNormalizeName(element)
-        || shouldNormalize(element.getHint(), SlackDialogFormElementLengthLimits.MAX_HINT_LENGTH)
-        || shouldNormalize(element.getValue(), SlackDialogFormElementLengthLimits.MAX_TEXT_AREA_ELEMENT_VALUE_LENGTH)) {
+        || shouldNormalize(element.getHint(), SlackDialogFormElementLengthLimits.MAX_HINT_LENGTH)) {
       return SlackFormTextareaElement.copyOf(element)
           .withPlaceholder(normalizePlaceholder(element))
           .withLabel(normalizeLabel(element))
-          .withName(normalizeName(element))
-          .withHint(normalizeHint(element))
-          .withValue(normalizeTextAreaElementValue(element));
+          .withHint(normalizeHint(element));
     }
     return element;
   }
@@ -58,13 +50,11 @@ public class SlackDialogElementNormalizer {
   public static AbstractSlackFormSelectElement normalize(AbstractSlackFormSelectElement element) {
     if (shouldNormalizePlaceholder(element, SlackDialogFormElementLengthLimits.MAX_PLACEHOLDER_LENGTH)
         || shouldNormalizeLabel(element, SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH)
-        || shouldNormalizeName(element)
         || shouldNormalize(element.getOptionGroups(), SlackDialogFormElementLengthLimits.MAX_OPTION_GROUPS_NUMBER)
         || shouldNormalize(element.getOptions(), SlackDialogFormElementLengthLimits.MAX_OPTIONS_NUMBER)) {
       return SlackFormSelectElement.copyOf(element)
           .withPlaceholder(normalizePlaceholder(element))
           .withLabel(normalizeLabel(element))
-          .withName(normalizeName(element))
           .withOptionGroups(normalizeOptionGroups(element))
           .withOptions(normalizeOptions(element));
     }
@@ -72,11 +62,8 @@ public class SlackDialogElementNormalizer {
   }
 
   public static SlackFormOptionIF normalize(SlackFormOptionIF element) {
-    if (shouldNormalizeLabel(element, SlackDialogFormElementLengthLimits.MAX_OPTION_LABEL_LENGTH)
-        || shouldNormalize(element.getValue(), SlackDialogFormElementLengthLimits.MAX_OPTION_VALUE_LENGTH)) {
-      return SlackFormOption.copyOf(element)
-          .withLabel(normalizeLabel(element))
-          .withValue(normalizeValue(element));
+    if (shouldNormalizeLabel(element, SlackDialogFormElementLengthLimits.MAX_OPTION_LABEL_LENGTH)) {
+      return SlackFormOption.copyOf(element).withLabel(normalizeLabel(element));
     }
     return element;
   }
@@ -95,10 +82,6 @@ public class SlackDialogElementNormalizer {
 
   private static boolean shouldNormalize(List listOfFormElements, SlackDialogFormElementLengthLimits maxListSize) {
     return listOfFormElements.size() > maxListSize.getLimit();
-  }
-
-  private static boolean shouldNormalizeName(SlackDialogFormElement element) {
-    return shouldNormalize(element.getName(), SlackDialogFormElementLengthLimits.MAX_NAME_LENGTH);
   }
 
   private static boolean shouldNormalizePlaceholder(SlackDialogFormElement element,
@@ -124,10 +107,6 @@ public class SlackDialogElementNormalizer {
     return normalizeIfLongerThan(option.getLabel(), SlackDialogFormElementLengthLimits.MAX_OPTION_LABEL_LENGTH.getLimit());
   }
 
-  private static String normalizeValue(SlackFormOptionIF option) {
-    return normalizeIfLongerThan(option.getValue(), SlackDialogFormElementLengthLimits.MAX_OPTION_VALUE_LENGTH.getLimit());
-  }
-
   private static String normalizeLabel(SlackFormOptionGroupIF optionGroup) {
     return normalizeIfLongerThan(optionGroup.getLabel(), SlackDialogFormElementLengthLimits.MAX_OPTION_LABEL_LENGTH.getLimit());
   }
@@ -148,10 +127,6 @@ public class SlackDialogElementNormalizer {
     return normalizeIfLongerThan(element.getLabel(), SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH.getLimit());
   }
 
-  private static String normalizeName(SlackDialogFormElement element) {
-    return normalizeIfLongerThan(element.getName(), SlackDialogFormElementLengthLimits.MAX_NAME_LENGTH.getLimit());
-  }
-
   private static Optional<String> normalizePlaceholder(SlackDialogFormElement element) {
     return element.getPlaceholder()
         .map(placeholder ->
@@ -164,24 +139,6 @@ public class SlackDialogElementNormalizer {
   private static Optional<String> normalizeHint(AbstractSlackDialogFormTextElement element) {
     return element.getHint()
         .map(hint -> normalizeIfLongerThan(hint, SlackDialogFormElementLengthLimits.MAX_HINT_LENGTH.getLimit()));
-  }
-
-  private static Optional<String> normalizeTextElementValue(AbstractSlackFormTextElement element) {
-    return element.getValue()
-        .map(value ->
-            normalizeIfLongerThan(
-                value,
-                SlackDialogFormElementLengthLimits.MAX_TEXT_ELEMENT_VALUE_LENGTH.getLimit()
-            ));
-  }
-
-  private static Optional<String> normalizeTextAreaElementValue(AbstractSlackFormTextareaElement element) {
-    return element.getValue()
-        .map(value ->
-            normalizeIfLongerThan(
-                value,
-                SlackDialogFormElementLengthLimits.MAX_TEXT_AREA_ELEMENT_VALUE_LENGTH.getLimit()
-            ));
   }
 
   private static String normalizeIfLongerThan(String label, int maxLength) {
