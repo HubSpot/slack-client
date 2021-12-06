@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
-import com.hubspot.slack.client.models.dialog.form.elements.helper.SlackDialogElementNormalizer;
+import com.hubspot.slack.client.models.dialog.form.elements.helpers.SlackDialogElementNormalizer;
 
 @Immutable
 @HubSpotStyle
@@ -23,8 +23,10 @@ public interface SlackFormOptionIF extends HasLabel{
     }
 
     String label = normalized.getLabel();
-    if (label.length() > SlackDialogFormElementLengthLimits.MAX_OPTION_LABEL_LENGTH.getLimit()) {
-      throw new IllegalStateException("Label cannot exceed 75 chars - '" + label + "'");
+    int maxOptionLabelLength = SlackDialogFormElementLengthLimits.MAX_OPTION_LABEL_LENGTH.getLimit();
+    if (label.length() > maxOptionLabelLength) {
+      String errorMessage = String.format("Label cannot exceed %s chars - '%s'", maxOptionLabelLength, label);
+      throw new IllegalStateException(errorMessage);
     }
 
     if (Strings.isNullOrEmpty(getValue())) {
@@ -32,8 +34,10 @@ public interface SlackFormOptionIF extends HasLabel{
     }
 
     String value = normalized.getValue();
-    if (value.length() > SlackDialogFormElementLengthLimits.MAX_OPTION_VALUE_LENGTH.getLimit()) {
-      throw new IllegalStateException("Value cannot exceed 75 chars - '" + value + "'");
+    int maxOptionValueLength = SlackDialogFormElementLengthLimits.MAX_OPTION_VALUE_LENGTH.getLimit();
+    if (value.length() > maxOptionValueLength) {
+      String errorMessage = String.format("Value cannot exceed %s chars - '%s'", maxOptionValueLength, value);
+      throw new IllegalStateException(errorMessage);
     }
     return normalized;
   }

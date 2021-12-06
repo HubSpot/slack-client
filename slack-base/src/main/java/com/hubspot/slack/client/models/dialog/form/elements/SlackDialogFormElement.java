@@ -17,19 +17,28 @@ public abstract class SlackDialogFormElement implements HasLabel {
 
   protected void validateBaseElementProperties(SlackDialogFormElement normalized) {
     String normalizedLabel = normalized.getLabel();
-    if (normalizedLabel.length() > SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH.getLimit()) {
-      throw new IllegalStateException("Label cannot exceed 24 chars, got " + normalizedLabel);
+    int maxLabelLength = SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH.getLimit();
+    if (normalizedLabel.length() > maxLabelLength) {
+      String errorMessage = String.format("Label cannot exceed %s chars, got %s", maxLabelLength, normalizedLabel);
+      throw new IllegalStateException(errorMessage);
     }
 
     String normalizedName = normalized.getName();
-    if (normalizedName.length() > SlackDialogFormElementLengthLimits.MAX_NAME_LENGTH.getLimit()) {
-      throw new IllegalStateException("Name cannot exceed 300 chars, got " + normalizedName);
+    int maxNameLength = SlackDialogFormElementLengthLimits.MAX_NAME_LENGTH.getLimit();
+    if (normalizedName.length() > maxNameLength) {
+      String errorMessage = String.format("Name cannot exceed %s chars, got %s", maxNameLength, normalizedName);
+      throw new IllegalStateException(errorMessage);
     }
 
     Optional<String> normalizedPlaceholder = normalized.getPlaceholder();
-    if (normalizedPlaceholder.isPresent() && normalizedPlaceholder.get().length() > SlackDialogFormElementLengthLimits.MAX_PLACEHOLDER_LENGTH
-        .getLimit()) {
-      throw new IllegalStateException("Placeholder length cannot exceed 150 chars, got " + normalizedPlaceholder.get());
+    int maxPlaceholderLength = SlackDialogFormElementLengthLimits.MAX_PLACEHOLDER_LENGTH.getLimit();
+    if (normalizedPlaceholder.isPresent() && normalizedPlaceholder.get().length() > maxPlaceholderLength) {
+      String errorMessage = String.format(
+          "Placeholder cannot exceed %s chars, got %s",
+          maxPlaceholderLength,
+          normalizedPlaceholder.get()
+      );
+      throw new IllegalStateException(errorMessage);
     }
   }
 }

@@ -26,7 +26,7 @@ public class SlackFormTextElementTest{
     try {
       SlackFormTextElement.builder().setLabel("ignored").setName("ignored").setValue(tooLongValue).build();
     } catch (IllegalStateException ise) {
-      String errorMessage = String.format("Value cannot exceed 150 chars, got '%s'", tooLongValue);
+      String errorMessage = String.format("Value cannot exceed 150 chars, got %s", tooLongValue);
       assertThat(ise.getMessage()).contains(errorMessage);
       return;
     }

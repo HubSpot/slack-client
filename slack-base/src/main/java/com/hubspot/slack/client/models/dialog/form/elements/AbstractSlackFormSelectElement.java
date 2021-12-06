@@ -16,13 +16,13 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.actions.SlackDataSource;
 import com.hubspot.slack.client.models.dialog.form.SlackFormElementTypes;
-import com.hubspot.slack.client.models.dialog.form.elements.helper.SlackDialogElementNormalizer;
+import com.hubspot.slack.client.models.dialog.form.elements.helpers.SlackDialogElementNormalizer;
 
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonInclude(Include.NON_EMPTY)
-public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElement {
+public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElement implements HasOptions {
   @Default
   @Override
   public SlackFormElementTypes getType() {
@@ -34,7 +34,6 @@ public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElem
     return SlackDataSource.STATIC;
   }
 
-  public abstract List<SlackFormOption> getOptions();
   public abstract List<SlackFormOptionGroup> getOptionGroups();
   public abstract Optional<String> getValue();
   public abstract List<SlackFormOption> getSelectedOptions();
@@ -51,12 +50,14 @@ public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElem
     List<SlackFormOptionGroup> normalizedOptionGroups = normalized.getOptionGroups();
     int numOptionGroups = normalizedOptionGroups.size();
 
-    if (numOptions > SlackDialogFormElementLengthLimits.MAX_OPTIONS_NUMBER.getLimit()) {
-      errors.add("Cannot have more than 100 options");
+    int maxOptionsNumber = SlackDialogFormElementLengthLimits.MAX_OPTIONS_NUMBER.getLimit();
+    if (numOptions > maxOptionsNumber) {
+      errors.add(String.format("Cannot have more than %s options", maxOptionsNumber));
     }
 
-    if (numOptionGroups > SlackDialogFormElementLengthLimits.MAX_OPTION_GROUPS_NUMBER.getLimit()) {
-      errors.add("Cannot have more than 100 option groups");
+    int maxOptionGroupsNumber = SlackDialogFormElementLengthLimits.MAX_OPTION_GROUPS_NUMBER.getLimit();
+    if (numOptionGroups > maxOptionGroupsNumber) {
+      errors.add(String.format("Cannot have more than %s option groups", maxOptionGroupsNumber));
     }
 
     if (normalized.getDataSource().equals(SlackDataSource.STATIC)) {
