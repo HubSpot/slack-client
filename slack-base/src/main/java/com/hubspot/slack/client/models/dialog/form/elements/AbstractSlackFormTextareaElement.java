@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.dialog.form.elements;
 
+import java.util.Optional;
+
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.dialog.form.SlackFormElementTypes;
+import com.hubspot.slack.client.models.dialog.form.elements.helpers.SlackDialogElementNormalizer;
 
 @Immutable
 @HubSpotStyle
@@ -23,19 +26,28 @@ public abstract class AbstractSlackFormTextareaElement extends AbstractSlackDial
   }
 
   @Check
-  public void validate() {
-    super.validateBaseTextElementProps();
+  public AbstractSlackFormTextareaElement validate() {
+    AbstractSlackFormTextareaElement normalized = SlackDialogElementNormalizer.normalize(this);
+    super.validateBaseTextElementProps(normalized);
 
-    if (getMaxLength() > 3000) {
-      throw new IllegalStateException("Form text area cannot have max length > 3000 chars, got " + getMaxLength());
+    int normalizedMaxLength = normalized.getMaxLength();
+    int maxTextareaElementValueLengthLimit = SlackDialogFormElementLengthLimits.MAX_TEXT_AREA_ELEMENT_VALUE_LENGTH.getLimit();
+    if (normalizedMaxLength > maxTextareaElementValueLengthLimit) {
+      String errorMessage = String.format("Form text area cannot have max length > %s chars, got %s", maxTextareaElementValueLengthLimit, normalizedMaxLength);
+      throw new IllegalStateException(errorMessage);
     }
 
-    if (getMinLength() > 3000) {
-      throw new IllegalStateException("Form text area cannot have min length > 3000 chars, got " + getMinLength());
+    int normalizedMinLength = normalized.getMinLength();
+    if (normalizedMinLength > maxTextareaElementValueLengthLimit) {
+      String errorMessage = String.format("Form text area cannot have min length > %s chars, got %s", maxTextareaElementValueLengthLimit, normalizedMinLength);
+      throw new IllegalStateException(errorMessage);
     }
 
-    if (getValue().isPresent() && getValue().get().length() > 3000) {
-      throw new IllegalStateException("Value cannot exceed 3000 chars, got '" + getValue().get() + "'");
+    Optional<String> value = normalized.getValue();
+    if (value.isPresent() && value.get().length() > maxTextareaElementValueLengthLimit) {
+      String errorMessage = String.format("Value cannot exceed %s chars, got %s", maxTextareaElementValueLengthLimit, value.get());
+      throw new IllegalStateException(errorMessage);
     }
+    return normalized;
   }
 }
