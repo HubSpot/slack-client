@@ -5,40 +5,26 @@ import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hubspot.slack.client.models.dialog.form.SlackFormElementTypes;
 
-public abstract class SlackDialogFormElement implements HasLabel {
+public abstract class SlackDialogFormElement {
   public abstract SlackFormElementTypes getType();
-
   public abstract String getName();
-
+  public abstract String getLabel();
   public abstract Optional<String> getPlaceholder();
 
   @JsonProperty("optional")
   public abstract Optional<Boolean> isOptional();
 
-  protected void validateBaseElementProperties(SlackDialogFormElement normalized) {
-    String normalizedLabel = normalized.getLabel();
-    int maxLabelLength = SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH.getLimit();
-    if (normalizedLabel.length() > maxLabelLength) {
-      String errorMessage = String.format("Label cannot exceed %s chars, got %s", maxLabelLength, normalizedLabel);
-      throw new IllegalStateException(errorMessage);
+  protected void validateBaseElementProperties() {
+    if (getLabel().length() > 24) {
+      throw new IllegalStateException("Label cannot exceed 24 chars, got " + getLabel());
     }
 
-    String normalizedName = normalized.getName();
-    int maxNameLength = SlackDialogFormElementLengthLimits.MAX_NAME_LENGTH.getLimit();
-    if (normalizedName.length() > maxNameLength) {
-      String errorMessage = String.format("Name cannot exceed %s chars, got %s", maxNameLength, normalizedName);
-      throw new IllegalStateException(errorMessage);
+    if (getName().length() > 300) {
+      throw new IllegalStateException("Name cannot exceed 300 chars, got " + getName());
     }
 
-    Optional<String> normalizedPlaceholder = normalized.getPlaceholder();
-    int maxPlaceholderLength = SlackDialogFormElementLengthLimits.MAX_PLACEHOLDER_LENGTH.getLimit();
-    if (normalizedPlaceholder.isPresent() && normalizedPlaceholder.get().length() > maxPlaceholderLength) {
-      String errorMessage = String.format(
-          "Placeholder cannot exceed %s chars, got %s",
-          maxPlaceholderLength,
-          normalizedPlaceholder.get()
-      );
-      throw new IllegalStateException(errorMessage);
+    if (getPlaceholder().isPresent() && getPlaceholder().get().length() > 150) {
+      throw new IllegalStateException("Placeholder length cannot exceed 150 chars, got " + getPlaceholder().get());
     }
   }
 }
