@@ -28,10 +28,12 @@ public class SlackDialogElementNormalizer {
     if (shouldNormalizePlaceholder(element)
         || shouldNormalizeLabel(element, SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH)
         || shouldNormalize(element.getHint(), SlackDialogFormElementLengthLimits.MAX_HINT_LENGTH)) {
-      return SlackFormTextElement.copyOf(element)
-          .withPlaceholder(normalizePlaceholder(element))
-          .withLabel(normalizeLabel(element))
-          .withHint(normalizeHint(element));
+      return SlackFormTextElement.builder()
+          .from(element)
+          .setPlaceholder(normalizePlaceholder(element))
+          .setLabel(normalizeLabel(element))
+          .setHint(normalizeHint(element))
+          .build();
     }
     return element;
   }
@@ -40,10 +42,12 @@ public class SlackDialogElementNormalizer {
     if (shouldNormalizePlaceholder(element)
         || shouldNormalizeLabel(element, SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH)
         || shouldNormalize(element.getHint(), SlackDialogFormElementLengthLimits.MAX_HINT_LENGTH)) {
-      return SlackFormTextareaElement.copyOf(element)
-          .withPlaceholder(normalizePlaceholder(element))
-          .withLabel(normalizeLabel(element))
-          .withHint(normalizeHint(element));
+      return SlackFormTextareaElement.builder()
+          .from(element)
+          .setPlaceholder(normalizePlaceholder(element))
+          .setLabel(normalizeLabel(element))
+          .setHint(normalizeHint(element))
+          .build();
     }
     return element;
   }
@@ -53,11 +57,13 @@ public class SlackDialogElementNormalizer {
         || shouldNormalizeLabel(element, SlackDialogFormElementLengthLimits.MAX_LABEL_LENGTH)
         || shouldNormalize(element.getOptionGroups(), SlackDialogFormElementLengthLimits.MAX_OPTION_GROUPS_NUMBER)
         || shouldNormalizeOptions(element)) {
-      return SlackFormSelectElement.copyOf(element)
-          .withPlaceholder(normalizePlaceholder(element))
-          .withLabel(normalizeLabel(element))
-          .withOptionGroups(normalizeOptionGroups(element))
-          .withOptions(normalizeOptions(element));
+      return SlackFormSelectElement.builder()
+          .from(element)
+          .setPlaceholder(normalizePlaceholder(element))
+          .setLabel(normalizeLabel(element))
+          .setOptionGroups(normalizeOptionGroups(element))
+          .setOptions(normalizeOptions(element))
+          .build();
     }
     return element;
   }

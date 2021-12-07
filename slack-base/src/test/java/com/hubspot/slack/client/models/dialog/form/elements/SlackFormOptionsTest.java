@@ -210,4 +210,23 @@ public class SlackFormOptionsTest {
         .build();
     assertThat(optionGroup.getOptions()).hasSize(100);
   }
+
+  @Test
+  public void itNormalizesOptionsListToBuildFormSelectElement() {
+    List<SlackFormOption> options = new ArrayList<>();
+
+    for (int i = 0; i < 101; i++) {
+      options.add(SlackFormOption.builder()
+          .setLabel("label-" + String.valueOf(i))
+          .setValue("value-" + String.valueOf(i))
+          .build());
+    }
+
+    SlackFormSelectElement slackFormSelectElement = SlackFormSelectElement.builder()
+        .setLabel("ignored")
+        .setName("ignored")
+        .setOptions(options)
+        .build();
+    assertThat(slackFormSelectElement.getOptions()).hasSize(100);
+  }
 }
