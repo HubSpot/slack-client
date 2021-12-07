@@ -1,7 +1,5 @@
 package com.hubspot.slack.client.models.dialog.form.elements;
 
-import java.util.Optional;
-
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
@@ -12,7 +10,6 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.dialog.form.SlackFormElementTypes;
-import com.hubspot.slack.client.models.dialog.form.elements.helpers.SlackDialogElementNormalizer;
 
 @Immutable
 @HubSpotStyle
@@ -26,28 +23,19 @@ public abstract class AbstractSlackFormTextElement extends AbstractSlackDialogFo
   }
 
   @Check
-  public AbstractSlackFormTextElement validate() {
-    AbstractSlackFormTextElement normalized = SlackDialogElementNormalizer.normalize(this);
-    super.validateBaseTextElementProps(normalized);
+  public void validate() {
+    super.validateBaseTextElementProps();
 
-    int normalizedMaxLength = normalized.getMaxLength();
-    int maxTextElementValueLength = SlackDialogFormElementLengthLimits.MAX_TEXT_ELEMENT_VALUE_LENGTH.getLimit();
-    if (normalizedMaxLength > maxTextElementValueLength) {
-      String errorMessage = String.format("Form text element cannot have max length > %s chars, got %s", maxTextElementValueLength, normalizedMaxLength);
-      throw new IllegalStateException(errorMessage);
+    if (getMaxLength() > 150) {
+      throw new IllegalStateException("Form text element cannot have max length > 150 chars, got " + getMaxLength());
     }
 
-    int normalizedMinLength = normalized.getMinLength();
-    if (normalizedMinLength > maxTextElementValueLength) {
-      String errorMessage = String.format("Form text element cannot have min length > %s chars, got %s", maxTextElementValueLength, normalizedMinLength);
-      throw new IllegalStateException(errorMessage);
+    if (getMinLength() > 150) {
+      throw new IllegalStateException("Form text element cannot have min length > 150 chars, got " + getMinLength());
     }
 
-    Optional<String> value = normalized.getValue();
-    if (value.isPresent() && value.get().length() > maxTextElementValueLength) {
-      String errorMessage = String.format("Value cannot exceed %s chars, got %s", maxTextElementValueLength, value.get());
-      throw new IllegalStateException(errorMessage);
+    if (getValue().isPresent() && getValue().get().length() > 150) {
+      throw new IllegalStateException("Value cannot exceed 150 chars, got '" + getValue().get() + "'");
     }
-    return normalized;
   }
 }
