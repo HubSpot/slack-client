@@ -16,12 +16,13 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.actions.SlackDataSource;
 import com.hubspot.slack.client.models.dialog.form.SlackFormElementTypes;
+import com.hubspot.slack.client.models.dialog.form.elements.helpers.SlackDialogElementNormalizer;
 
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonInclude(Include.NON_EMPTY)
-public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElement {
+public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElement implements HasOptions {
   @Default
   @Override
   public SlackFormElementTypes getType() {
@@ -33,63 +34,69 @@ public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElem
     return SlackDataSource.STATIC;
   }
 
-  public abstract List<SlackFormOption> getOptions();
   public abstract List<SlackFormOptionGroup> getOptionGroups();
   public abstract Optional<String> getValue();
   public abstract List<SlackFormOption> getSelectedOptions();
   public abstract Optional<Integer> getMinQueryLength();
 
   @Check
-  public void validate() {
-    super.validateBaseElementProperties();
+  public AbstractSlackFormSelectElement validate() {
+    AbstractSlackFormSelectElement normalized = SlackDialogElementNormalizer.normalize(this);
+    super.validateBaseElementProperties(normalized);
     List<String> errors = new ArrayList<>();
 
-    int numOptions = getOptions().size();
-    int numOptionGroups = getOptionGroups().size();
+    List<SlackFormOption> normalizedOptions = normalized.getOptions();
+    int numOptions = normalizedOptions.size();
+    List<SlackFormOptionGroup> normalizedOptionGroups = normalized.getOptionGroups();
+    int numOptionGroups = normalizedOptionGroups.size();
 
-    if (numOptions > 100) {
-      errors.add("Cannot have more than 100 options");
+    int maxOptionsNumber = SlackDialogFormElementLengthLimits.MAX_OPTIONS_NUMBER.getLimit();
+    if (numOptions > maxOptionsNumber) {
+      errors.add(String.format("Cannot have more than %s options", maxOptionsNumber));
     }
 
-    if (numOptionGroups > 100) {
-      errors.add("Cannot have more than 100 option groups");
+    int maxOptionGroupsNumber = SlackDialogFormElementLengthLimits.MAX_OPTION_GROUPS_NUMBER.getLimit();
+    if (numOptionGroups > maxOptionGroupsNumber) {
+      errors.add(String.format("Cannot have more than %s option groups", maxOptionGroupsNumber));
     }
 
-    if (getDataSource().equals(SlackDataSource.STATIC)) {
+    if (normalized.getDataSource().equals(SlackDataSource.STATIC)) {
       if (numOptions == 0 && numOptionGroups == 0) {
         errors.add("Either options or option groups are required for static data source types");
       }
     }
 
-    if (getValue().isPresent() && getDataSource().equals(SlackDataSource.EXTERNAL)) {
+    Optional<String> normalizedValue = normalized.getValue();
+    if (normalizedValue.isPresent() && normalized.getDataSource().equals(SlackDataSource.EXTERNAL)) {
       errors.add("Cannot use value for external data source, must use selected options");
     }
 
-    if (getValue().isPresent()) {
+    if (normalizedValue.isPresent()) {
       boolean valueIsSomeOptionValue = getOptions().stream()
-          .anyMatch(option -> option.getValue().equalsIgnoreCase(getValue().get()));
+          .anyMatch(option -> option.getValue().equalsIgnoreCase(normalizedValue.get()));
       if (!valueIsSomeOptionValue) {
         errors.add("Value must exactly match the value field for one provided option");
       }
     }
 
-    if (!getSelectedOptions().isEmpty()) {
-      if (getSelectedOptions().size() != 1) {
+    List<SlackFormOption> normalizedSelectedOptions = normalized.getSelectedOptions();
+    if (!normalizedSelectedOptions.isEmpty()) {
+      if (normalizedSelectedOptions.size() != 1) {
         errors.add("Selected options must be a single element array");
       }
-      if (!getOptionGroups().isEmpty()) {
-        boolean selectedOptionIsInOptionsGroup = getOptionGroups().stream()
+      if (!normalizedOptionGroups.isEmpty()) {
+        boolean selectedOptionIsInOptionsGroup = normalizedOptionGroups.stream()
             .map(SlackFormOptionGroup::getOptions)
             .collect(Collectors.toList())
             .stream()
             .flatMap(List::stream)
-            .anyMatch(option -> option.equals(getSelectedOptions().get(0)));
+            .anyMatch(option -> option.equals(normalizedSelectedOptions.get(0)));
         if (!selectedOptionIsInOptionsGroup) {
           errors.add("Selected option must exactly match an option in the provided options groups");
         }
-      } else if (!getOptions().isEmpty()) {
-        boolean selectedOptionIsInOptions = getOptions().stream()
-            .anyMatch(option -> option.equals(getSelectedOptions().get(0)));
+      } else if (!normalizedOptions.isEmpty()) {
+        boolean selectedOptionIsInOptions = normalizedOptions.stream()
+            .anyMatch(option -> option.equals(normalizedSelectedOptions.get(0)));
         if (!selectedOptionIsInOptions) {
           errors.add("Selected option must exactly match an option in the provided options");
         }
@@ -99,5 +106,6 @@ public abstract class AbstractSlackFormSelectElement extends SlackDialogFormElem
     if (!errors.isEmpty()) {
       throw new IllegalStateException(errors.toString());
     }
+    return normalized;
   }
 }

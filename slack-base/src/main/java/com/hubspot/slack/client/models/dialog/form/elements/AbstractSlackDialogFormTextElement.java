@@ -22,23 +22,20 @@ public abstract class AbstractSlackDialogFormTextElement extends SlackDialogForm
 
   public abstract Optional<String> getValue();
 
-  protected void validateBaseTextElementProps() {
-
-    super.validateBaseElementProperties();
-    if (getMinLength() < 0) {
-      throw new IllegalStateException("Min length cannot be negative, got " + getMinLength());
+  protected void validateBaseTextElementProps(AbstractSlackDialogFormTextElement normalized) {
+    super.validateBaseElementProperties(normalized);
+    int normalizedMinLength = normalized.getMinLength();
+    if (normalizedMinLength < 0) {
+      throw new IllegalStateException("Min length cannot be negative, got " + normalizedMinLength);
     }
 
-    if (getMaxLength() < 0) {
-      throw new IllegalStateException("Max length cannot be negative, got " + getMaxLength());
+    int normalizedMaxLength = normalized.getMaxLength();
+    if (normalizedMaxLength < 0) {
+      throw new IllegalStateException("Max length cannot be negative, got " + normalizedMaxLength);
     }
 
-    if (getMinLength() > getMaxLength()) {
-      throw new IllegalStateException("Min length must be <= max length, got " + getMinLength() + ", " + getMaxLength());
-    }
-
-    if (getHint().isPresent() && getHint().get().length() > 150) {
-      throw new IllegalStateException("Hint cannot exceed 150 chars, got '" + getHint().get() + "'");
+    if (normalizedMinLength > normalizedMaxLength) {
+      throw new IllegalStateException("Min length must be <= max length, got " + normalizedMinLength + ", " + normalizedMaxLength);
     }
   }
 }

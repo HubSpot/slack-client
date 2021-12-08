@@ -4,12 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
 
 import com.hubspot.slack.client.models.actions.SlackDataSource;
+import com.hubspot.slack.client.testutils.StringGenerator;
 
 public class SlackFormOptionsTest {
 
@@ -172,25 +172,29 @@ public class SlackFormOptionsTest {
   }
 
   @Test
-  public void itFailsToBuildFormSelectOptionGroupForLongLabel() {
-    try {
-      SlackFormOptionGroup.builder()
-          .setLabel(String.join("", Collections.nCopies(76, "a"))) // long label
-          .addOptions(SlackFormOption.builder()
-              .setLabel("label")
-              .setValue("value")
-              .build()
-          ).build();
-    } catch (IllegalStateException ise) {
-      assertThat(ise.getMessage()).contains("Label cannot exceed 75 chars");
-      return;
-    }
-
-    fail("Didn't throw exception");
+  public void itNormalizesLongLabelToBuildFormSelectOptionGroup() {
+    SlackFormOptionGroup optionGroup = SlackFormOptionGroup.builder()
+        .setLabel(StringGenerator.generateStringWithLength(76))
+        .addOptions(SlackFormOption.builder()
+            .setLabel("label")
+            .setValue("value")
+            .build()
+        ).build();
+    String expectedLabel = StringGenerator.generateStringWithLengthAndEllipsis(71);
+    assertThat(optionGroup.getLabel()).isEqualTo(expectedLabel);
   }
 
   @Test
-  public void itFailsToBuildFormSelectOptionGroupForInvalidNumberOfOptions() {
+  public void itNormalizesLongLabelToBuildFormSelectOption() {
+    SlackFormOption option = SlackFormOption.builder()
+        .setLabel(StringGenerator.generateStringWithLength(76))
+        .setValue("value-1").build();
+    String expectedLabel = StringGenerator.generateStringWithLengthAndEllipsis(71);
+    assertThat(option.getLabel()).isEqualTo(expectedLabel);
+  }
+
+  @Test
+  public void itNormalizesOptionsListToBuildFormSelectOptionGroup() {
     List<SlackFormOption> options = new ArrayList<>();
 
     for (int i = 0; i < 101; i++) {
@@ -200,16 +204,29 @@ public class SlackFormOptionsTest {
           .build());
     }
 
-    try {
-      SlackFormOptionGroup.builder()
-          .setLabel("label")
-          .setOptions(options)
-          .build();
-    } catch (IllegalStateException ise) {
-      assertThat(ise.getMessage()).contains("Cannot have more than 100 option groups");
-      return;
+    SlackFormOptionGroup optionGroup = SlackFormOptionGroup.builder()
+        .setLabel("label")
+        .setOptions(options)
+        .build();
+    assertThat(optionGroup.getOptions()).hasSize(100);
+  }
+
+  @Test
+  public void itNormalizesOptionsListToBuildFormSelectElement() {
+    List<SlackFormOption> options = new ArrayList<>();
+
+    for (int i = 0; i < 101; i++) {
+      options.add(SlackFormOption.builder()
+          .setLabel("label-" + String.valueOf(i))
+          .setValue("value-" + String.valueOf(i))
+          .build());
     }
 
-    fail("Didn't throw exception");
+    SlackFormSelectElement slackFormSelectElement = SlackFormSelectElement.builder()
+        .setLabel("ignored")
+        .setName("ignored")
+        .setOptions(options)
+        .build();
+    assertThat(slackFormSelectElement.getOptions()).hasSize(100);
   }
 }
