@@ -34,4 +34,6 @@ public interface InputIF extends Block {
 
   @JsonProperty("optional")
   Optional<Boolean> isOptional();
+
+  Optional<Boolean> getDispatchAction();
 }
