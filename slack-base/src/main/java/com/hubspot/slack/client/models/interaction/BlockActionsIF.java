@@ -3,6 +3,8 @@ package com.hubspot.slack.client.models.interaction;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.Nullable;
+
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -27,9 +29,7 @@ public interface BlockActionsIF extends SlackInteractiveCallback {
   List<BlockElementAction> getElementActions();
 
   @Override
-  default String getCallbackId() {
-    return null;
-  }
+  @Nullable String getCallbackId();
 
   @Override
   default String getActionTs() {
