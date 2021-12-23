@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
 
 public enum InteractiveLoadOptionsRequestType {
+  BLOCK_SUGGESTION,
   DIALOG_SUGGESTION,
   INTERACTIVE_MESSAGE,
   UNKNOWN
