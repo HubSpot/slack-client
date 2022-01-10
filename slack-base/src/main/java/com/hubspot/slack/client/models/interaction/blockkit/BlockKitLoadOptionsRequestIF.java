@@ -19,5 +19,4 @@ public interface BlockKitLoadOptionsRequestIF {
     String getToken();
     InteractiveLoadOptionsRequestType getType();
     SlackUser getUser();
-
 }
