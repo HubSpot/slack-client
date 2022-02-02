@@ -2,6 +2,7 @@ package com.hubspot.slack.client.models.events.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
+import com.hubspot.slack.client.methods.interceptor.HasChannel;
 import com.hubspot.slack.client.models.ChannelType;
 import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.events.SlackEvent;
@@ -160,6 +161,12 @@ public class EventDeserializerTest {
   }
 
   @Test
+  public void itCanHaveAChannelWhenJoining() throws IOException {
+    SlackMemberJoinedChannelEvent event = fetchAndDeserializeSlackEvent("member_joined_private_channel.json").toDetailedEvent();
+    assertThat(event).isInstanceOf(HasChannel.class);
+  }
+
+  @Test
   public void itCanDeserMemberLeftPublicChannelEvent() throws IOException {
     SlackMemberLeftChannelEvent event = fetchAndDeserializeSlackEvent("member_left_public_channel.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_LEFT_CHANNEL);
@@ -171,6 +178,12 @@ public class EventDeserializerTest {
     SlackMemberLeftChannelEvent event = fetchAndDeserializeSlackEvent("member_left_private_channel.json").toDetailedEvent();
     assertThat(event.getType()).isEqualTo(SlackEventType.MEMBER_LEFT_CHANNEL);
     assertThat(ObjectMapperUtils.mapper().readValue(ObjectMapperUtils.mapper().writeValueAsString(event), SlackMemberLeftChannelEvent.class)).isEqualTo(event);
+  }
+
+  @Test
+  public void itCanHaveAChannelWhenLeaving() throws IOException {
+    SlackMemberLeftChannelEvent event = fetchAndDeserializeSlackEvent("member_left_private_channel.json").toDetailedEvent();
+    assertThat(event).isInstanceOf(HasChannel.class);
   }
 
   @Test
