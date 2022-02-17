@@ -1,5 +1,8 @@
 package com.hubspot.slack.client.models.interaction.views;
 
+import java.util.Optional;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -29,4 +32,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 )
 public interface ViewInput {
   ViewInputType getType();
+
+  @JsonIgnore
+  Optional<String> getStringValue();
 }

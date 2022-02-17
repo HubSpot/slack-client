@@ -1,12 +1,13 @@
 package com.hubspot.slack.client.models.interaction.views;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
+import org.immutables.value.Value;
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
-import org.immutables.value.Value;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 @Value.Immutable
 @HubSpotStyle

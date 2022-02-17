@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.interaction.views;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -13,4 +14,9 @@ import java.util.Optional;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public interface ViewExternalSelectIF extends ViewInput {
     Optional<Option> getSelectedOption();
+
+    @JsonIgnore
+    default Optional<String> getStringValue() {
+        return getSelectedOption().map(Option::getValue);
+    }
 }
