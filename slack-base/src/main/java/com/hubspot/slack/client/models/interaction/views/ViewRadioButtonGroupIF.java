@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.interaction.views;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -16,4 +17,9 @@ import java.util.Optional;
 public interface ViewRadioButtonGroupIF extends ViewInput {
   @JsonDeserialize(contentUsing = OptionOrOptionGroupDeserializer.class)
   Optional<Option> getSelectedOption();
+
+  @JsonIgnore
+  default Optional<String> getStringValue() {
+    return getSelectedOption().map(Option::getValue);
+  }
 }
