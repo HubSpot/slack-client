@@ -3,6 +3,7 @@ package com.hubspot.slack.client.models.blocks;
 import java.util.Optional;
 
 import org.immutables.value.Value;
+import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Immutable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,4 +37,9 @@ public interface InputIF extends Block {
   Optional<Boolean> isOptional();
 
   Optional<Boolean> getDispatchAction();
+
+  @Check
+  default InputIF validate() {
+    return SlackBlockNormalizer.normalize(this);
+  }
 }
