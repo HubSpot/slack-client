@@ -20,6 +20,8 @@ import com.hubspot.slack.client.models.blocks.objects.OptionGroupIF;
 import com.hubspot.slack.client.models.blocks.objects.OptionIF;
 import com.hubspot.slack.client.models.blocks.objects.Text;
 import com.hubspot.slack.client.models.dialog.form.elements.SlackDialogFormElementLengthLimits;
+import com.hubspot.slack.client.models.interaction.BlocksLoadOptionsResponse;
+import com.hubspot.slack.client.models.interaction.BlocksLoadOptionsResponseIF;
 
 public class SlackBlockNormalizer {
   private SlackBlockNormalizer() {
@@ -69,6 +71,18 @@ public class SlackBlockNormalizer {
           .build();
     }
     return staticSelectMenu;
+  }
+
+  public static BlocksLoadOptionsResponseIF normalize(BlocksLoadOptionsResponseIF blocksLoadOptionsResponse) {
+    if (shouldNormalize(blocksLoadOptionsResponse.getOptionGroups(), BlockElementLengthLimits.MAX_OPTION_GROUPS_NUMBER)
+        || shouldNormalize(blocksLoadOptionsResponse.getOptions(), BlockElementLengthLimits.MAX_OPTIONS_NUMBER)) {
+      return BlocksLoadOptionsResponse.builder()
+          .from(blocksLoadOptionsResponse)
+          .setOptionGroups(normalizeOptionGroups(blocksLoadOptionsResponse.getOptionGroups()))
+          .setOptions(normalizeOptions(blocksLoadOptionsResponse.getOptions()))
+          .build();
+    }
+    return blocksLoadOptionsResponse;
   }
 
   public static OptionGroupIF normalize(OptionGroupIF optionGroup) {
