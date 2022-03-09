@@ -6,6 +6,7 @@ import java.util.Map;
 import com.hubspot.slack.client.models.interaction.views.ViewCheckboxes;
 import com.hubspot.slack.client.models.interaction.views.ViewInput;
 import com.hubspot.slack.client.models.interaction.views.ViewInputType;
+import com.hubspot.slack.client.models.interaction.views.ViewMultiStaticSelect;
 import org.junit.Test;
 
 import com.hubspot.slack.client.SerializationTestBase;
@@ -30,5 +31,13 @@ public class ViewSubmissionSerializationTest extends SerializationTestBase {
     assertThat(checkboxes.getSelectedOptions().get(0).getText().getText()).isEqualTo("The checkbox label");
     assertThat(checkboxes.getSelectedOptions().get(0).getDescription().isPresent()).isEqualTo(false);
     assertThat(checkboxes.getSelectedOptions().get(0).getValue()).isEqualTo("true");
+
+    //multi_static_select
+    assertThat(bav.get("YjQ").get("multi_static_select-action").getType()).isEqualTo(ViewInputType.MULTI_STATIC_SELECT);
+    final ViewMultiStaticSelect multiStaticSelect = (ViewMultiStaticSelect) bav.get("YjQ").get("multi_static_select-action");
+    assertThat(multiStaticSelect.getSelectedOptions().size()).isEqualTo(1);
+    assertThat(multiStaticSelect.getSelectedOptions().get(0).getText().getText()).isEqualTo("this is plain_text text");
+    assertThat(multiStaticSelect.getSelectedOptions().get(0).getDescription().isPresent()).isEqualTo(false);
+    assertThat(multiStaticSelect.getSelectedOptions().get(0).getValue()).isEqualTo("test-1");
   }
 }

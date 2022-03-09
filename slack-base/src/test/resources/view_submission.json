@@ -112,6 +112,21 @@
               }
             ]
           }
+        },
+        "YjQ": {
+          "multi_static_select-action": {
+            "type": "multi_static_select",
+            "selected_options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "this is plain_text text",
+                  "emoji": true
+                },
+                "value": "test-1"
+              }
+            ]
+          }
         }
       }
     },

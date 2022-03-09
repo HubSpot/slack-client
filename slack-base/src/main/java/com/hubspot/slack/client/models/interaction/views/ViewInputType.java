@@ -12,6 +12,7 @@ public enum ViewInputType {
   EXTERNAL_SELECT,
   CHECKBOXES,
   CONVERSATIONS_SELECT,
+  MULTI_STATIC_SELECT,
   UNKNOWN;
 
   private static final EnumIndex<String, ViewInputType> INDEX = new EnumIndex<>(
