@@ -2,6 +2,7 @@ package com.hubspot.slack.client.models.blocks;
 
 public enum BlockElementLengthLimits {
   MAX_INPUT_LABEL_LENGTH(2000),
+  MAX_ACTION_ID_LENGTH(255),
   MAX_HINT_LENGTH(2000),
   MAX_OPTION_GROUPS_NUMBER(100),
   MAX_OPTIONS_NUMBER(100),
