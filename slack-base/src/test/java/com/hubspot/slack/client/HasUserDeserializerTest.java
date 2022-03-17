@@ -26,6 +26,6 @@ public class HasUserDeserializerTest extends ReflectionBasedFieldPresenceTest {
   @Test
   public void pojosDoDeserializeHasUsersWithUserField() throws Exception {
     Object hasUserInstance = buildTestInstance(hasUserClass);
-    verifyHasField(HasChannel.class, hasUserInstance, "user");
+    verifyHasField(HasChannel.class, hasUserInstance, "useraskdfmkasmdkfmaskdmfasmdkfmaksmdfksamdfaskdf");
   }
 }
