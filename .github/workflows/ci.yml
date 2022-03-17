@@ -20,5 +20,7 @@ jobs:
         java-version: '11'
     - name: Print out Maven version
       run: mvn -v
+    - name: Print out current folder
+      run: ls
     - name: Build with Maven
       run: mvn -B -q clean install --file pom.xml
