@@ -14,13 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2.3.4
       with:
-        fetch-depth: 10
+        fetch-depth: 100
     - name: Set up JDK
       uses: actions/setup-java@v2.1.0
       with:
         distribution: 'adopt'
         java-version: '11'
-    - name: Print out Maven version
-      run: mvn -v
     - name: Build with Maven
-      run: mvn -B -q clean install --file pom.xml
+      run: mvn -B clean install
