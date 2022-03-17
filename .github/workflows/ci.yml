@@ -16,9 +16,9 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v2.1.0
       with:
-        distribution: 'adopt'
+        distribution: 'temurin'
         java-version: '11'
     - name: Print out Maven version
       run: mvn -v
     - name: Build with Maven
-      run: mvn -B -q clean install
+      run: mvn -B -q clean install --file pom.xml
