@@ -16,6 +16,7 @@ import com.hubspot.slack.client.models.BlockOrAttachment;
     @JsonSubTypes.Type(value = Image.class, name = Image.TYPE),
     @JsonSubTypes.Type(value = Input.class, name = Input.TYPE),
     @JsonSubTypes.Type(value = Section.class, name = Section.TYPE),
+    @JsonSubTypes.Type(value = Header.class, name = Header.TYPE),
 })
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface Block extends BlockOrAttachment {
