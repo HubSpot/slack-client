@@ -79,7 +79,7 @@
   "state":{
     "values":{
       "tZ1":{
-        "SCREENSHOT_SELECT":{
+        "TEST_ITEM":{
           "type":"multi_static_select",
           "selected_options":[
             {
@@ -88,7 +88,7 @@
                 "text":"1",
                 "emoji":true
               },
-              "value":"8017"
+              "value":"10"
             },
             {
               "text":{
@@ -96,7 +96,7 @@
                 "text":" 2",
                 "emoji":true
               },
-              "value":"8019"
+              "value":"11"
             }
           ]
         }
