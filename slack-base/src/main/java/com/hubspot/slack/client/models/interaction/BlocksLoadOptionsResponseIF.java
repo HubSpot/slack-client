@@ -19,6 +19,8 @@ import com.hubspot.slack.client.models.blocks.objects.OptionGroup;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface BlocksLoadOptionsResponseIF extends BaseSlackOptionsResponse {
+  String TYPE = "blocks_load_options_response";
+
   @JsonInclude(Include.NON_EMPTY)
   List<Option> getOptions();
 
