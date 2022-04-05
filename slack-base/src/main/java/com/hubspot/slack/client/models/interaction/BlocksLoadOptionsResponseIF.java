@@ -2,7 +2,7 @@ package com.hubspot.slack.client.models.interaction;
 
 import java.util.List;
 
-import org.immutables.value.Value;
+import org.immutables.value.Value.Derived;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Immutable;
 
@@ -22,7 +22,7 @@ import com.hubspot.slack.client.models.blocks.objects.OptionGroup;
 public interface BlocksLoadOptionsResponseIF extends BaseSlackOptionsResponse {
   String TYPE = "blocks_load_options_response";
 
-  @Value.Derived
+  @Derived
   default String getType() {
     return TYPE;
   }
