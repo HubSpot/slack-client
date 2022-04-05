@@ -11,7 +11,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ViewStateValuesPayloadIF {
+public interface StateValuesPayloadIF {
   @JsonProperty("values")
   Map<String, Map<String, ViewInput>> getBlockIdToActionIdToValues();
 }
