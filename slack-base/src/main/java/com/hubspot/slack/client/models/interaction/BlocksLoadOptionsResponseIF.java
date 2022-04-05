@@ -2,7 +2,6 @@ package com.hubspot.slack.client.models.interaction;
 
 import java.util.List;
 
-import org.immutables.value.Value.Derived;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Immutable;
 
@@ -21,11 +20,6 @@ import com.hubspot.slack.client.models.blocks.objects.OptionGroup;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface BlocksLoadOptionsResponseIF extends BaseSlackOptionsResponse {
   String TYPE = "blocks_load_options_response";
-
-  @Derived
-  default String getType() {
-    return TYPE;
-  }
 
   @JsonInclude(Include.NON_EMPTY)
   List<Option> getOptions();

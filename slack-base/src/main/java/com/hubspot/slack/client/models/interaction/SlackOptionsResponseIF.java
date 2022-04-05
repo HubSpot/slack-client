@@ -30,11 +30,6 @@ public interface SlackOptionsResponseIF extends BaseSlackOptionsResponse {
   // NOTE: slack annoyingly has a different model for dialog options and attachment options
   // https://api.slack.com/dialogs | https://api.slack.com/docs/message-menus
 
-  @Derived
-  default String getType() {
-    return TYPE;
-  }
-
   static SlackOptionsResponse emptyAttachmentOptions() {
     return SlackOptionsResponse
         .builder()
