@@ -3,7 +3,6 @@ package com.hubspot.slack.client.models.interaction;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -77,11 +76,13 @@ public interface SlackOptionsResponseIF extends BaseSlackOptionsResponse {
 
   @Derived
   @Nullable
-   default Object getOptions() {
-    return Stream.of(getAttachmentOptions(), getDialogOptions())
-        .findFirst()
-        .orElse(null)
-        .orElse(null);
+  default Object getOptions() {
+    if(getAttachmentOptions().isPresent()) {
+      return getAttachmentOptions().get();
+    } else if (getDialogOptions().isPresent()) {
+      return getDialogOptions().get();
+    }
+    return null;
   }
 
   @Derived
