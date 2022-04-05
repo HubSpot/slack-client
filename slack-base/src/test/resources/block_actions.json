@@ -75,5 +75,32 @@
       "block_id": "GFS",
       "action_ts": "1576003038.785719"
     }
-  ]
+  ],
+  "state":{
+    "values":{
+      "tZ1":{
+        "SCREENSHOT_SELECT":{
+          "type":"multi_static_select",
+          "selected_options":[
+            {
+              "text":{
+                "type":"plain_text",
+                "text":"1",
+                "emoji":true
+              },
+              "value":"8017"
+            },
+            {
+              "text":{
+                "type":"plain_text",
+                "text":" 2",
+                "emoji":true
+              },
+              "value":"8019"
+            }
+          ]
+        }
+      }
+    }
+  }
 }
