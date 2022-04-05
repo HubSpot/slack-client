@@ -12,7 +12,7 @@ import com.hubspot.slack.client.models.views.ViewPayloadBase;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ViewInteractionPayloadIF extends ViewPayloadBase {
 
-  ViewStateValuesPayload getState();
+  StateValuesPayload getState();
   String getHash();
 
 }
