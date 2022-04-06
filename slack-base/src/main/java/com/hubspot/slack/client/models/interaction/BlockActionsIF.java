@@ -26,7 +26,7 @@ public interface BlockActionsIF extends SlackInteractiveCallback {
   @JsonProperty("actions")
   List<BlockElementAction> getElementActions();
 
-  StateValuesPayload getState();
+  Optional<StateValuesPayload> getState();
 
   @Override
   default String getCallbackId() {
