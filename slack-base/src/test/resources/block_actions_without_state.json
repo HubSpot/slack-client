@@ -1,0 +1,79 @@
+{
+  "type": "block_actions",
+  "team": {
+    "id": "TEAM_ID",
+    "name": "TEAM_NAME",
+    "domain": "slackhubspoti-et16299"
+  },
+  "user": {
+    "id": "USER_ID",
+    "name": "auser",
+    "access_token": "xoxp-507412329303-981238771351-1412370955013-fce9dc6b782f54549b5b2d435afe229e"
+  },
+  "token": "ITS_A_SECRET",
+  "trigger_id": "869524640327.819832772087.67c795e952f7b500a9cd55d2d1830d6c",
+  "view": {
+    "id": "VRH64BLSY",
+    "team_id": "TEAM_ID",
+    "type": "modal",
+    "blocks": [
+      {
+        "type": "section",
+        "block_id": "GFS",
+        "text": {
+          "type": "mrkdwn",
+          "text": "Thanks for clicking on _something_!",
+          "verbatim": false
+        },
+        "accessory": {
+          "type": "datepicker",
+          "action_id": "my-date-picker"
+        }
+      }
+    ],
+    "private_metadata": "",
+    "callback_id": "",
+    "state": {
+      "values": {
+        "state-action": {
+          "action-value-1": {
+            "type": "text",
+            "value": "this is a text value"
+          },
+          "action-value-2": {
+            "type": "radio_buttons",
+            "selected_option": null
+          },
+          "action-value-3": {
+            "type": "external_select",
+            "selected_option": null
+          },
+          "action-value-4": {
+            "type": "datepicker",
+            "selected_date": "2020-11-03"
+          }
+        }
+      }
+    },
+    "hash": "1576003032.b99e0143",
+    "title": {
+      "type": "plain_text",
+      "text": "Hi auser",
+      "emoji": true
+    },
+    "clear_on_close": false,
+    "notify_on_close": false,
+    "root_view_id": "VRH64BLSY",
+    "app_id": "APP_ID",
+    "external_id": "",
+    "bot_id": "COOL_BOT_ID"
+  },
+  "actions": [
+    {
+      "type": "datepicker",
+      "action_id": "my-date-picker",
+      "block_id": "GFS",
+      "action_ts": "1576003038.785719"
+    }
+  ]
+}

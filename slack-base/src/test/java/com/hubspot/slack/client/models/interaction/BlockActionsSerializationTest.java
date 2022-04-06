@@ -13,4 +13,8 @@ public class BlockActionsSerializationTest extends SerializationTestBase {
     testSerialization("block_actions.json", BlockActions.class);
   }
 
+  @Test
+  public void testBlockSerializationWithoutState() throws IOException {
+    testSerialization("block_actions_without_state.json", BlockActions.class);
+  }
 }
