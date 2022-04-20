@@ -28,7 +28,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
     @Type(value = ViewConversationsSelect.class, name = "conversations_select"),
     @Type(value = ViewStaticSelect.class, name = "static_select"),
     @Type(value = ViewExternalSelect.class, name = "external_select"),
-    @Type(value = ViewMultiStaticSelect.class, name = "multi_static_select")
+    @Type(value = ViewMultiStaticSelect.class, name = "multi_static_select"),
+    @Type(value = ViewMultiExternalSelect.class, name = "multi_external_select")
   }
 )
 public interface ViewInput {

@@ -120,10 +120,41 @@
               {
                 "text": {
                   "type": "plain_text",
-                  "text": "this is plain_text text",
+                  "text": "Test option 1",
                   "emoji": true
                 },
                 "value": "test-1"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Test option 2",
+                  "emoji": true
+                },
+                "value": "test-2"
+              }
+            ]
+          }
+        },
+        "BjF": {
+          "multi_external_select-action": {
+            "type": "multi_external_select",
+            "selected_options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Test option 1",
+                  "emoji": true
+                },
+                "value": "test-1"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Test option 2",
+                  "emoji": true
+                },
+                "value": "test-2"
               }
             ]
           }

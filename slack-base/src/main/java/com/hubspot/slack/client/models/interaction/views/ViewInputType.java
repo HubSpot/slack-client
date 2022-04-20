@@ -14,6 +14,7 @@ public enum ViewInputType {
   CONVERSATIONS_SELECT,
   STATIC_SELECT,
   MULTI_STATIC_SELECT,
+  MULTI_EXTERNAL_SELECT,
   UNKNOWN;
 
   private static final EnumIndex<String, ViewInputType> INDEX = new EnumIndex<>(
