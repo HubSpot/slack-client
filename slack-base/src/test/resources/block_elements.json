@@ -37,6 +37,15 @@
     }
   },
   {
+    "type": "timepicker",
+    "action_id": "timepicker123",
+    "initial_time": "13:30",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Select a time"
+    }
+  },
+  {
     "type": "image",
     "image_url": "http://placekitten.com/700/500",
     "alt_text": "Multiple cute kittens"

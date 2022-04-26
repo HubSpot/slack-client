@@ -1,7 +1,5 @@
 package com.hubspot.slack.client.models.interaction.views;
 
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
@@ -10,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+import java.util.Optional;
 
 @JsonTypeInfo(
   use = Id.NAME,
@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
   {
     @Type(value = ViewPlainTextInput.class, name = "plain_text_input"),
     @Type(value = ViewDatePicker.class, name = "datepicker"),
+    @Type(value = ViewTimePicker.class, name = "timepicker"),
     @Type(value = ViewRadioButtonGroup.class, name = "radio_buttons"),
     @Type(value = UsersSelectInput.class, name = "users_select"),
     @Type(value = ViewCheckboxes.class, name = "checkboxes"),

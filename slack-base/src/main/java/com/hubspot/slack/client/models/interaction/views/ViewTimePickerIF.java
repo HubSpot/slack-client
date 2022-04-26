@@ -6,21 +6,21 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import org.immutables.value.Value;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public interface ViewDatePickerIF extends ViewInput {
-  Optional<LocalDate> getSelectedDate();
+public interface ViewTimePickerIF extends ViewInput {
+  Optional<LocalTime> getSelectedTime();
 
   @JsonIgnore
   default Optional<String> getStringValue() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
-    if (getSelectedDate().isPresent()) {
-      return Optional.of(getSelectedDate().get().format(formatter));
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
+    if (getSelectedTime().isPresent()) {
+      return Optional.of(getSelectedTime().get().format(formatter));
     }
     return Optional.empty();
   }
