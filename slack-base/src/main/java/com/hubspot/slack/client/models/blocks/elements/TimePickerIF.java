@@ -10,14 +10,14 @@ import com.hubspot.slack.client.models.blocks.objects.Text;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface DatePickerIF extends BlockElement, HasActionId {
-  String TYPE = "datepicker";
+public interface TimePickerIF extends BlockElement, HasActionId {
+  String TYPE = "timepicker";
 
   @Override
   @Value.Derived
@@ -30,8 +30,8 @@ public interface DatePickerIF extends BlockElement, HasActionId {
 
   Optional<Text> getPlaceholder();
 
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-  Optional<LocalDate> getInitialDate();
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "H:mm")
+  Optional<LocalTime> getInitialTime();
 
   @JsonProperty("confirm")
   Optional<ConfirmationDialog> getConfirmationDialog();
