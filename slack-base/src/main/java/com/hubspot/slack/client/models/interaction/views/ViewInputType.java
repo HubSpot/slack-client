@@ -7,6 +7,7 @@ import com.hubspot.slack.client.enums.EnumIndex;
 public enum ViewInputType {
   PLAIN_TEXT_INPUT,
   DATEPICKER,
+  TIMEPICKER,
   RADIO_BUTTONS,
   USERS_SELECT,
   EXTERNAL_SELECT,
