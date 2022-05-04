@@ -12,6 +12,10 @@ public enum SlackMethods implements SlackMethod {
   auth_revoke(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
   auth_test(MethodWriteMode.READ, SpecialTier.of(200), JsonStatus.ACCEPTS_JSON),
 
+  bookmarks_add(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
+  bookmarks_edit(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
+  bookmarks_list(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
+  bookmarks_remove(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
   bots_info(MethodWriteMode.READ, RateLimitingTiers.TIER_3, JsonStatus.FORM_ENCODING_ONLY),
 
   channels_archive(MethodWriteMode.WRITE, RateLimitingTiers.TIER_2, JsonStatus.ACCEPTS_JSON),
