@@ -3,6 +3,7 @@ package com.hubspot.slack.client;
 import com.hubspot.algebra.Result;
 import com.hubspot.slack.client.methods.SlackMethod;
 import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksAddParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksEditParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksListParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksRemoveParams;
@@ -277,7 +278,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<HomeTabViewCommandResponse, SlackError>> publishView(PublishViewParams params);
 
   // bookmarks
-  CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(BookmarksListParams params);
+  CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(BookmarksAddParams params);
   CompletableFuture<Result<BookmarkEditResponse, SlackError>> editBookmark(BookmarksEditParams params);
   CompletableFuture<Result<BookmarkRemoveResponse, SlackError>> removeBookmark(BookmarksRemoveParams params);
   CompletableFuture<Result<BookmarkListResponse, SlackError>> listBookmarks(BookmarksListParams params);

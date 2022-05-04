@@ -1,5 +1,6 @@
 package com.hubspot.slack.client;
 
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksAddParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksEditParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksListParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksRemoveParams;
@@ -1511,7 +1512,7 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(BookmarksListParams params) {
+  public CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(BookmarksAddParams params) {
     return postSlackCommand(
       SlackMethods.bookmarks_add,
       params,
