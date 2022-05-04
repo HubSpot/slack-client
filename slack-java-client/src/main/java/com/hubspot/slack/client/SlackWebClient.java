@@ -1,5 +1,14 @@
 package com.hubspot.slack.client;
 
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksAddParams;
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksEditParams;
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksListParams;
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksRemoveParams;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkAddResponse;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkEditResponse;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkEditResponseIF;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkListResponse;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkRemoveResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
@@ -1503,11 +1512,47 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  public CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(BookmarksAddParams params) {
+    return postSlackCommand(
+      SlackMethods.bookmarks_add,
+      params,
+      BookmarkAddResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<BookmarkEditResponse, SlackError>> editBookmark(BookmarksEditParams params) {
+    return postSlackCommand(
+      SlackMethods.bookmarks_edit,
+      params,
+      BookmarkEditResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<BookmarkRemoveResponse, SlackError>> removeBookmark(BookmarksRemoveParams params) {
+    return postSlackCommand(
+      SlackMethods.bookmarks_remove,
+      params,
+      BookmarkRemoveResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<BookmarkListResponse, SlackError>> listBookmarks(BookmarksListParams params) {
+    return postSlackCommand(
+      SlackMethods.bookmarks_list,
+      params,
+      BookmarkListResponse.class
+    );
+  }
+
+  @Override
   public CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(MigrationExchangeParams params) {
     return postSlackCommand(
-        SlackMethods.migration_exchange,
-        params,
-        MigrationExchangeResponse.class
+      SlackMethods.migration_exchange,
+      params,
+      MigrationExchangeResponse.class
     );
   }
 

@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "bookmarks": [
+    {
+      "id": "AAA",
+      "channel_id": "CB7NAAAAA",
+      "title": "Mainsail",
+      "link": "https://hs.net/dashboards/1111",
+      "emoji": null,
+      "icon_url": "https://hs.net/favicon.ico",
+      "type": "link",
+      "entity_id": null,
+      "date_created": 1625079310,
+      "date_updated": 0,
+      "rank": "g",
+      "last_updated_by_user_id": "AAA",
+      "last_updated_by_team_id": "AAA",
+      "shortcut_id": null,
+      "app_id": null
+    },
+    {
+      "id": "AAA",
+      "channel_id": "AAA",
+      "title": "Issues Home",
+      "link": "https://hs.net",
+      "emoji": null,
+      "icon_url": "https://hs.net",
+      "type": "link",
+      "entity_id": null,
+      "date_created": 1625079337,
+      "date_updated": 0,
+      "rank": "p",
+      "last_updated_by_user_id": "AAA",
+      "last_updated_by_team_id": "AAA",
+      "shortcut_id": null,
+      "app_id": null
+    }
+  ]
+}
