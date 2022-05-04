@@ -1548,6 +1548,15 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
+  public CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(MigrationExchangeParams params) {
+    return postSlackCommand(
+      SlackMethods.migration_exchange,
+      params,
+      MigrationExchangeResponse.class
+    );
+  }
+
+  @Override
   public <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
     SlackMethod method,
     Object params,
