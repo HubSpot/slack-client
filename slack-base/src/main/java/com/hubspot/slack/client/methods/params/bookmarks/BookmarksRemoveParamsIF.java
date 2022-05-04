@@ -16,6 +16,6 @@ public interface BookmarksRemoveParamsIF extends HasChannel {
   default String getChannel() {
     return getChannelId();
   }
-  
+
   String getBookmarkId();
 }
