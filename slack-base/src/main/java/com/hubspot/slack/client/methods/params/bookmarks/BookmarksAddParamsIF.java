@@ -14,6 +14,11 @@ import org.immutables.value.Value;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface BookmarksAddParamsIF extends HasChannel {
+  @Value.Derived
+  default String getChannel() {
+    return getChannelId();
+  }
+
   String getTitle();
   BookmarkType getType();
 
