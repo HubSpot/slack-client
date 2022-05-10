@@ -24,8 +24,7 @@ public interface ChatUnfurlParamsIF extends HasChannel {
 
   String getTs();
 
-  @JsonDeserialize(contentUsing = BlockOrAttachmentDeserializer.class)
-  Map<String, List<? extends BlockOrAttachment>> getUnfurls();
+  Map<String, ChatUnfurlBlocks> getUnfurls();
 
   Optional<Boolean> isUserAuthRequired();
 
