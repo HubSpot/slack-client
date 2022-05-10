@@ -2,12 +2,21 @@
   "channel": "C123456",
   "ts": "123456789.9875",
   "unfurls": {
-    "https://example.com/": {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "A message *with some bold text* and _some italicized text_."
-      }
+    "https://gentle-buttons.com/carafe": {
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Take a look at this carafe, just another cousin of glass"
+          },
+          "accessory": {
+            "type": "image",
+            "image_url": "https://gentle-buttons.com/img/carafe-filled-with-red-wine.png",
+            "alt_text": "Stein's wine carafe"
+          }
+        }
+      ]
     }
   },
   "user_auth_message": null,

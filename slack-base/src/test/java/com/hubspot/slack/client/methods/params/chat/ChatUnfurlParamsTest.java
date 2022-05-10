@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.Collections;
 import org.junit.Test;
 
 import com.hubspot.slack.client.SerializationTestBase;
@@ -29,7 +30,7 @@ public class ChatUnfurlParamsTest extends SerializationTestBase {
     ChatUnfurlParams.builder()
         .setChannelId("C1234567890")
         .setTs("123456789.9875")
-        .putUnfurls("https://example.com/12345", attachment)
+        .putUnfurls("https://example.com/12345", ChatUnfurlBlocks.of(Collections.singletonList(attachment)))
         .setUserAuthRequired(true)
         .setUserAuthMessage("User auth is required")
         .setUserAuthUrl(new URI("http://www.auth.com/"))
@@ -46,16 +47,11 @@ public class ChatUnfurlParamsTest extends SerializationTestBase {
     ChatUnfurlParams.builder()
         .setChannelId("C1234567890")
         .setTs("123456789.9875")
-        .putUnfurls("https://example.com/12345", sectionBlock)
+        .putUnfurls("https://example.com/12345", ChatUnfurlBlocks.of(Collections.singletonList(sectionBlock)))
         .setUserAuthRequired(true)
         .setUserAuthMessage("User auth is required")
         .setUserAuthUrl(new URI("http://www.auth.com/"))
         .build();
-  }
-
-  @Test
-  public void itCanDeserChatUnfurlParamsWithAttachment() throws IOException {
-    testSerialization("chat_unfurl_params_using_attachment.json", ChatUnfurlParams.class);
   }
 
   @Test
