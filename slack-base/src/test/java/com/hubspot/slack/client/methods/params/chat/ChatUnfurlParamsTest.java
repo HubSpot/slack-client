@@ -55,11 +55,6 @@ public class ChatUnfurlParamsTest extends SerializationTestBase {
   }
 
   @Test
-  public void itCanDeserChatUnfurlParamsWithAttachment() throws IOException {
-    testSerialization("chat_unfurl_params_using_attachment.json", ChatUnfurlParams.class);
-  }
-
-  @Test
   public void itCanDeserChatUnfurlParamsWithBlock() throws IOException {
     testSerialization("chat_unfurl_params_using_block.json", ChatUnfurlParams.class);
   }
