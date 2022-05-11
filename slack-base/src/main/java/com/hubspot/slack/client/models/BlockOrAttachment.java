@@ -1,4 +1,4 @@
 package com.hubspot.slack.client.models;
 
-public interface BlockOrAttachment {
+public interface BlockOrAttachment extends ChatUnfurlBlocksOrAttachment {
 }
