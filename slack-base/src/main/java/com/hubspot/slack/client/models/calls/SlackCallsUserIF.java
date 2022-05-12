@@ -6,5 +6,6 @@ import org.immutables.value.Value;
 @HubSpotStyle
 @Value.Immutable
 public interface SlackCallsUserIF extends SlackInternalOrExternalUser {
+  @Value.Parameter(order = 1)
   String getSlackId();
 }
