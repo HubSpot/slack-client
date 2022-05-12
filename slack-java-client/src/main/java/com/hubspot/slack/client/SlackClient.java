@@ -286,6 +286,9 @@ public interface SlackClient extends Closeable {
   // migration.exchange
   CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(MigrationExchangeParams params);
 
+  // calls
+
+
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
       SlackMethod method,
