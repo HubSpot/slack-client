@@ -1,0 +1,30 @@
+{
+  "channel": "C123456",
+  "ts": "123456789.9875",
+  "unfurls": {
+    "https://gentle-buttons.com/carafe": {
+      "fallback": null,
+      "color": null,
+      "pretext": null,
+      "author_name": null,
+      "author_link": null,
+      "author_icon": null,
+      "title": null,
+      "title_link": null,
+      "text": "Take a look at this carafe, just another cousin of glass",
+      "image_url": null,
+      "attachment_type": null,
+      "fields": [],
+      "footer": null,
+      "footer_icon": null,
+      "thumb_url": null,
+      "callback_id": null,
+      "actions": [],
+      "mrkdwn_in": [],
+      "ts": null
+    }
+  },
+  "user_auth_message": null,
+  "user_auth_url": null,
+  "is_user_auth_required": null
+}
