@@ -7,6 +7,12 @@ import com.hubspot.slack.client.methods.params.bookmarks.BookmarksAddParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksEditParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksListParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksRemoveParams;
+import com.hubspot.slack.client.methods.params.calls.CallsAddParams;
+import com.hubspot.slack.client.methods.params.calls.CallsEndParams;
+import com.hubspot.slack.client.methods.params.calls.CallsInfoParams;
+import com.hubspot.slack.client.methods.params.calls.CallsParticipantsAddParams;
+import com.hubspot.slack.client.methods.params.calls.CallsParticipantsRemoveParams;
+import com.hubspot.slack.client.methods.params.calls.CallsUpdateParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsInfoParams;
@@ -77,6 +83,12 @@ import com.hubspot.slack.client.models.response.bookmarks.BookmarkAddResponse;
 import com.hubspot.slack.client.models.response.bookmarks.BookmarkEditResponse;
 import com.hubspot.slack.client.models.response.bookmarks.BookmarkListResponse;
 import com.hubspot.slack.client.models.response.bookmarks.BookmarkRemoveResponse;
+import com.hubspot.slack.client.models.response.calls.CallsAddResponse;
+import com.hubspot.slack.client.models.response.calls.CallsEndResponse;
+import com.hubspot.slack.client.models.response.calls.CallsInfoResponse;
+import com.hubspot.slack.client.models.response.calls.CallsParticipantsAddResponse;
+import com.hubspot.slack.client.models.response.calls.CallsParticipantsRemoveResponse;
+import com.hubspot.slack.client.models.response.calls.CallsUpdateResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsKickResponse;
 import com.hubspot.slack.client.models.response.channels.SharedChannelInviteResponse;
@@ -287,7 +299,12 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(MigrationExchangeParams params);
 
   // calls
-
+  CompletableFuture<Result<CallsAddResponse, SlackError>> addCall(CallsAddParams params);
+  CompletableFuture<Result<CallsEndResponse, SlackError>> endCall(CallsEndParams params);
+  CompletableFuture<Result<CallsUpdateResponse, SlackError>> updateCall(CallsUpdateParams params);
+  CompletableFuture<Result<CallsInfoResponse, SlackError>> getCallInfo(CallsInfoParams params);
+  CompletableFuture<Result<CallsParticipantsAddResponse, SlackError>> addCallParticipants(CallsParticipantsAddParams params);
+  CompletableFuture<Result<CallsParticipantsRemoveResponse, SlackError>> removeCallParticipants(CallsParticipantsRemoveParams params);
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
