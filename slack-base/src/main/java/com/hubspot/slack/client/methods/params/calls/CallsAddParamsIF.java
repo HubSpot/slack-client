@@ -28,5 +28,5 @@ public interface CallsAddParamsIF {
 
   Optional<String> getTitle();
 
-  List<SlackInternalOrExternalUser> getUsers();
+  List<? extends SlackInternalOrExternalUser> getUsers();
 }
