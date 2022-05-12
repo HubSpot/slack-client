@@ -15,5 +15,5 @@ import org.immutables.value.Value;
 public interface CallsParticipantsRemoveParamsIF {
   String getId();
 
-  List<? extends SlackInternalOrExternalUser> getUsers();
+  List<SlackInternalOrExternalUser> getUsers();
 }
