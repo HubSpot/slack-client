@@ -1,31 +1,5 @@
 package com.hubspot.slack.client;
 
-import com.hubspot.slack.client.methods.params.bookmarks.BookmarksAddParams;
-import com.hubspot.slack.client.methods.params.bookmarks.BookmarksEditParams;
-import com.hubspot.slack.client.methods.params.bookmarks.BookmarksListParams;
-import com.hubspot.slack.client.methods.params.bookmarks.BookmarksRemoveParams;
-import com.hubspot.slack.client.models.response.bookmarks.BookmarkAddResponse;
-import com.hubspot.slack.client.models.response.bookmarks.BookmarkEditResponse;
-import com.hubspot.slack.client.models.response.bookmarks.BookmarkEditResponseIF;
-import com.hubspot.slack.client.models.response.bookmarks.BookmarkListResponse;
-import com.hubspot.slack.client.models.response.bookmarks.BookmarkRemoveResponse;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.annotations.VisibleForTesting;
@@ -59,6 +33,16 @@ import com.hubspot.slack.client.methods.JsonStatus;
 import com.hubspot.slack.client.methods.SlackMethod;
 import com.hubspot.slack.client.methods.SlackMethods;
 import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksAddParams;
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksEditParams;
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksListParams;
+import com.hubspot.slack.client.methods.params.bookmarks.BookmarksRemoveParams;
+import com.hubspot.slack.client.methods.params.calls.CallsAddParams;
+import com.hubspot.slack.client.methods.params.calls.CallsEndParams;
+import com.hubspot.slack.client.methods.params.calls.CallsInfoParams;
+import com.hubspot.slack.client.methods.params.calls.CallsParticipantsAddParams;
+import com.hubspot.slack.client.methods.params.calls.CallsParticipantsRemoveParams;
+import com.hubspot.slack.client.methods.params.calls.CallsUpdateParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsFilter;
 import com.hubspot.slack.client.methods.params.channels.ChannelsHistoryParams;
 import com.hubspot.slack.client.methods.params.channels.ChannelsInfoParams;
@@ -129,6 +113,16 @@ import com.hubspot.slack.client.models.response.SlackErrorType;
 import com.hubspot.slack.client.models.response.SlackResponse;
 import com.hubspot.slack.client.models.response.auth.AuthRevokeResponse;
 import com.hubspot.slack.client.models.response.auth.AuthTestResponse;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkAddResponse;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkEditResponse;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkListResponse;
+import com.hubspot.slack.client.models.response.bookmarks.BookmarkRemoveResponse;
+import com.hubspot.slack.client.models.response.calls.CallsAddResponse;
+import com.hubspot.slack.client.models.response.calls.CallsEndResponse;
+import com.hubspot.slack.client.models.response.calls.CallsInfoResponse;
+import com.hubspot.slack.client.models.response.calls.CallsParticipantsAddResponse;
+import com.hubspot.slack.client.models.response.calls.CallsParticipantsRemoveResponse;
+import com.hubspot.slack.client.models.response.calls.CallsUpdateResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsHistoryResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsInfoResponse;
 import com.hubspot.slack.client.models.response.channels.ChannelsKickResponse;
@@ -186,6 +180,21 @@ import com.hubspot.slack.client.paging.AbstractPagedIterable;
 import com.hubspot.slack.client.paging.LazyLoadingPage;
 import com.hubspot.slack.client.ratelimiting.ByMethodRateLimiter;
 import com.hubspot.slack.client.ratelimiting.SlackRateLimiter;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SlackWebClient implements SlackClient {
   public static final int RATE_LIMIT_SENTINEL_VALUE = -1;
@@ -371,12 +380,12 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<ConversationKickResponse, SlackError>> kickUserFromConversation(
-      ConversationKickParams params
+    ConversationKickParams params
   ) {
     return postSlackCommand(
       SlackMethods.conversations_kick,
       params,
-        ConversationKickResponse.class
+      ConversationKickResponse.class
     );
   }
 
@@ -474,60 +483,60 @@ public class SlackWebClient implements SlackClient {
     UsersInfoParams params
   ) {
     return postSlackCommand(
-        SlackMethods.users_profile_get,
-        params,
-        UsersProfileResponse.class
+      SlackMethods.users_profile_get,
+      params,
+      UsersProfileResponse.class
     );
   }
 
   @Override
   public CompletableFuture<Result<UsersProfileResponse, SlackError>> setUserProfile(
-          SetUserProfileParams params
+    SetUserProfileParams params
   ) {
     return postSlackCommand(
-            SlackMethods.users_profile_set,
-            params,
-            UsersProfileResponse.class
+      SlackMethods.users_profile_set,
+      params,
+      UsersProfileResponse.class
     );
   }
 
   @Override
   public CompletableFuture<Result<DndInfoResponse, SlackError>> getDndInfo(
-          DndInfoParams params
+    DndInfoParams params
   ) {
     return postSlackCommand(
-            SlackMethods.dnd_info,
-            params,
-            DndInfoResponse.class
+      SlackMethods.dnd_info,
+      params,
+      DndInfoResponse.class
     );
   }
 
   @Override
   public CompletableFuture<Result<SimpleSlackResponse, SlackError>> endDnd() {
     return postSlackCommand(
-            SlackMethods.dnd_endDnd,
-            Collections.emptyMap(),
-            SimpleSlackResponse.class
+      SlackMethods.dnd_endDnd,
+      Collections.emptyMap(),
+      SimpleSlackResponse.class
     );
   }
 
   @Override
   public CompletableFuture<Result<DndSnoozeResponse, SlackError>> setDndSnooze(
-          DndSetSnoozeParams params
-          ) {
+    DndSetSnoozeParams params
+  ) {
     return postSlackCommand(
-            SlackMethods.dnd_setSnooze,
-            params,
-            DndSnoozeResponse.class
+      SlackMethods.dnd_setSnooze,
+      params,
+      DndSnoozeResponse.class
     );
   }
 
   @Override
   public CompletableFuture<Result<DndInfoResponse, SlackError>> endDndSnooze() {
     return postSlackCommand(
-            SlackMethods.dnd_endSnooze,
-            Collections.emptyMap(),
-            DndInfoResponse.class
+      SlackMethods.dnd_endSnooze,
+      Collections.emptyMap(),
+      DndInfoResponse.class
     );
   }
 
@@ -807,27 +816,27 @@ public class SlackWebClient implements SlackClient {
   @Override
   public CompletableFuture<Result<ChatScheduleMessageResponse, SlackError>> scheduleMessage(ChatScheduleMessageParams params) {
     return postSlackCommand(
-        SlackMethods.chat_scheduleMessage,
-        params,
-        ChatScheduleMessageResponse.class
+      SlackMethods.chat_scheduleMessage,
+      params,
+      ChatScheduleMessageResponse.class
     );
   }
 
   @Override
   public CompletableFuture<Result<ChatScheduledMessagesListResponse, SlackError>> scheduledMessageList(ChatScheduledMessagesListParams params) {
     return postSlackCommand(
-        SlackMethods.chat_scheduledMessages_list,
-        params,
-        ChatScheduledMessagesListResponse.class
+      SlackMethods.chat_scheduledMessages_list,
+      params,
+      ChatScheduledMessagesListResponse.class
     );
   }
 
   @Override
   public CompletableFuture<Result<ChatDeleteScheduledMessageResponse, SlackError>> deleteScheduledMessage(ChatDeleteScheduledMessageParams params) {
     return postSlackCommand(
-        SlackMethods.chat_deleteScheduledMessage,
-        params,
-        ChatDeleteScheduledMessageResponse.class
+      SlackMethods.chat_deleteScheduledMessage,
+      params,
+      ChatDeleteScheduledMessageResponse.class
     );
   }
 
@@ -965,7 +974,7 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<ConversationListResponse, SlackError>> usersConversationsPaginated(
-      ConversationsUserParams params
+    ConversationsUserParams params
   ) {
     return postSlackCommand(SlackMethods.users_conversations, params, ConversationListResponse.class);
   }
@@ -993,8 +1002,8 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<SharedChannelInviteResponse, SlackError>>  inviteToSharedConversation(
-      ConversationInviteSharedParams params
+  public CompletableFuture<Result<SharedChannelInviteResponse, SlackError>> inviteToSharedConversation(
+    ConversationInviteSharedParams params
   ) {
     return postSlackCommand(SlackMethods.conversations_inviteShared, params, SharedChannelInviteResponse.class);
   }
@@ -1185,7 +1194,7 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<ConversationMemberResponse, SlackError>> getConversationMembersPaginated(
-      ConversationMemberParams params
+    ConversationMemberParams params
   ) {
     return postSlackCommand(SlackMethods.conversations_members, params, ConversationMemberResponse.class);
   }
@@ -1197,8 +1206,8 @@ public class SlackWebClient implements SlackClient {
     return searchNextConversationPage(
       conversationName,
       listConversations(
-          ConversationsListParams.builder().from(conversationsFilter).build()
-        )
+        ConversationsListParams.builder().from(conversationsFilter).build()
+      )
         .iterator()
     );
   }
@@ -1221,7 +1230,7 @@ public class SlackWebClient implements SlackClient {
             .filter(
               conversation ->
                 conversation.getName().isPresent() &&
-                conversation.getName().get().equals(conversationName)
+                  conversation.getName().get().equals(conversationName)
             )
             .findFirst();
           if (matchInPage.isPresent()) {
@@ -1553,6 +1562,60 @@ public class SlackWebClient implements SlackClient {
       SlackMethods.migration_exchange,
       params,
       MigrationExchangeResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<CallsAddResponse, SlackError>> addCall(CallsAddParams params) {
+    return postSlackCommand(
+      SlackMethods.calls_add,
+      params,
+      CallsAddResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<CallsEndResponse, SlackError>> endCall(CallsEndParams params) {
+    return postSlackCommand(
+      SlackMethods.calls_end,
+      params,
+      CallsEndResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<CallsUpdateResponse, SlackError>> updateCall(CallsUpdateParams params) {
+    return postSlackCommand(
+      SlackMethods.calls_update,
+      params,
+      CallsUpdateResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<CallsInfoResponse, SlackError>> getCallInfo(CallsInfoParams params) {
+    return postSlackCommand(
+      SlackMethods.calls_info,
+      params,
+      CallsInfoResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<CallsParticipantsAddResponse, SlackError>> addCallParticipants(CallsParticipantsAddParams params) {
+    return postSlackCommand(
+      SlackMethods.calls_participants_add,
+      params,
+      CallsParticipantsAddResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<CallsParticipantsRemoveResponse, SlackError>> removeCallParticipants(CallsParticipantsRemoveParams params) {
+    return postSlackCommand(
+      SlackMethods.calls_participants_remove,
+      params,
+      CallsParticipantsRemoveResponse.class
     );
   }
 
