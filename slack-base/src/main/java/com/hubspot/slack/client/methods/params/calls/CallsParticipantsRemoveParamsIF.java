@@ -14,5 +14,6 @@ import org.immutables.value.Value;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface CallsParticipantsRemoveParamsIF {
   String getId();
+
   List<? extends SlackInternalOrExternalUser> getUsers();
 }
