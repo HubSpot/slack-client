@@ -30,7 +30,7 @@ public interface TimePickerIF extends BlockElement, HasActionId {
 
   Optional<Text> getPlaceholder();
 
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "H:mm")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
   Optional<LocalTime> getInitialTime();
 
   @JsonProperty("confirm")
