@@ -20,6 +20,10 @@
       <artifactId>slack-java-client</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.hubspot.slack</groupId>
+      <artifactId>slack-request-verifier</artifactId>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>

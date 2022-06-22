@@ -18,6 +18,7 @@
     <module>slack-java-client</module>
     <module>slack-java-client-examples</module>
     <module>slack-java-client-guice</module>
+    <module>slack-request-verifier</module>
   </modules>
 
   <properties>
@@ -41,6 +42,11 @@
       <dependency>
         <groupId>com.hubspot.slack</groupId>
         <artifactId>slack-java-client-examples</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hubspot.slack</groupId>
+        <artifactId>slack-request-verifier</artifactId>
         <version>${project.version}</version>
       </dependency>
 
