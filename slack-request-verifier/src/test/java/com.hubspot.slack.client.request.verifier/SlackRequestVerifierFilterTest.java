@@ -14,13 +14,9 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.Before;
+import org.junit.Test;
 
-
-@ExtendWith(MockitoExtension.class)
 public class SlackRequestVerifierFilterTest {
 
   private static final String SIGNING_SECRET = "secret";
@@ -36,8 +32,8 @@ public class SlackRequestVerifierFilterTest {
 
   private SlackRequestVerifierFilter slackRequestVerifierFilter;
 
-  @BeforeEach
-  void setup() {
+  @Before
+  public void setup() {
     this.slackRequestVerifierFilter = new SlackRequestVerifierFilter(REQUEST_EXPIRATION_TIME, SIGNING_SECRET);
   }
 
