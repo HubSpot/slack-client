@@ -8,7 +8,7 @@
     <version>1.13-SNAPSHOT</version>
   </parent>
 
-  <artifactId>slack-java-client-guice</artifactId>
+  <artifactId>slack-request-verifier</artifactId>
 
   <dependencies>
     <dependency>
@@ -16,18 +16,36 @@
       <artifactId>guice</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.hubspot.slack</groupId>
-      <artifactId>slack-java-client</artifactId>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.hubspot.slack</groupId>
-      <artifactId>slack-request-verifier</artifactId>
+      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-assistedinject</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-
 </project>
