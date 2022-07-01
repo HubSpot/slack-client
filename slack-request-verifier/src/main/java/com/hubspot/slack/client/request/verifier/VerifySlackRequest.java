@@ -7,5 +7,5 @@ import com.google.inject.BindingAnnotation;
 
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SlackRequestVerifier {
+public @interface VerifySlackRequest {
 }
