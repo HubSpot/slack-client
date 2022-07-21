@@ -31,6 +31,8 @@ public interface ConversationIF {
   Optional<Boolean> isPrivate();
   @JsonProperty("is_member")
   Optional<Boolean> isMember();
+  @JsonProperty("is_shared")
+  Optional<Boolean> isShared();
   @JsonProperty("num_members")
   Optional<Integer> getNumMembers();
 }
