@@ -14,4 +14,5 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public interface ConversationsListParamsIF extends BaseConversationsFilter {
   Optional<String> getCursor();
   Optional<Integer> getLimit();
+  Optional<Boolean> shouldExcludeSharedChannels();
 }

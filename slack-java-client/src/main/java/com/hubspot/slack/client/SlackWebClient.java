@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
 import com.google.inject.assistedinject.Assisted;
@@ -897,8 +898,7 @@ public class SlackWebClient implements SlackClient {
         );
 
         CompletableFuture<Result<List<Conversation>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(ConversationListResponse::getConversations)
-        );
+          result -> result.mapOk(response -> getConversations(response, params)));
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(
           resultFuture
@@ -913,6 +913,20 @@ public class SlackWebClient implements SlackClient {
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
     };
+  }
+
+  private List<Conversation> getConversations(ConversationListResponse conversationListResponse, ConversationsListParams params) {
+    List<Conversation> conversations = conversationListResponse.getConversations();
+    if (params.shouldExcludeSharedChannels().orElse(false)) {
+      return filterSharedConversations(conversations);
+    }
+    return conversations;
+  }
+
+  private List<Conversation> filterSharedConversations(List<Conversation> conversations) {
+    return conversations.stream()
+            .filter(conversation -> !(conversation.isShared().orElse(false)) )
+            .collect(ImmutableList.toImmutableList());
   }
 
   @Override
