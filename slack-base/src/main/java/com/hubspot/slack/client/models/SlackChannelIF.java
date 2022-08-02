@@ -20,6 +20,7 @@ public interface SlackChannelIF {
   Optional<Boolean> getIsGeneral();
   Optional<Boolean> getIsPrivate();
   Optional<Boolean> getIsMember();
+  Optional<Boolean> getIsShared();
 
   @Derived
   @JsonIgnore
