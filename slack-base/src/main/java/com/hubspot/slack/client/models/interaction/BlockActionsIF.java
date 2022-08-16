@@ -27,7 +27,7 @@ public interface BlockActionsIF extends SlackInteractiveCallback {
 
   Optional<StateValuesPayload> getState();
 
-  Optional<MessageContainer> getContainer();
+  Optional<Container> getContainer();
 
   @Override
   default String getCallbackId() {
