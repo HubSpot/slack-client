@@ -102,11 +102,5 @@
         }
       }
     }
-  },
-  "container":{
-    "type":"message",
-    "message_ts":"1660548550.394939",
-    "channel_id":"C03M1ESC555",
-    "is_ephemeral":false
   }
 }
