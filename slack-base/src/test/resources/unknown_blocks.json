@@ -1,12 +1,12 @@
 [
   {
-    "type": "rich_text",
+    "type": "rich_text_unknown",
     "elements": [
       {
-        "type": "rich_text_section",
+        "type": "rich_text_section_unknown",
         "elements": [
           {
-            "type": "text",
+            "type": "text_unknown",
             "text": "blah"
           }
         ]
