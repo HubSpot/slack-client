@@ -1,0 +1,394 @@
+
+  {
+    "type": "message_action",
+    "token": "uWopedqK86MJfjUeq8v9pUAD",
+    "action_ts": "1668518741.225922",
+    "team": { "id": "T01DK9EHX5F", "domain": "nliutyi-slack-test" },
+    "user": {
+      "id": "U01DCR2RJJY",
+      "username": "liutyi.nazar",
+      "team_id": "T01DK9EHX5F",
+      "name": "liutyi.nazar"
+    },
+    "channel": { "id": "C01DK9EJ9BK", "name": "general" },
+    "is_enterprise_install": false,
+    "callback_id": "create_a_note_view_open",
+    "trigger_id": "4374030983106.1461320609185.e7f0674b7df7e1921fab448523f7b57f",
+    "response_url": "https://hooks.slack.com/app/T01DK9EHX5F/4359488714231/3UovfsZ3ac6Dfh0xdZdyhTll",
+    "message_ts": "1668518700.305859",
+    "message": {
+      "client_msg_id": "7c5a7a69-d6df-49a7-8d80-ba9756e2a032",
+      "type": "message",
+      "subtype": null,
+      "botId": null,
+      "username": null,
+      "text": "Simple case:\n*A bold text.*\n_Italic text._\n~Strike text.~\n<https://calendar.google.com/calendar/u/1/r/week|Link>\n1. Numbered list root level.\n2. Ordered list also root level\n    a. Letter list from ordered(numbered) list\n    b. Also letter list\n        i. Rome list level 1\n        ii. Rome list next item\n        iii. *Rome list bold*\n        iv. _Rome list italic_\n        v. _*Rome list italic bold*_\n        vi. ~_*Rome list italic bold strike*_~\n    c. Letter list item after rome list.\n3. Ordered-numbere list item after letter list.\n\u2022 Bulleted list root\n\u2022 Bulleted list root 2.\n    \u25e6 Bulleted list inside previous bulleted list \n    \u25e6 Bulleted list item 2 inside previous bulleted list \n        \u25aa\ufe0e Bulleted list item third incapsulated \n        \u25aa\ufe0e Bulleted list item third incapsulated 2\n            \u2022 Bulleted list level 4 of deepness\n        \u25aa\ufe0e Bulleted list item third incapsulated 3\n    \u25e6 Bulleted list item 3 inside previous bulleted list \n\u2022 Bulleted list root 3.\nJust a row after the list ( should be separated )\n> Dobrii vechir, everybady!\n`code line`\n```var bar far;\n\npub sub mob dob;\ncucu```\nThe user mentioning line: <@U01DVDVMS12>",
+      "user": "U01DCR2RJJY",
+      "ts": "1668518700.305859",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "yW=Nc",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                { "type": "text", "text": "Simple case:\n" },
+                {
+                  "type": "text",
+                  "text": "A bold text.",
+                  "style": { "bold": true }
+                },
+                { "type": "text", "text": "\n" },
+                {
+                  "type": "text",
+                  "text": "Italic text.",
+                  "style": { "italic": true }
+                },
+                { "type": "text", "text": "\n" },
+                {
+                  "type": "text",
+                  "text": "Strike text.",
+                  "style": { "strike": true }
+                },
+                { "type": "text", "text": "\n" },
+                {
+                  "type": "link",
+                  "url": "https://calendar.google.com/calendar/u/1/r/week",
+                  "text": "Link"
+                },
+                { "type": "text", "text": "\n" }
+              ]
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    { "type": "text", "text": "Numbered list root level." }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    { "type": "text", "text": "Ordered list also root level" }
+                  ]
+                }
+              ],
+              "style": "ordered",
+              "indent": 0,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Letter list from ordered(numbered) list"
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [{ "type": "text", "text": "Also letter list" }]
+                }
+              ],
+              "style": "ordered",
+              "indent": 1,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [{ "type": "text", "text": "Rome list level 1" }]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    { "type": "text", "text": "Rome list next item" }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Rome list bold",
+                      "style": { "bold": true }
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Rome list italic",
+                      "style": { "italic": true }
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Rome list italic bold",
+                      "style": { "bold": true, "italic": true }
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Rome list italic bold strike",
+                      "style": { "bold": true, "italic": true, "strike": true }
+                    }
+                  ]
+                }
+              ],
+              "style": "ordered",
+              "indent": 2,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Letter list item after rome list."
+                    }
+                  ]
+                }
+              ],
+              "style": "ordered",
+              "indent": 1,
+              "offset": 2,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Ordered-numbere list item after letter list."
+                    }
+                  ]
+                }
+              ],
+              "style": "ordered",
+              "indent": 0,
+              "offset": 2,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [{ "type": "text", "text": "Bulleted list root" }]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    { "type": "text", "text": "Bulleted list root 2." }
+                  ]
+                }
+              ],
+              "style": "bullet",
+              "indent": 0,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Bulleted list inside previous bulleted list "
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Bulleted list item 2 inside previous bulleted list "
+                    }
+                  ]
+                }
+              ],
+              "style": "bullet",
+              "indent": 1,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Bulleted list item third incapsulated "
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Bulleted list item third incapsulated 2"
+                    }
+                  ]
+                }
+              ],
+              "style": "bullet",
+              "indent": 2,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Bulleted list level 4 of deepness"
+                    }
+                  ]
+                }
+              ],
+              "style": "bullet",
+              "indent": 3,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Bulleted list item third incapsulated 3"
+                    }
+                  ]
+                }
+              ],
+              "style": "bullet",
+              "indent": 2,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Bulleted list item 3 inside previous bulleted list "
+                    }
+                  ]
+                }
+              ],
+              "style": "bullet",
+              "indent": 1,
+              "border": 0
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    { "type": "text", "text": "Bulleted list root 3." }
+                  ]
+                }
+              ],
+              "style": "bullet",
+              "indent": 0,
+              "border": 0
+            },
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "Just a row after the list ( should be separated )\n"
+                }
+              ]
+            },
+            {
+              "type": "rich_text_quote",
+              "elements": [
+                { "type": "text", "text": "Dobrii vechir, everybady!" }
+              ]
+            },
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "code line",
+                  "style": { "code": true }
+                },
+                { "type": "text", "text": "\n" }
+              ]
+            },
+            {
+              "type": "rich_text_preformatted",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "var bar far;\n\npub sub mob dob;\ncucu"
+                }
+              ],
+              "border": 0
+            },
+            {
+              "type": "rich_text_section",
+              "elements": [
+                { "type": "text", "text": "The user mentioning line: " },
+                { "type": "user", "user_id": "U01DVDVMS12" }
+              ]
+            }
+          ]
+        }
+      ],
+      "team": "T01DK9EHX5F",
+      "attachments": [
+        {
+          "from_url": "https://calendar.google.com/calendar/u/1/r/week",
+          "service_icon": "https://accounts.google.com/favicon.ico",
+          "id": 1,
+          "original_url": "https://calendar.google.com/calendar/u/1/r/week",
+          "fallback": "Google Calendar - Sign in to Access & Edit Your Schedule",
+          "text": "Access Google Calendar with a free Google account (for personal use) or Google Workspace account (for business use).",
+          "title": "Google Calendar - Sign in to Access & Edit Your Schedule",
+          "title_link": "https://calendar.google.com/calendar/u/1/r/week",
+          "service_name": "accounts.google.com"
+        }
+      ]
+    }
+  }
