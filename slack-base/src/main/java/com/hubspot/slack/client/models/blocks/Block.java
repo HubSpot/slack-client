@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.hubspot.slack.client.models.BlockOrAttachment;
+import com.hubspot.slack.client.models.blocks.messages.Emoji;
 import com.hubspot.slack.client.models.blocks.messages.Link;
 import com.hubspot.slack.client.models.blocks.messages.RichText;
 import com.hubspot.slack.client.models.blocks.messages.RichTextList;
@@ -28,6 +29,7 @@ import com.hubspot.slack.client.models.blocks.messages.User;
     @JsonSubTypes.Type(value = Text.class, name = Text.TYPE),
     @JsonSubTypes.Type(value = Link.class, name = Link.TYPE),
     @JsonSubTypes.Type(value = User.class, name = User.TYPE),
+    @JsonSubTypes.Type(value = Emoji.class, name = Emoji.TYPE),
     @JsonSubTypes.Type(value = RichText.class, name = RichText.TYPE),
     @JsonSubTypes.Type(value = RichTextSection.class, name = RichTextSection.TYPE),
     @JsonSubTypes.Type(value = RichTextList.class, name = RichTextList.TYPE),
