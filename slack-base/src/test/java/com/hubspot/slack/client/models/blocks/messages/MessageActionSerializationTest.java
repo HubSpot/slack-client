@@ -28,7 +28,7 @@ public class MessageActionSerializationTest {
         assertThat(blocks.size()).isEqualTo(BLOCKS_COUNT);
 
         RichMessageBlock firstBlock = (RichMessageBlock) blocks.get(0);
-        List<MessageBlock> elements = firstBlock.getElements();
+        List<Block> elements = firstBlock.getElements();
         assertThat(elements.size()).isEqualTo(RICH_MESSAGE_BLOCKS_COUNT);
     }
 }
