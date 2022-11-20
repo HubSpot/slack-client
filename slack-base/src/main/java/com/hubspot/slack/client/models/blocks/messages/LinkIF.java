@@ -23,4 +23,6 @@ public interface LinkIF extends Block {
     String getUrl();
 
     Optional<String> getText();
+
+    Optional<TextStyle> getStyle();
 }
