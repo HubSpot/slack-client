@@ -33,31 +33,17 @@
             {
               "type": "rich_text_section",
               "elements": [
-                { "type": "text", "text": "Simple case:\n" },
+                { "type": "text", "text": "Simple case" },
                 {
                   "type": "text",
                   "text": "A bold text.",
                   "style": { "bold": true }
                 },
-                { "type": "text", "text": "\n" },
-                {
-                  "type": "text",
-                  "text": "Italic text.",
-                  "style": { "italic": true }
-                },
-                { "type": "text", "text": "\n" },
                 {
                   "type": "text",
                   "text": "Strike text.",
                   "style": { "strike": true }
-                },
-                { "type": "text", "text": "\n" },
-                {
-                  "type": "link",
-                  "url": "https://calendar.google.com/calendar/u/1/r/week",
-                  "text": "Link"
-                },
-                { "type": "text", "text": "\n" }
+                }
               ]
             },
             {
@@ -67,12 +53,6 @@
                   "type": "rich_text_section",
                   "elements": [
                     { "type": "text", "text": "Numbered list root level." }
-                  ]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    { "type": "text", "text": "Ordered list also root level" }
                   ]
                 }
               ],
@@ -91,10 +71,6 @@
                       "text": "Letter list from ordered(numbered) list"
                     }
                   ]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [{ "type": "text", "text": "Also letter list" }]
                 }
               ],
               "style": "ordered",
@@ -107,42 +83,6 @@
                 {
                   "type": "rich_text_section",
                   "elements": [{ "type": "text", "text": "Rome list level 1" }]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    { "type": "text", "text": "Rome list next item" }
-                  ]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Rome list bold",
-                      "style": { "bold": true }
-                    }
-                  ]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Rome list italic",
-                      "style": { "italic": true }
-                    }
-                  ]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Rome list italic bold",
-                      "style": { "bold": true, "italic": true }
-                    }
-                  ]
                 },
                 {
                   "type": "rich_text_section",
@@ -182,162 +122,12 @@
               "elements": [
                 {
                   "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Ordered-numbere list item after letter list."
-                    }
-                  ]
-                }
-              ],
-              "style": "ordered",
-              "indent": 0,
-              "offset": 2,
-              "border": 0
-            },
-            {
-              "type": "rich_text_list",
-              "elements": [
-                {
-                  "type": "rich_text_section",
                   "elements": [{ "type": "text", "text": "Bulleted list root" }]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    { "type": "text", "text": "Bulleted list root 2." }
-                  ]
                 }
               ],
               "style": "bullet",
               "indent": 0,
               "border": 0
-            },
-            {
-              "type": "rich_text_list",
-              "elements": [
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Bulleted list inside previous bulleted list "
-                    }
-                  ]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Bulleted list item 2 inside previous bulleted list "
-                    }
-                  ]
-                }
-              ],
-              "style": "bullet",
-              "indent": 1,
-              "border": 0
-            },
-            {
-              "type": "rich_text_list",
-              "elements": [
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Bulleted list item third incapsulated "
-                    }
-                  ]
-                },
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Bulleted list item third incapsulated 2"
-                    }
-                  ]
-                }
-              ],
-              "style": "bullet",
-              "indent": 2,
-              "border": 0
-            },
-            {
-              "type": "rich_text_list",
-              "elements": [
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Bulleted list level 4 of deepness"
-                    }
-                  ]
-                }
-              ],
-              "style": "bullet",
-              "indent": 3,
-              "border": 0
-            },
-            {
-              "type": "rich_text_list",
-              "elements": [
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Bulleted list item third incapsulated 3"
-                    }
-                  ]
-                }
-              ],
-              "style": "bullet",
-              "indent": 2,
-              "border": 0
-            },
-            {
-              "type": "rich_text_list",
-              "elements": [
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "type": "text",
-                      "text": "Bulleted list item 3 inside previous bulleted list "
-                    }
-                  ]
-                }
-              ],
-              "style": "bullet",
-              "indent": 1,
-              "border": 0
-            },
-            {
-              "type": "rich_text_list",
-              "elements": [
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    { "type": "text", "text": "Bulleted list root 3." }
-                  ]
-                }
-              ],
-              "style": "bullet",
-              "indent": 0,
-              "border": 0
-            },
-            {
-              "type": "rich_text_section",
-              "elements": [
-                {
-                  "type": "text",
-                  "text": "Just a row after the list ( should be separated )\n"
-                }
-              ]
             },
             {
               "type": "rich_text_quote",
@@ -352,8 +142,7 @@
                   "type": "text",
                   "text": "code line",
                   "style": { "code": true }
-                },
-                { "type": "text", "text": "\n" }
+                }
               ]
             },
             {
@@ -363,13 +152,11 @@
                   "type": "text",
                   "text": "var bar far;\n\npub sub mob dob;\ncucu"
                 }
-              ],
-              "border": 0
+              ]
             },
             {
               "type": "rich_text_section",
               "elements": [
-                { "type": "text", "text": "The user mentioning line: " },
                 { "type": "user", "user_id": "U01DVDVMS12" }
               ]
             }
