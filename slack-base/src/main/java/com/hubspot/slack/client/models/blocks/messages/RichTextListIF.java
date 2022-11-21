@@ -8,7 +8,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public interface RichTextListIF extends RichMessageBlock {
+public interface RichTextListIF extends HasNestedBlocks {
     String TYPE = "rich_text_list";
     @Override
     @Value.Derived
@@ -16,7 +16,7 @@ public interface RichTextListIF extends RichMessageBlock {
         return TYPE;
     }
 
-    RichBlockStyle getStyle();
+    ListType getStyle();
 
     int getIndent();
 

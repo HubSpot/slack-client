@@ -17,7 +17,7 @@ public interface TextStyleIF {
     @JsonProperty("italic")
     Optional<Boolean> isItalic();
     @JsonProperty("strike")
-    Optional<Boolean> isStrike();
+    Optional<Boolean> isStrikethrough();
     @JsonProperty("code")
     Optional<Boolean> isCode();
 }

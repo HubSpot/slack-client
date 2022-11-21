@@ -8,7 +8,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public interface RichTextPreformattedIF extends RichMessageBlock{
+public interface RichTextPreformattedIF extends HasNestedBlocks {
     String TYPE = "rich_text_preformatted";
 
     @Override

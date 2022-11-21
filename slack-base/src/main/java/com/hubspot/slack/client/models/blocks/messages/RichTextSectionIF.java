@@ -8,7 +8,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public interface RichTextSectionIF extends RichMessageBlock {
+public interface RichTextSectionIF extends HasNestedBlocks {
     String TYPE = "rich_text_section";
     @Override
     @Value.Derived

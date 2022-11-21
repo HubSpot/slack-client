@@ -4,6 +4,6 @@ import com.hubspot.slack.client.models.blocks.Block;
 
 import java.util.List;
 
-public interface RichMessageBlock extends Block {
+public interface HasNestedBlocks extends Block {
     List<Block> getElements();
 }
