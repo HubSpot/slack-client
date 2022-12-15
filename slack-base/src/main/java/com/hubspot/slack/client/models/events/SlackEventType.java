@@ -21,6 +21,11 @@ import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
+import com.hubspot.slack.client.models.events.workflow.WorkflowDeletedEvent;
+import com.hubspot.slack.client.models.events.workflow.WorkflowPublishedEvent;
+import com.hubspot.slack.client.models.events.workflow.WorkflowStepDeletedEvent;
+import com.hubspot.slack.client.models.events.workflow.WorkflowStepExecuteEvent;
+import com.hubspot.slack.client.models.events.workflow.WorkflowUnpublishedEvent;
 
 public enum SlackEventType {
 
@@ -90,8 +95,12 @@ public enum SlackEventType {
   TOKENS_REVOKED(SlackTokensRevokedEvent.class),
   URL_VERIFICATION,
   USER_CHANGE(SlackUserChangeEvent.class),
-  UNKNOWN
-  ;
+  WORKFLOW_DELETED(WorkflowDeletedEvent.class),
+  WORKFLOW_PUBLISHED(WorkflowPublishedEvent.class),
+  WORKFLOW_STEP_DELETED(WorkflowStepDeletedEvent.class),
+  WORKFLOW_STEP_EXECUTE(WorkflowStepExecuteEvent.class),
+  WORKFLOW_UNPUBLISHED(WorkflowUnpublishedEvent.class),
+  UNKNOWN;
 
   private final Class<? extends SlackEvent> eventClass;
 

@@ -1,0 +1,26 @@
+{
+"workflow_id" : "438766394390110018",
+"step_id" : "2b44c3e9-7f8e-4f16-9e44-b8465a637c9c",
+  "inputs": {
+    "strings": {
+      "value": [
+        ":pizza:",
+        ":hamburger:",
+        ":carrot:",
+        ":burrito:",
+        ":taco:"
+      ],
+      "skip_variable_replacement": false,
+      "variables": {
+        "target": "replacement"
+      }
+    }
+  },
+  "outputs": [
+    {
+      "name": "random_string",
+      "type": "text",
+      "label": "Random String"
+    }
+  ]
+}

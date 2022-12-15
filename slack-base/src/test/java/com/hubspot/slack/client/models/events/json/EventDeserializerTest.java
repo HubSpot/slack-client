@@ -1,5 +1,8 @@
 package com.hubspot.slack.client.models.events.json;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.methods.interceptor.HasChannel;
@@ -13,12 +16,8 @@ import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
-import org.junit.Test;
-
 import java.io.IOException;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class EventDeserializerTest {
   @Test
@@ -135,6 +134,31 @@ public class EventDeserializerTest {
   public void itCanDeserializeGroupUnArchiveEvent() throws IOException {
     SlackEvent event = fetchAndDeserializeSlackEvent("group_unarchive_event.json");
     assertThat(event.getType()).isEqualTo(SlackEventType.GROUP_UNARCHIVE);
+  }
+
+  @Test
+  public void itCanDeserializeWorkflowStepExecute() throws IOException {
+    assertThat(fetchAndDeserializeSlackEvent("workflow_step_execute_event.json").getType()).isEqualTo(SlackEventType.WORKFLOW_STEP_EXECUTE);
+  }
+
+  @Test
+  public void itCanDeserializeWorkflowPublished() throws IOException {
+    assertThat(fetchAndDeserializeSlackEvent("workflow_published_event.json").getType()).isEqualTo(SlackEventType.WORKFLOW_PUBLISHED);
+  }
+
+  @Test
+  public void itCanDeserializeWorkflowUnpublished() throws IOException {
+    assertThat(fetchAndDeserializeSlackEvent("workflow_unpublished_event.json").getType()).isEqualTo(SlackEventType.WORKFLOW_UNPUBLISHED);
+  }
+
+  @Test
+  public void itCanDeserializeWorkflowDeleted() throws IOException {
+    assertThat(fetchAndDeserializeSlackEvent("workflow_deleted_event.json").getType()).isEqualTo(SlackEventType.WORKFLOW_DELETED);
+  }
+
+  @Test
+  public void itCanDeserializeWorkflowStepDeleted() throws IOException {
+    assertThat(fetchAndDeserializeSlackEvent("workflow_step_deleted_event.json").getType()).isEqualTo(SlackEventType.WORKFLOW_STEP_DELETED);
   }
 
   @Test

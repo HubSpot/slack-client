@@ -1,0 +1,43 @@
+{
+  "token": "uWopedqK86MJfjUeq8v9pUAD",
+  "team_id": "redacted",
+  "api_app_id": "redacted",
+  "event": {
+    "type": "workflow_step_execute",
+    "callback_id": "open_ticket",
+    "workflow_step": {
+      "workflow_step_execute_id": "1036669284371.19077474947.c94bcf942e047298d21f89faf24f1326",
+      "inputs": {
+        "title": {
+          "value": "{{user}} submitted an issue",
+          "skip_variable_replacement": false
+        },
+        "submitter": {
+          "value": "{{user}}",
+          "skip_variable_replacement": false
+        },
+        "channel": {
+          "value": "{{channel}}",
+          "skip_variable_replacement": true
+        }
+      },
+      "outputs": [
+        {
+          "type": "text",
+          "name": "title",
+          "label": "Title of Ticket"
+        },
+        {
+          "type": "text",
+          "name": "id",
+          "label": "Ticket ID"
+        }
+      ]
+    }  },
+  "type": "event_callback",
+  "event_id": "EvCYD468UB",
+  "event_time": 1537543598,
+  "authed_users": [
+    "UBRFHDFGA"
+  ]
+}

@@ -11,6 +11,7 @@ public enum InteractiveCallbackType {
   BLOCK_ACTIONS,
   VIEW_SUBMISSION,
   SHORTCUT,
+  WORKFLOW_STEP_EDIT,
   UNKNOWN
   ;
 

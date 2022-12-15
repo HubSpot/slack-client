@@ -1,0 +1,39 @@
+{
+  "action_ts": "1671054757.388707",
+  "callback_id": "step_edit",
+  "team": {
+    "domain": "XXXX",
+    "id": "T0719BWG1"
+  },
+  "token": "redacted",
+  "trigger_id": "4522294552740.7043404545.1c925b0a099e37ca9ef67b3ae18db20e",
+  "type": "workflow_step_edit",
+  "user": {
+    "access_token" : null,
+    "id" : "U01T69L9WR0",
+    "name" : null
+  },
+  "workflow_step": {
+    "inputs": {
+      "strings": {
+        "skip_variable_replacement": false,
+        "value": [
+          ":pizza:",
+          ":hamburger:",
+          ":carrot:",
+          ":burrito:",
+          ":taco:"
+        ]
+      }
+    },
+    "outputs": [
+      {
+        "label": "Random String",
+        "name": "random_string",
+        "type": "text"
+      }
+    ],
+    "step_id": "2b44c3e9-7f8e-4f16-9e44-b8465a637c9c",
+    "workflow_id": "438766394390110018"
+  }
+}
