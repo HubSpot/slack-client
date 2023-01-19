@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.teams;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -12,7 +13,8 @@ import java.util.Optional;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface SlackTeamIconIF {
 
-  Optional<String> getImage_88();
+  @JsonProperty("image_88")
+  Optional<String> getImage88();
 
   @Deprecated
   Optional<String> getImageOriginal();
