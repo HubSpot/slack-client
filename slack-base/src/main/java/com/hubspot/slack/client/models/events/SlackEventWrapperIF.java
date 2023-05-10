@@ -14,6 +14,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public interface SlackEventWrapperIF<T extends SlackEvent> {
   String getToken();
   String getTeamId();
+  Optional<String> getContextTeamId();
   SlackEventType getType();
   List<String> getAuthedUsers();
   String getEventId();
