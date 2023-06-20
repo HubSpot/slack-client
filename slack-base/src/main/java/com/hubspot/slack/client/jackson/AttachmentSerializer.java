@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 // this custom serializer is used for compatibility with some Slack API features -
-// if our attachment has "blocks" field, all other fields should not be present
+// if our attachment has a not empty "blocks" field, all other fields should not be present
 public class AttachmentSerializer extends StdSerializer<Attachment> {
     private static final String BLOCKS_FIELD_NAME = "blocks";
 
