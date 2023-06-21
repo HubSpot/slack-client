@@ -1,0 +1,27 @@
+{
+  "fallback": null,
+  "color": null,
+  "pretext": null,
+  "author_name": null,
+  "author_link": null,
+  "author_icon": null,
+  "title": null,
+  "title_link": null,
+  "text": null,
+  "image_url": null,
+  "attachment_type": null,
+  "fields": [
+    {
+      "title": null,
+      "value": "Change preferences for this notification in <https://app.hubspotqa.com/notification-preferences/885224775/?highlight=27870&referrer=slack%7CHubSpot>",
+      "short": false
+    }
+  ],
+  "footer": null,
+  "footer_icon": null,
+  "thumb_url": null,
+  "callback_id": null,
+  "actions": [],
+  "mrkdwn_in": [],
+  "ts": null
+}
