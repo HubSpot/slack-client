@@ -9,6 +9,11 @@ import java.io.IOException;
 public class AttachmentSerializationTest extends SerializationTestBase {
 
     @Test
+    public void testAttachmentsWithNullsSerialization() throws IOException {
+        testSerialization("attachment_without_blocks_with_nulls.json", Attachment.class);
+    }
+
+    @Test
     public void testAttachmentsSerialization() throws IOException {
         testSerialization("attachment_without_blocks.json", Attachment.class);
     }

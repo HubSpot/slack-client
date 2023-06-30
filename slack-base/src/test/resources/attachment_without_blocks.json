@@ -1,27 +1,35 @@
 {
-  "fallback": null,
-  "color": null,
-  "pretext": null,
-  "author_name": null,
-  "author_link": null,
-  "author_icon": null,
-  "title": null,
-  "title_link": null,
-  "text": null,
-  "image_url": null,
-  "attachment_type": null,
+  "fallback": "fallback",
+  "color": "blue",
+  "pretext": "pretext value",
+  "author_name": "author name",
+  "author_link": "author link",
+  "author_icon": "author icon",
+  "title": "the title",
+  "title_link": "www.title.link",
+  "text": "text",
+  "image_url": "www.image.url",
+  "attachment_type": "type of attachment",
   "fields": [
     {
-      "title": null,
+      "title": "simple title",
       "value": "Change preferences for this notification in <https://app.hubspotqa.com/notification-preferences/885224775/?highlight=27870&referrer=slack%7CHubSpot>",
       "short": false
     }
   ],
-  "footer": null,
-  "footer_icon": null,
-  "thumb_url": null,
-  "callback_id": null,
-  "actions": [],
-  "mrkdwn_in": [],
-  "ts": null
+  "footer": "footer",
+  "footer_icon": "footer icon",
+  "thumb_url": "thumb url",
+  "callback_id": "1234",
+  "actions": [
+    {
+      "type": "button",
+      "text": "View mention",
+      "url": "link"
+    }
+  ],
+  "mrkdwn_in": [
+    "text"
+  ],
+  "ts": "123456789.9875"
 }
