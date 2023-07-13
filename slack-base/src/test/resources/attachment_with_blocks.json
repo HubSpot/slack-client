@@ -1,0 +1,18 @@
+{
+  "blocks": [
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "image",
+          "image_url": "image url",
+          "alt_text": "alt text"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "<profileUrl543|name123>"
+        }
+      ]
+    }
+  ]
+}
