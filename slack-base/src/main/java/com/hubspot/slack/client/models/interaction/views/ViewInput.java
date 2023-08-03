@@ -21,8 +21,12 @@ import java.util.Optional;
 @JsonSubTypes(
   {
     @Type(value = ViewPlainTextInput.class, name = "plain_text_input"),
+    @Type(value = ViewNumberInput.class, name = "number_input"),
+    @Type(value = ViewEmailInput.class, name = "email_text_input"),
+    @Type(value = ViewUrlInput.class, name = "url_text_input"),
     @Type(value = ViewDatePicker.class, name = "datepicker"),
     @Type(value = ViewTimePicker.class, name = "timepicker"),
+    @Type(value = ViewDateTimePicker.class, name = "datetimepicker"),
     @Type(value = ViewRadioButtonGroup.class, name = "radio_buttons"),
     @Type(value = UsersSelectInput.class, name = "users_select"),
     @Type(value = ViewCheckboxes.class, name = "checkboxes"),

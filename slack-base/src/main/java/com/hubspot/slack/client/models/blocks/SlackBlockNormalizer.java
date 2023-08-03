@@ -6,6 +6,10 @@ import java.util.Optional;
 import com.google.common.collect.Iterables;
 import com.hubspot.slack.client.models.blocks.elements.Checkboxes;
 import com.hubspot.slack.client.models.blocks.elements.CheckboxesIF;
+import com.hubspot.slack.client.models.blocks.elements.EmailInput;
+import com.hubspot.slack.client.models.blocks.elements.EmailInputIF;
+import com.hubspot.slack.client.models.blocks.elements.NumberInput;
+import com.hubspot.slack.client.models.blocks.elements.NumberInputIF;
 import com.hubspot.slack.client.models.blocks.elements.PlainTextInput;
 import com.hubspot.slack.client.models.blocks.elements.PlainTextInputIF;
 import com.hubspot.slack.client.models.blocks.elements.RadioButtonGroup;
@@ -14,6 +18,8 @@ import com.hubspot.slack.client.models.blocks.elements.StaticMultiSelectMenu;
 import com.hubspot.slack.client.models.blocks.elements.StaticMultiSelectMenuIF;
 import com.hubspot.slack.client.models.blocks.elements.StaticSelectMenu;
 import com.hubspot.slack.client.models.blocks.elements.StaticSelectMenuIF;
+import com.hubspot.slack.client.models.blocks.elements.UrlInput;
+import com.hubspot.slack.client.models.blocks.elements.UrlInputIF;
 import com.hubspot.slack.client.models.blocks.objects.Option;
 import com.hubspot.slack.client.models.blocks.objects.OptionGroup;
 import com.hubspot.slack.client.models.blocks.objects.OptionGroupIF;
@@ -47,6 +53,36 @@ public class SlackBlockNormalizer {
           .build();
     }
     return plainTextInput;
+  }
+
+  public static NumberInputIF normalize(NumberInputIF numberInput) {
+    if (shouldNormalize(numberInput.getPlaceholder(), BlockElementLengthLimits.MAX_PLAIN_TEXT_PLACEHOLDER_LENGTH)) {
+      return NumberInput.builder()
+              .from(numberInput)
+              .setPlaceholder(normalize(numberInput.getPlaceholder(), BlockElementLengthLimits.MAX_PLAIN_TEXT_PLACEHOLDER_LENGTH))
+              .build();
+    }
+    return numberInput;
+  }
+
+  public static EmailInputIF normalize(EmailInputIF emailInput) {
+    if (shouldNormalize(emailInput.getPlaceholder(), BlockElementLengthLimits.MAX_PLAIN_TEXT_PLACEHOLDER_LENGTH)) {
+      return EmailInput.builder()
+              .from(emailInput)
+              .setPlaceholder(normalize(emailInput.getPlaceholder(), BlockElementLengthLimits.MAX_PLAIN_TEXT_PLACEHOLDER_LENGTH))
+              .build();
+    }
+    return emailInput;
+  }
+
+  public static UrlInputIF normalize(UrlInputIF urlInput) {
+    if (shouldNormalize(urlInput.getPlaceholder(), BlockElementLengthLimits.MAX_PLAIN_TEXT_PLACEHOLDER_LENGTH)) {
+      return UrlInput.builder()
+              .from(urlInput)
+              .setPlaceholder(normalize(urlInput.getPlaceholder(), BlockElementLengthLimits.MAX_PLAIN_TEXT_PLACEHOLDER_LENGTH))
+              .build();
+    }
+    return urlInput;
   }
 
   public static StaticMultiSelectMenuIF normalize(StaticMultiSelectMenuIF staticMultiSelectMenu) {
