@@ -1,30 +1,14 @@
 package com.hubspot.slack.client.models.files;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.hubspot.slack.client.models.files.json.SlackFileDeserializer;
 import java.util.List;
 import java.util.Optional;
 
 import org.immutables.value.Value.Default;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-
-@JsonTypeInfo(
-    use = Id.NAME,
-    include = As.EXISTING_PROPERTY,
-    property = "filetype",
-    defaultImpl = SlackUnknownFiletype.class
-)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = SlackTextFile.class, name = "text"),
-    @JsonSubTypes.Type(value = SlackCsvFile.class, name = "csv"),
-    @JsonSubTypes.Type(value = SlackGifFile.class, name = "gif"),
-    @JsonSubTypes.Type(value = SlackJpgFile.class, name = "jpg"),
-    @JsonSubTypes.Type(value = SlackPngFile.class, name = "png"),
-    @JsonSubTypes.Type(value = SlackJavaScriptFile.class, name = "javascript")
-})
+@JsonDeserialize(using = SlackFileDeserializer.class)
 public interface SlackFile {
   String getId();
   @JsonProperty("created")
