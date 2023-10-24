@@ -30,6 +30,8 @@ public interface TimePickerIF extends BlockElement, HasActionId {
 
   Optional<Text> getPlaceholder();
 
+  Optional<String> getTimezone();
+
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
   Optional<LocalTime> getInitialTime();
 
