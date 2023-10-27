@@ -11,6 +11,20 @@ import org.junit.Test;
 public class SlackFileDeserializerTest {
 
   @Test
+  public void shouldDeserializeDeleted() throws IOException {
+    SlackFile file = fetchAndDeserializeSlackFile("file_with_file_deleted.json");
+    assertEquals(SlackFileType.PNG, file.getFiletype());
+    assertTrue(file instanceof SlackFileDeletedFile);
+  }
+
+  @Test
+  public void shouldDeserializeFileNotFound() throws IOException {
+    SlackFile file = fetchAndDeserializeSlackFile("file_with_file_not_found.json");
+    assertEquals(SlackFileType.PNG, file.getFiletype());
+    assertTrue(file instanceof SlackFileNotFoundFile);
+  }
+
+  @Test
   public void shouldDeserializeAccessDeniedFile() throws IOException {
     SlackFile file = fetchAndDeserializeSlackFile("file_with_access_denied.json");
     assertEquals(SlackFileType.PNG, file.getFiletype());
