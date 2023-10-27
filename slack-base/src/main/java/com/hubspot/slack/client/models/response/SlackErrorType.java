@@ -9,6 +9,7 @@ import com.hubspot.slack.client.enums.EnumIndex;
 import com.hubspot.slack.client.enums.UnmappedKeyException;
 
 public enum SlackErrorType {
+  ACCESS_DENIED("access_denied"),
   ACCOUNT_INACTIVE("account_inactive"),
   ALREADY_REACTED("already_reacted"),
   APP_MISSING_ACTION_URL("app_missing_action_url"),
@@ -25,6 +26,7 @@ public enum SlackErrorType {
 
   FAILED_SENDING_DIALOG("failed_sending_dialog"),
   FATAL_ERROR("fatal_error"),
+  FILE_DELETED("file_deleted"),
   FILE_NOT_FOUND("file_not_found"),
 
   JSON_NOT_OBJECT("json_not_object"),
