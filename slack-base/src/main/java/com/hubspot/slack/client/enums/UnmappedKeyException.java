@@ -6,4 +6,3 @@ public class UnmappedKeyException extends Exception {
     super(String.format("%s does not contain a value for %s", clazz, key));
   }
 }
-

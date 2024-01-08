@@ -1,14 +1,12 @@
 package com.hubspot.slack.client.models.group;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.immutables.value.Value.Immutable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.ChannelMetadata;
 import com.hubspot.slack.client.models.Message;
+import java.util.List;
+import java.util.Optional;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle

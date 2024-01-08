@@ -7,11 +7,10 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.blocks.objects.ConfirmationDialog;
 import com.hubspot.slack.client.models.blocks.objects.Text;
-import org.immutables.value.Value;
-import org.immutables.value.Value.Immutable;
-
 import java.time.LocalDate;
 import java.util.Optional;
+import org.immutables.value.Value;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle

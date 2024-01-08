@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes({
+@JsonSubTypes(
+  {
     @JsonSubTypes.Type(value = ModalViewPayload.class, name = ModalViewPayload.TYPE),
     @JsonSubTypes.Type(value = HomeTabViewPayload.class, name = HomeTabViewPayload.TYPE),
-})
+  }
+)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public interface ViewPayloadJsonBase {
-}
+public interface ViewPayloadJsonBase {}

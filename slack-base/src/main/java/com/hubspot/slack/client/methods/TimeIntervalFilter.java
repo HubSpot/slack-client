@@ -1,12 +1,10 @@
 package com.hubspot.slack.client.methods;
 
-import java.util.Optional;
-
-import org.immutables.value.Value.Derived;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hubspot.slack.client.methods.params.channels.PagingDirection;
+import java.util.Optional;
+import org.immutables.value.Value.Derived;
 
 public interface TimeIntervalFilter {
   @JsonProperty("inclusive")

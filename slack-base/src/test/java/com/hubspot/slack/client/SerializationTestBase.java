@@ -8,6 +8,7 @@ import com.hubspot.slack.client.models.JsonLoader;
 import java.io.IOException;
 
 public class SerializationTestBase {
+
   private static final ObjectMapper OBJECT_MAPPER = ObjectMapperUtils.mapper();
 
   protected <T> void testSerialization(String filename, Class<T> jsonClass)

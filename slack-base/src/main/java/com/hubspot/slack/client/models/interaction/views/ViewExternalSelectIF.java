@@ -5,18 +5,17 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.blocks.objects.Option;
-import org.immutables.value.Value;
-
 import java.util.Optional;
+import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public interface ViewExternalSelectIF extends ViewInput {
-    Optional<Option> getSelectedOption();
+  Optional<Option> getSelectedOption();
 
-    @JsonIgnore
-    default Optional<String> getStringValue() {
-        return getSelectedOption().map(Option::getValue);
-    }
+  @JsonIgnore
+  default Optional<String> getStringValue() {
+    return getSelectedOption().map(Option::getValue);
+  }
 }

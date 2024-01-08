@@ -9,10 +9,12 @@ public enum ConversationType {
   PUBLIC_CHANNEL,
   PRIVATE_CHANNEL,
   MPIM,
-  IM,
-  ;
+  IM;
 
-  private static final EnumIndex<String, ConversationType> INDEX = new EnumIndex<>(ConversationType.class, ConversationType::toString);
+  private static final EnumIndex<String, ConversationType> INDEX = new EnumIndex<>(
+    ConversationType.class,
+    ConversationType::toString
+  );
 
   @JsonCreator
   public static ConversationType get(String key) throws UnmappedKeyException {

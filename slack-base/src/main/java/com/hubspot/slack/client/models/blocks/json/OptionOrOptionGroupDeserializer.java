@@ -1,7 +1,5 @@
 package com.hubspot.slack.client.models.blocks.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -10,8 +8,11 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.hubspot.slack.client.models.blocks.objects.Option;
 import com.hubspot.slack.client.models.blocks.objects.OptionGroup;
 import com.hubspot.slack.client.models.blocks.objects.OptionOrOptionGroup;
+import java.io.IOException;
 
-public class OptionOrOptionGroupDeserializer extends StdDeserializer<OptionOrOptionGroup> {
+public class OptionOrOptionGroupDeserializer
+  extends StdDeserializer<OptionOrOptionGroup> {
+
   private static final String OPTIONS_FIELD = "options";
 
   protected OptionOrOptionGroupDeserializer() {
@@ -19,7 +20,8 @@ public class OptionOrOptionGroupDeserializer extends StdDeserializer<OptionOrOpt
   }
 
   @Override
-  public OptionOrOptionGroup deserialize(JsonParser p, DeserializationContext context) throws IOException {
+  public OptionOrOptionGroup deserialize(JsonParser p, DeserializationContext context)
+    throws IOException {
     ObjectCodec codec = p.getCodec();
     JsonNode node = codec.readTree(p);
 

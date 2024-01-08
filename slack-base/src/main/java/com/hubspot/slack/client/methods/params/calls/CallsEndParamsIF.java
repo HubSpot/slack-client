@@ -25,8 +25,6 @@ public interface CallsEndParamsIF {
   @Value.Derived
   @JsonProperty("duration")
   default Optional<Integer> getDurationSeconds() {
-    return getDuration()
-      .map(Duration::getSeconds)
-      .map(Ints::checkedCast);
+    return getDuration().map(Duration::getSeconds).map(Ints::checkedCast);
   }
 }

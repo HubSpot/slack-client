@@ -1,11 +1,9 @@
 package com.hubspot.slack.client.models.response;
 
+import com.hubspot.immutables.style.HubSpotStyle;
 import java.util.List;
 import java.util.Optional;
-
 import org.immutables.value.Value.Immutable;
-
-import com.hubspot.immutables.style.HubSpotStyle;
 
 @Immutable
 @HubSpotStyle

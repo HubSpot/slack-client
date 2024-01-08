@@ -1,18 +1,20 @@
 package com.hubspot.slack.client.models.blocks;
 
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
 import com.hubspot.slack.client.enums.UnmappedKeyException;
+import java.util.Optional;
 
 public enum Style {
   DEFAULT,
   PRIMARY,
   DANGER;
 
-  private static final EnumIndex<String, Style> INDEX = new EnumIndex<>(Style.class, Style::key);
+  private static final EnumIndex<String, Style> INDEX = new EnumIndex<>(
+    Style.class,
+    Style::key
+  );
 
   @JsonCreator
   public static Style get(String key) throws UnmappedKeyException {

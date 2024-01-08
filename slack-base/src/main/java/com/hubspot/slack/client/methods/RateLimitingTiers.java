@@ -22,8 +22,7 @@ public enum RateLimitingTiers implements RateLimitingTier {
   /**
    * Enjoy a large request quota for Tier 4 methods, including generous burst behavior.
    */
-  TIER_4(100),
-  ;
+  TIER_4(100);
 
   private final int allowancePerMinute;
 

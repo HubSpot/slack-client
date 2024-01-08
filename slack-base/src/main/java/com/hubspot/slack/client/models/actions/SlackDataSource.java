@@ -29,11 +29,12 @@ public enum SlackDataSource {
   /**
    * Hit interactive endpoint to populate
    */
-  EXTERNAL,
+  EXTERNAL;
 
-  ;
-
-  private static final EnumIndex<String, SlackDataSource> INDEX = new EnumIndex<>(SlackDataSource.class, SlackDataSource::toString);
+  private static final EnumIndex<String, SlackDataSource> INDEX = new EnumIndex<>(
+    SlackDataSource.class,
+    SlackDataSource::toString
+  );
 
   @JsonCreator
   public static SlackDataSource get(String key) throws UnmappedKeyException {

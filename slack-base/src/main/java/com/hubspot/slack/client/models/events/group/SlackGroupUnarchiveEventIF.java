@@ -11,5 +11,4 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = SlackGroupUnarchiveEvent.class)
 @Value.Immutable
 @HubSpotStyle
-public interface SlackGroupUnarchiveEventIF extends SlackConversationEventCore {
-}
+public interface SlackGroupUnarchiveEventIF extends SlackConversationEventCore {}

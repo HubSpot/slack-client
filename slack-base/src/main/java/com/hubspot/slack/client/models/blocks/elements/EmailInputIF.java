@@ -6,11 +6,10 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.blocks.SlackBlockNormalizer;
 import com.hubspot.slack.client.models.blocks.objects.Text;
+import java.util.Optional;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Immutable;
-
-import java.util.Optional;
 
 @Immutable
 @HubSpotStyle

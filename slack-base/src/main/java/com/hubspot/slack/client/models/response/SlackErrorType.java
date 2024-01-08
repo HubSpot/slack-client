@@ -1,12 +1,11 @@
 package com.hubspot.slack.client.models.response;
 
-import java.util.Arrays;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.hubspot.slack.client.enums.EnumIndex;
 import com.hubspot.slack.client.enums.UnmappedKeyException;
+import java.util.Arrays;
 
 public enum SlackErrorType {
   ACCOUNT_INACTIVE("account_inactive"),
@@ -84,8 +83,7 @@ public enum SlackErrorType {
   JSON_PARSING_FAILED("_json_parsing_failed"),
   WRITE_RESTRICTED_TO_PROD("_write_restricted_to_prod"),
   PARAMS_FAILED_API_FILTER("_method_failed_filter"),
-  UNKNOWN("unknown"),
-  ;
+  UNKNOWN("unknown");
 
   private final String code;
 
@@ -101,10 +99,15 @@ public enum SlackErrorType {
     return name().toLowerCase();
   }
 
+  private static final ImmutableMap<String, SlackErrorType> CODE_INDEX = Maps.uniqueIndex(
+    Arrays.asList(SlackErrorType.values()),
+    SlackErrorType::getCode
+  );
 
-  private static final ImmutableMap<String, SlackErrorType> CODE_INDEX = Maps.uniqueIndex(Arrays.asList(SlackErrorType.values()), SlackErrorType::getCode);
-
-  private static final EnumIndex<String, SlackErrorType> TYPE_INDEX = new EnumIndex<>(SlackErrorType.class, SlackErrorType::key);
+  private static final EnumIndex<String, SlackErrorType> TYPE_INDEX = new EnumIndex<>(
+    SlackErrorType.class,
+    SlackErrorType::key
+  );
 
   @JsonCreator
   public static SlackErrorType get(String code) {

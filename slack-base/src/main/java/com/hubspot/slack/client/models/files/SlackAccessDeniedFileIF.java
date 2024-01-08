@@ -144,10 +144,13 @@ public interface SlackAccessDeniedFileIF extends SlackFile {
 
   @Override
   Optional<Boolean> isStarred();
+
   @Override
   List<String> getChannelIds();
+
   @Override
   List<String> getGroupIds();
+
   @Override
   List<String> getImIds();
 }

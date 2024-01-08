@@ -1,11 +1,9 @@
 package com.hubspot.slack.client.methods.params.views;
 
-import java.io.IOException;
-
-import org.junit.Test;
-
 import com.hubspot.slack.client.SerializationTestBase;
 import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
+import java.io.IOException;
+import org.junit.Test;
 
 public class ViewResponseSerializationTest extends SerializationTestBase {
 

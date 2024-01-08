@@ -1,15 +1,15 @@
 package com.hubspot.slack.client;
 
+import com.hubspot.slack.client.methods.interceptor.HasChannel;
+import com.hubspot.slack.client.methods.interceptor.HasUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.hubspot.slack.client.methods.interceptor.HasChannel;
-import com.hubspot.slack.client.methods.interceptor.HasUser;
-
 @RunWith(Parameterized.class)
 public class HasUserDeserializerTest extends ReflectionBasedFieldPresenceTest {
+
   @Parameters(name = "{0}")
   public static Iterable<Class<? extends HasUser>> classes() {
     return getConcreteFinalSubclasses(HasUser.class);
@@ -17,9 +17,7 @@ public class HasUserDeserializerTest extends ReflectionBasedFieldPresenceTest {
 
   private Class<? extends HasUser> hasUserClass;
 
-  public HasUserDeserializerTest(
-      Class<? extends HasUser> hasUserClass
-  ) {
+  public HasUserDeserializerTest(Class<? extends HasUser> hasUserClass) {
     this.hasUserClass = hasUserClass;
   }
 

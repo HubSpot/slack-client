@@ -7,9 +7,8 @@ import com.hubspot.slack.client.models.response.views.ViewResponseBase;
 import com.hubspot.slack.client.models.teams.SlackTeam;
 import com.hubspot.slack.client.models.users.SlackUser;
 import com.hubspot.slack.client.models.users.SlackUserLite;
-import org.immutables.value.Value.Immutable;
-
 import java.util.Optional;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle

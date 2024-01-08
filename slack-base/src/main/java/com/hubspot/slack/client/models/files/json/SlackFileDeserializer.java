@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
+
   private static final String FILE_ACCESS_FIELD = "file_access";
   private static final String FILE_TYPE_FIELD = "filetype";
   private static final String ACCESS_DENIED = "access_denied";
