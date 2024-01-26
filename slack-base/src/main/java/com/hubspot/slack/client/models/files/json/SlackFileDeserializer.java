@@ -9,16 +9,29 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hubspot.slack.client.models.files.SlackAccessDeniedFile;
 import com.hubspot.slack.client.models.files.SlackFile;
+import com.hubspot.slack.client.models.files.SlackFileDeletedFile;
+import com.hubspot.slack.client.models.files.SlackFileError;
+import com.hubspot.slack.client.models.files.SlackFileNotFoundFile;
 import com.hubspot.slack.client.models.files.SlackFileType;
 import com.hubspot.slack.client.models.files.SlackUnknownFiletype;
-import com.hubspot.slack.client.models.files.SlackUnknownFiletypeIF;
+import com.hubspot.slack.client.models.response.SlackErrorType;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
   private static final String FILE_ACCESS_FIELD = "file_access";
   private static final String FILE_TYPE_FIELD = "filetype";
-  private static final String ACCESS_DENIED = "access_denied";
+  private static final Map<String, Class<? extends SlackFileError>> fileTypeErrorClasses;
+
+  static {
+    fileTypeErrorClasses = new HashMap<>();
+    fileTypeErrorClasses.put(SlackErrorType.ACCESS_DENIED.getCode(), SlackAccessDeniedFile.class);
+    fileTypeErrorClasses.put(SlackErrorType.FILE_NOT_FOUND.getCode(), SlackFileNotFoundFile.class);
+    fileTypeErrorClasses.put(SlackErrorType.FILE_DELETED.getCode(), SlackFileDeletedFile.class);
+  }
 
   public SlackFileDeserializer() {
     super(SlackFile.class);
@@ -32,8 +45,9 @@ public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
 
     if (node.has(FILE_ACCESS_FIELD)) {
       String fileAccess = node.get(FILE_ACCESS_FIELD).asText();
-      if (fileAccess.equalsIgnoreCase(ACCESS_DENIED)) {
-        return codec.treeToValue(node, SlackAccessDeniedFile.class);
+      Optional<? extends Class<? extends SlackFileError>> errorClass = Optional.ofNullable(fileTypeErrorClasses.get(fileAccess.toLowerCase()));
+      if (errorClass.isPresent()){
+          return codec.treeToValue(node, errorClass.get());
       }
     }
 
