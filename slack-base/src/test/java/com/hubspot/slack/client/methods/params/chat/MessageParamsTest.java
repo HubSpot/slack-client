@@ -12,17 +12,20 @@ public class MessageParamsTest {
   @Test
   public void itBuildsWithAttachmentsAndNoText() {
     ChatPostEphemeralMessageParams.builder()
+        .setToken("testToken")
         .setChannelId("testChannelId")
         .setUserToSendTo("testUserId")
         .addAttachments(Attachment.builder().build())
         .build();
 
     ChatPostMessageParams.builder()
+        .setToken("testToken")
         .setChannelId("testChannelId")
         .addAttachments(Attachment.builder().build())
         .build();
 
     ChatUpdateMessageParams.builder()
+        .setToken("testToken")
         .setTs("testTs")
         .setChannelId("testChannelId")
         .addAttachments(Attachment.builder().build())
@@ -32,17 +35,20 @@ public class MessageParamsTest {
   @Test
   public void itBuildsWithTextAndNoAttachments() {
     ChatPostEphemeralMessageParams.builder()
+        .setToken("testToken")
         .setChannelId("testChannelId")
         .setUserToSendTo("testUserId")
         .setText("testText")
         .build();
 
     ChatPostMessageParams.builder()
+        .setToken("testToken")
         .setChannelId("testChannelId")
         .setText("testText")
         .build();
 
     ChatUpdateMessageParams.builder()
+        .setToken("testToken")
         .setTs("testTs")
         .setChannelId("testChannelId")
         .setText("testText")
@@ -55,6 +61,7 @@ public class MessageParamsTest {
 
     try {
       ChatPostEphemeralMessageParams.builder()
+          .setToken("testToken")
           .setChannelId("testChannelId")
           .setUserToSendTo("testUserId")
           .build();
@@ -65,6 +72,7 @@ public class MessageParamsTest {
 
     try {
       ChatPostMessageParams.builder()
+          .setToken("testToken")
           .setChannelId("testChannelId")
           .build();
       success = false;
@@ -74,6 +82,7 @@ public class MessageParamsTest {
 
     try {
       ChatUpdateMessageParams.builder()
+          .setToken("testToken")
           .setTs("testTs")
           .setChannelId("testChannelId")
           .build();

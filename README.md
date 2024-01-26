@@ -192,6 +192,7 @@ If you're not familiar with Java 8's `CompletableFuture` API, know that you can 
  - [@mlr46](https://github.com/mlr46) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=mlr46)
  - [@mindspin311](https://github.com/mindspin311) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=mindspin311)
  - [@Ulya0302](https://github.com/Ulya0302) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=Ulya0302)
+ - [@bdros](https://github.com/bdros) | [:computer:](https://github.com/HubSpot/slack-client/commits?author=bdros)
 
 ## License
 
