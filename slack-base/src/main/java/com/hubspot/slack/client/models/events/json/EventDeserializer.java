@@ -1,9 +1,6 @@
 package com.hubspot.slack.client.models.events.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -11,6 +8,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.hubspot.slack.client.models.events.SlackEvent;
 import com.hubspot.slack.client.models.events.SlackEventType;
 import com.hubspot.slack.client.models.events.SlackMessageSubtype;
+import java.io.IOException;
 
 public class EventDeserializer extends StdDeserializer<SlackEvent> {
   private static final String TYPE_FIELD = "type";
@@ -21,7 +19,7 @@ public class EventDeserializer extends StdDeserializer<SlackEvent> {
   }
 
   @Override
-  public SlackEvent deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public SlackEvent deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
     ObjectCodec codec = p.getCodec();
     JsonNode node = codec.readTree(p);
 
