@@ -1,0 +1,50 @@
+{
+  "id": "F0S43PZDF",
+  "created": 1531763342,
+  "timestamp": 1531763342,
+  "name": "spreadsheet.xls",
+  "title": "spreadsheet.xls",
+  "mimetype": "application/vnd.ms-excel",
+  "filetype": "xls",
+  "pretty_type": "XLS",
+  "user": "U061F7AUR",
+  "editable": false,
+  "size": 137531,
+  "mode": "hosted",
+  "is_external": false,
+  "external_type": "",
+  "is_public": true,
+  "public_url_shared": false,
+  "display_as_bot": false,
+  "username": "",
+  "url_private": "https://.../spreadsheet.xls",
+  "url_private_download": "https://.../spreadsheet.xls",
+  "permalink": "https://.../spreadsheet.xls",
+  "permalink_public": "https://.../...",
+  "comments_count": 0,
+  "is_starred": false,
+  "shares": {
+    "public": {
+      "C0T8SE4AU": [
+        {
+          "reply_users": [
+            "U061F7AUR"
+          ],
+          "reply_users_count": 1,
+          "reply_count": 1,
+          "ts": "1531763348.000001",
+          "thread_ts": "1531763273.000015",
+          "latest_reply": "1531763348.000001",
+          "channel_name": "file-under",
+          "team_id": "T061EG9R6"
+        }
+      ]
+    }
+  },
+  "channels": [
+    "C0T8SE4AU"
+  ],
+  "groups": [],
+  "ims": [],
+  "has_rich_preview": false
+}
