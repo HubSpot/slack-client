@@ -13,6 +13,8 @@ public enum SlackFileType {
   JPG("jpg", SlackJpgFile.class),
   PNG("png", SlackPngFile.class),
   JAVASCRIPT("javascript", SlackJavaScriptFile.class),
+  XLSX("xlsx", SlackXlsxFile.class),
+  XLS("xls", SlackXlsFile.class),
   UNKNOWN("unknown", SlackUnknownFiletype.class),
   ;
 

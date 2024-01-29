@@ -39,6 +39,20 @@ public class SlackFileDeserializerTest {
   }
 
   @Test
+  public void shouldDeserializeXlsFileType() throws IOException {
+    SlackFile file = fetchAndDeserializeSlackFile("file_xls.json");
+    assertEquals(SlackFileType.XLS, file.getFiletype());
+    assertTrue(file instanceof SlackXlsFile);
+  }
+
+  @Test
+  public void shouldDeserializeXlsxFileType() throws IOException {
+    SlackFile file = fetchAndDeserializeSlackFile("file_xlsx.json");
+    assertEquals(SlackFileType.XLSX, file.getFiletype());
+    assertTrue(file instanceof SlackXlsxFile);
+  }
+
+  @Test
   public void shouldDeserializeUnknownFile() throws IOException {
     SlackFile file = fetchAndDeserializeSlackFile("file_unknown_type.json");
     assertEquals(SlackFileType.UNKNOWN, file.getFiletype());
