@@ -1,5 +1,10 @@
 package com.hubspot.slack.client.enums;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -7,13 +12,8 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collector;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
 public class EnumIndex<K, V extends Enum<V>> {
+
   private final ImmutableMap<K, V> index;
   private final Class<V> enumType;
 
@@ -31,33 +31,36 @@ public class EnumIndex<K, V extends Enum<V>> {
   }
 
   public ImmutableSet<K> getUnmappedKeys(Collection<K> keys) {
-    return keys.stream()
-        .filter(key -> !index.containsKey(key))
-        .collect(toImmutableSet());
+    return keys.stream().filter(key -> !index.containsKey(key)).collect(toImmutableSet());
   }
 
   public ImmutableSet<V> getAllPresent(Collection<K> keys) {
-    return keys.stream()
-        .map(this::find)
-        .filter(Optional::isPresent)
-        .map(Optional::get)
-        .collect(toImmutableEnumSet());
+    return keys
+      .stream()
+      .map(this::find)
+      .filter(Optional::isPresent)
+      .map(Optional::get)
+      .collect(toImmutableEnumSet());
   }
 
   private static <T> Collector<T, Builder<T>, ImmutableSet<T>> toImmutableSet() {
-    return Collector.of(ImmutableSet.Builder::new,
-        ImmutableSet.Builder::add,
-        (left, right) -> left.addAll(right.build()),
-        ImmutableSet.Builder::build);
+    return Collector.of(
+      ImmutableSet.Builder::new,
+      ImmutableSet.Builder::add,
+      (left, right) -> left.addAll(right.build()),
+      ImmutableSet.Builder::build
+    );
   }
 
   public static <E extends Enum<E>> Collector<E, HashSet<E>, ImmutableSet<E>> toImmutableEnumSet() {
-    return Collector.of(HashSet::new,
-        HashSet::add,
-        (left, right) -> {
-          left.addAll(right);
-          return left;
-        },
-        Sets::immutableEnumSet);
+    return Collector.of(
+      HashSet::new,
+      HashSet::add,
+      (left, right) -> {
+        left.addAll(right);
+        return left;
+      },
+      Sets::immutableEnumSet
+    );
   }
 }

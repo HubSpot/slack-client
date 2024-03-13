@@ -10,13 +10,18 @@ import com.hubspot.slack.client.models.calls.SlackCallsUser;
 import com.hubspot.slack.client.models.calls.SlackInternalOrExternalUser;
 import java.io.IOException;
 
-public class SlackOrExternalUserDeserializer extends StdDeserializer<SlackInternalOrExternalUser> {
+public class SlackOrExternalUserDeserializer
+  extends StdDeserializer<SlackInternalOrExternalUser> {
+
   protected SlackOrExternalUserDeserializer() {
     super(SlackInternalOrExternalUser.class);
   }
 
   @Override
-  public SlackInternalOrExternalUser deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
+  public SlackInternalOrExternalUser deserialize(
+    JsonParser jsonParser,
+    DeserializationContext context
+  ) throws IOException {
     ObjectCodec codec = jsonParser.getCodec();
     JsonNode node = codec.readTree(jsonParser);
 

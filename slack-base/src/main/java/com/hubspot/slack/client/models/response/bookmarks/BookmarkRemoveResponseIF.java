@@ -6,5 +6,4 @@ import org.immutables.value.Value;
 
 @HubSpotStyle
 @Value.Immutable
-public interface BookmarkRemoveResponseIF extends SlackResponse {
-}
+public interface BookmarkRemoveResponseIF extends SlackResponse {}

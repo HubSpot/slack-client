@@ -11,8 +11,9 @@ public class BasicRuntimeConfig {
   }
 
   public static SlackClientRuntimeConfig get() {
-    return SlackClientRuntimeConfig.builder()
-        .setTokenSupplier(() -> "a fake token")
-        .build();
+    return SlackClientRuntimeConfig
+      .builder()
+      .setTokenSupplier(() -> "a fake token")
+      .build();
   }
 }

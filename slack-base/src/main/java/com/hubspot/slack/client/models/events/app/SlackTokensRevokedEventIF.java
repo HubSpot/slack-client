@@ -13,13 +13,12 @@ import org.immutables.value.Value;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackTokensRevokedEvent.class)
 public interface SlackTokensRevokedEventIF extends SlackEvent {
-    @JsonProperty
-    TokensRevoked getTokens();
+  @JsonProperty
+  TokensRevoked getTokens();
 
-    //Tokens revoked events do not have a ts, so we manually set it as null
-    @Override
-    default String getTs() {
-        return null;
-    }
-
+  //Tokens revoked events do not have a ts, so we manually set it as null
+  @Override
+  default String getTs() {
+    return null;
+  }
 }

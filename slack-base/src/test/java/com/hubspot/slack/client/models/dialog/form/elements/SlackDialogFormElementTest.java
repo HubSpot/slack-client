@@ -3,9 +3,8 @@ package com.hubspot.slack.client.models.dialog.form.elements;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-import org.junit.Test;
-
 import com.hubspot.slack.client.testutils.StringGenerator;
+import org.junit.Test;
 
 public class SlackDialogFormElementTest {
 
@@ -15,7 +14,8 @@ public class SlackDialogFormElementTest {
     try {
       SlackFormTextElement.builder().setLabel("ignored").setName(tooLongName).build();
     } catch (IllegalStateException ise) {
-      assertThat(ise.getMessage()).contains("Name cannot exceed 300 chars, got " + tooLongName);
+      assertThat(ise.getMessage())
+        .contains("Name cannot exceed 300 chars, got " + tooLongName);
       return;
     }
 
@@ -24,21 +24,23 @@ public class SlackDialogFormElementTest {
 
   @Test
   public void itNormalizesLongLabelToBuildFormSelectElement() {
-    SlackFormTextElement slackFormTextElement = SlackFormTextElement.builder()
-        .setLabel(StringGenerator.generateStringWithLength(25))
-        .setName("ignored")
-        .build();
+    SlackFormTextElement slackFormTextElement = SlackFormTextElement
+      .builder()
+      .setLabel(StringGenerator.generateStringWithLength(25))
+      .setName("ignored")
+      .build();
     String expectedLabel = StringGenerator.generateStringWithLengthAndEllipsis(20);
     assertThat(slackFormTextElement.getLabel()).isEqualTo(expectedLabel);
   }
 
   @Test
   public void itNormalizesLongPlaceholderToBuildFormSelectElement() {
-    SlackFormTextElement slackFormTextElement = SlackFormTextElement.builder()
-        .setLabel("ignored")
-        .setName("ignored")
-        .setPlaceholder(StringGenerator.generateStringWithLength(151))
-        .build();
+    SlackFormTextElement slackFormTextElement = SlackFormTextElement
+      .builder()
+      .setLabel("ignored")
+      .setName("ignored")
+      .setPlaceholder(StringGenerator.generateStringWithLength(151))
+      .build();
     String expectedLabel = StringGenerator.generateStringWithLengthAndEllipsis(146);
     assertThat(slackFormTextElement.getPlaceholder()).hasValue(expectedLabel);
   }

@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ResultSortOrder {
   ASC,
-  DESC,
-  ;
+  DESC;
 
   @JsonCreator
   public static ResultSortOrder parse(String result) {

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class BlockElementActionSerializer extends StdSerializer<BlockElementAction> {
+
   private static final String BLOCK_ID_FIELD = "block_id";
   private static final String ACTION_ID_FIELD = "action_id";
   private static final String VALUE_FIELD = "value";

@@ -2,14 +2,12 @@ package com.hubspot.slack.client.models.blocks.elements;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
-
-import org.junit.Test;
-
 import com.hubspot.slack.client.SerializationTestBase;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.blocks.Section;
+import java.io.IOException;
+import org.junit.Test;
 
 public class BlockElementSerializationTest extends SerializationTestBase {
 

@@ -7,11 +7,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.hubspot.slack.client.models.blocks.objects.Option;
 import com.hubspot.slack.client.models.response.views.StateActionValue;
-
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class StateActionValueDeserializer extends StdDeserializer<StateActionValue> {
+
   private static final String BLOCK_ELEMENT_TYPE = "type";
   private static final String BLOCK_ELEMENT_VALUE = "value";
   private static final String SELECTED_OPTION = "selected_option";
@@ -22,7 +22,8 @@ public class StateActionValueDeserializer extends StdDeserializer<StateActionVal
   }
 
   @Override
-  public StateActionValue deserialize(JsonParser p, DeserializationContext context) throws IOException {
+  public StateActionValue deserialize(JsonParser p, DeserializationContext context)
+    throws IOException {
     final StateActionValue.Builder builder = StateActionValue.builder();
 
     ObjectCodec codec = p.getCodec();
@@ -48,5 +49,4 @@ public class StateActionValueDeserializer extends StdDeserializer<StateActionVal
 
     return builder.build();
   }
-
 }

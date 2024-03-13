@@ -1,11 +1,10 @@
 package com.hubspot.slack.client.models.response.team;
 
-import org.immutables.value.Value.Immutable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.response.SlackResponse;
 import com.hubspot.slack.client.models.teams.SlackTeam;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle

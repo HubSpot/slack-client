@@ -1,10 +1,8 @@
 package com.hubspot.slack.client.methods.params.channels;
 
-import java.util.Optional;
-
-import org.immutables.value.Value.Default;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Optional;
+import org.immutables.value.Value.Default;
 
 public interface BaseChannelsFilter {
   // should we exclude archived channels?

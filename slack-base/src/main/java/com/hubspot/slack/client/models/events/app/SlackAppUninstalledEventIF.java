@@ -12,9 +12,9 @@ import org.immutables.value.Value;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackAppUninstalledEvent.class)
 public interface SlackAppUninstalledEventIF extends SlackEvent {
-    //App uninstall events do not have a ts, so we manually set it as null
-    @Override
-    default String getTs() {
-        return null;
-    }
+  //App uninstall events do not have a ts, so we manually set it as null
+  @Override
+  default String getTs() {
+    return null;
+  }
 }

@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-
 import java.util.Optional;
 
 @JsonTypeInfo(
@@ -34,7 +33,7 @@ import java.util.Optional;
     @Type(value = ViewStaticSelect.class, name = "static_select"),
     @Type(value = ViewExternalSelect.class, name = "external_select"),
     @Type(value = ViewMultiStaticSelect.class, name = "multi_static_select"),
-    @Type(value = ViewMultiExternalSelect.class, name = "multi_external_select")
+    @Type(value = ViewMultiExternalSelect.class, name = "multi_external_select"),
   }
 )
 public interface ViewInput {

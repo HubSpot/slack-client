@@ -92,11 +92,14 @@ public enum StandardHttpStatus implements HttpStatus {
   INSUFFICIENT_STORAGE(507),
   LOOP_DETECTED(508),
   NOT_EXTENDED(510),
-  NETWORK_AUTHENTICATION_REQUIRED(511),
-  ;
+  NETWORK_AUTHENTICATION_REQUIRED(511);
 
-  private static final Map<Integer, StandardHttpStatus> INDEX = Collections.unmodifiableMap(
-      Stream.of(values()).collect(Collectors.toMap(StandardHttpStatus::getCode, Function.identity())));
+  private static final Map<Integer, StandardHttpStatus> INDEX =
+    Collections.unmodifiableMap(
+      Stream
+        .of(values())
+        .collect(Collectors.toMap(StandardHttpStatus::getCode, Function.identity()))
+    );
 
   private final int code;
   private final HttpStatusFamily family;
@@ -126,4 +129,3 @@ public enum StandardHttpStatus implements HttpStatus {
     return Optional.ofNullable(INDEX.get(code));
   }
 }
-

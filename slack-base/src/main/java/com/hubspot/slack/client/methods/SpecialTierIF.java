@@ -1,9 +1,8 @@
 package com.hubspot.slack.client.methods;
 
+import com.hubspot.immutables.style.HubSpotStyle;
 import org.immutables.value.Value.Immutable;
 import org.immutables.value.Value.Parameter;
-
-import com.hubspot.immutables.style.HubSpotStyle;
 
 @Immutable
 @HubSpotStyle

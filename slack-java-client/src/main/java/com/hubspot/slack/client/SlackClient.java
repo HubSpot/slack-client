@@ -145,30 +145,44 @@ import java.util.concurrent.CompletableFuture;
 public interface SlackClient extends Closeable {
   // auth
   CompletableFuture<Result<AuthTestResponse, SlackError>> testAuth();
-  CompletableFuture<Result<AuthRevokeResponse, SlackError>> revokeAuth(AuthRevokeParams params);
+  CompletableFuture<Result<AuthRevokeResponse, SlackError>> revokeAuth(
+    AuthRevokeParams params
+  );
 
   // searching
-  CompletableFuture<Result<SearchMessageResponse, SlackError>> searchMessages(SearchMessagesParams params);
-  CompletableFuture<Result<FindRepliesResponse, SlackError>> findReplies(FindRepliesParams params);
-  CompletableFuture<Result<UsersInfoResponse, SlackError>> findUser(UsersInfoParams params);
-  CompletableFuture<Result<UsersInfoResponse, SlackError>> lookupUserByEmail(UserEmailParams email);
-  CompletableFuture<Result<UsersProfileResponse, SlackError>> getUserProfile(UsersInfoParams params);
-  CompletableFuture<Result<UsersProfileResponse, SlackError>> setUserProfile(SetUserProfileParams params);
+  CompletableFuture<Result<SearchMessageResponse, SlackError>> searchMessages(
+    SearchMessagesParams params
+  );
+  CompletableFuture<Result<FindRepliesResponse, SlackError>> findReplies(
+    FindRepliesParams params
+  );
+  CompletableFuture<Result<UsersInfoResponse, SlackError>> findUser(
+    UsersInfoParams params
+  );
+  CompletableFuture<Result<UsersInfoResponse, SlackError>> lookupUserByEmail(
+    UserEmailParams email
+  );
+  CompletableFuture<Result<UsersProfileResponse, SlackError>> getUserProfile(
+    UsersInfoParams params
+  );
+  CompletableFuture<Result<UsersProfileResponse, SlackError>> setUserProfile(
+    SetUserProfileParams params
+  );
 
   // users
   Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
-  CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(UsersListParams params);
+  CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(
+    UsersListParams params
+  );
 
   // channels
 
-  CompletableFuture<Result<DndInfoResponse, SlackError>> getDndInfo(
-          DndInfoParams params
-  );
+  CompletableFuture<Result<DndInfoResponse, SlackError>> getDndInfo(DndInfoParams params);
 
   CompletableFuture<Result<SimpleSlackResponse, SlackError>> endDnd();
 
   CompletableFuture<Result<DndSnoozeResponse, SlackError>> setDndSnooze(
-          DndSetSnoozeParams params
+    DndSetSnoozeParams params
   );
 
   CompletableFuture<Result<DndInfoResponse, SlackError>> endDndSnooze();
@@ -178,31 +192,46 @@ public interface SlackClient extends Closeable {
    * @deprecated use {@link #listConversations(ConversationsListParams)}
    */
   @Deprecated
-  Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(ChannelsListParams filter);
+  Iterable<CompletableFuture<Result<List<SlackChannel>, SlackError>>> listChannels(
+    ChannelsListParams filter
+  );
+
   /**
    * Will be removed on or after November 25, 2020
    * @deprecated use {@link #getConversationHistory(ConversationsHistoryParams)}
    */
   @Deprecated
-  Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> channelHistory(ChannelsHistoryParams params);
+  Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> channelHistory(
+    ChannelsHistoryParams params
+  );
+
   /**
    * Will be removed on or after November 25, 2020
    * @deprecated use {@link #getConversationByName(String, ConversationsFilter)}
    */
   @Deprecated
-  CompletableFuture<Result<SlackChannel, SlackError>> getChannelByName(String channelName, ChannelsFilter channelsFilter);
+  CompletableFuture<Result<SlackChannel, SlackError>> getChannelByName(
+    String channelName,
+    ChannelsFilter channelsFilter
+  );
+
   /**
    * Will be removed on or after November 25, 2020
    * @deprecated use {@link #getConversationInfo(ConversationsInfoParams)}
    */
   @Deprecated
-  CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(ChannelsInfoParams params);
+  CompletableFuture<Result<ChannelsInfoResponse, SlackError>> getChannelInfo(
+    ChannelsInfoParams params
+  );
+
   /**
    * Will be removed on or after November 25, 2020
    * @deprecated need to implement conversations.kick to mimic this functionality
    */
   @Deprecated
-  CompletableFuture<Result<ChannelsKickResponse, SlackError>> kickUserFromChannel(ChannelsKickParams channelKickParams);
+  CompletableFuture<Result<ChannelsKickResponse, SlackError>> kickUserFromChannel(
+    ChannelsKickParams channelKickParams
+  );
 
   // groups
   /**
@@ -210,13 +239,18 @@ public interface SlackClient extends Closeable {
    * @deprecated use {@link #listConversations(ConversationsListParams)}
    */
   @Deprecated
-  Iterable<CompletableFuture<Result<List<SlackGroup>, SlackError>>> listGroups(GroupsListParams filter);
+  Iterable<CompletableFuture<Result<List<SlackGroup>, SlackError>>> listGroups(
+    GroupsListParams filter
+  );
+
   /**
    * Will be removed on or after November 25, 2020
    * @deprecated need to implement conversations.kick to mimic this functionality
    */
   @Deprecated
-  CompletableFuture<Result<GroupsKickResponse, SlackError>> kickUserFromGroup(GroupsKickParams params);
+  CompletableFuture<Result<GroupsKickResponse, SlackError>> kickUserFromGroup(
+    GroupsKickParams params
+  );
 
   // messaging
   /**
@@ -225,91 +259,197 @@ public interface SlackClient extends Closeable {
    */
   @Deprecated
   CompletableFuture<Result<ImOpenResponse, SlackError>> openIm(ImOpenParams params);
-  CompletableFuture<Result<ChatPostMessageResponse, SlackError>> postMessage(ChatPostMessageParams params);
-  CompletableFuture<Result<ChatPostEphemeralMessageResponse, SlackError>> postEphemeralMessage(ChatPostEphemeralMessageParams params);
-  CompletableFuture<Result<ChatUpdateMessageResponse, SlackError>> updateMessage(ChatUpdateMessageParams params);
-  CompletableFuture<Result<ChatScheduleMessageResponse, SlackError>> scheduleMessage(ChatScheduleMessageParams params);
-  CompletableFuture<Result<ChatScheduledMessagesListResponse, SlackError>> scheduledMessageList(ChatScheduledMessagesListParams params);
-  CompletableFuture<Result<ChatDeleteScheduledMessageResponse, SlackError>> deleteScheduledMessage(ChatDeleteScheduledMessageParams params);
-  CompletableFuture<Result<ChatGetPermalinkResponse, SlackError>> getPermalink(ChatGetPermalinkParams params);
-  CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(ChatDeleteParams params);
-  CompletableFuture<Result<ChatUnfurlResponse, SlackError>> unfurlLinks(ChatUnfurlParams params);
+
+  CompletableFuture<Result<ChatPostMessageResponse, SlackError>> postMessage(
+    ChatPostMessageParams params
+  );
+  CompletableFuture<Result<ChatPostEphemeralMessageResponse, SlackError>> postEphemeralMessage(
+    ChatPostEphemeralMessageParams params
+  );
+  CompletableFuture<Result<ChatUpdateMessageResponse, SlackError>> updateMessage(
+    ChatUpdateMessageParams params
+  );
+  CompletableFuture<Result<ChatScheduleMessageResponse, SlackError>> scheduleMessage(
+    ChatScheduleMessageParams params
+  );
+  CompletableFuture<Result<ChatScheduledMessagesListResponse, SlackError>> scheduledMessageList(
+    ChatScheduledMessagesListParams params
+  );
+  CompletableFuture<Result<ChatDeleteScheduledMessageResponse, SlackError>> deleteScheduledMessage(
+    ChatDeleteScheduledMessageParams params
+  );
+  CompletableFuture<Result<ChatGetPermalinkResponse, SlackError>> getPermalink(
+    ChatGetPermalinkParams params
+  );
+  CompletableFuture<Result<ChatDeleteResponse, SlackError>> deleteMessage(
+    ChatDeleteParams params
+  );
+  CompletableFuture<Result<ChatUnfurlResponse, SlackError>> unfurlLinks(
+    ChatUnfurlParams params
+  );
 
   // conversations
-  Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> listConversations(ConversationsListParams params);
-  CompletableFuture<Result<ConversationListResponse, SlackError>> listConversationsPaginated(ConversationsListParams params);
-  Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> usersConversations(ConversationsUserParams params);
-  CompletableFuture<Result<ConversationListResponse, SlackError>> usersConversationsPaginated(ConversationsUserParams params);
-  CompletableFuture<Result<ConversationsCreateResponse, SlackError>> createConversation(ConversationCreateParams params);
-  CompletableFuture<Result<ConversationsInviteResponse, SlackError>> inviteToConversation(ConversationInviteParams params);
-  CompletableFuture<Result<SharedChannelInviteResponse, SlackError>>  inviteToSharedConversation(ConversationInviteSharedParams params);
-  CompletableFuture<Result<ConversationsUnarchiveResponse, SlackError>> unarchiveConversation(ConversationUnarchiveParams params);
-  Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> getConversationHistory(ConversationsHistoryParams params);
-  CompletableFuture<Result<ConversationsArchiveResponse, SlackError>> archiveConversation(ConversationArchiveParams params);
-  CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(ConversationsInfoParams params);
-  CompletableFuture<Result<ConversationsRepliesResponse, SlackError>> getConversationReplies(ConversationsRepliesParams params);
-  CompletableFuture<Result<Conversation, SlackError>> getConversationByName(String conversationName, ConversationsFilter conversationsFilter);
-  CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(ConversationOpenParams params);
-  Iterable<CompletableFuture<Result<List<String>, SlackError>>> getConversationMembers(ConversationMemberParams params);
-  CompletableFuture<Result<ConversationMemberResponse, SlackError>> getConversationMembersPaginated(ConversationMemberParams params);
-  CompletableFuture<Result<ConversationsInfoResponse, SlackError>> joinConversation(ConversationsJoinParams params);
-  CompletableFuture<Result<ConversationSetPurposeResponse, SlackError>> setConversationPurpose(ConversationSetPurposeParams params);
-  CompletableFuture<Result<ConversationSetTopicResponse, SlackError>> setConversationTopic(ConversationSetTopicParams params);
-  CompletableFuture<Result<ConversationKickResponse, SlackError>> kickUserFromConversation(ConversationKickParams params);
+  Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> listConversations(
+    ConversationsListParams params
+  );
+  CompletableFuture<Result<ConversationListResponse, SlackError>> listConversationsPaginated(
+    ConversationsListParams params
+  );
+  Iterable<CompletableFuture<Result<List<Conversation>, SlackError>>> usersConversations(
+    ConversationsUserParams params
+  );
+  CompletableFuture<Result<ConversationListResponse, SlackError>> usersConversationsPaginated(
+    ConversationsUserParams params
+  );
+  CompletableFuture<Result<ConversationsCreateResponse, SlackError>> createConversation(
+    ConversationCreateParams params
+  );
+  CompletableFuture<Result<ConversationsInviteResponse, SlackError>> inviteToConversation(
+    ConversationInviteParams params
+  );
+  CompletableFuture<Result<SharedChannelInviteResponse, SlackError>> inviteToSharedConversation(
+    ConversationInviteSharedParams params
+  );
+  CompletableFuture<Result<ConversationsUnarchiveResponse, SlackError>> unarchiveConversation(
+    ConversationUnarchiveParams params
+  );
+  Iterable<CompletableFuture<Result<List<LiteMessage>, SlackError>>> getConversationHistory(
+    ConversationsHistoryParams params
+  );
+  CompletableFuture<Result<ConversationsArchiveResponse, SlackError>> archiveConversation(
+    ConversationArchiveParams params
+  );
+  CompletableFuture<Result<ConversationsInfoResponse, SlackError>> getConversationInfo(
+    ConversationsInfoParams params
+  );
+  CompletableFuture<Result<ConversationsRepliesResponse, SlackError>> getConversationReplies(
+    ConversationsRepliesParams params
+  );
+  CompletableFuture<Result<Conversation, SlackError>> getConversationByName(
+    String conversationName,
+    ConversationsFilter conversationsFilter
+  );
+  CompletableFuture<Result<ConversationsOpenResponse, SlackError>> openConversation(
+    ConversationOpenParams params
+  );
+  Iterable<CompletableFuture<Result<List<String>, SlackError>>> getConversationMembers(
+    ConversationMemberParams params
+  );
+  CompletableFuture<Result<ConversationMemberResponse, SlackError>> getConversationMembersPaginated(
+    ConversationMemberParams params
+  );
+  CompletableFuture<Result<ConversationsInfoResponse, SlackError>> joinConversation(
+    ConversationsJoinParams params
+  );
+  CompletableFuture<Result<ConversationSetPurposeResponse, SlackError>> setConversationPurpose(
+    ConversationSetPurposeParams params
+  );
+  CompletableFuture<Result<ConversationSetTopicResponse, SlackError>> setConversationTopic(
+    ConversationSetTopicParams params
+  );
+  CompletableFuture<Result<ConversationKickResponse, SlackError>> kickUserFromConversation(
+    ConversationKickParams params
+  );
 
   // usergroups
-  CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(UsergroupCreateParams params);
-  Iterable<CompletableFuture<Result<List<SlackUsergroup>, SlackError>>> listUsergroups(UsergroupListParams params);
-  CompletableFuture<Result<UsergroupUpdateResponse, SlackError>> updateUsergroup(UsergroupUpdateParams params);
-  CompletableFuture<Result<UsergroupEnableResponse, SlackError>> enableUsergroup(UsergroupEnableParams params);
-  CompletableFuture<Result<UsergroupDisableResponse, SlackError>> disableUsergroup(UsergroupDisableParams params);
+  CompletableFuture<Result<UsergroupCreateResponse, SlackError>> createUsergroup(
+    UsergroupCreateParams params
+  );
+  Iterable<CompletableFuture<Result<List<SlackUsergroup>, SlackError>>> listUsergroups(
+    UsergroupListParams params
+  );
+  CompletableFuture<Result<UsergroupUpdateResponse, SlackError>> updateUsergroup(
+    UsergroupUpdateParams params
+  );
+  CompletableFuture<Result<UsergroupEnableResponse, SlackError>> enableUsergroup(
+    UsergroupEnableParams params
+  );
+  CompletableFuture<Result<UsergroupDisableResponse, SlackError>> disableUsergroup(
+    UsergroupDisableParams params
+  );
 
   // usergroups.users
-  CompletableFuture<Result<UsergroupUsersUpdateResponse, SlackError>> updateUsergroupUsers(UsergroupUsersUpdateParams params);
+  CompletableFuture<Result<UsergroupUsersUpdateResponse, SlackError>> updateUsergroupUsers(
+    UsergroupUsersUpdateParams params
+  );
 
   // dialogs
-  CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(DialogOpenParams params);
+  CompletableFuture<Result<DialogOpenResponse, SlackError>> openDialog(
+    DialogOpenParams params
+  );
 
   // reactions
-  CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(ReactionsAddParams param);
+  CompletableFuture<Result<AddReactionResponse, SlackError>> addReaction(
+    ReactionsAddParams param
+  );
 
   // teams
   CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo();
 
   // files
-  CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(FilesUploadParams params);
-  CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(FilesSharedPublicUrlParams params);
+  CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(
+    FilesUploadParams params
+  );
+  CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(
+    FilesSharedPublicUrlParams params
+  );
 
   // emoji
   CompletableFuture<Result<EmojiListResponse, SlackError>> listEmoji();
 
   // views
-  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> openView(OpenViewParams params);
-  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> updateView(UpdateViewParams params);
-  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> pushView(OpenViewParams params);
-  CompletableFuture<Result<HomeTabViewCommandResponse, SlackError>> publishView(PublishViewParams params);
+  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> openView(
+    OpenViewParams params
+  );
+  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> updateView(
+    UpdateViewParams params
+  );
+  CompletableFuture<Result<ModalViewCommandResponse, SlackError>> pushView(
+    OpenViewParams params
+  );
+  CompletableFuture<Result<HomeTabViewCommandResponse, SlackError>> publishView(
+    PublishViewParams params
+  );
 
   // bookmarks
-  CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(BookmarksAddParams params);
-  CompletableFuture<Result<BookmarkEditResponse, SlackError>> editBookmark(BookmarksEditParams params);
-  CompletableFuture<Result<BookmarkRemoveResponse, SlackError>> removeBookmark(BookmarksRemoveParams params);
-  CompletableFuture<Result<BookmarkListResponse, SlackError>> listBookmarks(BookmarksListParams params);
+  CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(
+    BookmarksAddParams params
+  );
+  CompletableFuture<Result<BookmarkEditResponse, SlackError>> editBookmark(
+    BookmarksEditParams params
+  );
+  CompletableFuture<Result<BookmarkRemoveResponse, SlackError>> removeBookmark(
+    BookmarksRemoveParams params
+  );
+  CompletableFuture<Result<BookmarkListResponse, SlackError>> listBookmarks(
+    BookmarksListParams params
+  );
 
   // migration.exchange
-  CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(MigrationExchangeParams params);
+  CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(
+    MigrationExchangeParams params
+  );
 
   // calls
   CompletableFuture<Result<CallsAddResponse, SlackError>> addCall(CallsAddParams params);
   CompletableFuture<Result<CallsEndResponse, SlackError>> endCall(CallsEndParams params);
-  CompletableFuture<Result<CallsUpdateResponse, SlackError>> updateCall(CallsUpdateParams params);
-  CompletableFuture<Result<CallsInfoResponse, SlackError>> getCallInfo(CallsInfoParams params);
-  CompletableFuture<Result<CallsParticipantsAddResponse, SlackError>> addCallParticipants(CallsParticipantsAddParams params);
-  CompletableFuture<Result<CallsParticipantsRemoveResponse, SlackError>> removeCallParticipants(CallsParticipantsRemoveParams params);
+  CompletableFuture<Result<CallsUpdateResponse, SlackError>> updateCall(
+    CallsUpdateParams params
+  );
+  CompletableFuture<Result<CallsInfoResponse, SlackError>> getCallInfo(
+    CallsInfoParams params
+  );
+  CompletableFuture<Result<CallsParticipantsAddResponse, SlackError>> addCallParticipants(
+    CallsParticipantsAddParams params
+  );
+  CompletableFuture<Result<CallsParticipantsRemoveResponse, SlackError>> removeCallParticipants(
+    CallsParticipantsRemoveParams params
+  );
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
-      SlackMethod method,
-      Object params,
-      Class<T> returnClazz
+    SlackMethod method,
+    Object params,
+    Class<T> returnClazz
   );
 }

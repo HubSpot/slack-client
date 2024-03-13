@@ -197,6 +197,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SlackWebClient implements SlackClient {
+
   public static final int RATE_LIMIT_SENTINEL_VALUE = -1;
   public static final int RATE_LIMIT_LOG_WARNING_THRESHOLD_SECONDS = 5;
 
@@ -231,11 +232,10 @@ public class SlackWebClient implements SlackClient {
     this.nioHttpClient =
       config
         .getHttpClient()
-        .orElseGet(
-          () ->
-            nioHttpClientFactory.wrap(
-              new NingAsyncHttpClient(config.getHttpConfig().orElse(DEFAULT_CONFIG))
-            )
+        .orElseGet(() ->
+          nioHttpClientFactory.wrap(
+            new NingAsyncHttpClient(config.getHttpConfig().orElse(DEFAULT_CONFIG))
+          )
         );
     this.defaultRateLimiter = defaultRateLimiter;
     this.config = config;
@@ -245,7 +245,6 @@ public class SlackWebClient implements SlackClient {
         .getMethodFilter()
         .orElse(
           new SlackMethodAcceptor() {
-
             @Override
             public String getFailureExplanation(SlackMethod method, Object params) {
               throw new IllegalStateException(
@@ -392,7 +391,6 @@ public class SlackWebClient implements SlackClient {
   @Override
   public Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers() {
     return new AbstractPagedIterable<Result<List<SlackUser>, SlackError>, String>() {
-
       @Override
       protected String getInitialOffset() {
         return null;
@@ -411,15 +409,15 @@ public class SlackWebClient implements SlackClient {
           .setLimit(config.getUsersListBatchSize().get());
         Optional.ofNullable(offset).ifPresent(requestBuilder::setCursor);
 
-        CompletableFuture<Result<UsersListResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.users_list,
-          requestBuilder.build(),
-          UsersListResponse.class
-        );
+        CompletableFuture<Result<UsersListResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.users_list,
+            requestBuilder.build(),
+            UsersListResponse.class
+          );
 
-        CompletableFuture<Result<List<SlackUser>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(UsersListResponse::getMembers)
-        );
+        CompletableFuture<Result<List<SlackUser>, SlackError>> pageFuture =
+          resultFuture.thenApply(result -> result.mapOk(UsersListResponse::getMembers));
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(
           resultFuture
@@ -427,9 +425,8 @@ public class SlackWebClient implements SlackClient {
         CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(
           Optional::isPresent
         );
-        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(
-          cursorMaybe -> cursorMaybe.orElse(null)
-        );
+        CompletableFuture<String> nextCursorFuture =
+          nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
 
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
@@ -447,15 +444,13 @@ public class SlackWebClient implements SlackClient {
     CompletableFuture<Result<T, SlackError>> responseFuture
   ) {
     return responseFuture
-      .thenApply(
-        result ->
-          result.mapOk(
-            response ->
-              response
-                .getResponseMetadata()
-                .flatMap(ResponseMetadata::getNextCursor)
-                .map(Strings::emptyToNull)
-          )
+      .thenApply(result ->
+        result.mapOk(response ->
+          response
+            .getResponseMetadata()
+            .flatMap(ResponseMetadata::getNextCursor)
+            .map(Strings::emptyToNull)
+        )
       )
       .thenApply(result -> result.match(err -> Optional.empty(), ok -> ok));
   }
@@ -504,11 +499,7 @@ public class SlackWebClient implements SlackClient {
   public CompletableFuture<Result<DndInfoResponse, SlackError>> getDndInfo(
     DndInfoParams params
   ) {
-    return postSlackCommand(
-      SlackMethods.dnd_info,
-      params,
-      DndInfoResponse.class
-    );
+    return postSlackCommand(SlackMethods.dnd_info, params, DndInfoResponse.class);
   }
 
   @Override
@@ -524,11 +515,7 @@ public class SlackWebClient implements SlackClient {
   public CompletableFuture<Result<DndSnoozeResponse, SlackError>> setDndSnooze(
     DndSetSnoozeParams params
   ) {
-    return postSlackCommand(
-      SlackMethods.dnd_setSnooze,
-      params,
-      DndSnoozeResponse.class
-    );
+    return postSlackCommand(SlackMethods.dnd_setSnooze, params, DndSnoozeResponse.class);
   }
 
   @Override
@@ -545,7 +532,6 @@ public class SlackWebClient implements SlackClient {
     ChannelsListParams filter
   ) {
     return new AbstractPagedIterable<Result<List<SlackChannel>, SlackError>, String>() {
-
       @Override
       protected String getInitialOffset() {
         return null;
@@ -565,15 +551,16 @@ public class SlackWebClient implements SlackClient {
           .setLimit(config.getChannelsListBatchSize().get());
         Optional.ofNullable(offset).ifPresent(requestBuilder::setCursor);
 
-        CompletableFuture<Result<ChannelsListResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.channels_list,
-          requestBuilder.build(),
-          ChannelsListResponse.class
-        );
+        CompletableFuture<Result<ChannelsListResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.channels_list,
+            requestBuilder.build(),
+            ChannelsListResponse.class
+          );
 
-        CompletableFuture<Result<List<SlackChannel>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(ChannelsListResponse::getChannels)
-        );
+        CompletableFuture<Result<List<SlackChannel>, SlackError>> pageFuture =
+          resultFuture.thenApply(result -> result.mapOk(ChannelsListResponse::getChannels)
+          );
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(
           resultFuture
@@ -581,9 +568,8 @@ public class SlackWebClient implements SlackClient {
         CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(
           Optional::isPresent
         );
-        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(
-          cursorMaybe -> cursorMaybe.orElse(null)
-        );
+        CompletableFuture<String> nextCursorFuture =
+          nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
 
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
@@ -596,7 +582,6 @@ public class SlackWebClient implements SlackClient {
   ) {
     PagingDirection pagingDirection = params.getPagingDirection();
     return new AbstractPagedIterable<Result<List<LiteMessage>, SlackError>, Long>() {
-
       @Override
       protected Long getInitialOffset() {
         return null;
@@ -615,15 +600,13 @@ public class SlackWebClient implements SlackClient {
 
         Optional
           .ofNullable(offset)
-          .ifPresent(
-            presentOffset -> {
-              if (pagingDirection == PagingDirection.FORWARD_IN_TIME) {
-                requestBuilder.setOldestTimestamp(presentOffset.toString());
-              } else {
-                requestBuilder.setNewestTimestamp(presentOffset.toString());
-              }
+          .ifPresent(presentOffset -> {
+            if (pagingDirection == PagingDirection.FORWARD_IN_TIME) {
+              requestBuilder.setOldestTimestamp(presentOffset.toString());
+            } else {
+              requestBuilder.setNewestTimestamp(presentOffset.toString());
             }
-          );
+          });
 
         ChannelsHistoryParams currentRequest = requestBuilder.build();
         if (LOG.isTraceEnabled()) {
@@ -635,18 +618,20 @@ public class SlackWebClient implements SlackClient {
           );
         }
 
-        CompletableFuture<Result<ChannelsHistoryResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.channels_history,
-          currentRequest,
-          ChannelsHistoryResponse.class
-        );
+        CompletableFuture<Result<ChannelsHistoryResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.channels_history,
+            currentRequest,
+            ChannelsHistoryResponse.class
+          );
 
-        CompletableFuture<Result<List<LiteMessage>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(ChannelsHistoryResponse::getMessages)
-        );
+        CompletableFuture<Result<List<LiteMessage>, SlackError>> pageFuture =
+          resultFuture.thenApply(result ->
+            result.mapOk(ChannelsHistoryResponse::getMessages)
+          );
 
-        CompletableFuture<Boolean> hasMoreFuture = resultFuture.thenApply(
-          result -> result.match(err -> false, ok -> ok.hasMore())
+        CompletableFuture<Boolean> hasMoreFuture = resultFuture.thenApply(result ->
+          result.match(err -> false, ok -> ok.hasMore())
         );
         CompletableFuture<Long> nextOffset = nextOffset(pagingDirection, pageFuture);
 
@@ -659,36 +644,32 @@ public class SlackWebClient implements SlackClient {
     PagingDirection pagingDirection,
     CompletableFuture<Result<List<LiteMessage>, SlackError>> pageFuture
   ) {
-    return pageFuture.thenApply(
-      page -> {
-        return page.match(
-          err -> null,
-          messages -> {
-            Set<String> timestamps = messages
+    return pageFuture.thenApply(page -> {
+      return page.match(
+        err -> null,
+        messages -> {
+          Set<String> timestamps = messages
+            .stream()
+            .map(LiteMessage::getTimestamp)
+            .collect(Collectors.toSet());
+          if (pagingDirection == PagingDirection.FORWARD_IN_TIME && !messages.isEmpty()) {
+            return timestamps
               .stream()
-              .map(LiteMessage::getTimestamp)
-              .collect(Collectors.toSet());
-            if (
-              pagingDirection == PagingDirection.FORWARD_IN_TIME && !messages.isEmpty()
-            ) {
-              return timestamps
-                .stream()
-                .max(Comparator.comparing(Function.identity()))
-                .map(largestTs -> (long) Double.parseDouble(largestTs))
-                .get();
-            } else if (!messages.isEmpty()) {
-              return timestamps
-                .stream()
-                .min(Comparator.comparing(Function.identity()))
-                .map(smallestTs -> (long) Double.parseDouble(smallestTs))
-                .get();
-            }
-
-            return null;
+              .max(Comparator.comparing(Function.identity()))
+              .map(largestTs -> (long) Double.parseDouble(largestTs))
+              .get();
+          } else if (!messages.isEmpty()) {
+            return timestamps
+              .stream()
+              .min(Comparator.comparing(Function.identity()))
+              .map(smallestTs -> (long) Double.parseDouble(smallestTs))
+              .get();
           }
-        );
-      }
-    );
+
+          return null;
+        }
+      );
+    });
   }
 
   @Override
@@ -697,21 +678,19 @@ public class SlackWebClient implements SlackClient {
     ChannelsFilter channelsFilter
   ) {
     return findChannelByName(channelName, channelsFilter)
-      .thenApply(
-        channelMaybe -> {
-          if (channelMaybe.isPresent()) {
-            return Result.ok(channelMaybe.get());
-          } else {
-            return Result.err(
-              SlackError
-                .builder()
-                .setError("No channel found with name: " + channelName)
-                .setType(SlackErrorType.CHANNEL_NOT_FOUND)
-                .build()
-            );
-          }
+      .thenApply(channelMaybe -> {
+        if (channelMaybe.isPresent()) {
+          return Result.ok(channelMaybe.get());
+        } else {
+          return Result.err(
+            SlackError
+              .builder()
+              .setError("No channel found with name: " + channelName)
+              .setType(SlackErrorType.CHANNEL_NOT_FOUND)
+              .build()
+          );
         }
-      );
+      });
   }
 
   private CompletableFuture<Optional<SlackChannel>> findChannelByName(
@@ -732,7 +711,8 @@ public class SlackWebClient implements SlackClient {
       return CompletableFuture.completedFuture(Optional.empty());
     }
 
-    CompletableFuture<Result<List<SlackChannel>, SlackError>> nextPage = pageIterator.next();
+    CompletableFuture<Result<List<SlackChannel>, SlackError>> nextPage =
+      pageIterator.next();
     return nextPage
       .thenApply(Result::unwrapOrElseThrow)
       .thenComposeAsync(
@@ -814,7 +794,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<ChatScheduleMessageResponse, SlackError>> scheduleMessage(ChatScheduleMessageParams params) {
+  public CompletableFuture<Result<ChatScheduleMessageResponse, SlackError>> scheduleMessage(
+    ChatScheduleMessageParams params
+  ) {
     return postSlackCommand(
       SlackMethods.chat_scheduleMessage,
       params,
@@ -823,7 +805,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<ChatScheduledMessagesListResponse, SlackError>> scheduledMessageList(ChatScheduledMessagesListParams params) {
+  public CompletableFuture<Result<ChatScheduledMessagesListResponse, SlackError>> scheduledMessageList(
+    ChatScheduledMessagesListParams params
+  ) {
     return postSlackCommand(
       SlackMethods.chat_scheduledMessages_list,
       params,
@@ -832,7 +816,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<ChatDeleteScheduledMessageResponse, SlackError>> deleteScheduledMessage(ChatDeleteScheduledMessageParams params) {
+  public CompletableFuture<Result<ChatDeleteScheduledMessageResponse, SlackError>> deleteScheduledMessage(
+    ChatDeleteScheduledMessageParams params
+  ) {
     return postSlackCommand(
       SlackMethods.chat_deleteScheduledMessage,
       params,
@@ -870,7 +856,6 @@ public class SlackWebClient implements SlackClient {
     ConversationsListParams params
   ) {
     return new AbstractPagedIterable<Result<List<Conversation>, SlackError>, String>() {
-
       @Override
       protected String getInitialOffset() {
         return null;
@@ -890,15 +875,17 @@ public class SlackWebClient implements SlackClient {
           .setLimit(config.getChannelsListBatchSize().get());
         Optional.ofNullable(offset).ifPresent(requestBuilder::setCursor);
 
-        CompletableFuture<Result<ConversationListResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.conversations_list,
-          requestBuilder.build(),
-          ConversationListResponse.class
-        );
+        CompletableFuture<Result<ConversationListResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.conversations_list,
+            requestBuilder.build(),
+            ConversationListResponse.class
+          );
 
-        CompletableFuture<Result<List<Conversation>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(ConversationListResponse::getConversations)
-        );
+        CompletableFuture<Result<List<Conversation>, SlackError>> pageFuture =
+          resultFuture.thenApply(result ->
+            result.mapOk(ConversationListResponse::getConversations)
+          );
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(
           resultFuture
@@ -906,9 +893,8 @@ public class SlackWebClient implements SlackClient {
         CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(
           Optional::isPresent
         );
-        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(
-          cursorMaybe -> cursorMaybe.orElse(null)
-        );
+        CompletableFuture<String> nextCursorFuture =
+          nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
 
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
@@ -919,7 +905,11 @@ public class SlackWebClient implements SlackClient {
   public CompletableFuture<Result<ConversationListResponse, SlackError>> listConversationsPaginated(
     ConversationsListParams params
   ) {
-    return postSlackCommand(SlackMethods.conversations_list, params, ConversationListResponse.class);
+    return postSlackCommand(
+      SlackMethods.conversations_list,
+      params,
+      ConversationListResponse.class
+    );
   }
 
   @Override
@@ -927,7 +917,6 @@ public class SlackWebClient implements SlackClient {
     ConversationsUserParams params
   ) {
     return new AbstractPagedIterable<Result<List<Conversation>, SlackError>, String>() {
-
       @Override
       protected String getInitialOffset() {
         return null;
@@ -947,15 +936,17 @@ public class SlackWebClient implements SlackClient {
           .setLimit(config.getChannelsListBatchSize().get());
         Optional.ofNullable(offset).ifPresent(requestBuilder::setCursor);
 
-        CompletableFuture<Result<ConversationListResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.users_conversations,
-          requestBuilder.build(),
-          ConversationListResponse.class
-        );
+        CompletableFuture<Result<ConversationListResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.users_conversations,
+            requestBuilder.build(),
+            ConversationListResponse.class
+          );
 
-        CompletableFuture<Result<List<Conversation>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(ConversationListResponse::getConversations)
-        );
+        CompletableFuture<Result<List<Conversation>, SlackError>> pageFuture =
+          resultFuture.thenApply(result ->
+            result.mapOk(ConversationListResponse::getConversations)
+          );
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(
           resultFuture
@@ -963,9 +954,8 @@ public class SlackWebClient implements SlackClient {
         CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(
           Optional::isPresent
         );
-        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(
-          cursorMaybe -> cursorMaybe.orElse(null)
-        );
+        CompletableFuture<String> nextCursorFuture =
+          nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
 
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
@@ -976,7 +966,11 @@ public class SlackWebClient implements SlackClient {
   public CompletableFuture<Result<ConversationListResponse, SlackError>> usersConversationsPaginated(
     ConversationsUserParams params
   ) {
-    return postSlackCommand(SlackMethods.users_conversations, params, ConversationListResponse.class);
+    return postSlackCommand(
+      SlackMethods.users_conversations,
+      params,
+      ConversationListResponse.class
+    );
   }
 
   @Override
@@ -1005,7 +999,11 @@ public class SlackWebClient implements SlackClient {
   public CompletableFuture<Result<SharedChannelInviteResponse, SlackError>> inviteToSharedConversation(
     ConversationInviteSharedParams params
   ) {
-    return postSlackCommand(SlackMethods.conversations_inviteShared, params, SharedChannelInviteResponse.class);
+    return postSlackCommand(
+      SlackMethods.conversations_inviteShared,
+      params,
+      SharedChannelInviteResponse.class
+    );
   }
 
   @Override
@@ -1025,7 +1023,6 @@ public class SlackWebClient implements SlackClient {
   ) {
     PagingDirection pagingDirection = params.getPagingDirection();
     return new AbstractPagedIterable<Result<List<LiteMessage>, SlackError>, Long>() {
-
       @Override
       protected Long getInitialOffset() {
         return null;
@@ -1044,15 +1041,13 @@ public class SlackWebClient implements SlackClient {
 
         Optional
           .ofNullable(offset)
-          .ifPresent(
-            presentOffset -> {
-              if (pagingDirection == PagingDirection.FORWARD_IN_TIME) {
-                requestBuilder.setOldestTimestamp(presentOffset.toString());
-              } else {
-                requestBuilder.setNewestTimestamp(presentOffset.toString());
-              }
+          .ifPresent(presentOffset -> {
+            if (pagingDirection == PagingDirection.FORWARD_IN_TIME) {
+              requestBuilder.setOldestTimestamp(presentOffset.toString());
+            } else {
+              requestBuilder.setNewestTimestamp(presentOffset.toString());
             }
-          );
+          });
 
         ConversationsHistoryParams currentRequest = requestBuilder.build();
         if (LOG.isTraceEnabled()) {
@@ -1064,18 +1059,20 @@ public class SlackWebClient implements SlackClient {
           );
         }
 
-        CompletableFuture<Result<ConversationsHistoryResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.conversations_history,
-          currentRequest,
-          ConversationsHistoryResponse.class
-        );
+        CompletableFuture<Result<ConversationsHistoryResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.conversations_history,
+            currentRequest,
+            ConversationsHistoryResponse.class
+          );
 
-        CompletableFuture<Result<List<LiteMessage>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(ConversationsHistoryResponse::getMessages)
-        );
+        CompletableFuture<Result<List<LiteMessage>, SlackError>> pageFuture =
+          resultFuture.thenApply(result ->
+            result.mapOk(ConversationsHistoryResponse::getMessages)
+          );
 
-        CompletableFuture<Boolean> hasMoreFuture = resultFuture.thenApply(
-          result -> result.match(err -> false, ok -> ok.hasMore())
+        CompletableFuture<Boolean> hasMoreFuture = resultFuture.thenApply(result ->
+          result.match(err -> false, ok -> ok.hasMore())
         );
         CompletableFuture<Long> nextOffset = nextOffset(pagingDirection, pageFuture);
 
@@ -1112,21 +1109,19 @@ public class SlackWebClient implements SlackClient {
     ConversationsFilter conversationsFilter
   ) {
     return findConversationByName(conversationName, conversationsFilter)
-      .thenApply(
-        conversation -> {
-          if (conversation.isPresent()) {
-            return Result.ok(conversation.get());
-          } else {
-            return Result.err(
-              SlackError
-                .builder()
-                .setType(SlackErrorType.CHANNEL_NOT_FOUND)
-                .setError("No conversation found with name: " + conversationName)
-                .build()
-            );
-          }
+      .thenApply(conversation -> {
+        if (conversation.isPresent()) {
+          return Result.ok(conversation.get());
+        } else {
+          return Result.err(
+            SlackError
+              .builder()
+              .setType(SlackErrorType.CHANNEL_NOT_FOUND)
+              .setError("No conversation found with name: " + conversationName)
+              .build()
+          );
         }
-      );
+      });
   }
 
   @Override
@@ -1145,7 +1140,6 @@ public class SlackWebClient implements SlackClient {
     ConversationMemberParams params
   ) {
     return new AbstractPagedIterable<Result<List<String>, SlackError>, String>() {
-
       @Override
       protected String getInitialOffset() {
         return null;
@@ -1167,15 +1161,17 @@ public class SlackWebClient implements SlackClient {
         Optional.ofNullable(offset).ifPresent(requestBuilder::setCursor);
 
         ConversationMemberParams params = requestBuilder.build();
-        CompletableFuture<Result<ConversationMemberResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.conversations_members,
-          params,
-          ConversationMemberResponse.class
-        );
+        CompletableFuture<Result<ConversationMemberResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.conversations_members,
+            params,
+            ConversationMemberResponse.class
+          );
 
-        CompletableFuture<Result<List<String>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(ConversationMemberResponse::getMemberIds)
-        );
+        CompletableFuture<Result<List<String>, SlackError>> pageFuture =
+          resultFuture.thenApply(result ->
+            result.mapOk(ConversationMemberResponse::getMemberIds)
+          );
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(
           resultFuture
@@ -1183,9 +1179,8 @@ public class SlackWebClient implements SlackClient {
         CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(
           Optional::isPresent
         );
-        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(
-          cursorMaybe -> cursorMaybe.orElse(null)
-        );
+        CompletableFuture<String> nextCursorFuture =
+          nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
 
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
@@ -1196,7 +1191,11 @@ public class SlackWebClient implements SlackClient {
   public CompletableFuture<Result<ConversationMemberResponse, SlackError>> getConversationMembersPaginated(
     ConversationMemberParams params
   ) {
-    return postSlackCommand(SlackMethods.conversations_members, params, ConversationMemberResponse.class);
+    return postSlackCommand(
+      SlackMethods.conversations_members,
+      params,
+      ConversationMemberResponse.class
+    );
   }
 
   private CompletableFuture<Optional<Conversation>> findConversationByName(
@@ -1220,17 +1219,17 @@ public class SlackWebClient implements SlackClient {
       return CompletableFuture.completedFuture(Optional.empty());
     }
 
-    CompletableFuture<Result<List<Conversation>, SlackError>> nextPage = pageIterator.next();
+    CompletableFuture<Result<List<Conversation>, SlackError>> nextPage =
+      pageIterator.next();
     return nextPage
       .thenApply(Result::unwrapOrElseThrow)
       .thenComposeAsync(
         conversations -> {
           Optional<Conversation> matchInPage = conversations
             .stream()
-            .filter(
-              conversation ->
-                conversation.getName().isPresent() &&
-                  conversation.getName().get().equals(conversationName)
+            .filter(conversation ->
+              conversation.getName().isPresent() &&
+              conversation.getName().get().equals(conversationName)
             )
             .findFirst();
           if (matchInPage.isPresent()) {
@@ -1259,7 +1258,6 @@ public class SlackWebClient implements SlackClient {
     UsergroupListParams params
   ) {
     return new AbstractPagedIterable<Result<List<SlackUsergroup>, SlackError>, String>() {
-
       @Override
       protected String getInitialOffset() {
         return null;
@@ -1273,15 +1271,17 @@ public class SlackWebClient implements SlackClient {
           LOG.trace("Fetching slack usergroup page from {}", offset);
         }
 
-        CompletableFuture<Result<UsergroupListResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.usergroups_list,
-          UsergroupListParams.builder().from(params).build(),
-          UsergroupListResponse.class
-        );
+        CompletableFuture<Result<UsergroupListResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.usergroups_list,
+            UsergroupListParams.builder().from(params).build(),
+            UsergroupListResponse.class
+          );
 
-        CompletableFuture<Result<List<SlackUsergroup>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(UsergroupListResponse::getUsergroups)
-        );
+        CompletableFuture<Result<List<SlackUsergroup>, SlackError>> pageFuture =
+          resultFuture.thenApply(result ->
+            result.mapOk(UsergroupListResponse::getUsergroups)
+          );
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(
           resultFuture
@@ -1289,9 +1289,8 @@ public class SlackWebClient implements SlackClient {
         CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(
           Optional::isPresent
         );
-        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(
-          cursorMaybe -> cursorMaybe.orElse(null)
-        );
+        CompletableFuture<String> nextCursorFuture =
+          nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
 
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
@@ -1416,7 +1415,6 @@ public class SlackWebClient implements SlackClient {
     GroupsListParams filter
   ) {
     return new AbstractPagedIterable<Result<List<SlackGroup>, SlackError>, String>() {
-
       @Override
       protected String getInitialOffset() {
         return null;
@@ -1430,15 +1428,15 @@ public class SlackWebClient implements SlackClient {
           LOG.trace("Fetching slack group page from {}", offset);
         }
 
-        CompletableFuture<Result<GroupsListResponse, SlackError>> resultFuture = postSlackCommand(
-          SlackMethods.groups_list,
-          GroupsListParams.builder().from(filter).build(),
-          GroupsListResponse.class
-        );
+        CompletableFuture<Result<GroupsListResponse, SlackError>> resultFuture =
+          postSlackCommand(
+            SlackMethods.groups_list,
+            GroupsListParams.builder().from(filter).build(),
+            GroupsListResponse.class
+          );
 
-        CompletableFuture<Result<List<SlackGroup>, SlackError>> pageFuture = resultFuture.thenApply(
-          result -> result.mapOk(GroupsListResponse::getGroups)
-        );
+        CompletableFuture<Result<List<SlackGroup>, SlackError>> pageFuture =
+          resultFuture.thenApply(result -> result.mapOk(GroupsListResponse::getGroups));
 
         CompletableFuture<Optional<String>> nextCursorMaybeFuture = extractNextCursor(
           resultFuture
@@ -1446,9 +1444,8 @@ public class SlackWebClient implements SlackClient {
         CompletableFuture<Boolean> hasMoreFuture = nextCursorMaybeFuture.thenApply(
           Optional::isPresent
         );
-        CompletableFuture<String> nextCursorFuture = nextCursorMaybeFuture.thenApply(
-          cursorMaybe -> cursorMaybe.orElse(null)
-        );
+        CompletableFuture<String> nextCursorFuture =
+          nextCursorMaybeFuture.thenApply(cursorMaybe -> cursorMaybe.orElse(null));
 
         return new LazyLoadingPage<>(pageFuture, hasMoreFuture, nextCursorFuture);
       }
@@ -1464,7 +1461,11 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo() {
-    return postSlackCommand(SlackMethods.team_info, Collections.emptyMap(), TeamInfoResponse.class);
+    return postSlackCommand(
+      SlackMethods.team_info,
+      Collections.emptyMap(),
+      TeamInfoResponse.class
+    );
   }
 
   @Override
@@ -1521,7 +1522,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(BookmarksAddParams params) {
+  public CompletableFuture<Result<BookmarkAddResponse, SlackError>> addBookmark(
+    BookmarksAddParams params
+  ) {
     return postSlackCommand(
       SlackMethods.bookmarks_add,
       params,
@@ -1530,7 +1533,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<BookmarkEditResponse, SlackError>> editBookmark(BookmarksEditParams params) {
+  public CompletableFuture<Result<BookmarkEditResponse, SlackError>> editBookmark(
+    BookmarksEditParams params
+  ) {
     return postSlackCommand(
       SlackMethods.bookmarks_edit,
       params,
@@ -1539,7 +1544,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<BookmarkRemoveResponse, SlackError>> removeBookmark(BookmarksRemoveParams params) {
+  public CompletableFuture<Result<BookmarkRemoveResponse, SlackError>> removeBookmark(
+    BookmarksRemoveParams params
+  ) {
     return postSlackCommand(
       SlackMethods.bookmarks_remove,
       params,
@@ -1548,7 +1555,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<BookmarkListResponse, SlackError>> listBookmarks(BookmarksListParams params) {
+  public CompletableFuture<Result<BookmarkListResponse, SlackError>> listBookmarks(
+    BookmarksListParams params
+  ) {
     return postSlackCommand(
       SlackMethods.bookmarks_list,
       params,
@@ -1557,7 +1566,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(MigrationExchangeParams params) {
+  public CompletableFuture<Result<MigrationExchangeResponse, SlackError>> migrationExchange(
+    MigrationExchangeParams params
+  ) {
     return postSlackCommand(
       SlackMethods.migration_exchange,
       params,
@@ -1566,43 +1577,37 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<CallsAddResponse, SlackError>> addCall(CallsAddParams params) {
-    return postSlackCommand(
-      SlackMethods.calls_add,
-      params,
-      CallsAddResponse.class
-    );
+  public CompletableFuture<Result<CallsAddResponse, SlackError>> addCall(
+    CallsAddParams params
+  ) {
+    return postSlackCommand(SlackMethods.calls_add, params, CallsAddResponse.class);
   }
 
   @Override
-  public CompletableFuture<Result<CallsEndResponse, SlackError>> endCall(CallsEndParams params) {
-    return postSlackCommand(
-      SlackMethods.calls_end,
-      params,
-      CallsEndResponse.class
-    );
+  public CompletableFuture<Result<CallsEndResponse, SlackError>> endCall(
+    CallsEndParams params
+  ) {
+    return postSlackCommand(SlackMethods.calls_end, params, CallsEndResponse.class);
   }
 
   @Override
-  public CompletableFuture<Result<CallsUpdateResponse, SlackError>> updateCall(CallsUpdateParams params) {
-    return postSlackCommand(
-      SlackMethods.calls_update,
-      params,
-      CallsUpdateResponse.class
-    );
+  public CompletableFuture<Result<CallsUpdateResponse, SlackError>> updateCall(
+    CallsUpdateParams params
+  ) {
+    return postSlackCommand(SlackMethods.calls_update, params, CallsUpdateResponse.class);
   }
 
   @Override
-  public CompletableFuture<Result<CallsInfoResponse, SlackError>> getCallInfo(CallsInfoParams params) {
-    return postSlackCommand(
-      SlackMethods.calls_info,
-      params,
-      CallsInfoResponse.class
-    );
+  public CompletableFuture<Result<CallsInfoResponse, SlackError>> getCallInfo(
+    CallsInfoParams params
+  ) {
+    return postSlackCommand(SlackMethods.calls_info, params, CallsInfoResponse.class);
   }
 
   @Override
-  public CompletableFuture<Result<CallsParticipantsAddResponse, SlackError>> addCallParticipants(CallsParticipantsAddParams params) {
+  public CompletableFuture<Result<CallsParticipantsAddResponse, SlackError>> addCallParticipants(
+    CallsParticipantsAddParams params
+  ) {
     return postSlackCommand(
       SlackMethods.calls_participants_add,
       params,
@@ -1611,7 +1616,9 @@ public class SlackWebClient implements SlackClient {
   }
 
   @Override
-  public CompletableFuture<Result<CallsParticipantsRemoveResponse, SlackError>> removeCallParticipants(CallsParticipantsRemoveParams params) {
+  public CompletableFuture<Result<CallsParticipantsRemoveResponse, SlackError>> removeCallParticipants(
+    CallsParticipantsRemoveParams params
+  ) {
     return postSlackCommand(
       SlackMethods.calls_participants_remove,
       params,
@@ -1692,37 +1699,35 @@ public class SlackWebClient implements SlackClient {
     }
 
     return executeLogged(requestId, method, request, timer)
-      .thenApply(
-        response -> {
-          try {
-            return parseSlackResponse(response, responseType, requestId, method, request);
-          } catch (JsonProcessingException e) {
-            responseDebugger.debugProcessingFailure(
-              requestId,
-              method,
-              request,
-              response,
-              e
-            );
-            return Result.err(
-              SlackError
-                .builder()
-                .setError(SlackErrorType.JSON_PARSING_FAILED.getCode())
-                .setType(SlackErrorType.JSON_PARSING_FAILED)
-                .build()
-            );
-          } catch (RuntimeException ex) {
-            responseDebugger.debugProcessingFailure(
-              requestId,
-              method,
-              request,
-              response,
-              ex
-            );
-            throw ex;
-          }
+      .thenApply(response -> {
+        try {
+          return parseSlackResponse(response, responseType, requestId, method, request);
+        } catch (JsonProcessingException e) {
+          responseDebugger.debugProcessingFailure(
+            requestId,
+            method,
+            request,
+            response,
+            e
+          );
+          return Result.err(
+            SlackError
+              .builder()
+              .setError(SlackErrorType.JSON_PARSING_FAILED.getCode())
+              .setType(SlackErrorType.JSON_PARSING_FAILED)
+              .build()
+          );
+        } catch (RuntimeException ex) {
+          responseDebugger.debugProcessingFailure(
+            requestId,
+            method,
+            request,
+            response,
+            ex
+          );
+          throw ex;
         }
-      );
+      });
   }
 
   private <T extends SlackResponse> Result<T, SlackError> parseSlackResponse(
@@ -1769,19 +1774,16 @@ public class SlackWebClient implements SlackClient {
     HttpRequest request,
     Stopwatch timer
   ) {
-    CompletableFuture<HttpResponse> responseFuture = nioHttpClient.executeCompletableFuture(
-      request
-    );
+    CompletableFuture<HttpResponse> responseFuture =
+      nioHttpClient.executeCompletableFuture(request);
 
-    responseFuture.whenComplete(
-      (httpResponse, throwable) -> {
-        if (throwable != null) {
-          responseDebugger.debugTransportException(requestId, method, request, throwable);
-        } else {
-          responseDebugger.debug(requestId, method, timer, request, httpResponse);
-        }
+    responseFuture.whenComplete((httpResponse, throwable) -> {
+      if (throwable != null) {
+        responseDebugger.debugTransportException(requestId, method, request, throwable);
+      } else {
+        responseDebugger.debug(requestId, method, timer, request, httpResponse);
       }
-    );
+    });
 
     return responseFuture;
   }

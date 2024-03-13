@@ -1,15 +1,15 @@
 package com.hubspot.slack.client.http;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Arrays;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hubspot.horizon.Headers;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.internal.AbstractHttpResponse;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Arrays;
 
 public class CachingHttpResponse extends AbstractHttpResponse {
+
   private final AbstractHttpResponse delegate;
   private final byte[] responseBytes;
 

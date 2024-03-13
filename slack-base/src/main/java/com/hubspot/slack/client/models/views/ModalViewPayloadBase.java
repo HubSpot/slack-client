@@ -1,11 +1,9 @@
 package com.hubspot.slack.client.models.views;
 
-import java.util.Optional;
-
-import org.immutables.value.Value;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hubspot.slack.client.models.blocks.objects.Text;
+import java.util.Optional;
+import org.immutables.value.Value;
 
 public interface ModalViewPayloadBase extends ViewPayloadBase {
   String TYPE = "modal";

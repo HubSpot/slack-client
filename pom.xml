@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.hubspot</groupId>
     <artifactId>basepom</artifactId>
-    <version>25.7</version>
+    <version>59.5</version>
   </parent>
 
   <groupId>com.hubspot.slack</groupId>
@@ -22,14 +22,41 @@
   </modules>
 
   <properties>
-    <dep.immutables.version>2.2.12</dep.immutables.version>
     <dep.netty3.version>3.10.6.Final</dep.netty3.version>
-    <dep.slf4j.version>1.7.26</dep.slf4j.version>
-    <dep.plugin.gpg.version>3.1.0</dep.plugin.gpg.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.hubspot</groupId>
+        <artifactId>algebra</artifactId>
+        <version>${dep.algebra.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hubspot</groupId>
+        <artifactId>HorizonApache</artifactId>
+        <version>${horizon.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hubspot</groupId>
+        <artifactId>HorizonCore</artifactId>
+        <version>${horizon.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hubspot</groupId>
+        <artifactId>HorizonNing</artifactId>
+        <version>${horizon.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hubspot.immutables</groupId>
+        <artifactId>hubspot-style</artifactId>
+        <version>${dep.hubspot-immutables.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hubspot.immutables</groupId>
+        <artifactId>immutables-exceptions</artifactId>
+        <version>${dep.hubspot-immutables.version}</version>
+      </dependency>
       <dependency>
         <groupId>com.hubspot.slack</groupId>
         <artifactId>slack-base</artifactId>
@@ -56,56 +83,6 @@
         <artifactId>async-http-client</artifactId>
         <version>1.9.40</version>
       </dependency>
-      <dependency>
-        <groupId>com.hubspot</groupId>
-        <artifactId>HorizonCore</artifactId>
-        <version>${horizon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot</groupId>
-        <artifactId>HorizonNing</artifactId>
-        <version>${horizon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot</groupId>
-        <artifactId>HorizonApache</artifactId>
-        <version>${horizon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot</groupId>
-        <artifactId>algebra</artifactId>
-        <version>${dep.algebra.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot.immutables</groupId>
-        <artifactId>hubspot-style</artifactId>
-        <version>${dep.hubspot-immutables.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot.immutables</groupId>
-        <artifactId>immutables-exceptions</artifactId>
-        <version>${dep.hubspot-immutables.version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.1.0</version>
-          <configuration>
-            <additionalDependencies>
-              <additionalDependency>
-                <groupId>javax.annotation</groupId>
-                <artifactId>javax.annotation-api</artifactId>
-                <version>1.3.2</version>
-              </additionalDependency>
-            </additionalDependencies>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>

@@ -11,10 +11,12 @@ public enum InteractiveCallbackType {
   BLOCK_ACTIONS,
   VIEW_SUBMISSION,
   SHORTCUT,
-  UNKNOWN
-  ;
+  UNKNOWN;
 
-  private static final EnumIndex<String, InteractiveCallbackType> INDEX = new EnumIndex<>(InteractiveCallbackType.class, InteractiveCallbackType::toString);
+  private static final EnumIndex<String, InteractiveCallbackType> INDEX = new EnumIndex<>(
+    InteractiveCallbackType.class,
+    InteractiveCallbackType::toString
+  );
 
   @JsonCreator
   public static InteractiveCallbackType get(String key) {

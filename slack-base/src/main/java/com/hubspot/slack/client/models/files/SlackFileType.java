@@ -1,10 +1,9 @@
 package com.hubspot.slack.client.models.files;
 
-import java.util.stream.Stream;
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public enum SlackFileType {
   TEXT("text", SlackTextFile.class),
@@ -15,8 +14,7 @@ public enum SlackFileType {
   JAVASCRIPT("javascript", SlackJavaScriptFile.class),
   XLSX("xlsx", SlackXlsxFile.class),
   XLS("xls", SlackXlsFile.class),
-  UNKNOWN("unknown", SlackUnknownFiletype.class),
-  ;
+  UNKNOWN("unknown", SlackUnknownFiletype.class);
 
   final String type;
   private final Class<? extends SlackFile> clazz;
@@ -34,14 +32,16 @@ public enum SlackFileType {
   @JsonCreator
   public static SlackFileType parse(String field) {
     return tryParse(field)
-        .orElseThrow(() -> new IllegalArgumentException(field + " doesn't match any known slack file type"));
+      .orElseThrow(() ->
+        new IllegalArgumentException(field + " doesn't match any known slack file type")
+      );
   }
 
   public static Optional<SlackFileType> tryParse(String field) {
     return Stream
-        .of(values())
-        .filter(val -> val.getType().equalsIgnoreCase(field))
-        .findFirst();
+      .of(values())
+      .filter(val -> val.getType().equalsIgnoreCase(field))
+      .findFirst();
   }
 
   public Class<? extends SlackFile> getFileTypeClass() {

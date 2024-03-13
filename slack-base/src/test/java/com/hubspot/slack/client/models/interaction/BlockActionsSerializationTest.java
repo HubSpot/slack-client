@@ -1,9 +1,8 @@
 package com.hubspot.slack.client.models.interaction;
 
 import com.hubspot.slack.client.SerializationTestBase;
-import org.junit.Test;
-
 import java.io.IOException;
+import org.junit.Test;
 
 public class BlockActionsSerializationTest extends SerializationTestBase {
 

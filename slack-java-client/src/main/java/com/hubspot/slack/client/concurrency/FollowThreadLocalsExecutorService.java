@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.concurrency;
 
+import com.google.common.util.concurrent.ForwardingExecutorService;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -9,9 +10,10 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.google.common.util.concurrent.ForwardingExecutorService;
+public class FollowThreadLocalsExecutorService
+  extends ForwardingExecutorService
+  implements FollowThreadsMixin {
 
-public class FollowThreadLocalsExecutorService extends ForwardingExecutorService implements FollowThreadsMixin {
   private final ExecutorService delegate;
   private final String namePrefix;
 
@@ -26,22 +28,32 @@ public class FollowThreadLocalsExecutorService extends ForwardingExecutorService
   }
 
   @Override
-  public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks) throws InterruptedException {
+  public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks)
+    throws InterruptedException {
     return delegate().invokeAll(transformRequests(tasks));
   }
 
   @Override
-  public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit) throws InterruptedException {
+  public <T> List<Future<T>> invokeAll(
+    Collection<? extends Callable<T>> tasks,
+    long timeout,
+    TimeUnit unit
+  ) throws InterruptedException {
     return delegate().invokeAll(transformRequests(tasks), timeout, unit);
   }
 
   @Override
-  public <T> T invokeAny(Collection<? extends Callable<T>> tasks) throws InterruptedException, ExecutionException {
+  public <T> T invokeAny(Collection<? extends Callable<T>> tasks)
+    throws InterruptedException, ExecutionException {
     return delegate().invokeAny(transformRequests(tasks));
   }
 
   @Override
-  public <T> T invokeAny(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+  public <T> T invokeAny(
+    Collection<? extends Callable<T>> tasks,
+    long timeout,
+    TimeUnit unit
+  ) throws InterruptedException, ExecutionException, TimeoutException {
     return delegate().invokeAny(transformRequests(tasks), timeout, unit);
   }
 
@@ -69,5 +81,4 @@ public class FollowThreadLocalsExecutorService extends ForwardingExecutorService
   protected ExecutorService delegate() {
     return delegate;
   }
-
 }

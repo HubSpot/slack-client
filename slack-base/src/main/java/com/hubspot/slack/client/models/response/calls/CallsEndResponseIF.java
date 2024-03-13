@@ -6,5 +6,4 @@ import org.immutables.value.Value;
 
 @HubSpotStyle
 @Value.Immutable
-public interface CallsEndResponseIF extends SlackResponse {
-}
+public interface CallsEndResponseIF extends SlackResponse {}

@@ -1,18 +1,16 @@
 package com.hubspot.slack.client.models.interaction;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.hubspot.slack.client.models.blocks.Block;
-import org.immutables.value.Value.Check;
-import org.immutables.value.Value.Default;
-import org.immutables.value.Value.Immutable;
-
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.Attachment;
 import com.hubspot.slack.client.models.TopLevelMessageResponseType;
+import com.hubspot.slack.client.models.blocks.Block;
+import java.util.List;
+import java.util.Optional;
+import org.immutables.value.Value.Check;
+import org.immutables.value.Value.Default;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle

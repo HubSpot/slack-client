@@ -8,7 +8,9 @@ public interface NioHttpClientFactory extends NioHttpClient.Factory {
   }
 
   static class DefaultNioHttpClientFactory implements NioHttpClientFactory {
-    private static final NioHttpClientFactory INSTANCE = new DefaultNioHttpClientFactory();
+
+    private static final NioHttpClientFactory INSTANCE =
+      new DefaultNioHttpClientFactory();
 
     public static NioHttpClientFactory defaultFactory() {
       return INSTANCE;

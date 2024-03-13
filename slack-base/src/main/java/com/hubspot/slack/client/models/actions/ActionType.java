@@ -14,11 +14,12 @@ public enum ActionType {
   /**
    * Show a dropdown/selector
    */
-  SELECT,
+  SELECT;
 
-  ;
-
-  private static final EnumIndex<String, ActionType> INDEX = new EnumIndex<>(ActionType.class, ActionType::toString);
+  private static final EnumIndex<String, ActionType> INDEX = new EnumIndex<>(
+    ActionType.class,
+    ActionType::toString
+  );
 
   @JsonCreator
   public static ActionType get(String key) throws UnmappedKeyException {

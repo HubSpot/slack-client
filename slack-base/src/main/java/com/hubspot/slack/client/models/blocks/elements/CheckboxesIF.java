@@ -1,11 +1,5 @@
 package com.hubspot.slack.client.models.blocks.elements;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.immutables.value.Value;
-import org.immutables.value.Value.Check;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -15,6 +9,10 @@ import com.hubspot.slack.client.models.blocks.SlackBlockNormalizer;
 import com.hubspot.slack.client.models.blocks.json.OptionOrOptionGroupDeserializer;
 import com.hubspot.slack.client.models.blocks.objects.ConfirmationDialog;
 import com.hubspot.slack.client.models.blocks.objects.Option;
+import java.util.List;
+import java.util.Optional;
+import org.immutables.value.Value;
+import org.immutables.value.Value.Check;
 
 @Value.Immutable
 @HubSpotStyle

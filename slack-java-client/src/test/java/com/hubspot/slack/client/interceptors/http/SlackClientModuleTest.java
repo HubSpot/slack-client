@@ -1,11 +1,10 @@
 package com.hubspot.slack.client.interceptors.http;
 
-import org.junit.Test;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Stage;
 import com.hubspot.slack.client.SlackClientModule;
+import org.junit.Test;
 
 public class SlackClientModuleTest {
 

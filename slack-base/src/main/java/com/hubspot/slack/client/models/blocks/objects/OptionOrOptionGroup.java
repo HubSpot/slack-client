@@ -1,4 +1,3 @@
 package com.hubspot.slack.client.models.blocks.objects;
 
-public interface OptionOrOptionGroup extends CompositionObject {
-}
+public interface OptionOrOptionGroup extends CompositionObject {}

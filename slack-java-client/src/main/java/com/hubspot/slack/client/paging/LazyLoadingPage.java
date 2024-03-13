@@ -1,18 +1,18 @@
 package com.hubspot.slack.client.paging;
 
+import com.google.common.base.MoreObjects;
 import java.util.concurrent.CompletableFuture;
 
-import com.google.common.base.MoreObjects;
-
 public class LazyLoadingPage<T, K> {
+
   private final CompletableFuture<T> results;
   private final CompletableFuture<Boolean> hasMore;
   private final CompletableFuture<K> offset;
 
   public LazyLoadingPage(
-      CompletableFuture<T> results,
-      CompletableFuture<Boolean> hasMore,
-      CompletableFuture<K> offset
+    CompletableFuture<T> results,
+    CompletableFuture<Boolean> hasMore,
+    CompletableFuture<K> offset
   ) {
     this.results = results;
     this.hasMore = hasMore;
@@ -33,10 +33,11 @@ public class LazyLoadingPage<T, K> {
 
   @Override
   public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("results", results)
-        .add("hasMore", hasMore)
-        .add("offset", offset)
-        .toString();
+    return MoreObjects
+      .toStringHelper(this)
+      .add("results", results)
+      .add("hasMore", hasMore)
+      .add("offset", offset)
+      .toString();
   }
 }
