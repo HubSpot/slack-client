@@ -1,13 +1,5 @@
 package com.hubspot.slack.server.example;
 
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.hubspot.horizon.shaded.org.jboss.netty.buffer.ChannelBuffer;
 import com.hubspot.horizon.shaded.org.jboss.netty.channel.Channel;
 import com.hubspot.horizon.shaded.org.jboss.netty.channel.ChannelHandlerContext;
@@ -28,6 +20,12 @@ import com.hubspot.slack.client.models.interaction.BlockElementAction;
 import com.hubspot.slack.client.models.interaction.SlackInteractiveCallback;
 import com.hubspot.slack.client.models.response.views.ModalViewCommandResponse;
 import com.hubspot.slack.client.models.views.ModalViewPayload;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SlackMessageHandler extends SimpleChannelHandler {
 
@@ -39,14 +37,17 @@ public class SlackMessageHandler extends SimpleChannelHandler {
     slackClient = BasicRuntimeConfig.getClient();
   }
 
-
   @Override
   public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
     HttpRequest request = (HttpRequest) e.getMessage();
     ChannelBuffer content = request.getContent();
     try {
-      String jsonContent = URLDecoder.decode(content.toString(StandardCharsets.UTF_8), "utf-8").substring(8);
-      SlackInteractiveCallback callback = ObjectMapperUtils.mapper().readValue(jsonContent, SlackInteractiveCallback.class);
+      String jsonContent = URLDecoder
+        .decode(content.toString(StandardCharsets.UTF_8), "utf-8")
+        .substring(8);
+      SlackInteractiveCallback callback = ObjectMapperUtils
+        .mapper()
+        .readValue(jsonContent, SlackInteractiveCallback.class);
       LOG.info("Received raw JSON: {}", jsonContent);
       LOG.info("Deserialized Callback: {}", callback);
       if (callback instanceof BlockActions) {
@@ -69,17 +70,22 @@ public class SlackMessageHandler extends SimpleChannelHandler {
       LOG.info("You interaced with: {}", action);
     }
 
-    ModalViewCommandResponse response = slackClient.openView(
+    ModalViewCommandResponse response = slackClient
+      .openView(
         OpenViewParams.of(
-            blockActions.getTriggerId(),
-            ModalViewPayload.of(
-                Text.of(TextType.PLAIN_TEXT, "Hi " + blockActions.getUser().getUsername()),
-                Arrays.asList(Section.of(
-                    Text.of(TextType.MARKDOWN, "Thanks for clicking on _something_!"))
-                    .withAccessory(DatePicker.of("my-date-picker"))
-                )
-            ))
-    ).join().unwrapOrElseThrow();
+          blockActions.getTriggerId(),
+          ModalViewPayload.of(
+            Text.of(TextType.PLAIN_TEXT, "Hi " + blockActions.getUser().getUsername()),
+            Arrays.asList(
+              Section
+                .of(Text.of(TextType.MARKDOWN, "Thanks for clicking on _something_!"))
+                .withAccessory(DatePicker.of("my-date-picker"))
+            )
+          )
+        )
+      )
+      .join()
+      .unwrapOrElseThrow();
     LOG.info("Open View Response: {}", response);
   }
 }

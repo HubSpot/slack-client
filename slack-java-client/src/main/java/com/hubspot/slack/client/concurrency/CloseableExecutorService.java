@@ -9,26 +9,38 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CloseableExecutorService implements ExecutorService, Closeable {
-  private static final Logger LOGGER = LoggerFactory.getLogger(CloseableExecutorService.class);
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(
+    CloseableExecutorService.class
+  );
 
   private final ExecutorService delegate;
   private final String name;
   private final long shutdownTimeout;
   private final TimeUnit timeUnit;
 
-  private CloseableExecutorService(ExecutorService delegate, String name, long shutdownTimeout, TimeUnit timeUnit) {
+  private CloseableExecutorService(
+    ExecutorService delegate,
+    String name,
+    long shutdownTimeout,
+    TimeUnit timeUnit
+  ) {
     this.delegate = delegate;
     this.name = name;
     this.shutdownTimeout = shutdownTimeout;
     this.timeUnit = timeUnit;
   }
 
-  public static CloseableExecutorService wrap(ExecutorService executorService, String name, long shutdownTimeout, TimeUnit timeUnit) {
+  public static CloseableExecutorService wrap(
+    ExecutorService executorService,
+    String name,
+    long shutdownTimeout,
+    TimeUnit timeUnit
+  ) {
     return new CloseableExecutorService(executorService, name, shutdownTimeout, timeUnit);
   }
 
@@ -53,7 +65,8 @@ public class CloseableExecutorService implements ExecutorService, Closeable {
   }
 
   @Override
-  public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
+  public boolean awaitTermination(long timeout, TimeUnit unit)
+    throws InterruptedException {
     return delegate.awaitTermination(timeout, unit);
   }
 
@@ -73,25 +86,32 @@ public class CloseableExecutorService implements ExecutorService, Closeable {
   }
 
   @Override
-  public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks) throws InterruptedException {
+  public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks)
+    throws InterruptedException {
     return delegate.invokeAll(tasks);
   }
 
   @Override
-  public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks,
-                                       long timeout, TimeUnit unit) throws InterruptedException {
+  public <T> List<Future<T>> invokeAll(
+    Collection<? extends Callable<T>> tasks,
+    long timeout,
+    TimeUnit unit
+  ) throws InterruptedException {
     return delegate.invokeAll(tasks, timeout, unit);
   }
 
   @Override
-  public <T> T invokeAny(Collection<? extends Callable<T>> tasks) throws InterruptedException, ExecutionException {
+  public <T> T invokeAny(Collection<? extends Callable<T>> tasks)
+    throws InterruptedException, ExecutionException {
     return delegate.invokeAny(tasks);
   }
 
   @Override
-  public <T> T invokeAny(Collection<? extends Callable<T>> tasks,
-                         long timeout,
-                         TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+  public <T> T invokeAny(
+    Collection<? extends Callable<T>> tasks,
+    long timeout,
+    TimeUnit unit
+  ) throws InterruptedException, ExecutionException, TimeoutException {
     return delegate.invokeAny(tasks, timeout, unit);
   }
 
@@ -109,7 +129,10 @@ public class CloseableExecutorService implements ExecutorService, Closeable {
         if (!awaitTermination(shutdownTimeout, timeUnit)) {
           shutdownNow();
           if (!awaitTermination(shutdownTimeout, timeUnit)) {
-            LOGGER.error("{}: Tasks in executor failed to terminate in time, continuing with shutdown regardless.", name);
+            LOGGER.error(
+              "{}: Tasks in executor failed to terminate in time, continuing with shutdown regardless.",
+              name
+            );
           }
         }
       } catch (InterruptedException ie) {

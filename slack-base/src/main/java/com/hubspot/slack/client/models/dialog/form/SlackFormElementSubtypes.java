@@ -1,21 +1,19 @@
 package com.hubspot.slack.client.models.dialog.form;
 
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
 import com.hubspot.slack.client.enums.UnmappedKeyException;
+import java.util.Optional;
 
 public enum SlackFormElementSubtypes {
   EMAIL,
   NUMBER,
   TEL,
-  URL,
-  ;
+  URL;
 
-
-  private static final EnumIndex<String, SlackFormElementSubtypes> INDEX = new EnumIndex<>(SlackFormElementSubtypes.class, SlackFormElementSubtypes::key);
+  private static final EnumIndex<String, SlackFormElementSubtypes> INDEX =
+    new EnumIndex<>(SlackFormElementSubtypes.class, SlackFormElementSubtypes::key);
 
   @JsonCreator
   public static SlackFormElementSubtypes get(String key) throws UnmappedKeyException {

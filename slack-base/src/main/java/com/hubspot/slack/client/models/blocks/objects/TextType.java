@@ -7,5 +7,5 @@ public enum TextType {
   PLAIN_TEXT,
 
   @JsonProperty("mrkdwn")
-  MARKDOWN;
+  MARKDOWN,
 }

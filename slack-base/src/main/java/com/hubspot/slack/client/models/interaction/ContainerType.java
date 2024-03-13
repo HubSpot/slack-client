@@ -7,10 +7,12 @@ import com.hubspot.slack.client.enums.EnumIndex;
 public enum ContainerType {
   VIEW,
   MESSAGE,
-  UNKNOWN,
-  ;
+  UNKNOWN;
 
-  private static final EnumIndex<String, ContainerType> INDEX = new EnumIndex<>(ContainerType.class, ContainerType::toString);
+  private static final EnumIndex<String, ContainerType> INDEX = new EnumIndex<>(
+    ContainerType.class,
+    ContainerType::toString
+  );
 
   @JsonCreator
   public static ContainerType get(String key) {
@@ -22,5 +24,4 @@ public enum ContainerType {
   public String toString() {
     return name().toLowerCase();
   }
-
 }

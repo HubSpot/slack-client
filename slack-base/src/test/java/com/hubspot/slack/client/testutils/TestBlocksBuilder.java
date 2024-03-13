@@ -6,21 +6,18 @@ import com.hubspot.slack.client.models.blocks.objects.TextType;
 
 public class TestBlocksBuilder {
 
-  private TestBlocksBuilder() {
-  }
+  private TestBlocksBuilder() {}
 
   public static Option buildOption(String value, String text) {
-    return Option.builder()
-        .setValue(value)
-        .setText(buildPlainText(text))
-        .build();
+    return Option.builder().setValue(value).setText(buildPlainText(text)).build();
   }
 
   private static Text buildPlainText(String text) {
-    return Text.builder()
-        .setText(text)
-        .setType(TextType.PLAIN_TEXT)
-        .setEmoji(true)
-        .build();
+    return Text
+      .builder()
+      .setText(text)
+      .setType(TextType.PLAIN_TEXT)
+      .setEmoji(true)
+      .build();
   }
 }

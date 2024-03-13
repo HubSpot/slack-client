@@ -1,11 +1,10 @@
 package com.hubspot.slack.client.models.dialog.form;
 
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
 import com.hubspot.slack.client.enums.UnmappedKeyException;
+import java.util.Optional;
 
 /**
  * Descriptions from https://api.slack.com/dialogs
@@ -24,10 +23,12 @@ public enum SlackFormElementTypes {
   /**
    * Select menus are for multiple choice questions, and great for close-ended quantitative questions, such as office locations, priority level, meal preference, etc.
    */
-  SELECT,
-  ;
+  SELECT;
 
-  private static final EnumIndex<String, SlackFormElementTypes> INDEX = new EnumIndex<>(SlackFormElementTypes.class, SlackFormElementTypes::key);
+  private static final EnumIndex<String, SlackFormElementTypes> INDEX = new EnumIndex<>(
+    SlackFormElementTypes.class,
+    SlackFormElementTypes::key
+  );
 
   @JsonCreator
   public static SlackFormElementTypes get(String key) throws UnmappedKeyException {

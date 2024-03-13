@@ -10,10 +10,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.json.InstantDeserializer;
 import com.hubspot.slack.client.models.json.InstantSerializer;
 import com.hubspot.slack.client.models.response.SlackResponse;
-import org.immutables.value.Value;
-
 import java.time.Instant;
 import java.util.Optional;
+import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle

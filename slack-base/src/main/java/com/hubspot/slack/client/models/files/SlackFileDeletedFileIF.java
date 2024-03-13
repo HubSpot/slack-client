@@ -10,6 +10,4 @@ import org.immutables.value.Value.Immutable;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackFileDeletedFile.class)
-public interface SlackFileDeletedFileIF extends SlackFileError {
-
-}
+public interface SlackFileDeletedFileIF extends SlackFileError {}

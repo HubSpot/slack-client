@@ -11,5 +11,4 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = SlackGroupRenameEvent.class)
 @Value.Immutable
 @HubSpotStyle
-public interface SlackGroupRenameEventIF extends SlackConversationEventWithChannel {
-}
+public interface SlackGroupRenameEventIF extends SlackConversationEventWithChannel {}

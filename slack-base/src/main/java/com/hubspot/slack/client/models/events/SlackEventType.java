@@ -23,7 +23,6 @@ import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
 
 public enum SlackEventType {
-
   APP_HOME_OPENED(SlackAppHomeOpenedEvent.class),
   APP_MENTION(SlackEventMessage.class),
   APP_UNINSTALLED(SlackAppUninstalledEvent.class),
@@ -90,12 +89,14 @@ public enum SlackEventType {
   TOKENS_REVOKED(SlackTokensRevokedEvent.class),
   URL_VERIFICATION,
   USER_CHANGE(SlackUserChangeEvent.class),
-  UNKNOWN
-  ;
+  UNKNOWN;
 
   private final Class<? extends SlackEvent> eventClass;
 
-  private static final EnumIndex<String, SlackEventType> INDEX = new EnumIndex<>(SlackEventType.class, SlackEventType::toString);
+  private static final EnumIndex<String, SlackEventType> INDEX = new EnumIndex<>(
+    SlackEventType.class,
+    SlackEventType::toString
+  );
 
   SlackEventType(Class<? extends SlackEvent> eventClass) {
     this.eventClass = eventClass;

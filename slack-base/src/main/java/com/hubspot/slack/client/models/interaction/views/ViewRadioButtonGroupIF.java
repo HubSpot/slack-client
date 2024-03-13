@@ -7,9 +7,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.blocks.json.OptionOrOptionGroupDeserializer;
 import com.hubspot.slack.client.models.blocks.objects.Option;
-import org.immutables.value.Value;
-
 import java.util.Optional;
+import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle

@@ -1,12 +1,11 @@
 package com.hubspot.slack.client.methods.params.views;
 
-import org.immutables.value.Value;
-import org.immutables.value.Value.Immutable;
-
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.views.ModalViewPayload;
+import org.immutables.value.Value;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
@@ -14,6 +13,7 @@ import com.hubspot.slack.client.models.views.ModalViewPayload;
 public interface OpenViewParamsIF {
   @Value.Parameter
   String getTriggerId();
+
   @Value.Parameter
   ModalViewPayload getView();
 }

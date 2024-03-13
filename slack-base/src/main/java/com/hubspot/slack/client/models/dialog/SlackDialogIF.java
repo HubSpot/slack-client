@@ -1,11 +1,5 @@
 package com.hubspot.slack.client.models.dialog;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.immutables.value.Value.Check;
-import org.immutables.value.Value.Immutable;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
@@ -13,6 +7,10 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.dialog.form.elements.SlackDialogFormElement;
+import java.util.List;
+import java.util.Optional;
+import org.immutables.value.Value.Check;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
@@ -41,7 +39,9 @@ public interface SlackDialogIF {
     }
 
     if (getCallbackId().length() > 255) {
-      throw new IllegalStateException("Callback id cannot exceed 255 chars, got " + getCallbackId());
+      throw new IllegalStateException(
+        "Callback id cannot exceed 255 chars, got " + getCallbackId()
+      );
     }
 
     if (getElements().isEmpty()) {
@@ -49,19 +49,27 @@ public interface SlackDialogIF {
     }
 
     if (getElements().size() > 10) {
-      throw new IllegalStateException("At most 10 form elements allowed, got " + getElements().size());
+      throw new IllegalStateException(
+        "At most 10 form elements allowed, got " + getElements().size()
+      );
     }
 
-    getState().ifPresent(state -> {
-      if (state.length() > 3000) {
-        throw new IllegalStateException("State cannot exceed 3000 chars, got " + state.length());
-      }
-    });
+    getState()
+      .ifPresent(state -> {
+        if (state.length() > 3000) {
+          throw new IllegalStateException(
+            "State cannot exceed 3000 chars, got " + state.length()
+          );
+        }
+      });
 
-    getSubmitLabel().ifPresent(submitLabel -> {
-      if (submitLabel.length() > 24) {
-        throw new IllegalStateException("Submit label cannot exceed 24 chars, got " + submitLabel.length());
-      }
-    });
+    getSubmitLabel()
+      .ifPresent(submitLabel -> {
+        if (submitLabel.length() > 24) {
+          throw new IllegalStateException(
+            "Submit label cannot exceed 24 chars, got " + submitLabel.length()
+          );
+        }
+      });
   }
 }

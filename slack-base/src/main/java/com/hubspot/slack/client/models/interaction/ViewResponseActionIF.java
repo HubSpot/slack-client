@@ -6,10 +6,9 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.views.ModalViewPayload;
-import org.immutables.value.Value;
-
 import java.util.Map;
 import java.util.Optional;
+import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle

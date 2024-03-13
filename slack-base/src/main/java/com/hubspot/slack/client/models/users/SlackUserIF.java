@@ -1,22 +1,22 @@
 package com.hubspot.slack.client.models.users;
 
-import java.util.Optional;
-
-import org.immutables.value.Value.Derived;
-import org.immutables.value.Value.Immutable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import java.util.Optional;
+import org.immutables.value.Value.Derived;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface SlackUserIF extends SlackUserCore {
   Optional<UserProfile> getProfile();
+
   @JsonProperty("deleted")
   Optional<Boolean> isDeleted();
+
   Optional<String> getColor();
   Optional<String> isAdmin();
   Optional<String> isOwner();
@@ -25,8 +25,10 @@ public interface SlackUserIF extends SlackUserCore {
   Optional<Boolean> isPrimaryOwner();
   Optional<Boolean> isRestricted();
   Optional<Boolean> isUltraRestricted();
+
   @JsonProperty("is_bot")
   Optional<Boolean> isBot();
+
   Optional<Boolean> isAppUser();
 
   @JsonProperty("tz")
@@ -47,5 +49,4 @@ public interface SlackUserIF extends SlackUserCore {
   default Optional<Long> getUpdatedAt() {
     return getRawUpdated().map(updated -> updated * 1000L);
   }
-
 }

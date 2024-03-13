@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ResultSort {
   TIMESTAMP,
-  SCORE,
-  ;
+  SCORE;
 
   @JsonCreator
   public static ResultSort parse(String result) {

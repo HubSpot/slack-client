@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum TopLevelMessageResponseType {
   EPHEMERAL,
-  IN_CHANNEL,
-  ;
+  IN_CHANNEL;
 
   @Override
   @JsonValue

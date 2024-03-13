@@ -11,9 +11,9 @@ import org.immutables.value.Value;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackJpgFile.class)
 public interface SlackJpgFileIF extends SlackImageFile {
-    @Value.Default
-    @Override
-    default SlackFileType getFiletype() {
-        return SlackFileType.JPG;
-    }
+  @Value.Default
+  @Override
+  default SlackFileType getFiletype() {
+    return SlackFileType.JPG;
+  }
 }

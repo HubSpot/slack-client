@@ -5,11 +5,11 @@ import com.hubspot.slack.client.models.SlackChannel;
 import org.immutables.value.Value;
 
 public interface SlackConversationEventWithChannel extends SlackConversationEventCore {
-    SlackChannel getChannel();
+  SlackChannel getChannel();
 
-    @JsonIgnore
-    @Value.Derived
-    default String getChannelId() {
-        return getChannel().getId();
-    }
+  @JsonIgnore
+  @Value.Derived
+  default String getChannelId() {
+    return getChannel().getId();
+  }
 }

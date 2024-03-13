@@ -1,8 +1,5 @@
 package com.hubspot.slack.client.jackson;
 
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -11,9 +8,13 @@ import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public final class ObjectMapperUtils {
-  private static final AtomicReference<Optional<ObjectMapper>> MAPPER_REF = new AtomicReference<>(Optional.<ObjectMapper>empty());
+
+  private static final AtomicReference<Optional<ObjectMapper>> MAPPER_REF =
+    new AtomicReference<>(Optional.<ObjectMapper>empty());
 
   private ObjectMapperUtils() {}
 

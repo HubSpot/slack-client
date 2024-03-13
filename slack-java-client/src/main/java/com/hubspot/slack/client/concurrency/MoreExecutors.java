@@ -1,5 +1,8 @@
 package com.hubspot.slack.client.concurrency;
 
+import com.google.common.base.Optional;
+import com.google.common.base.Strings;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -11,18 +14,16 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Strings;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
 public final class MoreExecutors {
+
   private static final Logger LOG = LoggerFactory.getLogger(MoreExecutors.class);
 
-  private static final AtomicBoolean HAS_WARNED_UNNAMED_THREADFACTORY = new AtomicBoolean(false);
+  private static final AtomicBoolean HAS_WARNED_UNNAMED_THREADFACTORY = new AtomicBoolean(
+    false
+  );
 
   private MoreExecutors() {}
 
@@ -46,11 +47,15 @@ public final class MoreExecutors {
    * The name of the threads will be of the form "{namePrefix}-N" where N is an
    * integer.
    */
-  public static ThreadPoolExecutorBuilder threadPoolNonDaemonExecutorBuilder(String namePrefix) {
+  public static ThreadPoolExecutorBuilder threadPoolNonDaemonExecutorBuilder(
+    String namePrefix
+  ) {
     return new ThreadPoolExecutorBuilderImpl(namePrefix, false);
   }
 
-  public static ThreadPoolExecutorBuilder threadPoolDaemonExecutorBuilder(String namePrefix) {
+  public static ThreadPoolExecutorBuilder threadPoolDaemonExecutorBuilder(
+    String namePrefix
+  ) {
     return new ThreadPoolExecutorBuilderImpl(namePrefix, true);
   }
 
@@ -135,7 +140,9 @@ public final class MoreExecutors {
     CloseableExecutorService build();
   }
 
-  private static class ThreadPoolExecutorBuilderImpl implements ThreadPoolExecutorBuilder {
+  private static class ThreadPoolExecutorBuilderImpl
+    implements ThreadPoolExecutorBuilder {
+
     private final String namePrefix;
     private final boolean daemon;
     private boolean fair = false;
@@ -224,13 +231,14 @@ public final class MoreExecutors {
     @Override
     public CloseableExecutorService build() {
       ThreadPoolExecutor executor = new ThreadPoolExecutor(
-          unbounded ? 0 : maxSize,
-          unbounded ? Integer.MAX_VALUE : maxSize,
-          keepAliveTime,
-          keepAliveTimeUnit,
-          getQueue(),
-          buildThreadFactory(),
-          getRejectionPolicy());
+        unbounded ? 0 : maxSize,
+        unbounded ? Integer.MAX_VALUE : maxSize,
+        keepAliveTime,
+        keepAliveTimeUnit,
+        getQueue(),
+        buildThreadFactory(),
+        getRejectionPolicy()
+      );
       if (!fixed) {
         executor.allowCoreThreadTimeOut(true);
       }
@@ -242,23 +250,28 @@ public final class MoreExecutors {
         executorService = executor;
       }
 
-      return CloseableExecutorService.wrap(executorService, namePrefix, shutdownTimeout, shutdownTimeUnit);
+      return CloseableExecutorService.wrap(
+        executorService,
+        namePrefix,
+        shutdownTimeout,
+        shutdownTimeUnit
+      );
     }
 
     private ThreadFactory buildThreadFactory() {
       if (Strings.isNullOrEmpty(namePrefix)) { // hack for people who don't have a name
         if (HAS_WARNED_UNNAMED_THREADFACTORY.compareAndSet(false, true)) {
-          LOG.error("(づ｡◕‿‿◕｡)づ  Your newborn ThreadFactory needs a name!",
-              new RuntimeException("unnamed ThreadFactory"));
+          LOG.error(
+            "(づ｡◕‿‿◕｡)づ  Your newborn ThreadFactory needs a name!",
+            new RuntimeException("unnamed ThreadFactory")
+          );
         }
-        return new ThreadFactoryBuilder().setDaemon(daemon)
-            .build();
+        return new ThreadFactoryBuilder().setDaemon(daemon).build();
       } else {
-        return ThreadFactories.newBuilder(namePrefix)
-            .setDaemon(daemon)
-            .build();
+        return ThreadFactories.newBuilder(namePrefix).setDaemon(daemon).build();
       }
     }
+
     private BlockingQueue<Runnable> getQueue() {
       if (queue != null) {
         return queue;
@@ -283,12 +296,12 @@ public final class MoreExecutors {
   }
 
   private static class BlockCallerPolicy implements RejectedExecutionHandler {
+
     @Override
     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
       try {
         // block until there's room
-        executor.getQueue()
-            .put(r);
+        executor.getQueue().put(r);
       } catch (InterruptedException e) {
         throw new RejectedExecutionException("Unexpected InterruptedException", e);
       }

@@ -10,6 +10,6 @@ import org.immutables.value.Value;
 @HubSpotStyle
 @JsonDeserialize(as = SlackChannelSharedEvent.class)
 public interface SlackChannelSharedEventIF extends SlackConversationEventCore {
-    @JsonProperty("connected_team_id")
-    String getConnectedTeamId();
+  @JsonProperty("connected_team_id")
+  String getConnectedTeamId();
 }

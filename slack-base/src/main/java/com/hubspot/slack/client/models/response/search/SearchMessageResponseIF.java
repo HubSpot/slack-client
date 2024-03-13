@@ -1,10 +1,9 @@
 package com.hubspot.slack.client.models.response.search;
 
-import org.immutables.value.Value.Immutable;
-
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.response.MessagePage;
 import com.hubspot.slack.client.models.response.SlackResponse;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle

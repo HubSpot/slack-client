@@ -5,8 +5,7 @@ public interface HttpStatus {
   HttpStatusFamily getFamily();
 
   static HttpStatus forCode(int code) {
-    return StandardHttpStatus.lookup(code)
-        .orElseGet(() -> new HttpStatusImpl(code));
+    return StandardHttpStatus.lookup(code).orElseGet(() -> new HttpStatusImpl(code));
   }
 
   default boolean isInformation() {

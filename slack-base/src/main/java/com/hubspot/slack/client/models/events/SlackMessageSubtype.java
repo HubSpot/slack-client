@@ -56,8 +56,7 @@ public enum SlackMessageSubtype {
   /**
    * An unknown event type
    */
-  UNKNOWN(SlackEventMessage.class)
-  ;
+  UNKNOWN(SlackEventMessage.class);
 
   private final Class<? extends SlackEventMessageBase> messageClass;
 
@@ -69,8 +68,10 @@ public enum SlackMessageSubtype {
     this(SlackEventMessage.class);
   }
 
-  private static final EnumIndex<String, SlackMessageSubtype> INDEX = new EnumIndex<>(SlackMessageSubtype.class, SlackMessageSubtype::toString);
-
+  private static final EnumIndex<String, SlackMessageSubtype> INDEX = new EnumIndex<>(
+    SlackMessageSubtype.class,
+    SlackMessageSubtype::toString
+  );
 
   @JsonCreator
   public static SlackMessageSubtype get(String key) {
@@ -87,4 +88,3 @@ public enum SlackMessageSubtype {
     return messageClass;
   }
 }
-

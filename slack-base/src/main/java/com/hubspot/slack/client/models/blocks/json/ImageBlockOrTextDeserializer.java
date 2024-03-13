@@ -1,7 +1,5 @@
 package com.hubspot.slack.client.models.blocks.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -10,8 +8,10 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.hubspot.slack.client.models.blocks.Image;
 import com.hubspot.slack.client.models.blocks.objects.ImageBlockOrText;
 import com.hubspot.slack.client.models.blocks.objects.Text;
+import java.io.IOException;
 
 public class ImageBlockOrTextDeserializer extends StdDeserializer<ImageBlockOrText> {
+
   private static final String TYPE_FIELD = "type";
 
   protected ImageBlockOrTextDeserializer() {
@@ -19,7 +19,8 @@ public class ImageBlockOrTextDeserializer extends StdDeserializer<ImageBlockOrTe
   }
 
   @Override
-  public ImageBlockOrText deserialize(JsonParser p, DeserializationContext context) throws IOException {
+  public ImageBlockOrText deserialize(JsonParser p, DeserializationContext context)
+    throws IOException {
     ObjectCodec codec = p.getCodec();
     JsonNode node = codec.readTree(p);
 

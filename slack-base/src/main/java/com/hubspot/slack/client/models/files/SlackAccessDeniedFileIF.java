@@ -13,6 +13,4 @@ import org.immutables.value.Value.Immutable;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackAccessDeniedFile.class)
-public interface SlackAccessDeniedFileIF extends SlackFileError {
-
-}
+public interface SlackAccessDeniedFileIF extends SlackFileError {}

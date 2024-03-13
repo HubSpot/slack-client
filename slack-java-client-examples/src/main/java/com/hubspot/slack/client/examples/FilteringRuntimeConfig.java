@@ -15,25 +15,30 @@ public class FilteringRuntimeConfig {
   }
 
   public static SlackClientRuntimeConfig get() {
-    return SlackClientRuntimeConfig.builder()
-        .setTokenSupplier(() -> "a fake token")
-        .setMethodFilter(
-            new SlackMethodAcceptor() {
-              @Override
-              public String getFailureExplanation(SlackMethod method, Object params) {
-                return "Only allow WRITE methods to our special channel in QA!";
-              }
+    return SlackClientRuntimeConfig
+      .builder()
+      .setTokenSupplier(() -> "a fake token")
+      .setMethodFilter(
+        new SlackMethodAcceptor() {
+          @Override
+          public String getFailureExplanation(SlackMethod method, Object params) {
+            return "Only allow WRITE methods to our special channel in QA!";
+          }
 
-              @Override
-              public boolean test(SlackMethod slackMethod, Object o) {
-                if (isQa() && slackMethod.getWriteMode() == MethodWriteMode.WRITE) {
-                  return o instanceof HasChannel && ((HasChannel) o).getChannelId().equals("snazzy id");
-                }
+          @Override
+          public boolean test(SlackMethod slackMethod, Object o) {
+            if (isQa() && slackMethod.getWriteMode() == MethodWriteMode.WRITE) {
+              return (
+                o instanceof HasChannel &&
+                ((HasChannel) o).getChannelId().equals("snazzy id")
+              );
+            }
 
-                return true;
-              }
-            })
-        .build();
+            return true;
+          }
+        }
+      )
+      .build();
   }
 
   private static boolean isQa() {

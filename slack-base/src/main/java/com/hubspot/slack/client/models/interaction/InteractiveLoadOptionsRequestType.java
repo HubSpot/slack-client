@@ -8,10 +8,13 @@ public enum InteractiveLoadOptionsRequestType {
   BLOCK_SUGGESTION,
   DIALOG_SUGGESTION,
   INTERACTIVE_MESSAGE,
-  UNKNOWN
-  ;
+  UNKNOWN;
 
-  private static final EnumIndex<String, InteractiveLoadOptionsRequestType> INDEX = new EnumIndex<>(InteractiveLoadOptionsRequestType.class, InteractiveLoadOptionsRequestType::toString);
+  private static final EnumIndex<String, InteractiveLoadOptionsRequestType> INDEX =
+    new EnumIndex<>(
+      InteractiveLoadOptionsRequestType.class,
+      InteractiveLoadOptionsRequestType::toString
+    );
 
   @JsonCreator
   public static InteractiveLoadOptionsRequestType get(String key) {

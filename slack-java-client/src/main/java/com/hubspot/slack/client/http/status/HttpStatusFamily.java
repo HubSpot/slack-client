@@ -6,8 +6,7 @@ public enum HttpStatusFamily {
   REDIRECT,
   CLIENT_ERROR,
   SERVER_ERROR,
-  INVALID,
-  ;
+  INVALID;
 
   public static HttpStatusFamily getFamily(int code) {
     if (100 <= code && code < 200) {

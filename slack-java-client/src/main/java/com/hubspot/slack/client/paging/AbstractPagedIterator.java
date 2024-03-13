@@ -1,11 +1,11 @@
 package com.hubspot.slack.client.paging;
 
-import java.util.concurrent.CompletableFuture;
-
 import com.google.common.base.Throwables;
 import com.google.common.collect.AbstractIterator;
+import java.util.concurrent.CompletableFuture;
 
-public abstract class AbstractPagedIterator<T, K> extends AbstractIterator<CompletableFuture<T>> {
+public abstract class AbstractPagedIterator<T, K>
+  extends AbstractIterator<CompletableFuture<T>> {
 
   private LazyLoadingPage<T, K> page = null;
 
@@ -34,5 +34,6 @@ public abstract class AbstractPagedIterator<T, K> extends AbstractIterator<Compl
   }
 
   protected abstract K getInitialOffset();
+
   protected abstract LazyLoadingPage<T, K> getPage(K offset) throws Exception;
 }

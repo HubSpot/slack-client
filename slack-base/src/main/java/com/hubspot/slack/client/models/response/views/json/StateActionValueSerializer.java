@@ -4,18 +4,22 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.hubspot.slack.client.models.response.views.StateActionValue;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 
 public class StateActionValueSerializer extends StdSerializer<StateActionValue> {
+
   protected StateActionValueSerializer() {
     super(StateActionValue.class);
   }
 
   @Override
-  public void serialize(StateActionValue stateActionValue, JsonGenerator gen, SerializerProvider provider) throws IOException {
+  public void serialize(
+    StateActionValue stateActionValue,
+    JsonGenerator gen,
+    SerializerProvider provider
+  ) throws IOException {
     final String type = stateActionValue.getBlockElementType();
     final Optional<Object> value = stateActionValue.getBlockElementValue();
 

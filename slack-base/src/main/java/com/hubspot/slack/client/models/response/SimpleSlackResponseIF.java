@@ -5,5 +5,4 @@ import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle
-public interface SimpleSlackResponseIF extends SlackResponse {
-}
+public interface SimpleSlackResponseIF extends SlackResponse {}

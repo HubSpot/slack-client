@@ -6,8 +6,8 @@ public enum MarkdownSupportedFields {
   /** Renders markdown in the text field of an attachment */
   TEXT,
   /** Renders markdown in each field on an attachment */
-  FIELDS,
-  ;
+  FIELDS;
+
   public String getSlackVersion() {
     return name().toLowerCase();
   }

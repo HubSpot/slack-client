@@ -1,16 +1,5 @@
 package com.hubspot.slack.client.http.ning;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.hubspot.horizon.Compression;
@@ -22,8 +11,18 @@ import com.ning.http.client.multipart.FilePart;
 import com.ning.http.client.multipart.Part;
 import com.ning.http.client.multipart.StringPart;
 import com.ning.http.client.providers.jdk.MultipartRequestEntity;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class MultipartHttpRequest {
+
   private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
   public static Builder newBuilder() {
@@ -31,6 +30,7 @@ public class MultipartHttpRequest {
   }
 
   public static final class Builder {
+
     private final List<Part> parts;
     private final HttpRequest.Builder builder;
 
@@ -43,14 +43,28 @@ public class MultipartHttpRequest {
       return addStringPart(name, value, DEFAULT_CHARSET);
     }
 
-    public Builder addStringPart(@Nonnull String name, @Nonnull String value, @Nonnull Charset charset) {
+    public Builder addStringPart(
+      @Nonnull String name,
+      @Nonnull String value,
+      @Nonnull Charset charset
+    ) {
       return addStringPart(name, value, charset, null);
     }
 
-    public Builder addStringPart(@Nonnull String name, @Nonnull String value, @Nonnull Charset charset,
-                                 @Nullable String contentType) {
-      parts.add(new StringPart(Preconditions.checkNotNull(name), Preconditions.checkNotNull(value),
-          contentType, Preconditions.checkNotNull(charset)));
+    public Builder addStringPart(
+      @Nonnull String name,
+      @Nonnull String value,
+      @Nonnull Charset charset,
+      @Nullable String contentType
+    ) {
+      parts.add(
+        new StringPart(
+          Preconditions.checkNotNull(name),
+          Preconditions.checkNotNull(value),
+          contentType,
+          Preconditions.checkNotNull(charset)
+        )
+      );
       return this;
     }
 
@@ -58,12 +72,26 @@ public class MultipartHttpRequest {
       return addByteArrayPart(name, name, value);
     }
 
-    public Builder addByteArrayPart(@Nonnull String name, @Nonnull String fileName, @Nonnull byte[] value) {
+    public Builder addByteArrayPart(
+      @Nonnull String name,
+      @Nonnull String fileName,
+      @Nonnull byte[] value
+    ) {
       return addByteArrayPart(name, fileName, value, DEFAULT_CHARSET);
     }
 
-    public Builder addByteArrayPart(@Nonnull String name, @Nonnull String fileName, @Nonnull byte[] value, Charset charset) {
-      ByteArrayPart part = new ByteArrayPart(Preconditions.checkNotNull(name), Preconditions.checkNotNull(value), null, charset);
+    public Builder addByteArrayPart(
+      @Nonnull String name,
+      @Nonnull String fileName,
+      @Nonnull byte[] value,
+      Charset charset
+    ) {
+      ByteArrayPart part = new ByteArrayPart(
+        Preconditions.checkNotNull(name),
+        Preconditions.checkNotNull(value),
+        null,
+        charset
+      );
       part.setFileName(fileName);
       parts.add(part);
       return this;
@@ -73,8 +101,15 @@ public class MultipartHttpRequest {
       return addFilePart(name, value.getName(), value);
     }
 
-    public Builder addFilePart(@Nonnull String name, @Nonnull String fileName, @Nonnull File value) {
-      FilePart part = new FilePart(Preconditions.checkNotNull(name), Preconditions.checkNotNull(value));
+    public Builder addFilePart(
+      @Nonnull String name,
+      @Nonnull String fileName,
+      @Nonnull File value
+    ) {
+      FilePart part = new FilePart(
+        Preconditions.checkNotNull(name),
+        Preconditions.checkNotNull(value)
+      );
       part.setFileName(fileName);
       parts.add(part);
       return this;
@@ -84,7 +119,6 @@ public class MultipartHttpRequest {
       builder.addHeader(name, value);
       return this;
     }
-
 
     public Builder addQueryParam(@Nonnull String name, @Nullable String value) {
       builder.setQueryParam(name).to(value);
@@ -131,14 +165,20 @@ public class MultipartHttpRequest {
       return this;
     }
 
-    public Builder addBasicAuthentication(@Nonnull String userName, @Nullable String password) {
+    public Builder addBasicAuthentication(
+      @Nonnull String userName,
+      @Nullable String password
+    ) {
       builder.addBasicAuth(userName, password);
       return this;
     }
 
     public HttpRequest build() {
       final byte[] body;
-      MultipartRequestEntity requestEntity = new TerminatingMultipartRequestEntity(parts, new FluentCaseInsensitiveStringsMap());
+      MultipartRequestEntity requestEntity = new TerminatingMultipartRequestEntity(
+        parts,
+        new FluentCaseInsensitiveStringsMap()
+      );
       try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
         requestEntity.writeRequest(baos);
         baos.flush();

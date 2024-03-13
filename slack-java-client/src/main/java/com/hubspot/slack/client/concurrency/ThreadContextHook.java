@@ -1,12 +1,11 @@
 package com.hubspot.slack.client.concurrency;
 
+import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
-
-import com.google.common.collect.ImmutableList;
 
 /**
  * A helper to automatically follow threadlocal contexts
@@ -33,12 +32,15 @@ public enum ThreadContextHook {
   private final Collection<ThreadContextFollower> followers;
 
   ThreadContextHook() {
-    ServiceLoader<ThreadContextFollower> loader = ServiceLoader.load(ThreadContextFollower.class);
+    ServiceLoader<ThreadContextFollower> loader = ServiceLoader.load(
+      ThreadContextFollower.class
+    );
     followers = ImmutableList.copyOf(loader);
   }
 
   public Context buildThreadContext(String namePrefix) {
-    IdentityHashMap<ThreadContextFollower, Object> retainedObjects = new IdentityHashMap<>();
+    IdentityHashMap<ThreadContextFollower, Object> retainedObjects =
+      new IdentityHashMap<>();
     for (ThreadContextFollower follower : followers) {
       retainedObjects.put(follower, follower.getContext(namePrefix));
     }
@@ -47,11 +49,15 @@ public enum ThreadContextHook {
 
   @SuppressWarnings("unchecked")
   public Context initializeThreadContext(String namePrefix, Context context) {
-    IdentityHashMap<ThreadContextFollower, Object> initializingObjects = new IdentityHashMap<>();
+    IdentityHashMap<ThreadContextFollower, Object> initializingObjects =
+      new IdentityHashMap<>();
     for (ThreadContextFollower follower : followers) {
       Object followerContext = context.followersContext.get(follower);
       if (followerContext != null) {
-        initializingObjects.put(follower, follower.setContext(namePrefix, followerContext));
+        initializingObjects.put(
+          follower,
+          follower.setContext(namePrefix, followerContext)
+        );
       }
     }
     return new Context(Collections.unmodifiableMap(initializingObjects));
@@ -77,6 +83,7 @@ public enum ThreadContextHook {
   }
 
   public static class Context {
+
     private final Map<ThreadContextFollower, Object> followersContext;
 
     private Context(Map<ThreadContextFollower, Object> followersContext) {

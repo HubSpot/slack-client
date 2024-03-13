@@ -14,6 +14,5 @@ public interface ThreadContextFollower<T, V> {
   /**
    * Clear the context after a thread.
    */
-  default void clearContext(String namePrefix, V item) {
-  }
+  default void clearContext(String namePrefix, V item) {}
 }

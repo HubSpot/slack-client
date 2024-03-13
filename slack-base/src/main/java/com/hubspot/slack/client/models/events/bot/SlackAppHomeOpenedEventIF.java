@@ -8,29 +8,27 @@ import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.methods.interceptor.HasUser;
 import com.hubspot.slack.client.models.events.SlackEvent;
 import com.hubspot.slack.client.models.response.views.HomeTabViewResponse;
-import org.immutables.value.Value;
-
 import java.util.Optional;
+import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackAppHomeOpenedEvent.class)
 public interface SlackAppHomeOpenedEventIF extends SlackEvent, HasUser {
-    Optional<String> getTab();
+  Optional<String> getTab();
 
-    Optional<HomeTabViewResponse> getView();
+  Optional<HomeTabViewResponse> getView();
 
-    @JsonProperty("user")
-    String getUserId();
+  @JsonProperty("user")
+  String getUserId();
 
-    @JsonProperty("channel")
-    String getChannelId();
+  @JsonProperty("channel")
+  String getChannelId();
 
-    //Home opened events do not have a ts, so we manually set it as null
-    @Override
-    default String getTs() {
-        return null;
-    }
-
+  //Home opened events do not have a ts, so we manually set it as null
+  @Override
+  default String getTs() {
+    return null;
+  }
 }

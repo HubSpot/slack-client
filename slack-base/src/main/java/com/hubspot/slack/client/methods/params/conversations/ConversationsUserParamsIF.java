@@ -1,13 +1,11 @@
 package com.hubspot.slack.client.methods.params.conversations;
 
-import java.util.Optional;
-
-import org.immutables.value.Value.Immutable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import java.util.Optional;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
@@ -15,6 +13,7 @@ import com.hubspot.immutables.style.HubSpotStyle;
 public interface ConversationsUserParamsIF extends BaseConversationsFilter {
   @JsonProperty("user")
   Optional<String> getUserId();
+
   Optional<String> getCursor();
   Optional<Integer> getLimit();
 }

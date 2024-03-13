@@ -15,22 +15,31 @@ import com.hubspot.slack.client.models.files.SlackFileNotFoundFile;
 import com.hubspot.slack.client.models.files.SlackFileType;
 import com.hubspot.slack.client.models.files.SlackUnknownFiletype;
 import com.hubspot.slack.client.models.response.SlackErrorType;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
+
   private static final String FILE_ACCESS_FIELD = "file_access";
   private static final String FILE_TYPE_FIELD = "filetype";
   private static final Map<String, Class<? extends SlackFileError>> fileTypeErrorClasses;
 
   static {
     fileTypeErrorClasses = new HashMap<>();
-    fileTypeErrorClasses.put(SlackErrorType.ACCESS_DENIED.getCode(), SlackAccessDeniedFile.class);
-    fileTypeErrorClasses.put(SlackErrorType.FILE_NOT_FOUND.getCode(), SlackFileNotFoundFile.class);
-    fileTypeErrorClasses.put(SlackErrorType.FILE_DELETED.getCode(), SlackFileDeletedFile.class);
+    fileTypeErrorClasses.put(
+      SlackErrorType.ACCESS_DENIED.getCode(),
+      SlackAccessDeniedFile.class
+    );
+    fileTypeErrorClasses.put(
+      SlackErrorType.FILE_NOT_FOUND.getCode(),
+      SlackFileNotFoundFile.class
+    );
+    fileTypeErrorClasses.put(
+      SlackErrorType.FILE_DELETED.getCode(),
+      SlackFileDeletedFile.class
+    );
   }
 
   public SlackFileDeserializer() {
@@ -45,9 +54,10 @@ public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
 
     if (node.has(FILE_ACCESS_FIELD)) {
       String fileAccess = node.get(FILE_ACCESS_FIELD).asText();
-      Optional<? extends Class<? extends SlackFileError>> errorClass = Optional.ofNullable(fileTypeErrorClasses.get(fileAccess.toLowerCase()));
-      if (errorClass.isPresent()){
-          return codec.treeToValue(node, errorClass.get());
+      Optional<? extends Class<? extends SlackFileError>> errorClass =
+        Optional.ofNullable(fileTypeErrorClasses.get(fileAccess.toLowerCase()));
+      if (errorClass.isPresent()) {
+        return codec.treeToValue(node, errorClass.get());
       }
     }
 

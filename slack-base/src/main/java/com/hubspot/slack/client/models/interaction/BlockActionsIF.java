@@ -8,10 +8,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.LiteMessage;
 import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.response.views.ViewResponseBase;
-import org.immutables.value.Value.Immutable;
-
 import java.util.List;
 import java.util.Optional;
+import org.immutables.value.Value.Immutable;
 
 @Immutable
 @HubSpotStyle
@@ -22,6 +21,7 @@ public interface BlockActionsIF extends SlackInteractiveCallback {
   Optional<String> getResponseUrl();
   Optional<LiteMessage> getMessage();
   Optional<ViewResponseBase> getView();
+
   @JsonProperty("actions")
   List<BlockElementAction> getElementActions();
 
