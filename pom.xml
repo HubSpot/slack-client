@@ -11,7 +11,7 @@
 
     <groupId>com.hubspot.slack</groupId>
     <artifactId>slack-client</artifactId>
-    <version>1.13-SNAPSHOT</version>
+    <version>1.14-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -24,7 +24,6 @@
 
     <properties>
         <dep.netty3.version>3.10.6.Final</dep.netty3.version>
-        <dep.slf4j.version>1.7.26</dep.slf4j.version>
     </properties>
 
     <dependencyManagement>
