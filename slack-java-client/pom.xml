@@ -12,61 +12,24 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.ning</groupId>
-      <artifactId>async-http-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.hubspot</groupId>
-      <artifactId>algebra</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.hubspot</groupId>
-      <artifactId>HorizonNing</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.hubspot</groupId>
-      <artifactId>HorizonCore</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.hubspot.immutables</groupId>
-      <artifactId>hubspot-style</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.hubspot.immutables</groupId>
-      <artifactId>immutables-exceptions</artifactId>
-    </dependency>
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.hubspot.slack</groupId>
-      <artifactId>slack-base</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>annotations</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.immutables</groupId>
-      <artifactId>value</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
     </dependency>
 
     <!-- temporary -->
@@ -77,6 +40,43 @@
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-assistedinject</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.hubspot</groupId>
+      <artifactId>algebra</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.hubspot</groupId>
+      <artifactId>HorizonCore</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.hubspot</groupId>
+      <artifactId>HorizonNing</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.hubspot.immutables</groupId>
+      <artifactId>hubspot-style</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.hubspot.immutables</groupId>
+      <artifactId>immutables-exceptions</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.hubspot.slack</groupId>
+      <artifactId>slack-base</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.ning</groupId>
+      <artifactId>async-http-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.immutables</groupId>
+      <artifactId>value</artifactId>
+      <scope>provided</scope>
     </dependency>
 
     <!-- test deps -->
