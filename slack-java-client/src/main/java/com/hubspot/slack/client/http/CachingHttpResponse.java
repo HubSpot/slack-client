@@ -8,7 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 
-public class CachingHttpResponse extends AbstractHttpResponse {
+public class CachingHttpResponse    extends AbstractHttpResponse {
 
   private final AbstractHttpResponse delegate;
   private final byte[] responseBytes;
