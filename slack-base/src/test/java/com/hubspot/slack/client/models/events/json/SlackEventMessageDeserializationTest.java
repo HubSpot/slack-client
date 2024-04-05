@@ -7,9 +7,8 @@ import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.events.SlackEventMessage;
 import com.hubspot.slack.client.models.events.SlackEventType;
-import java.io.IOException;
-
 import com.hubspot.slack.client.models.events.SlackEventWrapper;
+import java.io.IOException;
 import org.junit.Test;
 
 public class SlackEventMessageDeserializationTest {
@@ -26,7 +25,7 @@ public class SlackEventMessageDeserializationTest {
   @Test
   public void itDeserializesEmptyFilesList() throws IOException {
     SlackEventMessage slackEvent = fetchAndDeserializeSlackEvent(
-            "message_shared_with_empty_files_list.json"
+      "message_shared_with_empty_files_list.json"
     );
     assertThat(slackEvent.getType()).isEqualTo(SlackEventType.MESSAGE);
     assertThat(slackEvent.getFiles().size()).isEqualTo(0);
@@ -35,7 +34,7 @@ public class SlackEventMessageDeserializationTest {
   @Test
   public void itDeserializesNoFilesList() throws IOException {
     SlackEventMessage slackEvent = fetchAndDeserializeSlackEvent(
-            "message_shared_with_no_files_list.json"
+      "message_shared_with_no_files_list.json"
     );
     assertThat(slackEvent.getType()).isEqualTo(SlackEventType.MESSAGE);
     assertThat(slackEvent.getFiles().size()).isEqualTo(0);
