@@ -23,6 +23,24 @@ public class SlackEventMessageDeserializationTest {
     assertThat(slackEvent.getFiles().size()).isEqualTo(2);
   }
 
+  @Test
+  public void itDeserializesEmptyFilesList() throws IOException {
+    SlackEventMessage slackEvent = fetchAndDeserializeSlackEvent(
+            "message_shared_with_empty_files_list.json"
+    );
+    assertThat(slackEvent.getType()).isEqualTo(SlackEventType.MESSAGE);
+    assertThat(slackEvent.getFiles().size()).isEqualTo(0);
+  }
+
+  @Test
+  public void itDeserializesNoFilesList() throws IOException {
+    SlackEventMessage slackEvent = fetchAndDeserializeSlackEvent(
+            "message_shared_with_no_files_list.json"
+    );
+    assertThat(slackEvent.getType()).isEqualTo(SlackEventType.MESSAGE);
+    assertThat(slackEvent.getFiles().size()).isEqualTo(0);
+  }
+
   private SlackEventMessage fetchAndDeserializeSlackEvent(String jsonFileName)
     throws IOException {
     String rawJson = JsonLoader.loadJsonFromFile(jsonFileName);

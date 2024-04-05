@@ -1,0 +1,36 @@
+{
+  "token":"redacted",
+  "team_id":"redacted",
+  "context_team_id":"redacted",
+  "context_enterprise_id":null,
+  "api_app_id":"redacted",
+  "event":{
+    "text":"",
+    "upload":false,
+    "user":"redacted",
+    "display_as_bot":false,
+    "type":"message",
+    "ts":"1711958705.400819",
+    "client_msg_id":"redacted",
+    "thread_ts":"1711957673.062609",
+    "parent_user_id":"redacted",
+    "channel":"redacted",
+    "subtype":"file_share",
+    "event_ts":"1711958705.400819",
+    "channel_type":"channel"
+  },
+  "type":"event_callback",
+  "event_id":"redacted",
+  "event_time":1711958705,
+  "authorizations":[
+    {
+      "enterprise_id":null,
+      "team_id":"redacted",
+      "user_id":"redacted",
+      "is_bot":false,
+      "is_enterprise_install":false
+    }
+  ],
+  "is_ext_shared_channel":false,
+  "event_context":"redacted"
+}
