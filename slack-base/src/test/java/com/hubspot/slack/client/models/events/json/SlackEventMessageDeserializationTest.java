@@ -1,13 +1,15 @@
-package com.hubspot.slack.client.models.events.includingfiles;
+package com.hubspot.slack.client.models.events.json;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
+import com.hubspot.slack.client.models.events.SlackEventMessage;
 import com.hubspot.slack.client.models.events.SlackEventType;
-import com.hubspot.slack.client.models.events.SlackEventWrapper;
 import java.io.IOException;
+
+import com.hubspot.slack.client.models.events.SlackEventWrapper;
 import org.junit.Test;
 
 public class SlackEventMessageDeserializationTest {
