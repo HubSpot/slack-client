@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.methods.interceptor.HasUser;
-import com.hubspot.slack.client.models.Attachment;
+import com.hubspot.slack.client.models.files.SlackFile;
 import java.util.List;
 import java.util.Optional;
 import org.immutables.value.Value.Immutable;
@@ -31,4 +31,6 @@ public abstract class AbstractSlackEventMessage
   public abstract String getUserId();
 
   public abstract String getText();
+
+  public abstract List<SlackFile> getFiles();
 }
