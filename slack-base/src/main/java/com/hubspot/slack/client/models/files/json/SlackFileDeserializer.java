@@ -12,6 +12,7 @@ import com.hubspot.slack.client.models.files.SlackFile;
 import com.hubspot.slack.client.models.files.SlackFileDeletedFile;
 import com.hubspot.slack.client.models.files.SlackFileError;
 import com.hubspot.slack.client.models.files.SlackFileNotFoundFile;
+import com.hubspot.slack.client.models.files.SlackFileTombstone;
 import com.hubspot.slack.client.models.files.SlackFileType;
 import com.hubspot.slack.client.models.files.SlackUnknownFiletype;
 import com.hubspot.slack.client.models.response.SlackErrorType;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
 
   private static final String FILE_ACCESS_FIELD = "file_access";
+  private static final String FILE_MODE_FIELD = "mode";
   private static final String FILE_TYPE_FIELD = "filetype";
   private static final Map<String, Class<? extends SlackFileError>> FILE_TYPE_ERROR_CLASSES;
 
@@ -58,6 +60,13 @@ public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
         Optional.ofNullable(FILE_TYPE_ERROR_CLASSES.get(fileAccess.toLowerCase()));
       if (errorClass.isPresent()) {
         return codec.treeToValue(node, errorClass.get());
+      }
+    }
+
+    if (node.has(FILE_MODE_FIELD)) {
+      String fileMode = node.get(FILE_MODE_FIELD).asText();
+      if (fileMode.equals("tombstone")) {
+        return codec.treeToValue(node, SlackFileTombstone.class);
       }
     }
 
