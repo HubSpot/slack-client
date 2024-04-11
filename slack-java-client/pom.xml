@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.hubspot.slack</groupId>
+    <groupId>com.hubspot.slack1</groupId>
     <artifactId>slack-client</artifactId>
     <version>1.15-SNAPSHOT</version>
   </parent>
