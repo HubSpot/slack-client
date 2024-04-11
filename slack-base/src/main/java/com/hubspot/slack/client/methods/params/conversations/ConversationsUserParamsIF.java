@@ -1,7 +1,7 @@
 package com.hubspot.slack.client.methods.params.conversations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import java.util.Optional;
@@ -15,5 +15,6 @@ public interface ConversationsUserParamsIF extends BaseConversationsFilter {
   Optional<String> getUserId();
 
   Optional<String> getCursor();
+
   Optional<Integer> getLimit();
 }

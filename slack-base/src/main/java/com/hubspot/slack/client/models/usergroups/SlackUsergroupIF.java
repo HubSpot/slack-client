@@ -1,7 +1,7 @@
 package com.hubspot.slack.client.models.usergroups;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import java.util.List;
@@ -14,13 +14,16 @@ import org.immutables.value.Value.Immutable;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface SlackUsergroupIF {
   String getId();
+
   String getTeamId();
 
   @JsonProperty("is_usergroup")
   boolean isUsergroup();
 
   String getName();
+
   Optional<String> getDescription();
+
   String getHandle();
 
   @JsonProperty("is_external")
@@ -36,8 +39,11 @@ public interface SlackUsergroupIF {
   int getDateDeletedEpochSeconds(); // 0 means never
 
   Optional<String> getAutoType();
+
   Optional<String> getCreatedBy();
+
   Optional<String> getUpdatedBy();
+
   Optional<String> getDeletedBy();
 
   @Derived

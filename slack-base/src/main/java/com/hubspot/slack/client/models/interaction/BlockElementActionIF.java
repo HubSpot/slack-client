@@ -1,7 +1,7 @@
 package com.hubspot.slack.client.models.interaction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -20,6 +20,7 @@ import org.immutables.value.Value.Immutable;
 @JsonSerialize(using = BlockElementActionSerializer.class)
 public interface BlockElementActionIF {
   String getBlockId();
+
   String getActionId();
 
   BlockElement getElement();

@@ -1,6 +1,6 @@
 package com.hubspot.slack.client.models.dialog.form.elements;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;

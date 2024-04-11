@@ -1,6 +1,6 @@
 package com.hubspot.slack.client.methods.params.reactions;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.immutables.validation.ImmutableConditions;
@@ -13,13 +13,15 @@ import org.immutables.value.Value.Immutable;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ReactionsAddParamsIF {
   String getName();
+
   Optional<String> getChannel();
+
   Optional<String> getTimestamp();
 
   /**
    * @deprecated As of 22nd August 2019, Slack has removed support for file comments -
    * <a href="https://api.slack.com/changelog/2018-05-file-threads-soon-tread#whats_changed">
-   *   file threads are the replacement
+   * file threads are the replacement
    * </a>
    */
   @Deprecated
@@ -28,7 +30,7 @@ public interface ReactionsAddParamsIF {
   /**
    * @deprecated As of 22nd August 2019, Slack has removed support for file comments -
    * <a href="https://api.slack.com/changelog/2018-05-file-threads-soon-tread#whats_changed">
-   *   file threads are the replacement
+   * file threads are the replacement
    * </a>
    */
   @Deprecated

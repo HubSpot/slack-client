@@ -1,6 +1,6 @@
 package com.hubspot.slack.client.models.interaction;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.SlackChannel;
@@ -14,15 +14,24 @@ import org.immutables.value.Value.Immutable;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface InteractiveLoadOptionsRequestIF {
   String getName();
+
   String getValue();
+
   String getCallbackId();
+
   SlackTeam getTeam();
+
   SlackChannel getChannel();
+
   SlackUserLite getUser();
+
   InteractiveLoadOptionsRequestType getType();
 
   String getActionTs();
+
   Optional<String> getMessageTs();
+
   Optional<String> getAttachmentId();
+
   String getToken();
 }

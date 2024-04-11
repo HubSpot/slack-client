@@ -1,7 +1,7 @@
 package com.hubspot.slack.client.models.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import java.util.Optional;
@@ -18,12 +18,19 @@ public interface SlackUserIF extends SlackUserCore {
   Optional<Boolean> isDeleted();
 
   Optional<String> getColor();
+
   Optional<String> isAdmin();
+
   Optional<String> isOwner();
+
   Optional<String> getTeamId();
+
   Optional<String> getRealName();
+
   Optional<Boolean> isPrimaryOwner();
+
   Optional<Boolean> isRestricted();
+
   Optional<Boolean> isUltraRestricted();
 
   @JsonProperty("is_bot")

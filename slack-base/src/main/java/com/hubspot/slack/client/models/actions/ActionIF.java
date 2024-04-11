@@ -3,7 +3,7 @@ package com.hubspot.slack.client.models.actions;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import java.util.List;
@@ -19,9 +19,13 @@ public interface ActionIF {
   Optional<String> getName();
 
   ActionType getType();
+
   Optional<String> getText();
+
   Optional<String> getValue();
+
   Optional<Confirm> getConfirm();
+
   Optional<String> getUrl();
 
   @JsonProperty("style")
@@ -33,7 +37,10 @@ public interface ActionIF {
   }
 
   List<Option> getOptions();
+
   List<Option> getSelectedOptions();
+
   Optional<SlackDataSource> getDataSource();
+
   Optional<Integer> getMinQueryLength();
 }
