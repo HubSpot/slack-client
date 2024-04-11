@@ -11,6 +11,13 @@ import org.junit.Test;
 public class SlackFileDeserializerTest {
 
   @Test
+  public void shouldDeserializeTombstone() throws IOException {
+    SlackFile file = fetchAndDeserializeSlackFile("file_with_tombstone.json");
+    assertEquals(SlackFileType.UNKNOWN, file.getFiletype());
+    assertTrue(file instanceof SlackFileTombstone);
+  }
+
+  @Test
   public void shouldDeserializeDeleted() throws IOException {
     SlackFile file = fetchAndDeserializeSlackFile("file_with_file_deleted.json");
     assertEquals(SlackFileType.PNG, file.getFiletype());
