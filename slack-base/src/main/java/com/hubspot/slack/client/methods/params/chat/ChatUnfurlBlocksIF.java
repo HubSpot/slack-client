@@ -1,6 +1,6 @@
 package com.hubspot.slack.client.methods.params.chat;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -12,7 +12,7 @@ import org.immutables.value.Value;
 
 @HubSpotStyle
 @Value.Immutable
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public interface ChatUnfurlBlocksIF extends ChatUnfurlBlocksOrAttachment {
   @Value.Parameter(order = 1)
   @JsonDeserialize(contentUsing = BlockOrAttachmentDeserializer.class)

@@ -1,7 +1,7 @@
 package com.hubspot.slack.client.methods.params.views;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -21,7 +21,9 @@ public interface UpdateViewParamsIF {
   ModalViewPayload getView();
 
   Optional<String> getExternalId();
+
   Optional<String> getHash();
+
   Optional<String> getViewId();
 
   @Check

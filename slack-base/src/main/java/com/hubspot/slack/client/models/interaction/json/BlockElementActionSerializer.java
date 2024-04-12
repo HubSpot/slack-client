@@ -45,11 +45,13 @@ public class BlockElementActionSerializer extends StdSerializer<BlockElementActi
   ) throws IOException {
     JavaType javaType = provider.constructType(element.getClass());
     BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-    JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(
-      provider,
-      javaType,
-      beanDesc
-    );
+    JsonSerializer<Object> serializer =
+      BeanSerializerFactory.instance.findBeanOrAddOnSerializer(
+        provider,
+        javaType,
+        beanDesc,
+        false
+      );
     serializer.unwrappingSerializer(null).serialize(element, gen, provider);
   }
 

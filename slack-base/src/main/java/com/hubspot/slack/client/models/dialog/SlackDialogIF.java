@@ -2,7 +2,7 @@ package com.hubspot.slack.client.models.dialog;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -18,10 +18,15 @@ import org.immutables.value.Value.Immutable;
 @JsonInclude(Include.NON_EMPTY)
 public interface SlackDialogIF {
   String getTitle();
+
   String getCallbackId();
+
   List<SlackDialogFormElement> getElements();
+
   Optional<String> getState();
+
   Optional<String> getSubmitLabel();
+
   Optional<Boolean> getNotifyOnCancel();
 
   @Check

@@ -26,19 +26,19 @@ public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
   private static final String FILE_ACCESS_FIELD = "file_access";
   private static final String FILE_MODE_FIELD = "mode";
   private static final String FILE_TYPE_FIELD = "filetype";
-  private static final Map<String, Class<? extends SlackFileError>> fileTypeErrorClasses;
+  private static final Map<String, Class<? extends SlackFileError>> FILE_TYPE_ERROR_CLASSES;
 
   static {
-    fileTypeErrorClasses = new HashMap<>();
-    fileTypeErrorClasses.put(
+    FILE_TYPE_ERROR_CLASSES = new HashMap<>();
+    FILE_TYPE_ERROR_CLASSES.put(
       SlackErrorType.ACCESS_DENIED.getCode(),
       SlackAccessDeniedFile.class
     );
-    fileTypeErrorClasses.put(
+    FILE_TYPE_ERROR_CLASSES.put(
       SlackErrorType.FILE_NOT_FOUND.getCode(),
       SlackFileNotFoundFile.class
     );
-    fileTypeErrorClasses.put(
+    FILE_TYPE_ERROR_CLASSES.put(
       SlackErrorType.FILE_DELETED.getCode(),
       SlackFileDeletedFile.class
     );
@@ -57,7 +57,7 @@ public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
     if (node.has(FILE_ACCESS_FIELD)) {
       String fileAccess = node.get(FILE_ACCESS_FIELD).asText();
       Optional<? extends Class<? extends SlackFileError>> errorClass =
-        Optional.ofNullable(fileTypeErrorClasses.get(fileAccess.toLowerCase()));
+        Optional.ofNullable(FILE_TYPE_ERROR_CLASSES.get(fileAccess.toLowerCase()));
       if (errorClass.isPresent()) {
         return codec.treeToValue(node, errorClass.get());
       }

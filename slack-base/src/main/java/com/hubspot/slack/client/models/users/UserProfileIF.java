@@ -2,7 +2,7 @@ package com.hubspot.slack.client.models.users;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -23,13 +23,21 @@ public interface UserProfileIF {
   Optional<String> getUsernameNormalized();
 
   Optional<String> getRealName();
+
   Optional<String> getRealNameNormalized();
+
   Optional<String> getEmail();
+
   Optional<String> getStatusText();
+
   Optional<String> getStatusEmoji();
+
   Optional<Long> getStatusExpiration();
+
   Optional<String> getTitle();
+
   Optional<String> getPhone();
+
   Optional<String> getSkype();
 
   // Extra custom fields set by your workspace admin
@@ -40,6 +48,7 @@ public interface UserProfileIF {
   Optional<String> getTeamId();
 
   Optional<String> getAvatarHash();
+
   Optional<String> getImageOriginal();
 
   @JsonProperty("image_24")

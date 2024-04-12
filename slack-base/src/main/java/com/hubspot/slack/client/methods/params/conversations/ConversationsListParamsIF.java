@@ -1,6 +1,6 @@
 package com.hubspot.slack.client.methods.params.conversations;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import java.util.Optional;
@@ -11,5 +11,6 @@ import org.immutables.value.Value.Immutable;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface ConversationsListParamsIF extends BaseConversationsFilter {
   Optional<String> getCursor();
+
   Optional<Integer> getLimit();
 }
