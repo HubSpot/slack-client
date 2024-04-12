@@ -1,7 +1,7 @@
 package com.hubspot.slack.client.models.events.app;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -10,7 +10,7 @@ import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonDeserialize(as = SlackTokensRevokedEvent.class)
 public interface SlackTokensRevokedEventIF extends SlackEvent {
   @JsonProperty
