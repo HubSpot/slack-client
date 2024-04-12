@@ -16,6 +16,7 @@ public enum SlackErrorType {
 
   CANT_DELETE_MESSAGE("cant_delete_message"),
   CANT_UPDATE_MESSAGE("cant_update_message"),
+  CANNOT_CREATE_CHANNEL("cannot_create_channel"),
   CANNOT_CREATE_DIALOG("cannot_create_dialog"),
   CANNOT_DM_BOT("cannot_dm_bot"),
   CHANNEL_NOT_FOUND("channel_not_found"),
@@ -30,6 +31,7 @@ public enum SlackErrorType {
 
   JSON_NOT_OBJECT("json_not_object"),
 
+  METHOD_NOT_SUPPORTED_FOR_MESSAGE_TYPE("method_not_supported_for_channel_type"),
   MISSING_DIALOG("missing_dialog"),
   MISSING_POST_TYPE("missing_post_type"),
   MISSING_SCOPE("missing_scope"),
@@ -47,6 +49,7 @@ public enum SlackErrorType {
 
   ORG_LOGIN_REQUIRED("org_login_required"),
 
+  INTERNAL_ERROR("internal_error"),
   INVALID_AUTH("invalid_auth"),
   INVALID_ARG_NAME("invalid_arg_name"),
   INVALID_ARRAY_ARG("invalid_array_arg"),
@@ -54,6 +57,11 @@ public enum SlackErrorType {
   INVALID_FORM_DATA("invalid_form_data"),
   INVALID_POST_TYPE("invalid_post_type"),
   INVALID_JSON("invalid_json"),
+  INVALID_NAME("invalid_name"),
+  INVALID_NAME_MAX_LENGTH("invalid_name_maxlength"),
+  INVALID_NAME_PUNCTUATION("invalid_name_punctuation"),
+  INVALID_NAME_REQUIRED("invalid_name_required"),
+  INVALID_NAME_SPECIALS("invalid_name_specials"),
   INVALID_TRIGGER("invalid_trigger"),
   INVALID_TS_OLDEST("invalid_ts_oldest"),
   INVALID_TS_LATEsT("invalid_ts_latest"),
@@ -65,6 +73,8 @@ public enum SlackErrorType {
 
   TEAM_ADDED_TO_ORG("team_added_to_org"),
   TOO_MANY_ATTACHMENTS("too_many_attachments"),
+  TOO_MANY_CONVOS_FOR_APP_ON_TEAM("too_many_convos_for_app_on_team"),
+  TOO_MANY_CONVOS_FOR_TEAM("too_many_convos_for_team"),
   TRIGGER_EXCHANGED("trigger_exchanged"),
   TRIGGER_EXPIRED("trigger_expired"),
 
