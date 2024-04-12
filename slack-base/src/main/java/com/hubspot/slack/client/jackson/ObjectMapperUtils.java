@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -23,7 +23,7 @@ public final class ObjectMapperUtils {
     mapper.registerModule(new GuavaModule());
     mapper.registerModule(new JodaModule());
     mapper.registerModule(new Jdk8Module());
-    mapper.registerModule(new JSR310Module());
+    mapper.registerModule(new JavaTimeModule());
 
     mapper.configure(JsonParser.Feature.ALLOW_COMMENTS, false);
     mapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);

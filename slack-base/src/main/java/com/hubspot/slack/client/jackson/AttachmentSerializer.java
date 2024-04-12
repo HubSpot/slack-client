@@ -63,7 +63,12 @@ public class AttachmentSerializer extends StdSerializer<Attachment> {
     JavaType javaType = provider.constructType(Attachment.class);
     BeanDescription beanDesc = provider.getConfig().introspect(javaType);
     JsonSerializer<Object> defaultSerializer =
-      BeanSerializerFactory.instance.findBeanSerializer(provider, javaType, beanDesc);
+      BeanSerializerFactory.instance.findBeanOrAddOnSerializer(
+        provider,
+        javaType,
+        beanDesc,
+        false
+      );
     defaultSerializer.serialize(attachment, jgen, provider);
   }
 }

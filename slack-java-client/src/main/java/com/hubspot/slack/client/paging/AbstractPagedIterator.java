@@ -29,7 +29,8 @@ public abstract class AbstractPagedIterator<T, K>
 
       return endOfData();
     } catch (Exception e) {
-      throw Throwables.propagate(e);
+      Throwables.throwIfUnchecked(e);
+      throw new RuntimeException(e);
     }
   }
 
