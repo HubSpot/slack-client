@@ -67,6 +67,14 @@ public class SlackFileDeserializerTest {
     assertEquals("F0S43PZDF", file.getId());
   }
 
+  @Test
+  public void shouldDeserializeSlackConnectFile() throws IOException {
+    SlackFile file = fetchAndDeserializeSlackFile("file_slack_connect.json");
+    assertEquals(SlackFileType.UNKNOWN, file.getFiletype());
+    assertTrue(file instanceof SlackConnectFile);
+    assertEquals("F12345678", file.getId());
+  }
+
   private SlackFile fetchAndDeserializeSlackFile(String jsonFileName) throws IOException {
     String rawJson = JsonLoader.loadJsonFromFile(jsonFileName);
     return ObjectMapperUtils.mapper().readValue(rawJson, SlackFile.class);

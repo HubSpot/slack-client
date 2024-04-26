@@ -1,0 +1,8 @@
+{
+  "id": "F12345678",
+  "mode": "file_access",
+  "file_access": "check_file_info",
+  "created": 0,
+  "timestamp": 0,
+  "user": ""
+}
