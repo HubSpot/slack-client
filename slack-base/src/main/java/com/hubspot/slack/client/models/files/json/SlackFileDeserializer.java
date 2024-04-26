@@ -1,13 +1,13 @@
 package com.hubspot.slack.client.models.files.json;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hubspot.slack.client.models.files.SlackAccessDeniedFile;
+import com.hubspot.slack.client.models.files.SlackConnectFile;
 import com.hubspot.slack.client.models.files.SlackFile;
 import com.hubspot.slack.client.models.files.SlackFileDeletedFile;
 import com.hubspot.slack.client.models.files.SlackFileError;
@@ -26,6 +26,7 @@ public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
   private static final String FILE_ACCESS_FIELD = "file_access";
   private static final String FILE_MODE_FIELD = "mode";
   private static final String FILE_TYPE_FIELD = "filetype";
+  private static final String SLACK_CONNECT_FILE_ACCESS = "check_file_info";
   private static final Map<String, Class<? extends SlackFileError>> FILE_TYPE_ERROR_CLASSES;
 
   static {
@@ -42,6 +43,7 @@ public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
       SlackErrorType.FILE_DELETED.getCode(),
       SlackFileDeletedFile.class
     );
+    FILE_TYPE_ERROR_CLASSES.put(SLACK_CONNECT_FILE_ACCESS, SlackConnectFile.class);
   }
 
   public SlackFileDeserializer() {
@@ -50,7 +52,7 @@ public class SlackFileDeserializer extends StdDeserializer<SlackFile> {
 
   @Override
   public SlackFile deserialize(JsonParser p, DeserializationContext ctxt)
-    throws IOException, JsonProcessingException {
+    throws IOException {
     ObjectCodec codec = p.getCodec();
     JsonNode node = codec.readTree(p);
 
