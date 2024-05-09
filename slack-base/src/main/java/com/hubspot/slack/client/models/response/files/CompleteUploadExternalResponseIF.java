@@ -1,18 +1,17 @@
-package com.hubspot.slack.client.methods.params.files;
+package com.hubspot.slack.client.models.response.files;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
-import java.util.List;
-import java.util.Optional;
+import com.hubspot.slack.client.models.files.SlackFile;
+import com.hubspot.slack.client.models.response.SlackResponse;
 import org.immutables.value.Value.Immutable;
+
+import java.util.List;
 
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface CompleteUploadExternalParamsIF {
-  List<FileIInfo> getFiles();
-  Optional<String> getChannelId();
-  Optional<String> getThreadTs();
-  Optional<String> getInitialComment();
+public interface CompleteUploadExternalResponseIF extends SlackResponse {
+  List<SlackFile> getFiles();
 }
