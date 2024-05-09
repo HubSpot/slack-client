@@ -9,7 +9,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface GetUploadURLExternalParamsIF {
+public interface GetUploadUrlExternalParamsIF {
   String getFilename();
   Long getLength();
   Optional<String> getAltText();
