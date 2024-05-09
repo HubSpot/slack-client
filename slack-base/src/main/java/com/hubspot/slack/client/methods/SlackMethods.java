@@ -622,7 +622,7 @@ public enum SlackMethods implements SlackMethod {
   files_getUploadURLExternal(
     MethodWriteMode.WRITE,
     RateLimitingTiers.TIER_4,
-    JsonStatus.ACCEPTS_JSON
+    JsonStatus.FORM_ENCODING_ONLY
   );
 
   private final MethodWriteMode writeMode;
