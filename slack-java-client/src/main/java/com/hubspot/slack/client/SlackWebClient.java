@@ -1406,7 +1406,7 @@ public class SlackWebClient implements SlackClient {
     GetUploadUrlExternalParams params
   ) {
     return postSlackCommand(
-      SlackMethods.files_get_upload_url_external,
+      SlackMethods.files_getUploadURLExternal,
       params,
       GetUploadUrlExternalResponse.class
     );
