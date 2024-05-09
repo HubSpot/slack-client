@@ -11,4 +11,5 @@ import org.immutables.value.Value.Immutable;
 @JsonNaming(SnakeCaseStrategy.class)
 public interface GetUploadUrlExternalResponseIF extends SlackResponse {
   String getUploadUrl();
-  String getFileId();}
+  String getFileId();
+}

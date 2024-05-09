@@ -50,6 +50,7 @@ import com.hubspot.slack.client.methods.params.dnd.DndInfoParams;
 import com.hubspot.slack.client.methods.params.dnd.DndSetSnoozeParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
+import com.hubspot.slack.client.methods.params.files.GetUploadUrlExternalParams;
 import com.hubspot.slack.client.methods.params.group.GroupsKickParams;
 import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
@@ -389,6 +390,10 @@ public interface SlackClient extends Closeable {
   // files
   CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(
     FilesUploadParams params
+  );
+
+  CompletableFuture<Result<GetUploadUrlExternalParams, SlackError>> getUploadURLExternal(
+    GetUploadUrlExternalParams params
   );
   CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(
     FilesSharedPublicUrlParams params
