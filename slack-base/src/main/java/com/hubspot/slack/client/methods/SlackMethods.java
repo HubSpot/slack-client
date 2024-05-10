@@ -619,6 +619,11 @@ public enum SlackMethods implements SlackMethod {
   views_update(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
   views_push(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
   views_publish(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
+  files_getUploadURLExternal(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_4,
+    JsonStatus.FORM_ENCODING_ONLY
+  ),
   files_completeUploadExternal(
     MethodWriteMode.WRITE,
     RateLimitingTiers.TIER_4,
