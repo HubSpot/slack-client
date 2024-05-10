@@ -79,6 +79,8 @@ We currently support:
  - dialog.open
 #### files
  - files.upload
+ - files.getUploadURLExternal
+ - files.completeUploadExternal
  - files.sharedPublicURL
 #### groups
  - groups.kick (kickUserFromGroup)
