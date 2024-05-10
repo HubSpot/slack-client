@@ -596,7 +596,7 @@ public class SlackWebClient implements SlackClient {
         ChannelsHistoryParams.Builder requestBuilder = ChannelsHistoryParams
           .builder()
           .from(params);
-        if (!params.getCount().isPresent()) {
+        if (params.getCount().isEmpty()) {
           requestBuilder.setCount(config.getChannelsHistoryMessageBatchSize().get());
         }
 
@@ -633,7 +633,7 @@ public class SlackWebClient implements SlackClient {
           );
 
         CompletableFuture<Boolean> hasMoreFuture = resultFuture.thenApply(result ->
-          result.match(err -> false, ok -> ok.hasMore())
+          result.match(err -> false, ChannelsHistoryResponse::hasMore)
         );
         CompletableFuture<Long> nextOffset = nextOffset(pagingDirection, pageFuture);
 
@@ -646,8 +646,8 @@ public class SlackWebClient implements SlackClient {
     PagingDirection pagingDirection,
     CompletableFuture<Result<List<LiteMessage>, SlackError>> pageFuture
   ) {
-    return pageFuture.thenApply(page -> {
-      return page.match(
+    return pageFuture.thenApply(page ->
+      page.match(
         err -> null,
         messages -> {
           Set<String> timestamps = messages
@@ -670,8 +670,8 @@ public class SlackWebClient implements SlackClient {
 
           return null;
         }
-      );
-    });
+      )
+    );
   }
 
   @Override
@@ -1037,7 +1037,7 @@ public class SlackWebClient implements SlackClient {
         ConversationsHistoryParams.Builder requestBuilder = ConversationsHistoryParams
           .builder()
           .from(params);
-        if (!params.getLimit().isPresent()) {
+        if (params.getLimit().isEmpty()) {
           requestBuilder.setLimit(config.getConversationsHistoryMessageBatchSize().get());
         }
 
@@ -1074,7 +1074,7 @@ public class SlackWebClient implements SlackClient {
           );
 
         CompletableFuture<Boolean> hasMoreFuture = resultFuture.thenApply(result ->
-          result.match(err -> false, ok -> ok.hasMore())
+          result.match(err -> false, ConversationsHistoryResponse::hasMore)
         );
         CompletableFuture<Long> nextOffset = nextOffset(pagingDirection, pageFuture);
 
@@ -1157,7 +1157,7 @@ public class SlackWebClient implements SlackClient {
         ConversationMemberParams.Builder requestBuilder = ConversationMemberParams
           .builder()
           .from(params);
-        if (!params.getLimit().isPresent()) {
+        if (params.getLimit().isEmpty()) {
           requestBuilder.setLimit(config.getConversationMembersBatchSize().get());
         }
         Optional.ofNullable(offset).ifPresent(requestBuilder::setCursor);
