@@ -8,7 +8,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface FileIInfoIF {
+public interface FileInfoIF {
   String getId();
   String getTitle();
 }

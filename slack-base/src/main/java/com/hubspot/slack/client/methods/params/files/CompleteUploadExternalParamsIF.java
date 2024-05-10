@@ -11,7 +11,7 @@ import org.immutables.value.Value.Immutable;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 public interface CompleteUploadExternalParamsIF {
-  List<FileIInfo> getFiles();
+  List<FileInfo> getFiles();
   Optional<String> getChannelId();
   Optional<String> getThreadTs();
   Optional<String> getInitialComment();
