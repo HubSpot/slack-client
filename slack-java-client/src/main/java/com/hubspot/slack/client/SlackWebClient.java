@@ -157,7 +157,6 @@ import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
 import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponse;
-import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.files.GetUploadUrlExternalResponse;
@@ -1420,9 +1419,9 @@ public class SlackWebClient implements SlackClient {
     CompleteUploadExternalParams params
   ) {
     return postSlackCommand(
-       SlackMethods.files_completeUploadExternal,
-       params,
-       CompleteUploadExternalResponse.class
+      SlackMethods.files_completeUploadExternal,
+      params,
+      CompleteUploadExternalResponse.class
     );
   }
 
