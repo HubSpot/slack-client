@@ -25,7 +25,6 @@ import com.hubspot.slack.client.http.ning.MultipartHttpRequest.Builder;
 import com.hubspot.slack.client.interceptors.calls.SlackMethodAcceptor;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpRequestDebugger;
 import com.hubspot.slack.client.interceptors.http.DefaultHttpResponseDebugger;
-import com.hubspot.slack.client.interceptors.http.HttpFormatter;
 import com.hubspot.slack.client.interceptors.http.HttpRequestHelper;
 import com.hubspot.slack.client.interceptors.http.RequestDebugger;
 import com.hubspot.slack.client.interceptors.http.ResponseDebugger;
@@ -1683,8 +1682,6 @@ public class SlackWebClient implements SlackClient {
       .setBody(params)
       .addHeader("Authorization", "Bearer " + config.getTokenSupplier().get())
       .build();
-    String s = HttpFormatter.formatRequest(request);
-    LOG.error("Loold ", s);
     return executeLoggedAs(method, request, responseType);
   }
 
