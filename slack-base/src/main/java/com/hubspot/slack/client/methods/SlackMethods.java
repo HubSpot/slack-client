@@ -278,9 +278,9 @@ public enum SlackMethods implements SlackMethod {
 
   files_delete(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
   files_getUploadURLExternal(
-          MethodWriteMode.WRITE,
-          RateLimitingTiers.TIER_4,
-          JsonStatus.FORM_ENCODING_ONLY
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_4,
+    JsonStatus.FORM_ENCODING_ONLY
   ),
   files_info(
     MethodWriteMode.READ,
