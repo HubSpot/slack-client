@@ -275,8 +275,17 @@ public enum SlackMethods implements SlackMethod {
     RateLimitingTiers.TIER_2,
     JsonStatus.ACCEPTS_JSON
   ),
-
+  files_completeUploadExternal(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_4,
+    JsonStatus.ACCEPTS_JSON
+  ),
   files_delete(MethodWriteMode.WRITE, RateLimitingTiers.TIER_3, JsonStatus.ACCEPTS_JSON),
+  files_getUploadURLExternal(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_4,
+    JsonStatus.FORM_ENCODING_ONLY
+  ),
   files_info(
     MethodWriteMode.READ,
     RateLimitingTiers.TIER_4,
@@ -618,17 +627,7 @@ public enum SlackMethods implements SlackMethod {
   views_open(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
   views_update(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
   views_push(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
-  views_publish(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON),
-  files_getUploadURLExternal(
-    MethodWriteMode.WRITE,
-    RateLimitingTiers.TIER_4,
-    JsonStatus.FORM_ENCODING_ONLY
-  ),
-  files_completeUploadExternal(
-    MethodWriteMode.WRITE,
-    RateLimitingTiers.TIER_4,
-    JsonStatus.ACCEPTS_JSON
-  );
+  views_publish(MethodWriteMode.WRITE, RateLimitingTiers.TIER_4, JsonStatus.ACCEPTS_JSON);
 
   private final MethodWriteMode writeMode;
   private final RateLimitingTier rateLimitingTier;
