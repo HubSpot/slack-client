@@ -48,6 +48,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsUserPa
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.dnd.DndInfoParams;
 import com.hubspot.slack.client.methods.params.dnd.DndSetSnoozeParams;
+import com.hubspot.slack.client.methods.params.files.CompleteUploadExternalParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.group.GroupsKickParams;
@@ -117,6 +118,8 @@ import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
 import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
+import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponse;
+import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponseIF;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.group.GroupsKickResponse;
@@ -389,6 +392,9 @@ public interface SlackClient extends Closeable {
   // files
   CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(
     FilesUploadParams params
+  );
+  CompletableFuture<Result<CompleteUploadExternalResponse, SlackError>> completeUploadExternal(
+    CompleteUploadExternalParams params
   );
   CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(
     FilesSharedPublicUrlParams params
