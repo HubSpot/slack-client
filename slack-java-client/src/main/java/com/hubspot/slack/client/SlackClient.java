@@ -392,6 +392,12 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo();
 
   // files
+  /**
+   * This method is being sunset on March 11, 2025
+   * @deprecated use {@link #getUploadURLExternal(GetUploadUrlExternalParams)} and {@link #completeUploadExternal(CompleteUploadExternalParams)}
+   * @see <a href="https://api.slack.com/changelog/2024-04-a-better-way-to-upload-files-is-here-to-stay">Sunset details</a>
+   */
+  @Deprecated
   CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(
     FilesUploadParams params
   );
