@@ -400,6 +400,7 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(
     FilesUploadParams params
   );
+
   CompletableFuture<Result<GetUploadUrlExternalResponse, SlackError>> getUploadURLExternal(
     GetUploadUrlExternalParams params
   );
