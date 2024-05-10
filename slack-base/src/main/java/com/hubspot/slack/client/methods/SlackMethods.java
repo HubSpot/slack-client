@@ -624,6 +624,7 @@ public enum SlackMethods implements SlackMethod {
     RateLimitingTiers.TIER_4,
     JsonStatus.ACCEPTS_JSON
   );
+
   private final MethodWriteMode writeMode;
   private final RateLimitingTier rateLimitingTier;
   private final JsonStatus jsonStatus;
