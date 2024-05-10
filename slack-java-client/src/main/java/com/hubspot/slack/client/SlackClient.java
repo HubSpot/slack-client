@@ -120,7 +120,6 @@ import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
 import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponse;
-import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponseIF;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.files.GetUploadUrlExternalResponse;
