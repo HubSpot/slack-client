@@ -79,6 +79,7 @@ import com.hubspot.slack.client.methods.params.conversations.ConversationsUserPa
 import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.dnd.DndInfoParams;
 import com.hubspot.slack.client.methods.params.dnd.DndSetSnoozeParams;
+import com.hubspot.slack.client.methods.params.files.CompleteUploadExternalParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.files.GetUploadUrlExternalParams;
@@ -155,6 +156,7 @@ import com.hubspot.slack.client.models.response.dialog.DialogOpenResponse;
 import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
 import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
+import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.files.GetUploadUrlExternalResponse;
@@ -596,7 +598,7 @@ public class SlackWebClient implements SlackClient {
         ChannelsHistoryParams.Builder requestBuilder = ChannelsHistoryParams
           .builder()
           .from(params);
-        if (!params.getCount().isPresent()) {
+        if (params.getCount().isEmpty()) {
           requestBuilder.setCount(config.getChannelsHistoryMessageBatchSize().get());
         }
 
@@ -633,7 +635,7 @@ public class SlackWebClient implements SlackClient {
           );
 
         CompletableFuture<Boolean> hasMoreFuture = resultFuture.thenApply(result ->
-          result.match(err -> false, ok -> ok.hasMore())
+          result.match(err -> false, ChannelsHistoryResponse::hasMore)
         );
         CompletableFuture<Long> nextOffset = nextOffset(pagingDirection, pageFuture);
 
@@ -646,8 +648,8 @@ public class SlackWebClient implements SlackClient {
     PagingDirection pagingDirection,
     CompletableFuture<Result<List<LiteMessage>, SlackError>> pageFuture
   ) {
-    return pageFuture.thenApply(page -> {
-      return page.match(
+    return pageFuture.thenApply(page ->
+      page.match(
         err -> null,
         messages -> {
           Set<String> timestamps = messages
@@ -670,8 +672,8 @@ public class SlackWebClient implements SlackClient {
 
           return null;
         }
-      );
-    });
+      )
+    );
   }
 
   @Override
@@ -1037,7 +1039,7 @@ public class SlackWebClient implements SlackClient {
         ConversationsHistoryParams.Builder requestBuilder = ConversationsHistoryParams
           .builder()
           .from(params);
-        if (!params.getLimit().isPresent()) {
+        if (params.getLimit().isEmpty()) {
           requestBuilder.setLimit(config.getConversationsHistoryMessageBatchSize().get());
         }
 
@@ -1074,7 +1076,7 @@ public class SlackWebClient implements SlackClient {
           );
 
         CompletableFuture<Boolean> hasMoreFuture = resultFuture.thenApply(result ->
-          result.match(err -> false, ok -> ok.hasMore())
+          result.match(err -> false, ConversationsHistoryResponse::hasMore)
         );
         CompletableFuture<Long> nextOffset = nextOffset(pagingDirection, pageFuture);
 
@@ -1157,7 +1159,7 @@ public class SlackWebClient implements SlackClient {
         ConversationMemberParams.Builder requestBuilder = ConversationMemberParams
           .builder()
           .from(params);
-        if (!params.getLimit().isPresent()) {
+        if (params.getLimit().isEmpty()) {
           requestBuilder.setLimit(config.getConversationMembersBatchSize().get());
         }
         Optional.ofNullable(offset).ifPresent(requestBuilder::setCursor);
@@ -1409,6 +1411,17 @@ public class SlackWebClient implements SlackClient {
       SlackMethods.files_getUploadURLExternal,
       params,
       GetUploadUrlExternalResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<CompleteUploadExternalResponse, SlackError>> completeUploadExternal(
+    CompleteUploadExternalParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.files_completeUploadExternal,
+      params,
+      CompleteUploadExternalResponse.class
     );
   }
 
