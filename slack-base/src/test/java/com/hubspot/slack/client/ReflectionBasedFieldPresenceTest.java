@@ -69,10 +69,8 @@ class ReflectionBasedFieldPresenceTest {
       ReflectionUtils.withParametersCount(1),
       method -> !Iterable.class.isAssignableFrom(method.getParameterTypes()[0]),
       method ->
-        !(
-          Optional.class.isAssignableFrom(method.getParameterTypes()[0]) &&
-          !OPTIONAL_STRING_METHODS_TO_BUILD.contains(method.getName())
-        ),
+        !(Optional.class.isAssignableFrom(method.getParameterTypes()[0]) &&
+          !OPTIONAL_STRING_METHODS_TO_BUILD.contains(method.getName())),
       method -> !ReflectionUtils.withAnyParameterAnnotation(Nullable.class).apply(method)
     );
     for (Method builderMethod : builderMethods) {
