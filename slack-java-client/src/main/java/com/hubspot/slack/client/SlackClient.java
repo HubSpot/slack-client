@@ -120,7 +120,6 @@ import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
 import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponse;
-import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponseIF;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.files.GetUploadUrlExternalResponse;
@@ -392,9 +391,16 @@ public interface SlackClient extends Closeable {
   CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo();
 
   // files
+  /**
+   * This method is being sunset on March 11, 2025
+   * @deprecated use {@link #getUploadURLExternal(GetUploadUrlExternalParams)} and {@link #completeUploadExternal(CompleteUploadExternalParams)}
+   * @see <a href="https://api.slack.com/changelog/2024-04-a-better-way-to-upload-files-is-here-to-stay">Sunset details</a>
+   */
+  @Deprecated
   CompletableFuture<Result<FilesUploadResponse, SlackError>> uploadFile(
     FilesUploadParams params
   );
+
   CompletableFuture<Result<GetUploadUrlExternalResponse, SlackError>> getUploadURLExternal(
     GetUploadUrlExternalParams params
   );

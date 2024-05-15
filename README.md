@@ -27,6 +27,8 @@ An asychronous HTTP client wrapping Slack's [RPC-style web api](https://api.slac
 
 **NOTICE:**
 
+The original web API method for uploading files to Slack, `files.upload`, is being sunset on March 11, 2025. [See details](https://api.slack.com/changelog/2024-04-a-better-way-to-upload-files-is-here-to-stay)
+
 On October 18th 2019, Slack will stop supporting the `replies` thread on a `Message` returned from the [`conversations.replies` endpoint](https://api.slack.com/methods/conversations.replies) as well as any places that use `LiteMessage`.
 
 Due to this, we are deprecating `getReplies()` on [`LiteMessage`](https://github.com/HubSpot/slack-client/blob/master/slack-base/src/main/java/com/hubspot/slack/client/models/LiteMessageIF.java)
@@ -79,6 +81,8 @@ We currently support:
  - dialog.open
 #### files
  - files.upload
+ - files.getUploadURLExternal
+ - files.completeUploadExternal
  - files.sharedPublicURL
 #### groups
  - groups.kick (kickUserFromGroup)
