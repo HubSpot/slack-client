@@ -184,6 +184,10 @@ import com.hubspot.slack.client.paging.AbstractPagedIterable;
 import com.hubspot.slack.client.paging.LazyLoadingPage;
 import com.hubspot.slack.client.ratelimiting.ByMethodRateLimiter;
 import com.hubspot.slack.client.ratelimiting.SlackRateLimiter;
+import com.hubspot.utils.hubspot.context.HubSpotContext;
+import com.hubspot.utils.hubspot.context.PlatformProperties;
+import com.yammer.metrics.Metrics;
+import com.yammer.metrics.core.MetricName;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
@@ -211,6 +215,11 @@ public class SlackWebClient implements SlackClient {
     .setObjectMapper(ObjectMapperUtils.mapper())
     .build();
   private static final AtomicLong REQUEST_COUNTER = new AtomicLong(0);
+  private static final String UNKNOWN = "UNKNOWN";
+  private static final String METRIC_NAME = "SLACK_NOTIFICATIONS";
+  private static final String DEPLOYABLE_NAME_TAG = "DEPLOYABLE_NAME";
+  private static final String HUB_SPOT_TEAM_TAG = "HUB_SPOT_TEAM";
+  private static final String SLACK_MESSAGE_TAG = "SLACK_MESSAGE";
 
   private final NioHttpClient nioHttpClient;
   private final CloseableExecutorService recursingExecutor;
@@ -1766,6 +1775,7 @@ public class SlackWebClient implements SlackClient {
     JsonNode responseJson = response.getAsJsonNode();
     boolean isOk = responseJson.get("ok").asBoolean();
     if (isOk) {
+      publishMetrics(request);
       return Result.ok(
         ObjectMapperUtils.mapper().treeToValue(responseJson, responseType)
       );
@@ -1778,6 +1788,45 @@ public class SlackWebClient implements SlackClient {
     return Result.err(
       errorResponse.getError().orElseGet(() -> errorResponse.getErrors().get(0))
     );
+  }
+
+  private void publishMetrics(final HttpRequest request) {
+    ImmutableMap<String, String> tags = buildMetrics(request);
+    if (!tags.isEmpty()) {
+      incrementMetrics(tags);
+    }
+  }
+
+  private void incrementMetrics(final ImmutableMap<String, String> tags) {
+    try {
+      Metrics.newCounter(new MetricName(SlackWebClient.class, METRIC_NAME, tags)).inc();
+    } catch (Exception ex) {
+      LOG.warn("Failed to increment metric with name {}.", METRIC_NAME, ex);
+    }
+  }
+
+  private ImmutableMap<String, String> buildMetrics(HttpRequest request) {
+    try {
+      PlatformProperties platformProperties = HubSpotContext
+        .current()
+        .getPlatformProperties();
+      LOG.info("Building metrics for platform properties {}", platformProperties);
+      return ImmutableMap
+        .<String, String>builder()
+        .put(DEPLOYABLE_NAME_TAG, platformProperties.getDeployable().orElse(UNKNOWN))
+        .put(HUB_SPOT_TEAM_TAG, platformProperties.getHubSpotTeam().orElse(UNKNOWN))
+        .put(
+          SLACK_MESSAGE_TAG,
+          Optional
+            .ofNullable(request.getBody(ObjectMapperUtils.mapper()))
+            .map(String::new)
+            .orElse(UNKNOWN)
+        )
+        .build();
+    } catch (Exception ex) {
+      LOG.warn("Failed to build metrics for request {}", request, ex);
+      return ImmutableMap.of();
+    }
   }
 
   private <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommandUrlEncoded(
