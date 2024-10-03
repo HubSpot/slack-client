@@ -120,6 +120,8 @@ import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
 import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponse;
+import com.hubspot.slack.client.models.response.files.FileInfoRequest;
+import com.hubspot.slack.client.models.response.files.FileInfoResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.files.GetUploadUrlExternalResponse;
@@ -409,6 +411,9 @@ public interface SlackClient extends Closeable {
   );
   CompletableFuture<Result<FilesSharedPublicUrlResponse, SlackError>> shareFilePublically(
     FilesSharedPublicUrlParams params
+  );
+  CompletableFuture<Result<FileInfoResponse, SlackError>> getFileInfo(
+    FileInfoRequest request
   );
 
   // emoji
