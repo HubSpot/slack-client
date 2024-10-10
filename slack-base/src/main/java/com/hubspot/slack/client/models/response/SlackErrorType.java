@@ -95,6 +95,7 @@ public enum SlackErrorType {
   JSON_PARSING_FAILED("_json_parsing_failed"),
   WRITE_RESTRICTED_TO_PROD("_write_restricted_to_prod"),
   PARAMS_FAILED_API_FILTER("_method_failed_filter"),
+  NOT_IN_CHANNEL("not_in_channel"),
   UNKNOWN("unknown");
 
   private final String code;
