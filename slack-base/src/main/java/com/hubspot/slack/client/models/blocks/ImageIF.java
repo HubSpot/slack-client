@@ -22,7 +22,7 @@ public interface ImageIF extends Block, ImageBlockOrText {
   }
 
   @Value.Parameter
-  String getImageUrl();
+  Optional<String> getImageUrl();
 
   @Value.Parameter
   String getAltText();
