@@ -28,4 +28,5 @@ public interface ImageIF extends Block, ImageBlockOrText {
   String getAltText();
 
   Optional<Text> getTitle();
+  Optional<SlackFileObject> getSlackFile();
 }
