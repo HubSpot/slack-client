@@ -80,6 +80,7 @@ import com.hubspot.slack.client.methods.params.dialog.DialogOpenParams;
 import com.hubspot.slack.client.methods.params.dnd.DndInfoParams;
 import com.hubspot.slack.client.methods.params.dnd.DndSetSnoozeParams;
 import com.hubspot.slack.client.methods.params.files.CompleteUploadExternalParams;
+import com.hubspot.slack.client.methods.params.files.FilesInfoParams;
 import com.hubspot.slack.client.methods.params.files.FilesSharedPublicUrlParams;
 import com.hubspot.slack.client.methods.params.files.FilesUploadParams;
 import com.hubspot.slack.client.methods.params.files.GetUploadUrlExternalParams;
@@ -157,6 +158,7 @@ import com.hubspot.slack.client.models.response.dnd.DndInfoResponse;
 import com.hubspot.slack.client.models.response.dnd.DndSnoozeResponse;
 import com.hubspot.slack.client.models.response.emoji.EmojiListResponse;
 import com.hubspot.slack.client.models.response.files.CompleteUploadExternalResponse;
+import com.hubspot.slack.client.models.response.files.FilesInfoResponse;
 import com.hubspot.slack.client.models.response.files.FilesSharedPublicUrlResponse;
 import com.hubspot.slack.client.models.response.files.FilesUploadResponse;
 import com.hubspot.slack.client.models.response.files.GetUploadUrlExternalResponse;
@@ -1434,6 +1436,13 @@ public class SlackWebClient implements SlackClient {
       params,
       FilesSharedPublicUrlResponse.class
     );
+  }
+
+  @Override
+  public CompletableFuture<Result<FilesInfoResponse, SlackError>> getFileInfo(
+    FilesInfoParams request
+  ) {
+    return postSlackCommand(SlackMethods.files_info, request, FilesInfoResponse.class);
   }
 
   @Override
