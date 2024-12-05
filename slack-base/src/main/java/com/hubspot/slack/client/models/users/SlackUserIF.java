@@ -27,15 +27,23 @@ public interface SlackUserIF extends SlackUserCore {
 
   Optional<String> getRealName();
 
+  @JsonSetter("primaryOwner")
+  @JsonProperty("is_primary_owner")
   Optional<Boolean> isPrimaryOwner();
 
+  @JsonSetter("restricted")
+  @JsonProperty("is_restricted")
   Optional<Boolean> isRestricted();
 
+  @JsonSetter("ultra_restricted")
+  @JsonProperty("is_ultra_restricted")
   Optional<Boolean> isUltraRestricted();
 
   @JsonProperty("is_bot")
   Optional<Boolean> isBot();
 
+  @JsonSetter("app_user")
+  @JsonProperty("is_app_user")
   Optional<Boolean> isAppUser();
 
   @JsonProperty("tz")
