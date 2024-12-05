@@ -1,6 +1,7 @@
 package com.hubspot.slack.client.models.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -27,15 +28,23 @@ public interface SlackUserIF extends SlackUserCore {
 
   Optional<String> getRealName();
 
+  @JsonSetter("primaryOwner")
+  @JsonProperty("is_primary_owner")
   Optional<Boolean> isPrimaryOwner();
 
+  @JsonSetter("restricted")
+  @JsonProperty("is_restricted")
   Optional<Boolean> isRestricted();
 
+  @JsonSetter("ultra_restricted")
+  @JsonProperty("is_ultra_restricted")
   Optional<Boolean> isUltraRestricted();
 
   @JsonProperty("is_bot")
   Optional<Boolean> isBot();
 
+  @JsonSetter("app_user")
+  @JsonProperty("is_app_user")
   Optional<Boolean> isAppUser();
 
   @JsonProperty("tz")

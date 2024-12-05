@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.blocks.elements;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -29,6 +31,8 @@ public interface UrlInputIF extends BlockElement, HasActionId {
 
   Optional<String> getInitialValue();
 
+  @JsonSetter("focus_on_load")
+  @JsonProperty("is_focus_on_load")
   Optional<Boolean> isFocusOnLoad();
 
   @Check
