@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.hubspot.slack</groupId>
     <artifactId>slack-client</artifactId>
-    <version>1.16.3-SNAPSHOT</version>
+    <version>1.16.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>slack-request-verifier</artifactId>
