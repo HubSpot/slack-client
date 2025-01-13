@@ -14,6 +14,7 @@ public enum SlackFileType {
   JAVASCRIPT("javascript", SlackJavaScriptFile.class),
   XLSX("xlsx", SlackXlsxFile.class),
   XLS("xls", SlackXlsFile.class),
+  GDOC("gdoc", SlackGdocFile.class),
   UNKNOWN("unknown", SlackUnknownFiletype.class);
 
   final String type;
