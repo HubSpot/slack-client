@@ -22,7 +22,7 @@
   </modules>
 
   <properties>
-    <horizon.version>0.1.1</horizon.version>
+    <horizon.version>0.3.1</horizon.version>
     <dep.netty3.version>3.10.6.Final</dep.netty3.version>
   </properties>
 
