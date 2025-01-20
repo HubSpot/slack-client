@@ -32,6 +32,9 @@ import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.methods.JsonStatus;
 import com.hubspot.slack.client.methods.SlackMethod;
 import com.hubspot.slack.client.methods.SlackMethods;
+import com.hubspot.slack.client.methods.params.assistant.SetSuggestedPromptsParams;
+import com.hubspot.slack.client.methods.params.assistant.SetThreadStatusParams;
+import com.hubspot.slack.client.methods.params.assistant.SetTitleParams;
 import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksAddParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksEditParams;
@@ -1658,6 +1661,39 @@ public class SlackWebClient implements SlackClient {
       SlackMethods.calls_participants_remove,
       params,
       CallsParticipantsRemoveResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetThreadStatus(
+    SetThreadStatusParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.assistant_threads_status,
+      params,
+      SimpleSlackResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetSuggestedPrompts(
+    SetSuggestedPromptsParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.assistant_threads_set_prompts,
+      params,
+      SimpleSlackResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetTitle(
+    SetTitleParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.assistant_threads_set_prompts,
+      params,
+      SimpleSlackResponse.class
     );
   }
 

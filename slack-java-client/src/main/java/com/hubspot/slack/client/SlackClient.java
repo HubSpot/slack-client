@@ -2,6 +2,9 @@ package com.hubspot.slack.client;
 
 import com.hubspot.algebra.Result;
 import com.hubspot.slack.client.methods.SlackMethod;
+import com.hubspot.slack.client.methods.params.assistant.SetSuggestedPromptsParams;
+import com.hubspot.slack.client.methods.params.assistant.SetThreadStatusParams;
+import com.hubspot.slack.client.methods.params.assistant.SetTitleParams;
 import com.hubspot.slack.client.methods.params.auth.AuthRevokeParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksAddParams;
 import com.hubspot.slack.client.methods.params.bookmarks.BookmarksEditParams;
@@ -466,6 +469,18 @@ public interface SlackClient extends Closeable {
   );
   CompletableFuture<Result<CallsParticipantsRemoveResponse, SlackError>> removeCallParticipants(
     CallsParticipantsRemoveParams params
+  );
+
+  CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetThreadStatus(
+    SetThreadStatusParams params
+  );
+
+  CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetSuggestedPrompts(
+    SetSuggestedPromptsParams params
+  );
+
+  CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetTitle(
+    SetTitleParams params
   );
 
   // extension
