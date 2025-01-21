@@ -11,8 +11,8 @@ import org.immutables.value.Value;
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@JsonDeserialize(as = SlackAssistantThreadStartedEvent.class)
-public interface SlackAssistantThreadStartedEventIF extends SlackEvent {
+@JsonDeserialize(as = SlackAssistantThreadContextChangedEvent.class)
+public interface SlackAssistantThreadContextChangedEventIF extends SlackEvent {
   AssistantThread getAssistantThread();
 
   String getEventTs();

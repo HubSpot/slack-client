@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
 import com.hubspot.slack.client.models.events.app.SlackAppUninstalledEvent;
 import com.hubspot.slack.client.models.events.app.SlackTokensRevokedEvent;
+import com.hubspot.slack.client.models.events.assistant.SlackAssistantThreadContextChangedEvent;
 import com.hubspot.slack.client.models.events.assistant.SlackAssistantThreadStartedEvent;
 import com.hubspot.slack.client.models.events.bot.SlackAppHomeOpenedEvent;
 import com.hubspot.slack.client.models.events.channel.SlackChannelArchiveEvent;
@@ -28,7 +29,7 @@ public enum SlackEventType {
   APP_MENTION(SlackEventMessage.class),
   APP_UNINSTALLED(SlackAppUninstalledEvent.class),
   ASSISTANT_THREAD_STARTED(SlackAssistantThreadStartedEvent.class),
-  ASSISTANT_THREAD_CONTEXT_CHANGED,
+  ASSISTANT_THREAD_CONTEXT_CHANGED(SlackAssistantThreadContextChangedEvent.class),
   CHANNEL_ARCHIVE(SlackChannelArchiveEvent.class),
   CHANNEL_CREATED(SlackChannelCreatedEvent.class),
   CHANNEL_DELETED(SlackChannelDeletedEvent.class),
