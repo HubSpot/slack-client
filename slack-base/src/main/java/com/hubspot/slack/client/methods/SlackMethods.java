@@ -19,7 +19,7 @@ public enum SlackMethods implements SlackMethod {
 
   assistant_threads_status(
     MethodWriteMode.WRITE,
-    RateLimitingTiers.TIER_1,
+    RateLimitingTiers.TIER_2,
     JsonStatus.ACCEPTS_JSON
   ),
   assistant_threads_set_prompts(
