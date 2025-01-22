@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.methods.interceptor.HasChannel;
 import java.util.List;
+import java.util.Optional;
 import org.immutables.value.Value;
 
 @Value.Immutable
@@ -13,7 +14,7 @@ import org.immutables.value.Value;
 public interface SetSuggestedPromptsParamsIF extends HasChannel {
   String getThreadTs();
 
-  String getTitle();
+  Optional<String> getTitle();
 
   List<Prompt> getPrompts();
 }
