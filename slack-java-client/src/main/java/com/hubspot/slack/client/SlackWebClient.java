@@ -1669,7 +1669,7 @@ public class SlackWebClient implements SlackClient {
     SetThreadStatusParams params
   ) {
     return postSlackCommand(
-      SlackMethods.assistant_threads_status,
+      SlackMethods.assistant_threads_setStatus,
       params,
       SimpleSlackResponse.class
     );
@@ -1680,7 +1680,7 @@ public class SlackWebClient implements SlackClient {
     SetSuggestedPromptsParams params
   ) {
     return postSlackCommand(
-      SlackMethods.assistant_threads_set_prompts,
+      SlackMethods.assistant_threads_setSuggestedPrompts,
       params,
       SimpleSlackResponse.class
     );
@@ -1691,7 +1691,7 @@ public class SlackWebClient implements SlackClient {
     SetTitleParams params
   ) {
     return postSlackCommand(
-      SlackMethods.assistant_threads_set_prompts,
+      SlackMethods.assistant_threads_setTitle,
       params,
       SimpleSlackResponse.class
     );
