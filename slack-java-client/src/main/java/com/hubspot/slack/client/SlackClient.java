@@ -471,17 +471,23 @@ public interface SlackClient extends Closeable {
     CallsParticipantsRemoveParams params
   );
 
-  CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetThreadStatus(
+  default CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetThreadStatus(
     SetThreadStatusParams params
-  );
+  ) {
+    throw new UnsupportedOperationException();
+  }
 
-  CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetSuggestedPrompts(
+  default CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetSuggestedPrompts(
     SetSuggestedPromptsParams params
-  );
+  ) {
+    throw new UnsupportedOperationException();
+  }
 
-  CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetTitle(
+  default CompletableFuture<Result<SimpleSlackResponse, SlackError>> assistantSetTitle(
     SetTitleParams params
-  );
+  ) {
+    throw new UnsupportedOperationException();
+  }
 
   // extension
   <T extends SlackResponse> CompletableFuture<Result<T, SlackError>> postSlackCommand(
