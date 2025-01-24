@@ -10,6 +10,11 @@ import org.immutables.value.Value;
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public interface SetThreadStatusParamsIF extends HasChannel {
+  @Value.Derived
+  default String getChannel() {
+    return getChannelId();
+  }
+
   String getStatus();
 
   String getThreadTs();

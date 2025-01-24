@@ -12,6 +12,11 @@ import org.immutables.value.Value;
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public interface SetSuggestedPromptsParamsIF extends HasChannel {
+  @Value.Derived
+  default String getChannel() {
+    return getChannelId();
+  }
+
   String getThreadTs();
 
   Optional<String> getTitle();

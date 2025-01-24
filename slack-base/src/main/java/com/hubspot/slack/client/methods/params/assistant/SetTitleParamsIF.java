@@ -10,6 +10,11 @@ import org.immutables.value.Value;
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public interface SetTitleParamsIF extends HasChannel {
+  @Value.Derived
+  default String getChannel() {
+    return getChannelId();
+  }
+
   String getThreadTs();
 
   String getTitle();
