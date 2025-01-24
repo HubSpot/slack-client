@@ -17,6 +17,22 @@ public enum SlackMethods implements SlackMethod {
     JsonStatus.FORM_ENCODING_ONLY
   ),
 
+  assistant_threads_setStatus(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_2,
+    JsonStatus.ACCEPTS_JSON
+  ),
+  assistant_threads_setSuggestedPrompts(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_4,
+    JsonStatus.ACCEPTS_JSON
+  ),
+  assistant_threads_setTitle(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_4,
+    JsonStatus.ACCEPTS_JSON
+  ),
+
   auth_revoke(
     MethodWriteMode.WRITE,
     RateLimitingTiers.TIER_3,
