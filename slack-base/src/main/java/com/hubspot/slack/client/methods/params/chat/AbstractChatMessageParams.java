@@ -51,6 +51,7 @@ public abstract class AbstractChatMessageParams implements MessageParams {
 
   @Check
   public void check() {
+    MessageParams.super.check();
     Preconditions.checkState(
       (getText().isPresent() && !Strings.isNullOrEmpty(getText().get())) ||
       !getAttachments().isEmpty() ||

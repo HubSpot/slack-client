@@ -53,6 +53,7 @@ public interface ChatScheduleMessageParamsIF extends MessageParams {
 
   @Check
   default void check() {
+    MessageParams.super.check();
     Preconditions.checkState(
       (getText().isPresent() && !Strings.isNullOrEmpty(getText().get())) ||
       !getAttachments().isEmpty() ||
