@@ -19,5 +19,5 @@ public interface RichTextSectionIF extends RichTextBlock {
   }
 
   @Parameter
-  List<RichTextBlock> getElements();
+  List<RichTextElement> getElements();
 }
