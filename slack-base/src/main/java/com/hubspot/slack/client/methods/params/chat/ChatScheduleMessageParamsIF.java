@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.Metadata;
 import java.util.Optional;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
@@ -41,6 +42,11 @@ public interface ChatScheduleMessageParamsIF extends MessageParams {
   Optional<Boolean> getUnfurlLinks();
 
   Optional<Boolean> getUnfurlMedia();
+
+  @JsonProperty("reply_broadcast")
+  Optional<Boolean> getReplyAsBroadcast();
+
+  Optional<Metadata> getMetadata();
 
   @Check
   default void check() {
