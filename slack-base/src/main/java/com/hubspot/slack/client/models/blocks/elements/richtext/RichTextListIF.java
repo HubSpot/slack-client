@@ -26,7 +26,7 @@ public interface RichTextListIF {
    * <br/>
    * Required: true
    */
-  @Parameter
+  @Parameter(order = 0)
   ListStyle getStyle();
 
   /**
@@ -36,7 +36,7 @@ public interface RichTextListIF {
    * <br/>
    * Required: true
    */
-  @Parameter
+  @Parameter(order = 1)
   List<RichTextSection> getElements();
 
   /**
