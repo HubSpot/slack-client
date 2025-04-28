@@ -36,10 +36,12 @@ public abstract class AbstractChatMessageParams implements MessageParams {
 
   public abstract Optional<Boolean> getUnfurlMedia();
 
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
   public abstract Optional<Boolean> getReplyBroadcast();
 
   public abstract Optional<String> getParse();
 
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
   public abstract Optional<Metadata> getMetadata();
 
   @Default

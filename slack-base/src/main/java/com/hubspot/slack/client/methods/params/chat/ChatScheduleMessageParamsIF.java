@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -43,9 +44,11 @@ public interface ChatScheduleMessageParamsIF extends MessageParams {
 
   Optional<Boolean> getUnfurlMedia();
 
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
   @JsonProperty("reply_broadcast")
   Optional<Boolean> getReplyAsBroadcast();
 
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
   Optional<Metadata> getMetadata();
 
   @Check

@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Preconditions;
 import com.hubspot.slack.client.methods.interceptor.HasChannel;
 import com.hubspot.slack.client.models.Attachment;
@@ -21,6 +22,7 @@ public interface MessageParams extends HasChannel {
     return Collections.emptyList();
   }
 
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
   Optional<String> getMarkdownText();
 
   @Check
