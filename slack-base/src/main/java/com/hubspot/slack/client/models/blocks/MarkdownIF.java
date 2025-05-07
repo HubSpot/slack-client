@@ -4,33 +4,47 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.hubspot.immutables.style.HubSpotStyle;
-import javax.annotation.Nullable;
-import org.immutables.value.Value;
+import org.immutables.value.Value.Check;
+import org.immutables.value.Value.Derived;
+import org.immutables.value.Value.Immutable;
+import org.immutables.value.Value.Parameter;
 
-@Value.Immutable
+@Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public interface MarkdownIF extends Block {
   String TYPE = "markdown";
 
+  /**
+   * The type of block. For a markdown block, type is always markdown.
+   * <br/><br/>
+   * Type: String
+   * <br/>
+   * Required: true
+   */
   @Override
-  @Value.Derived
+  @Derived
   default String getType() {
     return TYPE;
   }
 
-  @Value.Default
-  @Nullable
-  @Value.Parameter
-  default String getText() {
-    return null;
-  }
+  /**
+   * The standard markdown-formatted text. Limit 12,000 characters max.
+   * <br/><br/>
+   * Type: String
+   * <br/>
+   * Required: true
+   */
+  @Parameter
+  String getText();
 
-  @Value.Check
+  @Check
   default void check() {
     Preconditions.checkState(
-      getText() != null && getText().length() <= 12000,
-      "The text length of a markdown block cannot exceed 12,000 characters"
+      getText().length() < BlockElementLengthLimits.MAX_MARKDOWN_LENGTH.getLimit(),
+      "Text length must be less than " +
+      BlockElementLengthLimits.MAX_MARKDOWN_LENGTH.getLimit() +
+      " characters"
     );
   }
 }
