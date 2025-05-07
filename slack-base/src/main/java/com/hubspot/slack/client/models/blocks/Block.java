@@ -22,6 +22,7 @@ import java.util.Optional;
     @JsonSubTypes.Type(value = Image.class, name = Image.TYPE),
     @JsonSubTypes.Type(value = Input.class, name = Input.TYPE),
     @JsonSubTypes.Type(value = Section.class, name = Section.TYPE),
+    @JsonSubTypes.Type(value = Markdown.class, name = Markdown.TYPE),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
