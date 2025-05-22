@@ -15,6 +15,7 @@ public enum SlackFileType {
   XLSX("xlsx", SlackXlsxFile.class),
   XLS("xls", SlackXlsFile.class),
   GDOC("gdoc", SlackGdocFile.class),
+  ZIP("zip", SlackZipFile.class),
   UNKNOWN("unknown", SlackUnknownFiletype.class);
 
   final String type;
