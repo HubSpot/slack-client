@@ -5,13 +5,16 @@
   <parent>
     <groupId>com.hubspot</groupId>
     <artifactId>basepom</artifactId>
-    <version>61.6</version>
+    <version>63.0</version>
   </parent>
 
   <groupId>com.hubspot.slack</groupId>
   <artifactId>slack-client</artifactId>
   <version>1.16.8-SNAPSHOT</version>
   <packaging>pom</packaging>
+
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>An asynchronous HTTP client for Slack's web API</description>
 
   <modules>
     <module>slack-base</module>
@@ -86,4 +89,20 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <url>https://github.com/HubSpot/slack-client</url>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Jared Stehler</name>
+      <email>jstehler@hubspot.com</email>
+    </developer>
+  </developers>
 </project>
