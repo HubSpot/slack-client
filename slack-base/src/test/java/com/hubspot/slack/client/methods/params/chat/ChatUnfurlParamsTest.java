@@ -34,7 +34,7 @@ public class ChatUnfurlParamsTest extends SerializationTestBase {
         "https://example.com/12345",
         ChatUnfurlBlocks.of(Collections.singletonList(attachment))
       )
-      .setUserAuthRequired(true)
+      .setIsUserAuthRequired(true)
       .setUserAuthMessage("User auth is required")
       .setUserAuthUrl(new URI("http://www.auth.com/"))
       .build();
@@ -56,7 +56,7 @@ public class ChatUnfurlParamsTest extends SerializationTestBase {
         "https://example.com/12345",
         ChatUnfurlBlocks.of(Collections.singletonList(sectionBlock))
       )
-      .setUserAuthRequired(true)
+      .setIsUserAuthRequired(true)
       .setUserAuthMessage("User auth is required")
       .setUserAuthUrl(new URI("http://www.auth.com/"))
       .build();
