@@ -21,5 +21,6 @@
   },
   "user_auth_message": null,
   "user_auth_url": null,
-  "is_user_auth_required": null
+  "is_user_auth_required": null,
+  "metadata" : null
 }

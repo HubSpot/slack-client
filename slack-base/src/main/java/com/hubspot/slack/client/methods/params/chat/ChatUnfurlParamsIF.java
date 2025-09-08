@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.methods.interceptor.HasChannel;
+import com.hubspot.slack.client.methods.params.chat.workobject.Metadata;
 import com.hubspot.slack.client.models.ChatUnfurlBlocksOrAttachment;
 import com.hubspot.slack.client.models.json.BlockOrAttachmentDeserializer;
 import java.net.URI;
@@ -31,4 +32,6 @@ public interface ChatUnfurlParamsIF extends HasChannel {
   Optional<String> getUserAuthMessage();
 
   Optional<URI> getUserAuthUrl();
+
+  Optional<Metadata> getMetadata();
 }
