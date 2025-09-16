@@ -9,7 +9,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 @HubSpotStyle
 public interface EntityPayloadAttributesIF {
-  String getTitle();
+  EntityPayloadAttributeTitle getTitle();
   Optional<String> getDisplayId();
 
   @JsonSerialize(using = DisplayTypeSerializer.class)
