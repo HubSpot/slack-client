@@ -21,4 +21,9 @@ public class DisplayTypeSerializer extends JsonSerializer<Optional<DisplayType>>
       gen.writeNull();
     }
   }
+
+  @Override
+  public boolean isEmpty(SerializerProvider provider, Optional<DisplayType> value) {
+    return value.isEmpty();
+  }
 }
