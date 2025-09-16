@@ -5,10 +5,12 @@
   <parent>
     <groupId>com.hubspot.slack</groupId>
     <artifactId>slack-client</artifactId>
-    <version>1.16.9-SNAPSHOT</version>
+    <version>1.16.10-SNAPSHOT</version>
   </parent>
 
   <artifactId>slack-java-client-guice</artifactId>
+
+  <name>${project.groupId}:${project.artifactId}</name>
 
   <dependencies>
     <dependency>
