@@ -10,7 +10,7 @@
 
   <groupId>com.hubspot.slack</groupId>
   <artifactId>slack-client</artifactId>
-  <version>1.16.10</version>
+  <version>1.16.11-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>${project.groupId}:${project.artifactId}</name>
@@ -105,8 +105,4 @@
       <email>jstehler@hubspot.com</email>
     </developer>
   </developers>
-
-  <scm>
-    <tag>slack-client-1.16.10</tag>
-  </scm>
 </project>
