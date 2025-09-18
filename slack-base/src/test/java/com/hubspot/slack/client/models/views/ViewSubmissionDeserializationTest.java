@@ -11,6 +11,7 @@ import com.hubspot.slack.client.models.interaction.views.ViewInput;
 import com.hubspot.slack.client.models.interaction.views.ViewInputType;
 import com.hubspot.slack.client.models.interaction.views.ViewMultiExternalSelect;
 import com.hubspot.slack.client.models.interaction.views.ViewMultiStaticSelect;
+import com.hubspot.slack.client.models.interaction.views.ViewMultiUsersSelect;
 import com.hubspot.slack.client.testutils.TestBlocksBuilder;
 import java.io.IOException;
 import java.util.Map;
@@ -90,5 +91,17 @@ public class ViewSubmissionDeserializationTest {
     final ViewMultiExternalSelect multiExternalSelect = (ViewMultiExternalSelect) input;
     assertThat(multiExternalSelect.getSelectedOptions())
       .containsExactly(option, anotherOption);
+  }
+
+  @Test
+  public void itDeserializesMultiUsersSelect() {
+    ViewInput input = BLOCK_ID_TO_ACTION_ID_TO_VALUES
+      .get("MuS")
+      .get("multi_users_select-action");
+    assertThat(input.getType()).isEqualTo(ViewInputType.MULTI_USERS_SELECT);
+
+    final ViewMultiUsersSelect multiUsersSelect = (ViewMultiUsersSelect) input;
+    assertThat(multiUsersSelect.getSelectedUsers())
+      .containsExactly("U12345", "U67890", "U11111");
   }
 }

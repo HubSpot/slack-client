@@ -34,6 +34,7 @@ import java.util.Optional;
     @Type(value = ViewExternalSelect.class, name = "external_select"),
     @Type(value = ViewMultiStaticSelect.class, name = "multi_static_select"),
     @Type(value = ViewMultiExternalSelect.class, name = "multi_external_select"),
+    @Type(value = ViewMultiUsersSelect.class, name = "multi_users_select"),
   }
 )
 public interface ViewInput {

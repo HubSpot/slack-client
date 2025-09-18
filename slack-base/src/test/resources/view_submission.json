@@ -158,6 +158,12 @@
               }
             ]
           }
+        },
+        "MuS": {
+          "multi_users_select-action": {
+            "type": "multi_users_select",
+            "selected_users": ["U12345", "U67890", "U11111"]
+          }
         }
       }
     },
