@@ -20,6 +20,7 @@ public enum ViewInputType {
   STATIC_SELECT,
   MULTI_STATIC_SELECT,
   MULTI_EXTERNAL_SELECT,
+  MULTI_USERS_SELECT,
   UNKNOWN;
 
   private static final EnumIndex<String, ViewInputType> INDEX = new EnumIndex<>(
