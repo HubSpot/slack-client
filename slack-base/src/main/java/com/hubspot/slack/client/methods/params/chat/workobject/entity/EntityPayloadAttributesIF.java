@@ -22,6 +22,6 @@ public interface EntityPayloadAttributesIF {
   Optional<DisplayType> getDisplayType();
 
   Optional<String> getProductName();
-  Optional<ProductIcon> getProductIcon();
+  Optional<Icon> getProductIcon();
   Optional<String> getLocale();
 }
