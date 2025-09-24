@@ -8,7 +8,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public interface ProductIconIF {
+public interface IconIF {
   String getUrl();
   String getAltText();
 }
