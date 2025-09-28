@@ -62,6 +62,7 @@ import com.hubspot.slack.client.methods.params.chat.ChatScheduleMessageParams;
 import com.hubspot.slack.client.methods.params.chat.ChatScheduledMessagesListParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUnfurlParams;
 import com.hubspot.slack.client.methods.params.chat.ChatUpdateMessageParams;
+import com.hubspot.slack.client.methods.params.chat.workobject.flexpane.WorkObjectFlexpaneParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationArchiveParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationCreateParams;
 import com.hubspot.slack.client.methods.params.conversations.ConversationInviteParams;
@@ -143,6 +144,7 @@ import com.hubspot.slack.client.models.response.chat.ChatScheduleMessageResponse
 import com.hubspot.slack.client.models.response.chat.ChatScheduledMessagesListResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
+import com.hubspot.slack.client.models.response.chat.EntityPresentDetailsResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationKickResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationListResponse;
 import com.hubspot.slack.client.models.response.conversations.ConversationMemberResponse;
@@ -858,6 +860,17 @@ public class SlackWebClient implements SlackClient {
     ChatUnfurlParams params
   ) {
     return postSlackCommand(SlackMethods.chat_unfurl, params, ChatUnfurlResponse.class);
+  }
+
+  @Override
+  public CompletableFuture<Result<EntityPresentDetailsResponse, SlackError>> entityPresentDetails(
+    WorkObjectFlexpaneParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.entity_presentDetails,
+      params,
+      EntityPresentDetailsResponse.class
+    );
   }
 
   @Override
