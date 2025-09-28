@@ -105,4 +105,16 @@
       <email>jstehler@hubspot.com</email>
     </developer>
   </developers>
+
+  <profiles>
+    <profile>
+      <id>skip-spotbugs-java25</id>
+      <activation>
+        <jdk>[25,)</jdk>
+      </activation>
+      <properties>
+        <spotbugs.skip>true</spotbugs.skip>
+      </properties>
+    </profile>
+  </profiles>
 </project>
