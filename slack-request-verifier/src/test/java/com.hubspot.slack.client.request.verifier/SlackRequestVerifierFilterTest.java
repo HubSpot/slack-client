@@ -93,7 +93,12 @@ public class SlackRequestVerifierFilterTest {
   @Test
   public void itFailsWhileGettingResponseBody() {
     ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
-    ByteArrayInputStream inputStream = mock(ByteArrayInputStream.class);
+    InputStream inputStream = new InputStream() {
+      @Override
+      public int read() throws java.io.IOException {
+        throw new java.io.IOException("Test IOException");
+      }
+    };
 
     when(requestContext.getHeaders())
       .thenReturn(getMapHeaders(getList(1L), getList("signature")));
