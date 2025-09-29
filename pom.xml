@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.hubspot</groupId>
     <artifactId>basepom</artifactId>
-    <version>63.8</version>
+    <version>63.9-SNAPSHOT</version>
   </parent>
 
   <groupId>com.hubspot.slack</groupId>
@@ -27,6 +27,7 @@
   <properties>
     <horizon.version>0.1.1</horizon.version>
     <dep.netty3.version>3.10.6.Final</dep.netty3.version>
+    <dep.plugin.spotbugs.version>4.9.3.2</dep.plugin.spotbugs.version>
   </properties>
 
   <dependencyManagement>
