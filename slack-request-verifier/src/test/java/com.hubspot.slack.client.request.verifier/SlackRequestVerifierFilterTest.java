@@ -1,7 +1,8 @@
 package com.hubspot.slack.client.request.verifier;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -92,7 +93,12 @@ public class SlackRequestVerifierFilterTest {
   @Test
   public void itFailsWhileGettingResponseBody() {
     ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
-    ByteArrayInputStream inputStream = mock(ByteArrayInputStream.class);
+    InputStream inputStream = new InputStream() {
+      @Override
+      public int read() throws java.io.IOException {
+        throw new java.io.IOException("Test IOException");
+      }
+    };
 
     when(requestContext.getHeaders())
       .thenReturn(getMapHeaders(getList(1L), getList("signature")));
