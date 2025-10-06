@@ -19,5 +19,5 @@ public interface EntityPayloadIF {
   Optional<EntityPayloadFields> getFields();
   List<EntityPayloadAttributesCustomField> getCustomFields();
   List<String> getDisplayOrder();
-  WorkObjectActionBlock getActions();
+  Optional<WorkObjectActionBlock> getActions();
 }

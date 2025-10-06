@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -33,5 +34,6 @@ public interface ChatUnfurlParamsIF extends HasChannel {
 
   Optional<URI> getUserAuthUrl();
 
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
   Optional<Metadata> getMetadata();
 }
