@@ -18,7 +18,6 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface ChatUnfurlParamsIF extends HasChannel {
   @Override
   @JsonProperty("channel")
@@ -35,5 +34,6 @@ public interface ChatUnfurlParamsIF extends HasChannel {
 
   Optional<URI> getUserAuthUrl();
 
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
   Optional<Metadata> getMetadata();
 }
