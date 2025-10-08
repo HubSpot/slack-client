@@ -207,7 +207,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SlackWebClient implements SlackClient {
+public class SlackWebClient implements SlackClientV2 {
 
   public static final int RATE_LIMIT_SENTINEL_VALUE = -1;
   public static final int RATE_LIMIT_LOG_WARNING_THRESHOLD_SECONDS = 5;
