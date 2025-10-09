@@ -31,4 +31,10 @@ public interface EntityDetailsRequestedEventIF extends SlackEvent {
 
   Optional<String> getMessageTs();
   Optional<String> getThreadTs();
+
+  //entity_details_requested events do not have a ts, so we manually set it as null
+  @Override
+  default String getTs() {
+    return null;
+  }
 }

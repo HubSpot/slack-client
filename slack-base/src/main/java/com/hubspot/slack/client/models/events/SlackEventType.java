@@ -70,7 +70,7 @@ public enum SlackEventType {
   IM_HISTORY_CHANGED,
   IM_OPEN,
   LINK_SHARED(SlackLinkSharedEvent.class),
-  ENTITY_PRESENT_DETAILS(SlackEntityDetails.class),
+  ENTITY_DETAILS_REQUESTED(SlackEntityDetails.class),
   MEMBER_JOINED_CHANNEL(SlackMemberJoinedChannelEvent.class),
   MEMBER_LEFT_CHANNEL(SlackMemberLeftChannelEvent.class),
   MESSAGE(SlackEventMessage.class),
