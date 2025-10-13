@@ -3,7 +3,6 @@ package com.hubspot.slack.client.models.events;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.hubspot.slack.client.enums.EnumIndex;
-import com.hubspot.slack.client.methods.params.chat.workobject.entity.SlackEntityDetails;
 import com.hubspot.slack.client.models.events.app.SlackAppUninstalledEvent;
 import com.hubspot.slack.client.models.events.app.SlackTokensRevokedEvent;
 import com.hubspot.slack.client.models.events.assistant.SlackAssistantThreadContextChangedEvent;
@@ -20,6 +19,7 @@ import com.hubspot.slack.client.models.events.group.SlackGroupDeletedEvent;
 import com.hubspot.slack.client.models.events.group.SlackGroupOpenEvent;
 import com.hubspot.slack.client.models.events.group.SlackGroupRenameEvent;
 import com.hubspot.slack.client.models.events.group.SlackGroupUnarchiveEvent;
+import com.hubspot.slack.client.models.events.links.EntityDetailsRequestedEvent;
 import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
@@ -70,7 +70,7 @@ public enum SlackEventType {
   IM_HISTORY_CHANGED,
   IM_OPEN,
   LINK_SHARED(SlackLinkSharedEvent.class),
-  ENTITY_DETAILS_REQUESTED(SlackEntityDetails.class),
+  ENTITY_DETAILS_REQUESTED(EntityDetailsRequestedEvent.class),
   MEMBER_JOINED_CHANNEL(SlackMemberJoinedChannelEvent.class),
   MEMBER_LEFT_CHANNEL(SlackMemberLeftChannelEvent.class),
   MESSAGE(SlackEventMessage.class),

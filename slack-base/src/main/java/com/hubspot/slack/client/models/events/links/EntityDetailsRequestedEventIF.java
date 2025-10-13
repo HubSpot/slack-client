@@ -1,5 +1,7 @@
 package com.hubspot.slack.client.models.events.links;
 
+import static org.immutables.value.Value.Immutable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -8,10 +10,9 @@ import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.methods.params.chat.workobject.ExternalRef;
 import com.hubspot.slack.client.models.events.SlackEvent;
 import java.util.Optional;
-import org.immutables.value.Value;
 
+@Immutable
 @HubSpotStyle
-@Value.Immutable
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonDeserialize(as = EntityDetailsRequestedEvent.class)
 public interface EntityDetailsRequestedEventIF extends SlackEvent {
