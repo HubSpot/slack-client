@@ -11,12 +11,12 @@ public class DisplayTypeSerializer extends JsonSerializer<Optional<DisplayType>>
 
   @Override
   public void serialize(
-    Optional<DisplayType> displayType,
+    Optional<DisplayType> displayTypeMaybe,
     JsonGenerator gen,
     SerializerProvider serializers
   ) throws IOException {
-    if (displayType.isPresent()) {
-      gen.writeString(displayType.get().getValue());
+    if (displayTypeMaybe.isPresent()) {
+      gen.writeString(displayTypeMaybe.get().getValue());
     } else {
       gen.writeNull();
     }
