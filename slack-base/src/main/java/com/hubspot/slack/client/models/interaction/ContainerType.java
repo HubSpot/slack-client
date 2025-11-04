@@ -7,6 +7,7 @@ import com.hubspot.slack.client.enums.EnumIndex;
 public enum ContainerType {
   VIEW,
   MESSAGE,
+  MESSAGE_ATTACHMENT,
   UNKNOWN;
 
   private static final EnumIndex<String, ContainerType> INDEX = new EnumIndex<>(
