@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
   {
     @Type(value = ViewContainer.class, name = "view"),
     @Type(value = MessageContainer.class, name = "message"),
+    @Type(value = MessageAttachmentContainer.class, name = "message_attachment"),
   }
 )
 public interface Container {
