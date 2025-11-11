@@ -5,12 +5,12 @@
   <parent>
     <groupId>com.hubspot</groupId>
     <artifactId>basepom</artifactId>
-    <version>63.8</version>
+    <version>65.1</version>
   </parent>
 
   <groupId>com.hubspot.slack</groupId>
   <artifactId>slack-client</artifactId>
-  <version>1.16.19-SNAPSHOT</version>
+  <version>1.17.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>${project.groupId}:${project.artifactId}</name>
@@ -25,9 +25,7 @@
   </modules>
 
   <properties>
-    <horizon.version>0.1.1</horizon.version>
-    <dep.netty3.version>3.10.6.Final</dep.netty3.version>
-    <dep.plugin.spotbugs.version>4.9.3.2</dep.plugin.spotbugs.version>
+    <horizon.version>0.5.0</horizon.version>
   </properties>
 
   <dependencyManagement>
@@ -81,12 +79,6 @@
         <groupId>com.hubspot.slack</groupId>
         <artifactId>slack-request-verifier</artifactId>
         <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.ning</groupId>
-        <artifactId>async-http-client</artifactId>
-        <version>1.9.40</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
