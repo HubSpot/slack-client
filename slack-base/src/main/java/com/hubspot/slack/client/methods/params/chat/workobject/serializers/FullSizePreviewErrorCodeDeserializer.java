@@ -3,28 +3,31 @@ package com.hubspot.slack.client.methods.params.chat.workobject.serializers;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.hubspot.slack.client.methods.params.chat.workobject.entity.DisplayType;
+import com.hubspot.slack.client.methods.params.chat.workobject.entity.fullsizepreview.FullSizePreviewErrorCode;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class DisplayTypeDeserializer extends JsonDeserializer<Optional<DisplayType>> {
+public class FullSizePreviewErrorCodeDeserializer
+  extends JsonDeserializer<Optional<FullSizePreviewErrorCode>> {
 
   @Override
-  public Optional<DisplayType> deserialize(JsonParser p, DeserializationContext ctxt)
-    throws IOException {
+  public Optional<FullSizePreviewErrorCode> deserialize(
+    JsonParser p,
+    DeserializationContext ctxt
+  ) throws IOException {
     String value = p.getText();
     if (value == null || value.isEmpty()) {
       return Optional.empty();
     }
     return Arrays
-      .stream(DisplayType.values())
+      .stream(FullSizePreviewErrorCode.values())
       .filter(type -> type.getValue().equals(value))
       .findFirst();
   }
 
   @Override
-  public Optional<DisplayType> getNullValue(DeserializationContext ctxt) {
+  public Optional<FullSizePreviewErrorCode> getNullValue(DeserializationContext ctxt) {
     return Optional.empty();
   }
 }
