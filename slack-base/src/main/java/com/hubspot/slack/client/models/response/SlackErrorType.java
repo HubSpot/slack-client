@@ -70,6 +70,7 @@ public enum SlackErrorType {
   REQUEST_TIMEOUT("request_timeout"),
   RATE_LIMITED("ratelimited"),
   RESTRICTED_ACTION("restricted_action"),
+  MESSAGE_LIMIT_EXCEEDED("message_limit_exceeded"),
 
   TEAM_ADDED_TO_ORG("team_added_to_org"),
   TOO_MANY_ATTACHMENTS("too_many_attachments"),
