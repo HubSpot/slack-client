@@ -8,6 +8,7 @@ public enum ContainerType {
   VIEW,
   MESSAGE,
   MESSAGE_ATTACHMENT,
+  ENTITY_DETAIL,
   UNKNOWN;
 
   private static final EnumIndex<String, ContainerType> INDEX = new EnumIndex<>(
