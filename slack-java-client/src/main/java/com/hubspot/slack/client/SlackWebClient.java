@@ -7,8 +7,6 @@ import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
-import com.google.inject.assistedinject.Assisted;
-import com.google.inject.assistedinject.AssistedInject;
 import com.hubspot.algebra.Result;
 import com.hubspot.horizon.HttpConfig;
 import com.hubspot.horizon.HttpRequest;
@@ -229,16 +227,15 @@ public class SlackWebClient implements SlackClient {
   private final ResponseDebugger responseDebugger;
 
   public interface Factory {
-    SlackWebClient build(@Assisted SlackClientRuntimeConfig config);
+    SlackWebClient build(SlackClientRuntimeConfig config);
   }
 
-  @AssistedInject
   public SlackWebClient(
     DefaultHttpRequestDebugger defaultHttpRequestDebugger,
     DefaultHttpResponseDebugger defaultHttpResponseDebugger,
     NioHttpClient.Factory nioHttpClientFactory,
     ByMethodRateLimiter defaultRateLimiter,
-    @Assisted SlackClientRuntimeConfig config
+    SlackClientRuntimeConfig config
   ) {
     this.nioHttpClient =
       config
