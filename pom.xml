@@ -25,7 +25,7 @@
   </modules>
 
   <properties>
-    <horizon.version>0.5.0</horizon.version>
+    <horizon.version>0.5.2</horizon.version>
   </properties>
 
   <dependencyManagement>
