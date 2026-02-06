@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.hubspot.slack</groupId>
     <artifactId>slack-client</artifactId>
-    <version>1.17.3-SNAPSHOT</version>
+    <version>1.17.3</version>
   </parent>
 
   <artifactId>slack-java-client-guice</artifactId>
@@ -32,4 +32,8 @@
     </dependency>
   </dependencies>
 
+
+  <scm>
+    <tag>slack-client-1.17.3</tag>
+  </scm>
 </project>
