@@ -44,4 +44,7 @@ public interface ConversationIF {
 
   @JsonProperty("num_members")
   Optional<Integer> getNumMembers();
+
+  @JsonProperty("topic")
+  Optional<Topic> getTopic();
 }
