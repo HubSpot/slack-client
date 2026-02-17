@@ -15,4 +15,10 @@ import org.immutables.value.Value.Immutable;
 public interface SlackEventSkeletonIF extends SlackEvent {
   @JsonProperty("channel")
   Optional<String> getChannelMaybe();
+
+  // Many event types deserialized as skeletons do not have a ts, so we manually set it as null.
+  @Override
+  default String getTs() {
+    return null;
+  }
 }

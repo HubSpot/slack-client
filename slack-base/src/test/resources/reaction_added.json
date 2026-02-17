@@ -1,0 +1,23 @@
+{
+  "token": "redacted",
+  "team_id": "T024G0P55",
+  "api_app_id": "ALZH69H5Z",
+  "event": {
+    "type": "reaction_added",
+    "user": "U0374K33CR2",
+    "reaction": "+1::skin-tone-4",
+    "item": {
+      "type": "message",
+      "channel": "C0AFGUN15AL",
+      "ts": "1771357246.016889"
+    },
+    "item_user": "U03TL2T7VNC",
+    "event_ts": "1771358418.002600"
+  },
+  "type": "event_callback",
+  "event_id": "Ev0AFC3DRA3V",
+  "event_time": 1771358418,
+  "authed_users": [
+    "UMB1NLKNC"
+  ]
+}
