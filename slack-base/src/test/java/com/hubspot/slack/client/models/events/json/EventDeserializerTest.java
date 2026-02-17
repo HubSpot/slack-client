@@ -276,6 +276,13 @@ public class EventDeserializerTest {
   }
 
   @Test
+  public void itCanDeserReactionAddedEvent() throws IOException {
+    SlackEvent event = fetchAndDeserializeSlackEvent("reaction_added.json");
+    assertThat(event.getType()).isEqualTo(SlackEventType.REACTION_ADDED);
+    assertThat(event.getTs()).isNull();
+  }
+
+  @Test
   public void itCanDeserBotMessageEventCallbacks() throws IOException {
     SlackEvent event = fetchAndDeserializeSlackEvent("bot_message_event_callback.json");
     assertThat(event.getType()).isEqualTo(SlackEventType.MESSAGE);
