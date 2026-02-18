@@ -1,6 +1,6 @@
 [
   {
-    "type": "rich_text",
+    "type": "unimplemented_block",
     "elements": [
       {
         "type": "rich_text_section",
