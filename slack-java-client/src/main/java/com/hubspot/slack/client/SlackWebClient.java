@@ -93,6 +93,7 @@ import com.hubspot.slack.client.methods.params.group.GroupsListParams;
 import com.hubspot.slack.client.methods.params.im.ImOpenParams;
 import com.hubspot.slack.client.methods.params.migration.MigrationExchangeParams;
 import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
+import com.hubspot.slack.client.methods.params.reactions.ReactionsRemoveParams;
 import com.hubspot.slack.client.methods.params.search.SearchMessagesParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupCreateParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupDisableParams;
@@ -172,6 +173,7 @@ import com.hubspot.slack.client.models.response.group.GroupsListResponse;
 import com.hubspot.slack.client.models.response.im.ImOpenResponse;
 import com.hubspot.slack.client.models.response.migration.MigrationExchangeResponse;
 import com.hubspot.slack.client.models.response.reactions.AddReactionResponse;
+import com.hubspot.slack.client.models.response.reactions.RemoveReactionResponse;
 import com.hubspot.slack.client.models.response.search.SearchMessageResponse;
 import com.hubspot.slack.client.models.response.team.TeamInfoResponse;
 import com.hubspot.slack.client.models.response.usergroups.UsergroupCreateResponse;
@@ -1378,6 +1380,17 @@ public class SlackWebClient implements SlackClient {
       SlackMethods.reactions_add,
       params,
       AddReactionResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<RemoveReactionResponse, SlackError>> removeReaction(
+    ReactionsRemoveParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.reactions_remove,
+      params,
+      RemoveReactionResponse.class
     );
   }
 
