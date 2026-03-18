@@ -156,6 +156,7 @@ import java.util.concurrent.CompletableFuture;
 
 // See https://api.slack.com/changelog/2020-01-deprecating-antecedents-to-the-conversations-api for details on deprecations starting 7 January 2020
 public interface SlackClient extends Closeable {
+  String NOT_IMPLEMENTED = "Method not implemented";
   // auth
   CompletableFuture<Result<AuthTestResponse, SlackError>> testAuth();
   CompletableFuture<Result<AuthRevokeResponse, SlackError>> revokeAuth(
@@ -399,9 +400,11 @@ public interface SlackClient extends Closeable {
     ReactionsAddParams param
   );
 
-  CompletableFuture<Result<RemoveReactionResponse, SlackError>> removeReaction(
+  default CompletableFuture<Result<RemoveReactionResponse, SlackError>> removeReaction(
     ReactionsRemoveParams param
-  );
+  ) {
+    throw new UnsupportedOperationException(NOT_IMPLEMENTED);
+  }
 
   // teams
   CompletableFuture<Result<TeamInfoResponse, SlackError>> getTeamInfo();
