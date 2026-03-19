@@ -1,11 +1,13 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.Metadata;
 import java.util.Optional;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
@@ -42,8 +44,16 @@ public interface ChatScheduleMessageParamsIF extends MessageParams {
 
   Optional<Boolean> getUnfurlMedia();
 
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
+  @JsonProperty("reply_broadcast")
+  Optional<Boolean> getReplyAsBroadcast();
+
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
+  Optional<Metadata> getMetadata();
+
   @Check
   default void check() {
+    MessageParams.super.check();
     Preconditions.checkState(
       (getText().isPresent() && !Strings.isNullOrEmpty(getText().get())) ||
       !getAttachments().isEmpty() ||
