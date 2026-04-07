@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.methods.interceptor.HasEdited;
 import com.hubspot.slack.client.methods.interceptor.HasUser;
 import com.hubspot.slack.client.models.files.SlackFile;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.immutables.value.Value.Immutable;
 @JsonDeserialize(as = SlackEventMessage.class)
 public abstract class AbstractSlackEventMessage
   extends SlackEventMessageBase
-  implements HasUser {
+  implements HasUser, HasEdited {
 
   @JsonProperty("channel")
   public abstract String getChannelId();
