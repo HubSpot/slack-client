@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.blocks.elements.richtextelements;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -34,6 +35,7 @@ public interface RichTextDateElementIF extends RichTextElement {
   @Immutable
   @HubSpotStyle
   @JsonNaming(SnakeCaseStrategy.class)
+  @JsonInclude(JsonInclude.Include.NON_ABSENT)
   @JsonDeserialize(as = RichTextDateElement.Style.class)
   interface StyleIF {
     Optional<Boolean> getBold();
