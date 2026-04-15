@@ -22,7 +22,7 @@ public interface RichTextLinkElementIF extends RichTextElement {
     return TYPE;
   }
 
-  @Value.Parameter(order = 1)
+  @Value.Parameter
   String getUrl();
 
   Optional<String> getText();
