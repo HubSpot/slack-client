@@ -1,0 +1,183 @@
+[
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "broadcast",
+            "range": "everyone"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "color",
+            "value": "#F405B3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "channel",
+            "channel_id": "C123ABC456"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "date",
+            "timestamp": 1720710212,
+            "format": "{date_num} at {time}",
+            "fallback": "timey"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "emoji",
+            "name": "basketball"
+          },
+          {
+            "type": "text",
+            "text": " "
+          },
+          {
+            "type": "emoji",
+            "name": "snowboarder"
+          },
+          {
+            "type": "text",
+            "text": " "
+          },
+          {
+            "type": "emoji",
+            "name": "checkered_flag"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "link",
+            "url": "https://docs.slack.dev"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "text",
+            "text": "Hello there, "
+          },
+          {
+            "type": "text",
+            "text": "I am a bold rich text block!",
+            "style": {
+              "bold": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "user",
+            "user_id": "U123ABC456"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "usergroup",
+            "usergroup_id": "G123ABC456"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "user",
+            "user_id": "U123ABC456",
+            "style": {
+              "underline": true
+            }
+          },
+          {
+            "type": "usergroup",
+            "usergroup_id": "G123ABC456"
+          },
+          {
+            "type": "date",
+            "timestamp": 1720710212,
+            "format": "{date_num} at {time}",
+            "fallback": "timey",
+            "style": {
+              "client_highlight": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

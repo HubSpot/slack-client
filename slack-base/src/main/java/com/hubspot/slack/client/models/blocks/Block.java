@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.hubspot.slack.client.models.BlockOrAttachment;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextBlock;
 import java.util.Optional;
 
 @JsonTypeInfo(
@@ -22,6 +23,9 @@ import java.util.Optional;
     @JsonSubTypes.Type(value = Image.class, name = Image.TYPE),
     @JsonSubTypes.Type(value = Input.class, name = Input.TYPE),
     @JsonSubTypes.Type(value = Section.class, name = Section.TYPE),
+    @JsonSubTypes.Type(value = RichTextBlock.class, name = RichTextBlock.TYPE),
+    @JsonSubTypes.Type(value = TaskCardBlock.class, name = TaskCardBlock.TYPE),
+    @JsonSubTypes.Type(value = MarkdownBlock.class, name = MarkdownBlock.TYPE),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
