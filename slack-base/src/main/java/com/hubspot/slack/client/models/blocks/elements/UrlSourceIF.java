@@ -7,8 +7,8 @@ import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
 /**
- * Slack's Rich text block displays formatted, structured representation of text..
- * @see <a href="https://docs.slack.dev/reference/block-kit/blocks/rich-text-block/">Rich text block Docs</a>
+ * Slack's URL source element displays a URL source for referencing within a task card block.
+ * @see <a href="https://docs.slack.dev/reference/block-kit/block-elements/url-source-element">URL source element</a>
  */
 @Immutable
 @HubSpotStyle
