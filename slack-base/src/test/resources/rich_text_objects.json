@@ -1,0 +1,74 @@
+[
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_preformatted",
+        "elements": [
+          {
+            "type": "text",
+            "text": "const x = 1;"
+          }
+        ],
+        "border": 0,
+        "language": "javascript"
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "block_id": "block1",
+    "elements": [
+      {
+        "type": "rich_text_list",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "Huddles"
+              }
+            ]
+          },
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "Canvas"
+              }
+            ]
+          },
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "Developing with Block Kit"
+              }
+            ]
+          }
+        ],
+        "style": "bullet",
+        "border": 1
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "block_id": "Vrzsu",
+    "elements": [
+      {
+        "type": "rich_text_quote",
+        "elements": [
+          {
+            "type": "text",
+            "text": "What we need is good examples in our documentation."
+          }
+        ],
+        "border": 0
+      }
+    ]
+  }
+]

@@ -10,6 +10,11 @@ import com.hubspot.slack.client.models.blocks.elements.BlockElement;
   {
     @JsonSubTypes.Type(value = RichTextSection.class, name = RichTextSection.TYPE),
     @JsonSubTypes.Type(value = RichTextList.class, name = RichTextList.TYPE),
+    @JsonSubTypes.Type(
+      value = RichTextPreformatted.class,
+      name = RichTextPreformatted.TYPE
+    ),
+    @JsonSubTypes.Type(value = RichTextQuote.class, name = RichTextQuote.TYPE),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
