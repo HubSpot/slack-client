@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
+import java.util.Optional;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
@@ -25,4 +26,10 @@ public interface RichTextListIF extends RichTextObject {
 
   @Value.Parameter
   RichTextListStyle getStyle();
+
+  Optional<Integer> getIntend();
+
+  Optional<Integer> getBorder();
+
+  Optional<Integer> getOffset();
 }
