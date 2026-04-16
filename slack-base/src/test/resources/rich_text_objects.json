@@ -57,6 +57,49 @@
   },
   {
     "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_list",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "Item"
+              }
+            ]
+          }
+        ],
+        "style": "ordered"
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_list",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "Nested item"
+              }
+            ]
+          }
+        ],
+        "style": "bullet",
+        "border": 2,
+        "indent": 3,
+        "offset": 1
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
     "block_id": "Vrzsu",
     "elements": [
       {

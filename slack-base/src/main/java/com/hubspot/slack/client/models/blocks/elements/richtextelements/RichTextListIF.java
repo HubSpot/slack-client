@@ -27,7 +27,7 @@ public interface RichTextListIF extends RichTextObject {
   @Value.Parameter
   RichTextListStyle getStyle();
 
-  Optional<Integer> getIntend();
+  Optional<Integer> getIndent();
 
   Optional<Integer> getBorder();
 

@@ -22,7 +22,9 @@ public class RichTextObjectTest {
   private static final ObjectMapper MAPPER = ObjectMapperUtils.mapper();
   private static final int PREFORMATTED_INDEX = 0;
   private static final int LIST_INDEX = 1;
-  private static final int QUOTE_INDEX = 2;
+  private static final int LIST_REQUIRED_ONLY_INDEX = 2;
+  private static final int LIST_ALL_OPTIONAL_INDEX = 3;
+  private static final int QUOTE_INDEX = 4;
   private static RichTextObject[] objects;
 
   @BeforeClass
@@ -71,6 +73,43 @@ public class RichTextObjectTest {
               .addElements(
                 RichTextTextElement.builder().setText("Developing with Block Kit").build()
               )
+              .build()
+          )
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesListBlockWithOnlyRequiredFields() {
+    assertThat(objects[LIST_REQUIRED_ONLY_INDEX])
+      .isEqualTo(
+        RichTextList
+          .builder()
+          .setStyle(RichTextListStyle.ORDERED)
+          .addElements(
+            RichTextSection
+              .builder()
+              .addElements(RichTextTextElement.builder().setText("Item").build())
+              .build()
+          )
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesListBlockWithAllOptionalFields() {
+    assertThat(objects[LIST_ALL_OPTIONAL_INDEX])
+      .isEqualTo(
+        RichTextList
+          .builder()
+          .setStyle(RichTextListStyle.BULLET)
+          .setBorder(2)
+          .setIndent(3)
+          .setOffset(1)
+          .addElements(
+            RichTextSection
+              .builder()
+              .addElements(RichTextTextElement.builder().setText("Nested item").build())
               .build()
           )
           .build()
