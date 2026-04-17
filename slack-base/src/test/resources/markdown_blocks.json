@@ -1,0 +1,10 @@
+[
+  {
+    "type": "markdown",
+    "text": "Here is a JavaScript function:\n\n```javascript\nfunction greet(name) {\n  return \"Hello, \" + name + \"!\";\n}\n\nconsole.log(greet(\"world\"));\n```"
+  },
+  {
+    "type": "markdown",
+    "text": "## Sprint Status\n\n| Task | Owner | Status |\n|---|---|---|\n| **Authentication** | Alice | ~~Done~~ _Shipped_ |\n| `Dashboard` | Bob | **In Progress** |\n| [API Docs](https://api.slack.com) | Carol | _Not Started_ |"
+  }
+]

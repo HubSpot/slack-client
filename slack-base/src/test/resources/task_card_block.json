@@ -1,0 +1,51 @@
+{
+  "type": "task_card",
+  "task_id": "fefba48f-80d8-4a4c-923f-e0f260d0fd76",
+  "title": "Demonstrating Task Card Block Features...",
+  "status": "in_progress",
+  "details": {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "text",
+            "text": "Fetching from "
+          },
+          {
+            "type": "link",
+            "url": "https://api.slack.com/partners/thinking-steps",
+            "text": "Thinking Steps"
+          }
+        ]
+      }
+    ]
+  },
+  "output": {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "text",
+            "text": "This task card shows how timeline mode interleaves text and tool calls in streaming content, making it ideal for short, naturally flowing tasks, unlike plan mode which groups tasks under a shared goal."
+          }
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "type": "url",
+      "url": "https://api.slack.com/partners/thinking-steps",
+      "text": "Thinking steps"
+    },
+    {
+      "type": "url",
+      "url": "https://api.slack.com/partners/thinking-steps#task-card-block",
+      "text": "Task card block"
+    }
+  ]
+}
