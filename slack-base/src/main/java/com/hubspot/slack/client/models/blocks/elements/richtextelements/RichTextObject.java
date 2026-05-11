@@ -5,7 +5,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.hubspot.slack.client.models.blocks.elements.BlockElement;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonTypeInfo(
+  use = JsonTypeInfo.Id.NAME,
+  property = "type",
+  defaultImpl = UnknownRichTextObject.class
+)
 @JsonSubTypes(
   {
     @JsonSubTypes.Type(value = RichTextSection.class, name = RichTextSection.TYPE),
