@@ -179,5 +179,19 @@
         ]
       }
     ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "message_mention",
+            "message_id": "1234567890.123456"
+          }
+        ]
+      }
+    ]
   }
 ]

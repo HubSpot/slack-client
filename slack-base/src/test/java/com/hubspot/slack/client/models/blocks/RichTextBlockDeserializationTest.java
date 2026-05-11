@@ -17,6 +17,7 @@ import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichText
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextTextElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextUserElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextUserGroupElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.UnknownRichTextElement;
 import java.io.IOException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,6 +35,7 @@ public class RichTextBlockDeserializationTest {
   private static final int SECTION_WITH_USER_ELEMENT_INDEX = 7;
   private static final int SECTION_WITH_USERGROUP_ELEMENT_INDEX = 8;
   private static final int SECTION_WITH_MULTIPLE_ELEMENTS_INDEX = 9;
+  private static final int SECTION_WITH_UNKNOWN_ELEMENT_INDEX = 10;
   private static RichTextSection[] sections;
 
   @BeforeClass
@@ -130,6 +132,14 @@ public class RichTextBlockDeserializationTest {
       .containsExactly(
         RichTextUserGroupElement.builder().setUserGroupId("G123ABC456").build()
       );
+  }
+
+  @Test
+  public void itDeserializesUnknownElementAsUnknownBlockElement() {
+    assertThat(sections[SECTION_WITH_UNKNOWN_ELEMENT_INDEX].getElements())
+      .hasSize(1)
+      .first()
+      .isInstanceOf(UnknownRichTextElement.class);
   }
 
   @Test
