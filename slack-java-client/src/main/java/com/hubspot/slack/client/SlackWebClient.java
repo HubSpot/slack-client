@@ -95,6 +95,9 @@ import com.hubspot.slack.client.methods.params.migration.MigrationExchangeParams
 import com.hubspot.slack.client.methods.params.reactions.ReactionsAddParams;
 import com.hubspot.slack.client.methods.params.reactions.ReactionsRemoveParams;
 import com.hubspot.slack.client.methods.params.search.SearchMessagesParams;
+import com.hubspot.slack.client.methods.params.stream.ChatAppendStreamParams;
+import com.hubspot.slack.client.methods.params.stream.ChatStartStreamParams;
+import com.hubspot.slack.client.methods.params.stream.ChatStopStreamParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupCreateParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupDisableParams;
 import com.hubspot.slack.client.methods.params.usergroups.UsergroupEnableParams;
@@ -143,6 +146,8 @@ import com.hubspot.slack.client.models.response.chat.ChatPostEphemeralMessageRes
 import com.hubspot.slack.client.models.response.chat.ChatPostMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatScheduleMessageResponse;
 import com.hubspot.slack.client.models.response.chat.ChatScheduledMessagesListResponse;
+import com.hubspot.slack.client.models.response.chat.ChatStartStreamResponse;
+import com.hubspot.slack.client.models.response.chat.ChatStopStreamResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUnfurlResponse;
 import com.hubspot.slack.client.models.response.chat.ChatUpdateMessageResponse;
 import com.hubspot.slack.client.models.response.chat.EntityPresentDetailsResponse;
@@ -1720,6 +1725,39 @@ public class SlackWebClient implements SlackClient {
       SlackMethods.assistant_threads_setTitle,
       params,
       SimpleSlackResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatStartStreamResponse, SlackError>> startStream(
+    ChatStartStreamParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.chat_startStream,
+      params,
+      ChatStartStreamResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatStopStreamResponse, SlackError>> stopStream(
+    ChatStopStreamParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.chat_stopStream,
+      params,
+      ChatStopStreamResponse.class
+    );
+  }
+
+  @Override
+  public CompletableFuture<Result<ChatStartStreamResponse, SlackError>> appendStream(
+    ChatAppendStreamParams params
+  ) {
+    return postSlackCommand(
+      SlackMethods.chat_appendStream,
+      params,
+      ChatStartStreamResponse.class
     );
   }
 

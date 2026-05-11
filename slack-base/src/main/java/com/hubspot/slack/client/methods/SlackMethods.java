@@ -172,6 +172,21 @@ public enum SlackMethods implements SlackMethod {
     RateLimitingTiers.TIER_3,
     JsonStatus.ACCEPTS_JSON
   ),
+  chat_startStream(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_2,
+    JsonStatus.ACCEPTS_JSON
+  ),
+  chat_stopStream(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_2,
+    JsonStatus.ACCEPTS_JSON
+  ),
+  chat_appendStream(
+    MethodWriteMode.WRITE,
+    RateLimitingTiers.TIER_4,
+    JsonStatus.ACCEPTS_JSON
+  ),
 
   conversations_archive(
     MethodWriteMode.WRITE,
