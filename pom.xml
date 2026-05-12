@@ -98,7 +98,4 @@
       <email>jstehler@hubspot.com</email>
     </developer>
   </developers>
-  <scm>
-    <tag>slack-client-1.17.9</tag>
-  </scm>
 </project>
