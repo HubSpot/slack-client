@@ -1,0 +1,141 @@
+[
+  {
+    "type": "context_actions",
+    "elements": [
+      {
+        "type": "feedback_buttons",
+        "action_id": "feedback_buttons_1",
+        "positive_button": {
+          "text": {
+            "type": "plain_text",
+            "text": "Not so bad"
+          },
+          "value": "positive_feedback",
+          "accessibility_label": "Mark this response as good"
+        },
+        "negative_button": {
+          "text": {
+            "type": "plain_text",
+            "text": "Not so good"
+          },
+          "value": "negative_feedback",
+          "accessibility_label": "Mark this response as bad"
+        }
+      }
+    ]
+  },
+  {
+    "type": "context_actions",
+    "elements": [
+      {
+        "type": "icon_button",
+        "icon": "trash",
+        "text": {
+          "type": "plain_text",
+          "text": "Delete"
+        },
+        "action_id": "delete_button",
+        "value": "delete_item"
+      }
+    ]
+  },
+  {
+    "type": "context_actions",
+    "elements": [
+      {
+        "type": "feedback_buttons",
+        "action_id": "feedback_buttons_1",
+        "positive_button": {
+          "text": {
+            "type": "plain_text",
+            "text": "Not so bad"
+          },
+          "value": "positive_feedback",
+          "accessibility_label": "Mark this response as good"
+        },
+        "negative_button": {
+          "text": {
+            "type": "plain_text",
+            "text": "Not so good"
+          },
+          "value": "negative_feedback",
+          "accessibility_label": "Mark this response as bad"
+        }
+      },
+      {
+        "type": "icon_button",
+        "icon": "trash",
+        "text": {
+          "type": "plain_text",
+          "text": "Delete"
+        },
+        "action_id": "delete_button",
+        "value": "delete_item"
+      }
+    ]
+  },
+  {
+    "type": "context_actions",
+    "block_id": "context_actions_with_block_id",
+    "elements": [
+      {
+        "type": "feedback_buttons",
+        "positive_button": {
+          "text": {
+            "type": "plain_text",
+            "text": "Good"
+          },
+          "value": "good"
+        },
+        "negative_button": {
+          "text": {
+            "type": "plain_text",
+            "text": "Bad"
+          },
+          "value": "bad"
+        }
+      }
+    ]
+  },
+  {
+    "type": "context_actions",
+    "elements": [
+      {
+        "type": "icon_button",
+        "icon": "trash",
+        "text": {
+          "type": "plain_text",
+          "text": "Delete"
+        },
+        "confirm": {
+          "title": {
+            "type": "plain_text",
+            "text": "Are you sure?"
+          },
+          "text": {
+            "type": "plain_text",
+            "text": "This cannot be undone"
+          },
+          "confirm": {
+            "type": "plain_text",
+            "text": "Yes"
+          },
+          "deny": {
+            "type": "plain_text",
+            "text": "No"
+          }
+        },
+        "accessibility_label": "Delete this item",
+        "visible_to_user_ids": ["U123ABC", "U456DEF"]
+      }
+    ]
+  },
+  {
+    "type": "context_actions",
+    "elements": [
+      {
+        "type": "unknown_element_type"
+      }
+    ]
+  }
+]

@@ -26,6 +26,10 @@ import java.util.Optional;
     @JsonSubTypes.Type(value = RichTextBlock.class, name = RichTextBlock.TYPE),
     @JsonSubTypes.Type(value = TaskCardBlock.class, name = TaskCardBlock.TYPE),
     @JsonSubTypes.Type(value = MarkdownBlock.class, name = MarkdownBlock.TYPE),
+    @JsonSubTypes.Type(
+      value = ContextActionsBlock.class,
+      name = ContextActionsBlock.TYPE
+    ),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
