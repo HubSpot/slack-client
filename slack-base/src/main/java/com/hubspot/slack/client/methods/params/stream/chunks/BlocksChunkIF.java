@@ -2,7 +2,7 @@ package com.hubspot.slack.client.methods.params.stream.chunks;
 
 import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
-import com.hubspot.slack.client.models.blocks.elements.BlockElement;
+import com.hubspot.slack.client.models.blocks.Block;
 import org.immutables.value.Value.Derived;
 import org.immutables.value.Value.Immutable;
 
@@ -17,5 +17,5 @@ public interface BlocksChunkIF extends StreamChunk {
     return TYPE;
   }
 
-  ImmutableList<BlockElement> getBlocks();
+  ImmutableList<Block> getBlocks();
 }
