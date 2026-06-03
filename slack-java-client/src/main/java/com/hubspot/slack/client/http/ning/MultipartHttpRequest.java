@@ -5,13 +5,10 @@ import com.google.common.collect.Multimap;
 import com.hubspot.horizon.Compression;
 import com.hubspot.horizon.HttpRequest;
 import com.hubspot.horizon.HttpRequest.Method;
-import com.ning.http.client.FluentCaseInsensitiveStringsMap;
-import com.ning.http.client.multipart.ByteArrayPart;
-import com.ning.http.client.multipart.FilePart;
-import com.ning.http.client.multipart.Part;
-import com.ning.http.client.multipart.StringPart;
-import com.ning.http.client.providers.jdk.MultipartRequestEntity;
-import java.io.ByteArrayOutputStream;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.Unpooled;
+import io.netty.handler.codec.http.DefaultHttpHeaders;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -20,10 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import org.asynchttpclient.request.body.Body.BodyState;
+import org.asynchttpclient.request.body.multipart.ByteArrayPart;
+import org.asynchttpclient.request.body.multipart.FilePart;
+import org.asynchttpclient.request.body.multipart.MultipartBody;
+import org.asynchttpclient.request.body.multipart.MultipartUtils;
+import org.asynchttpclient.request.body.multipart.Part;
+import org.asynchttpclient.request.body.multipart.StringPart;
 
 public class MultipartHttpRequest {
 
   private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
+  private static final int BODY_CHUNK_SIZE = 8192;
 
   public static Builder newBuilder() {
     return new Builder();
@@ -86,14 +91,15 @@ public class MultipartHttpRequest {
       @Nonnull byte[] value,
       Charset charset
     ) {
-      ByteArrayPart part = new ByteArrayPart(
-        Preconditions.checkNotNull(name),
-        Preconditions.checkNotNull(value),
-        null,
-        charset
+      parts.add(
+        new ByteArrayPart(
+          Preconditions.checkNotNull(name),
+          Preconditions.checkNotNull(value),
+          null,
+          charset,
+          fileName
+        )
       );
-      part.setFileName(fileName);
-      parts.add(part);
       return this;
     }
 
@@ -106,12 +112,15 @@ public class MultipartHttpRequest {
       @Nonnull String fileName,
       @Nonnull File value
     ) {
-      FilePart part = new FilePart(
-        Preconditions.checkNotNull(name),
-        Preconditions.checkNotNull(value)
+      parts.add(
+        new FilePart(
+          Preconditions.checkNotNull(name),
+          Preconditions.checkNotNull(value),
+          null,
+          null,
+          fileName
+        )
       );
-      part.setFileName(fileName);
-      parts.add(part);
       return this;
     }
 
@@ -174,23 +183,34 @@ public class MultipartHttpRequest {
     }
 
     public HttpRequest build() {
-      final byte[] body;
-      MultipartRequestEntity requestEntity = new TerminatingMultipartRequestEntity(
-        parts,
-        new FluentCaseInsensitiveStringsMap()
-      );
-      try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-        requestEntity.writeRequest(baos);
-        baos.flush();
-        body = baos.toByteArray();
-      } catch (IOException e) {
-        throw new RuntimeException("Error generating body bytes", e);
+      try (
+        MultipartBody multipartBody = MultipartUtils.newMultipartBody(
+          parts,
+          new DefaultHttpHeaders()
+        )
+      ) {
+        builder.addHeader("Content-Type", multipartBody.getContentType());
+        builder.setBody(readBody(multipartBody));
       }
 
-      builder.addHeader("Content-Type", requestEntity.getContentType());
-      builder.setBody(body);
-
       return builder.build();
+    }
+
+    private static byte[] readBody(MultipartBody multipartBody) {
+      long contentLength = multipartBody.getContentLength();
+      ByteBuf byteBuf = contentLength >= 0
+        ? Unpooled.buffer(Math.toIntExact(contentLength))
+        : Unpooled.buffer();
+      try {
+        while (multipartBody.transferTo(byteBuf) != BodyState.STOP) {
+          byteBuf.ensureWritable(BODY_CHUNK_SIZE);
+        }
+        return ByteBufUtil.getBytes(byteBuf);
+      } catch (IOException e) {
+        throw new RuntimeException("Error generating body bytes", e);
+      } finally {
+        byteBuf.release();
+      }
     }
   }
 }
