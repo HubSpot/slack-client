@@ -68,7 +68,15 @@
       <artifactId>slack-base</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.ning</groupId>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-buffer</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-codec-http</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.asynchttpclient</groupId>
       <artifactId>async-http-client</artifactId>
     </dependency>
     <dependency>
