@@ -1,0 +1,66 @@
+[
+  {
+    "type": "table",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Name"},
+        {"type": "raw_text", "text": "Department"}
+      ],
+      [
+        {"type": "raw_text", "text": "Alice"},
+        {"type": "raw_text", "text": "Engineering"}
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {"type": "text", "text": "Hello "},
+                {"type": "text", "text": "world", "style": {"bold": true}}
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Left"},
+        {"type": "raw_text", "text": "Center"},
+        {"type": "raw_text", "text": "Right"}
+      ]
+    ],
+    "column_settings": [
+      {"align": "left"},
+      {"align": "center", "is_wrapped": true},
+      {"align": "right"}
+    ]
+  },
+  {
+    "type": "table",
+    "block_id": "my_table_block",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Value"}
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        {"type": "future_slack_cell_type"}
+      ]
+    ]
+  }
+]

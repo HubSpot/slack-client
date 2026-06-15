@@ -1,0 +1,78 @@
+[
+  {
+    "type": "data_table",
+    "caption": "Team Directory",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Name"},
+        {"type": "raw_text", "text": "Department"},
+        {"type": "raw_text", "text": "Badge"}
+      ],
+      [
+        {"type": "raw_text", "text": "Alice"},
+        {"type": "raw_text", "text": "Engineering"},
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {"type": "text", "text": "Blue", "style": {"bold": true}}
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "type": "data_table",
+    "caption": "Scores",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Player"},
+        {"type": "raw_text", "text": "Score"},
+        {"type": "raw_text", "text": "Bonus"}
+      ],
+      [
+        {"type": "raw_text", "text": "Alice"},
+        {"type": "raw_number", "value": 95.0, "text": "95"},
+        {"type": "raw_number", "value": 10.5, "text": "10.5"}
+      ],
+      [
+        {"type": "raw_text", "text": "Bob"},
+        {"type": "raw_number", "value": 82.5, "text": "82.5"},
+        {"type": "raw_number", "value": 0.0, "text": "0"}
+      ]
+    ]
+  },
+  {
+    "type": "data_table",
+    "caption": "With Options",
+    "block_id": "my_data_table",
+    "page_size": 10,
+    "row_header_column_index": 1,
+    "rows": [
+      [
+        {"type": "raw_text", "text": "ID"},
+        {"type": "raw_text", "text": "Name"}
+      ],
+      [
+        {"type": "raw_text", "text": "1"},
+        {"type": "raw_text", "text": "Alice"}
+      ]
+    ]
+  },
+  {
+    "type": "data_table",
+    "caption": "Unknown Cell",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Column"}
+      ],
+      [
+        {"type": "future_slack_cell_type"}
+      ]
+    ]
+  }
+]
