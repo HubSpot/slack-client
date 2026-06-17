@@ -30,6 +30,7 @@ import java.util.Optional;
       value = ContextActionsBlock.class,
       name = ContextActionsBlock.TYPE
     ),
+    @JsonSubTypes.Type(value = Card.class, name = Card.TYPE),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
