@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.blocks;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -16,6 +17,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface DataTableIF extends Block {
   String TYPE = "data_table";
 
@@ -25,10 +27,10 @@ public interface DataTableIF extends Block {
     return TYPE;
   }
 
-  @Value.Parameter
+  @Value.Parameter(order = 1)
   String getCaption();
 
-  @Value.Parameter
+  @Value.Parameter(order = 2)
   ImmutableList<ImmutableList<DataTableCell>> getRows();
 
   @JsonProperty("page_size")

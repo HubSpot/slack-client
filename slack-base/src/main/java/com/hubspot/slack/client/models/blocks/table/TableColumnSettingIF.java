@@ -13,7 +13,7 @@ import org.immutables.value.Value.Immutable;
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public interface TableColumnSettingIF {
-  Optional<String> getAlign();
+  Optional<TableColumnAlign> getAlign();
 
   @JsonProperty("is_wrapped")
   Optional<Boolean> isWrapped();

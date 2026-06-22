@@ -18,9 +18,9 @@ public interface RawNumberTableCellIF extends DataTableCell {
     return TYPE;
   }
 
-  @Value.Parameter
+  @Value.Parameter(order = 1)
   double getValue();
 
-  @Value.Parameter
+  @Value.Parameter(order = 2)
   String getText();
 }

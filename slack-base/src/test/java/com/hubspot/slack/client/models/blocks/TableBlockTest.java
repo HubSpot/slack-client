@@ -13,6 +13,7 @@ import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichText
 import com.hubspot.slack.client.models.blocks.table.RawTextTableCell;
 import com.hubspot.slack.client.models.blocks.table.RichTextTableCell;
 import com.hubspot.slack.client.models.blocks.table.TableCell;
+import com.hubspot.slack.client.models.blocks.table.TableColumnAlign;
 import com.hubspot.slack.client.models.blocks.table.TableColumnSetting;
 import com.hubspot.slack.client.models.blocks.table.UnknownTableCell;
 import java.io.IOException;
@@ -74,13 +75,17 @@ public class TableBlockTest {
     Table block = blocks[COLUMN_SETTINGS_INDEX];
     assertThat(block.getColumnSettings()).hasSize(3);
     assertThat(block.getColumnSettings().get(0))
-      .isEqualTo(TableColumnSetting.builder().setAlign("left").build());
+      .isEqualTo(TableColumnSetting.builder().setAlign(TableColumnAlign.LEFT).build());
     assertThat(block.getColumnSettings().get(1))
       .isEqualTo(
-        TableColumnSetting.builder().setAlign("center").setWrapped(true).build()
+        TableColumnSetting
+          .builder()
+          .setAlign(TableColumnAlign.CENTER)
+          .setWrapped(true)
+          .build()
       );
     assertThat(block.getColumnSettings().get(2))
-      .isEqualTo(TableColumnSetting.builder().setAlign("right").build());
+      .isEqualTo(TableColumnSetting.builder().setAlign(TableColumnAlign.RIGHT).build());
   }
 
   @Test
@@ -105,9 +110,15 @@ public class TableBlockTest {
         ImmutableList.of(RawTextTableCell.of("Name"), RawTextTableCell.of("Score"))
       )
       .addRows(ImmutableList.of(RawTextTableCell.of("Alice"), RawTextTableCell.of("100")))
-      .addColumnSettings(TableColumnSetting.builder().setAlign("left").build())
       .addColumnSettings(
-        TableColumnSetting.builder().setAlign("right").setWrapped(true).build()
+        TableColumnSetting.builder().setAlign(TableColumnAlign.LEFT).build()
+      )
+      .addColumnSettings(
+        TableColumnSetting
+          .builder()
+          .setAlign(TableColumnAlign.RIGHT)
+          .setWrapped(true)
+          .build()
       )
       .build();
     String serialized = MAPPER.writeValueAsString(original);
@@ -150,7 +161,9 @@ public class TableBlockTest {
     Table.Builder builder = Table.builder();
     builder.addRows(ImmutableList.of(RawTextTableCell.of("cell")));
     for (int i = 0; i <= BlockElementLengthLimits.MAX_TABLE_COLUMNS.getLimit(); i++) {
-      builder.addColumnSettings(TableColumnSetting.builder().setAlign("left").build());
+      builder.addColumnSettings(
+        TableColumnSetting.builder().setAlign(TableColumnAlign.LEFT).build()
+      );
     }
     try {
       builder.build();
