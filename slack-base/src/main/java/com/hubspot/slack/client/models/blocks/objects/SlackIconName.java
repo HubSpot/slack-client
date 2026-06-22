@@ -1,7 +1,9 @@
 package com.hubspot.slack.client.models.blocks.objects;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-
+/**
+ * Icon names derived from @<a href="https://docs.slack.dev/reference/block-kit/composition-objects/slack-icon-object">slack docs</a>
+ */
 public enum SlackIconName {
   ARCHIVE("archive"),
   BOOK("book"),
