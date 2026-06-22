@@ -18,5 +18,5 @@ public interface SlackIconObjectIF extends CompositionObject {
   }
 
   @Value.Parameter
-  String getName();
+  SlackIconName getName();
 }

@@ -5,15 +5,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableList;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
 import com.hubspot.slack.client.models.blocks.elements.Button;
 import com.hubspot.slack.client.models.blocks.elements.Image;
+import com.hubspot.slack.client.models.blocks.objects.SlackIconName;
 import com.hubspot.slack.client.models.blocks.objects.SlackIconObject;
 import com.hubspot.slack.client.models.blocks.objects.Text;
 import com.hubspot.slack.client.models.blocks.objects.TextType;
 import java.io.IOException;
-import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -50,8 +51,18 @@ public class CardBlockTest {
     Card block = blocks[SLACK_ICON_WITH_ACTIONS_INDEX];
     assertThat(block.getSlackIcon()).isPresent();
     SlackIconObject icon = block.getSlackIcon().get();
-    assertThat(icon.getName()).isEqualTo("calendar");
+    assertThat(icon.getName()).isEqualTo(SlackIconName.CALENDAR);
+    assertThat(icon.getName().getValue()).isEqualTo("calendar");
     assertThat(icon.getType()).isEqualTo("icon");
+  }
+
+  @Test
+  public void itSerializesIconNameToHyphenatedWireValue() throws IOException {
+    SlackIconObject icon = SlackIconObject.of(SlackIconName.STAR_FILLED);
+    JsonNode node = MAPPER.readTree(MAPPER.writeValueAsString(icon));
+    assertThat(node.get("name").asText()).isEqualTo("star-filled");
+    assertThat(MAPPER.readValue(MAPPER.writeValueAsString(icon), SlackIconObject.class))
+      .isEqualTo(icon);
   }
 
   @Test
@@ -69,12 +80,10 @@ public class CardBlockTest {
   @Test
   public void itDeserializesActions() {
     Card block = blocks[SLACK_ICON_WITH_ACTIONS_INDEX];
-    assertThat(block.getActions()).isPresent();
-    List<?> actions = block.getActions().get();
-    assertThat(actions).hasSize(3);
-    assertThat(actions.get(0)).isInstanceOf(Button.class);
-    assertThat(actions.get(1)).isInstanceOf(Button.class);
-    assertThat(actions.get(2)).isInstanceOf(Button.class);
+    assertThat(block.getActions()).hasSize(3);
+    assertThat(block.getActions().get(0)).isInstanceOf(Button.class);
+    assertThat(block.getActions().get(1)).isInstanceOf(Button.class);
+    assertThat(block.getActions().get(2)).isInstanceOf(Button.class);
   }
 
   @Test
@@ -107,7 +116,7 @@ public class CardBlockTest {
   @Test
   public void itDeserializesActionsOnlyCard() {
     Card block = blocks[ACTIONS_ONLY_INDEX];
-    assertThat(block.getActions()).isPresent();
+    assertThat(block.getActions()).isNotEmpty();
     assertThat(block.getTitle()).isEmpty();
     assertThat(block.getHeroImage()).isEmpty();
     assertThat(block.getBody()).isEmpty();
@@ -139,7 +148,7 @@ public class CardBlockTest {
           .builder()
           .setTitle(Text.of(TextType.MARKDOWN, "Title"))
           .setIcon(Image.of("https://example.com/icon.png", "icon"))
-          .setSlackIcon(SlackIconObject.of("rocket"))
+          .setSlackIcon(SlackIconObject.of(SlackIconName.ROCKET))
           .build()
       )
       .isInstanceOf(IllegalStateException.class)
@@ -177,7 +186,7 @@ public class CardBlockTest {
         Card
           .builder()
           .setTitle(Text.of(TextType.MARKDOWN, "Title"))
-          .setActions(List.of(button, button, button, button))
+          .setActions(ImmutableList.of(button, button, button, button))
           .build()
       )
       .isInstanceOf(IllegalStateException.class)
