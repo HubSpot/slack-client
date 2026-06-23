@@ -30,6 +30,8 @@ import java.util.Optional;
       value = ContextActionsBlock.class,
       name = ContextActionsBlock.TYPE
     ),
+    @JsonSubTypes.Type(value = Table.class, name = Table.TYPE),
+    @JsonSubTypes.Type(value = DataTable.class, name = DataTable.TYPE),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
