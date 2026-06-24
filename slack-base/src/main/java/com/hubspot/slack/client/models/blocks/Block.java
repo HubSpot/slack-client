@@ -30,6 +30,7 @@ import java.util.Optional;
       value = ContextActionsBlock.class,
       name = ContextActionsBlock.TYPE
     ),
+    @JsonSubTypes.Type(value = Card.class, name = Card.TYPE),
     @JsonSubTypes.Type(value = Table.class, name = Table.TYPE),
     @JsonSubTypes.Type(value = DataTable.class, name = DataTable.TYPE),
   }
