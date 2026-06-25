@@ -40,6 +40,8 @@ public interface UserProfileIF {
 
   Optional<String> getSkype();
 
+  Optional<String> getPronouns();
+
   // Extra custom fields set by your workspace admin
   @JsonDeserialize(using = UserProfileFieldsDeserializer.class)
   Optional<Map<String, ProfileField>> getFields();
