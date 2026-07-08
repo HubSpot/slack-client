@@ -26,6 +26,7 @@ public class DataTableBlockTest {
   private static final int RAW_NUMBER_INDEX = 1;
   private static final int WITH_OPTIONS_INDEX = 2;
   private static final int UNKNOWN_CELL_INDEX = 3;
+  private static final int NO_CAPTION_INDEX = 4;
   private static DataTable[] blocks;
 
   @BeforeClass
@@ -48,7 +49,12 @@ public class DataTableBlockTest {
 
   @Test
   public void itDeserializesCaption() {
-    assertThat(blocks[RICH_TEXT_BODY_INDEX].getCaption()).isEqualTo("Team Directory");
+    assertThat(blocks[RICH_TEXT_BODY_INDEX].getCaption()).contains("Team Directory");
+  }
+
+  @Test
+  public void itDeserializesAbsentCaption() {
+    assertThat(blocks[NO_CAPTION_INDEX].getCaption()).isEmpty();
   }
 
   @Test
