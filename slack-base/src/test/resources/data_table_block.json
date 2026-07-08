@@ -74,5 +74,16 @@
         {"type": "future_slack_cell_type"}
       ]
     ]
+  },
+  {
+    "type": "data_table",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Header"}
+      ],
+      [
+        {"type": "raw_text", "text": "Body"}
+      ]
+    ]
   }
 ]

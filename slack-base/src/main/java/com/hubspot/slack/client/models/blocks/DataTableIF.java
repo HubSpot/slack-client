@@ -28,7 +28,7 @@ public interface DataTableIF extends Block {
   }
 
   @Value.Parameter(order = 1)
-  String getCaption();
+  Optional<String> getCaption();
 
   @Value.Parameter(order = 2)
   ImmutableList<ImmutableList<DataTableCell>> getRows();
