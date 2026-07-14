@@ -1,4 +1,7 @@
-package com.hubspot.slack.client.models.blocks.table;
+package com.hubspot.slack.client.models.blocks.table.deserializer;
+
+import com.hubspot.slack.client.models.blocks.table.DataTableCell;
+import com.hubspot.slack.client.models.blocks.table.RawTextTableCell;
 
 public class NullSafeDataTableCellRowDeserializer
   extends AbstractNullSafeTableCellRowDeserializer<DataTableCell> {

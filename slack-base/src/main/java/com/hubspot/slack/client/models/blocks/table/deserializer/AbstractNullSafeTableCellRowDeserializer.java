@@ -1,10 +1,12 @@
-package com.hubspot.slack.client.models.blocks.table;
+package com.hubspot.slack.client.models.blocks.table.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.common.collect.ImmutableList;
+import com.hubspot.slack.client.models.blocks.table.RawTextTableCell;
+import com.hubspot.slack.client.models.blocks.table.TableCell;
 import java.io.IOException;
 
 abstract class AbstractNullSafeTableCellRowDeserializer<T extends TableCell>
