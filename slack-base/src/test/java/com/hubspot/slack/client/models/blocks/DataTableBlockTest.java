@@ -27,6 +27,7 @@ public class DataTableBlockTest {
   private static final int WITH_OPTIONS_INDEX = 2;
   private static final int UNKNOWN_CELL_INDEX = 3;
   private static final int NO_CAPTION_INDEX = 4;
+  private static final int NULL_CELL_INDEX = 5;
   private static DataTable[] blocks;
 
   @BeforeClass
@@ -119,6 +120,23 @@ public class DataTableBlockTest {
       .hasSize(1)
       .first()
       .isInstanceOf(UnknownTableCell.class);
+  }
+
+  @Test
+  public void itDeserializesNullCellsAsBlankRawTextCells() {
+    assertThat(blocks[NULL_CELL_INDEX].getRows()).hasSize(2);
+    assertThat(blocks[NULL_CELL_INDEX].getRows().get(0))
+      .containsExactly(
+        RawTextTableCell.of("Name"),
+        RawTextTableCell.of(""),
+        RawTextTableCell.of("Department")
+      );
+    assertThat(blocks[NULL_CELL_INDEX].getRows().get(1))
+      .containsExactly(
+        RawTextTableCell.of("Alice"),
+        RawTextTableCell.of(""),
+        RawTextTableCell.of("Engineering")
+      );
   }
 
   @Test

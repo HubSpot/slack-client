@@ -85,5 +85,20 @@
         {"type": "raw_text", "text": "Body"}
       ]
     ]
+  },
+  {
+    "type": "data_table",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Name"},
+        null,
+        {"type": "raw_text", "text": "Department"}
+      ],
+      [
+        {"type": "raw_text", "text": "Alice"},
+        null,
+        {"type": "raw_text", "text": "Engineering"}
+      ]
+    ]
   }
 ]

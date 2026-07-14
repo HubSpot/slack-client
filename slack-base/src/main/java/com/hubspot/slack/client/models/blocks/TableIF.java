@@ -1,10 +1,12 @@
 package com.hubspot.slack.client.models.blocks;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.blocks.table.NullSafeTableCellRowDeserializer;
 import com.hubspot.slack.client.models.blocks.table.TableCell;
 import com.hubspot.slack.client.models.blocks.table.TableColumnSetting;
 import org.immutables.value.Value;
@@ -24,6 +26,7 @@ public interface TableIF extends Block {
   }
 
   @Value.Parameter
+  @JsonDeserialize(contentUsing = NullSafeTableCellRowDeserializer.class)
   ImmutableList<ImmutableList<TableCell>> getRows();
 
   ImmutableList<TableColumnSetting> getColumnSettings();

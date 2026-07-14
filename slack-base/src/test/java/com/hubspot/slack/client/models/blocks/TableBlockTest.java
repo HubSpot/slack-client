@@ -28,6 +28,7 @@ public class TableBlockTest {
   private static final int COLUMN_SETTINGS_INDEX = 2;
   private static final int BLOCK_ID_INDEX = 3;
   private static final int UNKNOWN_CELL_INDEX = 4;
+  private static final int NULL_CELL_INDEX = 5;
   private static Table[] blocks;
 
   @BeforeClass
@@ -172,6 +173,17 @@ public class TableBlockTest {
       return;
     }
     fail("Expected IllegalStateException for too many column settings");
+  }
+
+  @Test
+  public void itDeserializesNullCellsAsBlankRawTextCells() {
+    assertThat(blocks[NULL_CELL_INDEX].getRows()).hasSize(1);
+    assertThat(blocks[NULL_CELL_INDEX].getRows().get(0))
+      .containsExactly(
+        RawTextTableCell.of("Name"),
+        RawTextTableCell.of(""),
+        RawTextTableCell.of("Department")
+      );
   }
 
   @Test
