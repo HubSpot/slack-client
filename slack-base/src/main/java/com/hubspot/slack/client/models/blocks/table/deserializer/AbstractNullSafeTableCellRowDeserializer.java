@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.common.collect.ImmutableList;
-import com.hubspot.slack.client.models.blocks.table.RawTextTableCell;
 import com.hubspot.slack.client.models.blocks.table.TableCell;
 import java.io.IOException;
 
@@ -22,14 +21,14 @@ abstract class AbstractNullSafeTableCellRowDeserializer<T extends TableCell>
   protected abstract T emptyCell();
 
   @Override
-  public ImmutableList<T> deserialize(JsonParser p, DeserializationContext ctxt)
+  public ImmutableList<T> deserialize(JsonParser parser, DeserializationContext context)
     throws IOException {
     ImmutableList.Builder<T> builder = ImmutableList.builder();
-    while (p.nextToken() != JsonToken.END_ARRAY) {
-      if (p.currentToken() == JsonToken.VALUE_NULL) {
+    while (parser.nextToken() != JsonToken.END_ARRAY) {
+      if (parser.currentToken() == JsonToken.VALUE_NULL) {
         builder.add(emptyCell());
       } else {
-        builder.add(ctxt.readValue(p, cellType));
+        builder.add(context.readValue(parser, cellType));
       }
     }
     return builder.build();
