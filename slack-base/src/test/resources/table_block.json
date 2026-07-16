@@ -62,5 +62,15 @@
         {"type": "future_slack_cell_type"}
       ]
     ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        {"type": "raw_text", "text": "Name"},
+        null,
+        {"type": "raw_text", "text": "Department"}
+      ]
+    ]
   }
 ]

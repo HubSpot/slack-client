@@ -3,12 +3,14 @@ package com.hubspot.slack.client.models.blocks;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.blocks.table.DataTableCell;
 import com.hubspot.slack.client.models.blocks.table.RawTextTableCell;
+import com.hubspot.slack.client.models.blocks.table.deserializer.NullSafeDataTableCellRowDeserializer;
 import java.util.Optional;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Check;
@@ -31,6 +33,7 @@ public interface DataTableIF extends Block {
   Optional<String> getCaption();
 
   @Value.Parameter(order = 2)
+  @JsonDeserialize(contentUsing = NullSafeDataTableCellRowDeserializer.class)
   ImmutableList<ImmutableList<DataTableCell>> getRows();
 
   @JsonProperty("page_size")
