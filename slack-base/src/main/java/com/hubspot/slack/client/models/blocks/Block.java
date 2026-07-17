@@ -33,6 +33,7 @@ import java.util.Optional;
     @JsonSubTypes.Type(value = Card.class, name = Card.TYPE),
     @JsonSubTypes.Type(value = Table.class, name = Table.TYPE),
     @JsonSubTypes.Type(value = DataTable.class, name = DataTable.TYPE),
+    @JsonSubTypes.Type(value = ContainerBlock.class, name = ContainerBlock.TYPE),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

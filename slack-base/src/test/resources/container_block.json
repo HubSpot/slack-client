@@ -1,0 +1,46 @@
+[
+  {
+    "type": "container",
+    "block_id": "block123",
+    "title": {
+      "type": "plain_text",
+      "text": "My Container"
+    },
+    "subtitle": {
+      "type": "mrkdwn",
+      "text": "A subtitle here"
+    },
+    "icon": {
+      "type": "image",
+      "image_url": "https://example.com/icon.png",
+      "alt_text": "icon"
+    },
+    "width": "wide",
+    "is_collapsible": true,
+    "default_collapsed": false,
+    "child_blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "Hello world"
+        }
+      },
+      {
+        "type": "divider"
+      }
+    ]
+  },
+  {
+    "type": "container",
+    "title": {
+      "type": "plain_text",
+      "text": "Minimal Container"
+    },
+    "child_blocks": [
+      {
+        "type": "divider"
+      }
+    ]
+  }
+]
