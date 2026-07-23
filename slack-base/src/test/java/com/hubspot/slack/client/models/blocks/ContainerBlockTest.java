@@ -20,6 +20,7 @@ public class ContainerBlockTest {
   private static final int FULL_BLOCK_INDEX = 0;
   private static final int MINIMAL_BLOCK_INDEX = 1;
   private static final int RICH_TEXT_TITLE_INDEX = 2;
+  private static final int HEADER_DIVIDER_INDEX = 3;
   private static ContainerBlock[] blocks;
 
   @BeforeClass
@@ -55,7 +56,7 @@ public class ContainerBlockTest {
     assertThat(block.getWidth()).hasValue(ContainerBlockWidth.WIDE);
     assertThat(block.isCollapsible()).hasValue(true);
     assertThat(block.isDefaultCollapsed()).hasValue(false);
-    assertThat(block.getHasHeaderDivider()).hasValue(true);
+    assertThat(block.getHasHeaderDivider()).isEmpty();
     assertThat(block.getChildBlocks()).hasSize(2);
     assertThat(block.getChildBlocks().get(0)).isInstanceOf(Section.class);
     assertThat(block.getChildBlocks().get(1)).isInstanceOf(Divider.class);
@@ -75,6 +76,13 @@ public class ContainerBlockTest {
     assertThat(block.isDefaultCollapsed()).isEmpty();
     assertThat(block.getHasHeaderDivider()).isEmpty();
     assertThat(block.getBlockId()).isEmpty();
+  }
+
+  @Test
+  public void itDeserializesHasHeaderDivider() {
+    ContainerBlock block = blocks[HEADER_DIVIDER_INDEX];
+    assertThat(block.getHasHeaderDivider()).hasValue(true);
+    assertThat(block.isCollapsible()).isEmpty();
   }
 
   @Test
@@ -162,6 +170,35 @@ public class ContainerBlockTest {
       )
       .isInstanceOf(IllegalStateException.class)
       .hasMessageContaining("child_blocks cannot exceed");
+  }
+
+  @Test
+  public void itFailsWhenDefaultCollapsedWithoutIsCollapsible() {
+    assertThatThrownBy(() ->
+        ContainerBlock
+          .builder()
+          .setTitle(Text.of(TextType.PLAIN_TEXT, "Title"))
+          .addChildBlocks(Divider.builder().build())
+          .setDefaultCollapsed(true)
+          .build()
+      )
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("default_collapsed requires is_collapsible");
+  }
+
+  @Test
+  public void itFailsWhenHasHeaderDividerOnCollapsibleBlock() {
+    assertThatThrownBy(() ->
+        ContainerBlock
+          .builder()
+          .setTitle(Text.of(TextType.PLAIN_TEXT, "Title"))
+          .addChildBlocks(Divider.builder().build())
+          .setCollapsible(true)
+          .setHasHeaderDivider(true)
+          .build()
+      )
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("has_header_divider does not apply to collapsible blocks");
   }
 
   @Test

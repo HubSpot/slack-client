@@ -18,7 +18,6 @@
     "width": "wide",
     "is_collapsible": true,
     "default_collapsed": false,
-    "has_header_divider": true,
     "child_blocks": [
       {
         "type": "section",
@@ -60,6 +59,19 @@
         }
       ]
     },
+    "child_blocks": [
+      {
+        "type": "divider"
+      }
+    ]
+  },
+  {
+    "type": "container",
+    "title": {
+      "type": "plain_text",
+      "text": "Non-collapsible Container"
+    },
+    "has_header_divider": true,
     "child_blocks": [
       {
         "type": "divider"

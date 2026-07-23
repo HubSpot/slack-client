@@ -87,5 +87,13 @@ public interface ContainerBlockIF extends Block {
       getChildBlocks().stream().noneMatch(b -> TYPE.equals(b.getType())),
       "child_blocks cannot contain container blocks"
     );
+    Preconditions.checkState(
+      !isDefaultCollapsed().orElse(false) || isCollapsible().orElse(false),
+      "default_collapsed requires is_collapsible to be true"
+    );
+    Preconditions.checkState(
+      !isCollapsible().orElse(false) || !getHasHeaderDivider().orElse(false),
+      "has_header_divider does not apply to collapsible blocks"
+    );
   }
 }
