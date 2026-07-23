@@ -19,6 +19,7 @@ public class ContainerBlockTest {
   private static final ObjectMapper MAPPER = ObjectMapperUtils.mapper();
   private static final int FULL_BLOCK_INDEX = 0;
   private static final int MINIMAL_BLOCK_INDEX = 1;
+  private static final int RICH_TEXT_TITLE_INDEX = 2;
   private static ContainerBlock[] blocks;
 
   @BeforeClass
@@ -43,8 +44,9 @@ public class ContainerBlockTest {
   public void itDeserializesAllFields() {
     ContainerBlock block = blocks[FULL_BLOCK_INDEX];
     assertThat(block.getBlockId()).hasValue("block123");
-    assertThat(block.getTitle().getText()).isEqualTo("My Container");
-    assertThat(block.getTitle().getType()).isEqualTo(TextType.PLAIN_TEXT);
+    assertThat(block.getTitle()).isPresent();
+    assertThat(block.getTitle().get().getText()).isEqualTo("My Container");
+    assertThat(block.getTitle().get().getType()).isEqualTo(TextType.PLAIN_TEXT);
     assertThat(block.getSubtitle()).isPresent();
     assertThat(block.getSubtitle().get().getText()).isEqualTo("A subtitle here");
     assertThat(block.getIcon()).isPresent();
@@ -53,6 +55,7 @@ public class ContainerBlockTest {
     assertThat(block.getWidth()).hasValue(ContainerBlockWidth.WIDE);
     assertThat(block.isCollapsible()).hasValue(true);
     assertThat(block.isDefaultCollapsed()).hasValue(false);
+    assertThat(block.getHasHeaderDivider()).hasValue(true);
     assertThat(block.getChildBlocks()).hasSize(2);
     assertThat(block.getChildBlocks().get(0)).isInstanceOf(Section.class);
     assertThat(block.getChildBlocks().get(1)).isInstanceOf(Divider.class);
@@ -61,14 +64,24 @@ public class ContainerBlockTest {
   @Test
   public void itDeserializesMinimalBlock() {
     ContainerBlock block = blocks[MINIMAL_BLOCK_INDEX];
-    assertThat(block.getTitle().getText()).isEqualTo("Minimal Container");
+    assertThat(block.getTitle()).isPresent();
+    assertThat(block.getTitle().get().getText()).isEqualTo("Minimal Container");
     assertThat(block.getChildBlocks()).hasSize(1);
+    assertThat(block.getRichTextTitle()).isEmpty();
     assertThat(block.getSubtitle()).isEmpty();
     assertThat(block.getIcon()).isEmpty();
     assertThat(block.getWidth()).isEmpty();
     assertThat(block.isCollapsible()).isEmpty();
     assertThat(block.isDefaultCollapsed()).isEmpty();
+    assertThat(block.getHasHeaderDivider()).isEmpty();
     assertThat(block.getBlockId()).isEmpty();
+  }
+
+  @Test
+  public void itDeserializesRichTextTitle() {
+    ContainerBlock block = blocks[RICH_TEXT_TITLE_INDEX];
+    assertThat(block.getTitle()).isEmpty();
+    assertThat(block.getRichTextTitle()).isPresent();
   }
 
   @Test
@@ -81,6 +94,28 @@ public class ContainerBlockTest {
     String serialized = MAPPER.writeValueAsString(original);
     ContainerBlock deserialized = MAPPER.readValue(serialized, ContainerBlock.class);
     assertThat(deserialized).isEqualTo(original);
+  }
+
+  @Test
+  public void itFailsWhenNeitherTitleNorRichTextTitlePresent() {
+    assertThatThrownBy(() ->
+        ContainerBlock.builder().addChildBlocks(Divider.builder().build()).build()
+      )
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("must have either title or rich_text_title");
+  }
+
+  @Test
+  public void itFailsWhenTitleTypeIsNotPlainText() {
+    assertThatThrownBy(() ->
+        ContainerBlock
+          .builder()
+          .setTitle(Text.of(TextType.MARKDOWN, "Title"))
+          .addChildBlocks(Divider.builder().build())
+          .build()
+      )
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("plain_text formatting");
   }
 
   @Test
@@ -127,5 +162,23 @@ public class ContainerBlockTest {
       )
       .isInstanceOf(IllegalStateException.class)
       .hasMessageContaining("child_blocks cannot exceed");
+  }
+
+  @Test
+  public void itFailsWhenChildBlockIsContainerBlock() {
+    ContainerBlock inner = ContainerBlock
+      .builder()
+      .setTitle(Text.of(TextType.PLAIN_TEXT, "Inner"))
+      .addChildBlocks(Divider.builder().build())
+      .build();
+    assertThatThrownBy(() ->
+        ContainerBlock
+          .builder()
+          .setTitle(Text.of(TextType.PLAIN_TEXT, "Outer"))
+          .addChildBlocks(inner)
+          .build()
+      )
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("cannot contain container blocks");
   }
 }

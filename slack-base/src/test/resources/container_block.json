@@ -18,6 +18,7 @@
     "width": "wide",
     "is_collapsible": true,
     "default_collapsed": false,
+    "has_header_divider": true,
     "child_blocks": [
       {
         "type": "section",
@@ -36,6 +37,28 @@
     "title": {
       "type": "plain_text",
       "text": "Minimal Container"
+    },
+    "child_blocks": [
+      {
+        "type": "divider"
+      }
+    ]
+  },
+  {
+    "type": "container",
+    "rich_text_title": {
+      "type": "rich_text",
+      "elements": [
+        {
+          "type": "rich_text_section",
+          "elements": [
+            {
+              "type": "text",
+              "text": "Rich text title"
+            }
+          ]
+        }
+      ]
     },
     "child_blocks": [
       {
