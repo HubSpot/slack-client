@@ -12,7 +12,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ImageIF extends Block, ImageBlockOrText {
+public interface ImageIF extends Block, ImageBlockOrText, ContainerChildBlock {
   String TYPE = "image";
 
   @Override

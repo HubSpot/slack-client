@@ -157,7 +157,7 @@ public class ContainerBlockTest {
 
   @Test
   public void itFailsWhenChildBlocksExceedMaxCount() {
-    ImmutableList.Builder<Block> childBlocks = ImmutableList.builder();
+    ImmutableList.Builder<ContainerChildBlock> childBlocks = ImmutableList.builder();
     for (int i = 0; i < 11; i++) {
       childBlocks.add(Divider.builder().build());
     }
@@ -199,23 +199,5 @@ public class ContainerBlockTest {
       )
       .isInstanceOf(IllegalStateException.class)
       .hasMessageContaining("has_header_divider does not apply to collapsible blocks");
-  }
-
-  @Test
-  public void itFailsWhenChildBlockIsContainerBlock() {
-    ContainerBlock inner = ContainerBlock
-      .builder()
-      .setTitle(Text.of(TextType.PLAIN_TEXT, "Inner"))
-      .addChildBlocks(Divider.builder().build())
-      .build();
-    assertThatThrownBy(() ->
-        ContainerBlock
-          .builder()
-          .setTitle(Text.of(TextType.PLAIN_TEXT, "Outer"))
-          .addChildBlocks(inner)
-          .build()
-      )
-      .isInstanceOf(IllegalStateException.class)
-      .hasMessageContaining("cannot contain container blocks");
   }
 }

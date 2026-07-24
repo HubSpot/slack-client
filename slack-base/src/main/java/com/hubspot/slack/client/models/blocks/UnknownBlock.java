@@ -2,7 +2,7 @@ package com.hubspot.slack.client.models.blocks;
 
 import java.util.Optional;
 
-public class UnknownBlock implements Block {
+public class UnknownBlock implements Block, ContainerChildBlock {
 
   public static final String TYPE = "unknown";
 

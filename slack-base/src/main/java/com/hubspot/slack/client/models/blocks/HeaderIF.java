@@ -13,7 +13,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface HeaderIF extends Block {
+public interface HeaderIF extends Block, ContainerChildBlock {
   String TYPE = "header";
 
   @Override

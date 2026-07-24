@@ -33,7 +33,7 @@ public interface ContainerBlockIF extends Block {
 
   Optional<RichTextBlock> getRichTextTitle();
 
-  ImmutableList<Block> getChildBlocks();
+  ImmutableList<ContainerChildBlock> getChildBlocks();
 
   Optional<Text> getSubtitle();
 
@@ -82,10 +82,6 @@ public interface ContainerBlockIF extends Block {
       BlockElementLengthLimits.MAX_CONTAINER_CHILD_BLOCKS.getLimit(),
       "child_blocks cannot exceed %s blocks",
       BlockElementLengthLimits.MAX_CONTAINER_CHILD_BLOCKS.getLimit()
-    );
-    Preconditions.checkState(
-      getChildBlocks().stream().noneMatch(b -> TYPE.equals(b.getType())),
-      "child_blocks cannot contain container blocks"
     );
     Preconditions.checkState(
       !isDefaultCollapsed().orElse(false) || isCollapsible().orElse(false),
