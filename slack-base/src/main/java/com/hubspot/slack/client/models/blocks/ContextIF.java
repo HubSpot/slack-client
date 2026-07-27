@@ -13,7 +13,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface ContextIF extends Block {
+public interface ContextIF extends Block, ContainerChildBlock {
   String TYPE = "context";
 
   @Override

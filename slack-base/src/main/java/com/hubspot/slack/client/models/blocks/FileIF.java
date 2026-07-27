@@ -9,7 +9,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface FileIF extends Block {
+public interface FileIF extends Block, ContainerChildBlock {
   String TYPE = "file";
 
   @Override

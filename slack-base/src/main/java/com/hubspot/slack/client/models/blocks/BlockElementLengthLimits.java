@@ -20,7 +20,8 @@ public enum BlockElementLengthLimits {
   MAX_TABLE_COLUMNS(20),
   MAX_TABLE_BLOCK_ID_LENGTH(255),
   MIN_DATA_TABLE_ROWS(2),
-  MAX_DATA_TABLE_PAGE_SIZE(100);
+  MAX_DATA_TABLE_PAGE_SIZE(100),
+  MAX_CONTAINER_CHILD_BLOCKS(10);
 
   private final int limit;
 

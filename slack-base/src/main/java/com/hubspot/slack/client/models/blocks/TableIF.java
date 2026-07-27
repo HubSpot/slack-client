@@ -16,7 +16,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface TableIF extends Block {
+public interface TableIF extends Block, ContainerChildBlock {
   String TYPE = "table";
 
   @Override

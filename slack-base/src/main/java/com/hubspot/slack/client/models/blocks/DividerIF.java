@@ -9,7 +9,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface DividerIF extends Block {
+public interface DividerIF extends Block, ContainerChildBlock {
   String TYPE = "divider";
 
   @Override

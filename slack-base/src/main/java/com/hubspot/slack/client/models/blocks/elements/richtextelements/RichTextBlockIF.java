@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
 import com.hubspot.slack.client.models.blocks.Block;
+import com.hubspot.slack.client.models.blocks.ContainerChildBlock;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
@@ -16,7 +17,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface RichTextBlockIF extends Block {
+public interface RichTextBlockIF extends Block, ContainerChildBlock {
   String TYPE = "rich_text";
 
   @Override
