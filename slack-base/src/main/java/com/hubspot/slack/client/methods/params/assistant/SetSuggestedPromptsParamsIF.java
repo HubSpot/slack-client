@@ -17,7 +17,7 @@ public interface SetSuggestedPromptsParamsIF extends HasChannel {
     return getChannelId();
   }
 
-  String getThreadTs();
+  Optional<String> getThreadTs();
 
   Optional<String> getTitle();
 
