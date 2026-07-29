@@ -11,6 +11,7 @@ import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public interface SetSuggestedPromptsParamsIF extends HasChannel {
   @Value.Derived
@@ -18,10 +19,8 @@ public interface SetSuggestedPromptsParamsIF extends HasChannel {
     return getChannelId();
   }
 
-  @JsonInclude(JsonInclude.Include.NON_ABSENT)
   Optional<String> getThreadTs();
 
-  @JsonInclude(JsonInclude.Include.NON_ABSENT)
   Optional<String> getTitle();
 
   List<Prompt> getPrompts();
