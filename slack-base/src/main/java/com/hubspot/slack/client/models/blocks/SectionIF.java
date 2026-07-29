@@ -47,6 +47,10 @@ public interface SectionIF extends Block, ContainerChildBlock {
       hasNonEmptyTextField || hasFields,
       "Must include text if not providing a list of fields"
     );
+    Preconditions.checkState(
+      getFields().size() <= 10,
+      "A Section block cannot have more than 10 fields"
+    );
     boolean fieldsTextLengthValid =
       hasFields && getFields().stream().allMatch(item -> item.getText().length() <= 3000);
     boolean textLengthValid = getText() != null && getText().getText().length() <= 3000;
