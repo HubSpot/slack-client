@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.methods.params.assistant;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -10,6 +11,7 @@ import org.immutables.value.Value;
 
 @Value.Immutable
 @HubSpotStyle
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public interface SetSuggestedPromptsParamsIF extends HasChannel {
   @Value.Derived
