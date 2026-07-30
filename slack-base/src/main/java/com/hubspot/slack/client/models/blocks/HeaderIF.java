@@ -33,10 +33,10 @@ public interface HeaderIF extends Block, ContainerChildBlock {
       "The text type of a Header block must be plain_text"
     );
 
-    boolean isTextLengthValid = getText().getText().length() <= 3000;
+    boolean isTextLengthValid = getText().getText().length() <= 150;
     Preconditions.checkState(
       isTextLengthValid,
-      "The text length of a Header block cannot exceed 3000 characters"
+      "The text length of a Header block cannot exceed 150 characters"
     );
   }
 }
