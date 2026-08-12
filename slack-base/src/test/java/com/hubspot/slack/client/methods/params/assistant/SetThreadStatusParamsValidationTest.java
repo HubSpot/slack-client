@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.hubspot.immutables.validation.InvalidImmutableStateException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.Test;
@@ -58,6 +59,38 @@ public class SetThreadStatusParamsValidationTest {
       )
       .isInstanceOf(InvalidImmutableStateException.class)
       .hasMessageContaining("loadingMessages");
+  }
+
+  @Test
+  public void itBuildsWithOptionalFields() {
+    assertThatCode(() ->
+        SetThreadStatusParams
+          .builder()
+          .setChannelId(CHANNEL_ID)
+          .setThreadTs(THREAD_TS)
+          .setStatus(STATUS)
+          .setIconEmoji(Optional.of(":robot_face:"))
+          .setUsername(Optional.of("My Bot"))
+          .build()
+      )
+      .doesNotThrowAnyException();
+  }
+
+  @Test
+  public void itFailsToBuildWithBothIconEmojiAndIconUrl() {
+    assertThatThrownBy(() ->
+        SetThreadStatusParams
+          .builder()
+          .setChannelId(CHANNEL_ID)
+          .setThreadTs(THREAD_TS)
+          .setStatus(STATUS)
+          .setIconEmoji(Optional.of(":robot_face:"))
+          .setIconUrl(Optional.of("https://example.com/icon.png"))
+          .build()
+      )
+      .isInstanceOf(InvalidImmutableStateException.class)
+      .hasMessageContaining("iconEmoji")
+      .hasMessageContaining("iconUrl");
   }
 
   private static Iterable<String> loadingMessages(int count) {

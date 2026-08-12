@@ -36,11 +36,19 @@ public interface SetThreadStatusParamsIF extends HasChannel {
   Optional<String> getUsername();
 
   @Value.Check
-  default void loadingMessagesWithinLimit() {
+  default void checkLoadingMessagesWithinLimit() {
     ImmutableConditions.checkValid(
       getLoadingMessages().size() <= MAX_LOADING_MESSAGES,
       "loadingMessages cannot contain more than %s messages",
       MAX_LOADING_MESSAGES
+    );
+  }
+
+  @Value.Check
+  default void checkIconNotBothPresent() {
+    ImmutableConditions.checkValid(
+      !(getIconEmoji().isPresent() && getIconUrl().isPresent()),
+      "Only one of iconEmoji or iconUrl may be set"
     );
   }
 }
