@@ -60,6 +60,13 @@ public class SlackFileDeserializerTest {
   }
 
   @Test
+  public void shouldDeserializeZipFileType() throws IOException {
+    SlackFile file = fetchAndDeserializeSlackFile("file_zip.json");
+    assertEquals(SlackFileType.ZIP, file.getFiletype());
+    assertTrue(file instanceof SlackZipFile);
+  }
+
+  @Test
   public void shouldDeserializeUnknownFile() throws IOException {
     SlackFile file = fetchAndDeserializeSlackFile("file_unknown_type.json");
     assertEquals(SlackFileType.UNKNOWN, file.getFiletype());

@@ -10,7 +10,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-@JsonDeserialize(as = SlackGdocFile.class)
+@JsonDeserialize(as = SlackZipFile.class)
 public interface SlackZipFileIF extends SlackFile {
   @Default
   @Override
