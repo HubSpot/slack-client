@@ -1,13 +1,22 @@
 package com.hubspot.slack.client.guice;
 
 import com.google.inject.AbstractModule;
+import com.hubspot.slack.client.SlackClientFactory;
+import com.hubspot.slack.client.SlackWebClient;
+import com.hubspot.slack.client.http.NioHttpClient;
+import com.hubspot.slack.client.http.NioHttpClientFactory;
 import com.hubspot.slack.client.request.verifier.SlackRequestVerifierModule;
 
 public class SlackClientModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    install(new com.hubspot.slack.client.SlackClientModule());
+    bind(NioHttpClientFactory.class).toInstance(NioHttpClientFactory.defaultFactory());
+    bind(NioHttpClient.Factory.class).toInstance(NioHttpClientFactory.defaultFactory());
+
+    bind(SlackClientFactory.class).toInstance(SlackClientFactory.defaultFactory());
+    bind(SlackWebClient.Factory.class).toInstance(SlackClientFactory.defaultFactory());
+
     install(new SlackRequestVerifierModule());
   }
 
