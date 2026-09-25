@@ -3,6 +3,8 @@ package com.hubspot.slack.client.models.blocks.elements;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.models.blocks.SlackFileObject;
+import java.util.Optional;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
@@ -19,8 +21,10 @@ public interface ImageIF extends BlockElement {
   }
 
   @Value.Parameter
-  String getImageUrl();
+  Optional<String> getImageUrl();
 
   @Value.Parameter
   String getAltText();
+
+  Optional<SlackFileObject> getSlackFile();
 }
