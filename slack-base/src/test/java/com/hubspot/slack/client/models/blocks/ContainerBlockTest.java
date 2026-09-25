@@ -52,7 +52,7 @@ public class ContainerBlockTest {
     assertThat(block.getSubtitle().get().getText()).isEqualTo("A subtitle here");
     assertThat(block.getIcon()).isPresent();
     assertThat(block.getIcon().get().getImageUrl())
-      .isEqualTo("https://example.com/icon.png");
+      .contains("https://example.com/icon.png");
     assertThat(block.getWidth()).hasValue(ContainerBlockWidth.WIDE);
     assertThat(block.isCollapsible()).hasValue(true);
     assertThat(block.isDefaultCollapsed()).hasValue(false);
