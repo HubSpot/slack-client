@@ -15,6 +15,7 @@ import com.hubspot.slack.client.models.blocks.objects.SlackIconObject;
 import com.hubspot.slack.client.models.blocks.objects.Text;
 import com.hubspot.slack.client.models.blocks.objects.TextType;
 import java.io.IOException;
+import java.util.Optional;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -91,7 +92,7 @@ public class CardBlockTest {
     Card block = blocks[HERO_IMAGE_INDEX];
     assertThat(block.getHeroImage()).isPresent();
     Image heroImage = block.getHeroImage().get();
-    assertThat(heroImage.getImageUrl()).isEqualTo("https://example.com/hero.png");
+    assertThat(heroImage.getImageUrl()).contains("https://example.com/hero.png");
     assertThat(heroImage.getAltText()).isEqualTo("Sample hero image");
   }
 
@@ -100,7 +101,7 @@ public class CardBlockTest {
     Card block = blocks[ICON_WITH_ACTIONS_INDEX];
     assertThat(block.getIcon()).isPresent();
     Image icon = block.getIcon().get();
-    assertThat(icon.getImageUrl()).isEqualTo("https://example.com/icon.png");
+    assertThat(icon.getImageUrl()).contains("https://example.com/icon.png");
     assertThat(icon.getAltText()).isEqualTo("Icon");
   }
 
@@ -147,7 +148,7 @@ public class CardBlockTest {
         Card
           .builder()
           .setTitle(Text.of(TextType.MARKDOWN, "Title"))
-          .setIcon(Image.of("https://example.com/icon.png", "icon"))
+          .setIcon(Image.of(Optional.of("https://example.com/icon.png"), "icon"))
           .setSlackIcon(SlackIconObject.of(SlackIconName.ROCKET))
           .build()
       )
