@@ -26,6 +26,47 @@ public class SlackUserDeserializationTest {
   }
 
   @Test
+  public void externalTeamIdDeserializesAndMarksUserExternal() throws IOException {
+    SlackUser user = ObjectMapperUtils
+      .mapper()
+      .readValue(
+        "{\"id\":\"U123\",\"team_id\":\"TSCOPE\",\"external_team_id\":\"TORIGIN\"}",
+        SlackUser.class
+      );
+
+    assertThat(user.getExternalTeamId()).contains("TORIGIN");
+    assertThat(user.isExternal()).isTrue();
+  }
+
+  @Test
+  public void userWithoutExternalTeamIdIsNotExternal() throws IOException {
+    SlackUser user = getSlackUser();
+
+    assertThat(user.getExternalTeamId()).isEmpty();
+    assertThat(user.isExternal()).isFalse();
+  }
+
+  @Test
+  public void derivedIsExternalIsNotSerialized() throws IOException {
+    SlackUser user = SlackUser
+      .builder()
+      .setId("U123")
+      .setExternalTeamId("TORIGIN")
+      .build();
+
+    String json = ObjectMapperUtils.mapper().writeValueAsString(user);
+
+    // externalTeamId is persisted; the derived isExternal() must not leak into JSON
+    assertThat(json).contains("external_team_id");
+    assertThat(json).doesNotContain("is_external");
+    assertThat(json).doesNotContain("\"external\"");
+
+    SlackUser roundTripped = ObjectMapperUtils.mapper().readValue(json, SlackUser.class);
+    assertThat(roundTripped.getExternalTeamId()).contains("TORIGIN");
+    assertThat(roundTripped.isExternal()).isTrue();
+  }
+
+  @Test
   public void usersWithArrayProfileFieldsDeserializeCorrectly() throws IOException {
     SlackUser user = getUserWithArrayProfileFieldsType();
     assertThat(user.getProfile()).isPresent().describedAs("User profile is missing");
