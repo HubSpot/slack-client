@@ -21,7 +21,7 @@ public interface ImageIF extends BlockElement {
   }
 
   @Value.Parameter
-  String getImageUrl();
+  Optional<String> getImageUrl();
 
   @Value.Parameter
   String getAltText();
