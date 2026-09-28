@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
-import java.util.List;
 import java.util.Optional;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
@@ -31,7 +31,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
    * (files.completeUploadExternal with no channel_id) so Slack doesn't post a separate file
    * message. Slack replaces the message's blocks on update, so re-send the existing blocks too.
    */
-  List<String> getFileIds();
+  ImmutableList<String> getFileIds();
 
   @JsonInclude(JsonInclude.Include.NON_ABSENT)
   @JsonProperty("as_user")
