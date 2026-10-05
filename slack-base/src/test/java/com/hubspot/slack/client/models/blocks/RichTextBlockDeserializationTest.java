@@ -13,6 +13,7 @@ import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichText
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextColorElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextDateElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextEmojiElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextFileElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextLinkElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextMessageMentionElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextSection;
@@ -42,6 +43,7 @@ public class RichTextBlockDeserializationTest {
   private static final int SECTION_WITH_ATTACHMENT_MENTION_ELEMENT_INDEX = 11;
   private static final int SECTION_WITH_TEAM_ELEMENT_INDEX = 12;
   private static final int SECTION_WITH_MESSAGE_MENTION_ELEMENT_INDEX = 13;
+  private static final int SECTION_WITH_FILE_ELEMENT_INDEX = 14;
   private static RichTextSection[] sections;
 
   @BeforeClass
@@ -182,6 +184,19 @@ public class RichTextBlockDeserializationTest {
           .setMessageTs("1234567890.123456")
           .setAuthorId("U123ABC456")
           .setText("a message")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesFileElement() {
+    assertThat(sections[SECTION_WITH_FILE_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextFileElement
+          .builder()
+          .setFileId("F123ABC456")
+          .setText("the file")
+          .setStyle(RichTextFileElement.Style.builder().setBold(true).build())
           .build()
       );
   }

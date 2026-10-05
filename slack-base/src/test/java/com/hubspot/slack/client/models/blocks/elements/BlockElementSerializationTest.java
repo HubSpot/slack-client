@@ -33,6 +33,11 @@ public class BlockElementSerializationTest extends SerializationTestBase {
   }
 
   @Test
+  public void testFileRichTextSerialization() throws IOException {
+    testSerialization("file_rich_text.json", Block[].class);
+  }
+
+  @Test
   public void testUnknownBlockSerialization() throws IOException {
     String rawJson = JsonLoader.loadJsonFromFile("unknown_block_element.json");
     Section section = ObjectMapperUtils.mapper().readValue(rawJson, Section.class);

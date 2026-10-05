@@ -60,6 +60,10 @@ import com.hubspot.slack.client.models.blocks.elements.BlockElement;
       value = RichTextMessageMentionElement.class,
       name = RichTextMessageMentionElement.TYPE
     ),
+    @JsonSubTypes.Type(
+      value = RichTextFileElement.class,
+      name = RichTextFileElement.TYPE
+    ),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

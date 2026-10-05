@@ -1,0 +1,27 @@
+[
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "file",
+            "file_id": "F123ABC456",
+            "text": "the file",
+            "url": "https://example.com/file",
+            "is_skill_invocation": true,
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

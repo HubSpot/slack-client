@@ -247,5 +247,21 @@
         ]
       }
     ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "file",
+            "file_id": "F123ABC456",
+            "text": "the file",
+            "style": { "bold": true }
+          }
+        ]
+      }
+    ]
   }
 ]
