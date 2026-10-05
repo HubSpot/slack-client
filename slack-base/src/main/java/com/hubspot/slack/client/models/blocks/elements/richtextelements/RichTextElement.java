@@ -64,6 +64,39 @@ import com.hubspot.slack.client.models.blocks.elements.BlockElement;
       value = RichTextFileElement.class,
       name = RichTextFileElement.TYPE
     ),
+    @JsonSubTypes.Type(value = RichTextTagElement.class, name = RichTextTagElement.TYPE),
+    @JsonSubTypes.Type(
+      value = RichTextListRecordElement.class,
+      name = RichTextListRecordElement.TYPE
+    ),
+    @JsonSubTypes.Type(
+      value = RichTextWorkObjectMentionElement.class,
+      name = RichTextWorkObjectMentionElement.TYPE
+    ),
+    @JsonSubTypes.Type(
+      value = RichTextWorkflowMentionElement.class,
+      name = RichTextWorkflowMentionElement.TYPE
+    ),
+    @JsonSubTypes.Type(
+      value = RichTextSalesforceDataFieldElement.class,
+      name = RichTextSalesforceDataFieldElement.TYPE
+    ),
+    @JsonSubTypes.Type(
+      value = RichTextCanvasElement.class,
+      name = RichTextCanvasElement.TYPE
+    ),
+    @JsonSubTypes.Type(
+      value = RichTextCanvasUserMentionElement.class,
+      name = RichTextCanvasUserMentionElement.TYPE
+    ),
+    @JsonSubTypes.Type(
+      value = RichTextCanvasMessageUnfurlElement.class,
+      name = RichTextCanvasMessageUnfurlElement.TYPE
+    ),
+    @JsonSubTypes.Type(
+      value = RichTextCitationElement.class,
+      name = RichTextCitationElement.TYPE
+    ),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

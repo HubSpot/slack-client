@@ -38,6 +38,34 @@ public class BlockElementSerializationTest extends SerializationTestBase {
   }
 
   @Test
+  public void testRichTextElementsBatchSerialization() throws IOException {
+    testSerialization("rich_text_elements_batch.json", Block[].class);
+  }
+
+  @Test
+  public void testInteractiveElementsBatchSerialization() throws IOException {
+    testSerialization("interactive_elements_batch.json", BlockElement[].class);
+  }
+
+  @Test
+  public void testCitationRichTextSerialization() throws IOException {
+    testSerialization("citation_rich_text.json", Block[].class);
+  }
+
+  @Test
+  public void testInteractiveElementsDeserializeToExpectedTypes() throws IOException {
+    BlockElement[] elements = ObjectMapperUtils
+      .mapper()
+      .readValue(
+        JsonLoader.loadJsonFromFile("interactive_elements_batch.json"),
+        BlockElement[].class
+      );
+    assertThat(elements[0]).isInstanceOf(FileInput.class);
+    assertThat(elements[1]).isInstanceOf(RichTextInput.class);
+    assertThat(elements[2]).isInstanceOf(WorkflowButton.class);
+  }
+
+  @Test
   public void testUnknownBlockSerialization() throws IOException {
     String rawJson = JsonLoader.loadJsonFromFile("unknown_block_element.json");
     Section section = ObjectMapperUtils.mapper().readValue(rawJson, Section.class);

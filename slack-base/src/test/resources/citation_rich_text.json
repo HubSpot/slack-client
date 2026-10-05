@@ -1,0 +1,69 @@
+[
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "citation",
+            "url": "https://example.com/doc",
+            "text": "File source",
+            "index": 1,
+            "details": {
+              "citation_type": "file",
+              "descriptor": "notes.txt",
+              "file_id": "F999"
+            },
+            "from_llm": true,
+            "is_slack_url": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "citation",
+            "url": "https://example.com/web",
+            "text": "Web source",
+            "index": 2,
+            "details": {
+              "citation_type": "web",
+              "display_name": "Example",
+              "title": "Example Page",
+              "snippet": "a snippet"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "citation",
+            "url": "https://slack.com/archives/C1/p123",
+            "text": "Message source",
+            "index": 3,
+            "details": {
+              "citation_type": "message",
+              "channel": "C123ABC456",
+              "message_ts": "1234567890.123456"
+            },
+            "is_slack_url": true
+          }
+        ]
+      }
+    ]
+  }
+]
