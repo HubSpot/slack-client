@@ -185,6 +185,13 @@ public interface SlackClient extends Closeable, SlackChatStreamClient {
 
   // users
   Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers();
+
+  default Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers(
+    String teamId
+  ) {
+    throw new UnsupportedOperationException();
+  }
+
   CompletableFuture<Result<UsersListResponse, SlackError>> listUsersPaginated(
     UsersListParams params
   );
