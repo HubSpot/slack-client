@@ -48,6 +48,10 @@ import com.hubspot.slack.client.models.blocks.elements.BlockElement;
       value = RichTextEmojiElement.class,
       name = RichTextEmojiElement.TYPE
     ),
+    @JsonSubTypes.Type(
+      value = RichTextAttachmentMentionElement.class,
+      name = RichTextAttachmentMentionElement.TYPE
+    ),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

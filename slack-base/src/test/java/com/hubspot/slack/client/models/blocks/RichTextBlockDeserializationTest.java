@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextAttachmentMentionElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextBroadcastElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextBroadcastRange;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextChannelElement;
@@ -36,6 +37,7 @@ public class RichTextBlockDeserializationTest {
   private static final int SECTION_WITH_USERGROUP_ELEMENT_INDEX = 8;
   private static final int SECTION_WITH_MULTIPLE_ELEMENTS_INDEX = 9;
   private static final int SECTION_WITH_UNKNOWN_ELEMENT_INDEX = 10;
+  private static final int SECTION_WITH_ATTACHMENT_MENTION_ELEMENT_INDEX = 11;
   private static RichTextSection[] sections;
 
   @BeforeClass
@@ -131,6 +133,26 @@ public class RichTextBlockDeserializationTest {
     assertThat(sections[SECTION_WITH_USERGROUP_ELEMENT_INDEX].getElements())
       .containsExactly(
         RichTextUserGroupElement.builder().setUserGroupId("G123ABC456").build()
+      );
+  }
+
+  @Test
+  public void itDeserializesAttachmentMentionElement() {
+    assertThat(sections[SECTION_WITH_ATTACHMENT_MENTION_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextAttachmentMentionElement
+          .builder()
+          .setUrl("https://example.com/attachment")
+          .setText("Fallback text")
+          .setAppId("A123ABC456")
+          .setStyle(
+            RichTextAttachmentMentionElement.Style
+              .builder()
+              .setBold(true)
+              .setClientHighlight(true)
+              .build()
+          )
+          .build()
       );
   }
 

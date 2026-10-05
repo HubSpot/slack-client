@@ -1,0 +1,35 @@
+[
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "attachment_mention",
+            "url": "https://example.com/attachment",
+            "text": "Fallback text",
+            "app_id": "A123ABC456",
+            "entity_id": "E123ABC456",
+            "icon_url": "https://example.com/icon.png",
+            "channel_id": "C123ABC456",
+            "ts": "1234567890.123456",
+            "full_size_preview_enabled": true,
+            "icon_name": "sf-account",
+            "reference_object_type": "record",
+            "product_name": "Google Docs",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

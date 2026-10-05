@@ -193,5 +193,25 @@
         ]
       }
     ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "attachment_mention",
+            "url": "https://example.com/attachment",
+            "text": "Fallback text",
+            "app_id": "A123ABC456",
+            "style": {
+              "bold": true,
+              "client_highlight": true
+            }
+          }
+        ]
+      }
+    ]
   }
 ]

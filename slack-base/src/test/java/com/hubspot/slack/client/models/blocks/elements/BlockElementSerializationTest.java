@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.hubspot.slack.client.SerializationTestBase;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
+import com.hubspot.slack.client.models.blocks.Block;
 import com.hubspot.slack.client.models.blocks.Section;
 import java.io.IOException;
 import org.junit.Test;
@@ -14,6 +15,11 @@ public class BlockElementSerializationTest extends SerializationTestBase {
   @Test
   public void testBlockSerialization() throws IOException {
     testSerialization("block_elements.json", BlockElement[].class);
+  }
+
+  @Test
+  public void testAttachmentMentionRichTextSerialization() throws IOException {
+    testSerialization("attachment_mention_rich_text.json", Block[].class);
   }
 
   @Test
