@@ -1,0 +1,30 @@
+[
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "message_mention",
+            "channel_id": "C123ABC456",
+            "message_ts": "1234567890.123456",
+            "author_id": "U123ABC456",
+            "thread_ts": "1234567890.000001",
+            "text": "a message",
+            "url": "https://example.com/message",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

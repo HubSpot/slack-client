@@ -187,8 +187,8 @@
         "type": "rich_text_section",
         "elements": [
           {
-            "type": "message_mention",
-            "message_id": "1234567890.123456"
+            "type": "unsupported_rich_text_element",
+            "some_field": "some_value"
           }
         ]
       }
@@ -209,6 +209,40 @@
               "bold": true,
               "client_highlight": true
             }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "team",
+            "team_id": "T123ABC456",
+            "style": {
+              "bold": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "message_mention",
+            "channel_id": "C123ABC456",
+            "message_ts": "1234567890.123456",
+            "author_id": "U123ABC456",
+            "text": "a message"
           }
         ]
       }

@@ -14,7 +14,9 @@ import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichText
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextDateElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextEmojiElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextLinkElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextMessageMentionElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextSection;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextTeamElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextTextElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextUserElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextUserGroupElement;
@@ -38,6 +40,8 @@ public class RichTextBlockDeserializationTest {
   private static final int SECTION_WITH_MULTIPLE_ELEMENTS_INDEX = 9;
   private static final int SECTION_WITH_UNKNOWN_ELEMENT_INDEX = 10;
   private static final int SECTION_WITH_ATTACHMENT_MENTION_ELEMENT_INDEX = 11;
+  private static final int SECTION_WITH_TEAM_ELEMENT_INDEX = 12;
+  private static final int SECTION_WITH_MESSAGE_MENTION_ELEMENT_INDEX = 13;
   private static RichTextSection[] sections;
 
   @BeforeClass
@@ -152,6 +156,32 @@ public class RichTextBlockDeserializationTest {
               .setClientHighlight(true)
               .build()
           )
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesTeamElement() {
+    assertThat(sections[SECTION_WITH_TEAM_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextTeamElement
+          .builder()
+          .setTeamId("T123ABC456")
+          .setStyle(RichTextTeamElement.Style.builder().setBold(true).build())
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesMessageMentionElement() {
+    assertThat(sections[SECTION_WITH_MESSAGE_MENTION_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextMessageMentionElement
+          .builder()
+          .setChannelId("C123ABC456")
+          .setMessageTs("1234567890.123456")
+          .setAuthorId("U123ABC456")
+          .setText("a message")
           .build()
       );
   }
