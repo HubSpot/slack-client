@@ -10,7 +10,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 @HubSpotStyle
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public interface SlackFileObjectIF {
   Optional<String> getUrl();
   Optional<String> getId();
