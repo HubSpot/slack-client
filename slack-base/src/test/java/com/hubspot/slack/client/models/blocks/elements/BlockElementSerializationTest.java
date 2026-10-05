@@ -52,6 +52,18 @@ public class BlockElementSerializationTest extends SerializationTestBase {
     testSerialization("citation_rich_text.json", Block[].class);
   }
 
+  // Null-omission guard for all 14 Messages-surface elements (Slack rejects null-valued fields).
+  // Each fixture entry is required-fields-only, so every optional is ABSENT in the raw JSON. The
+  // round-trip asserts readTree(raw).equals(readTree(reserialized)); since a JSON null is a present
+  // NullNode (not the same as an absent key), if serialization emitted "field": null for any absent
+  // optional the generated tree would gain a key the raw tree lacks and this assertion would fail.
+  // The mapper sets no global serialization inclusion, so this genuinely exercises each model's
+  // @JsonInclude(NON_EMPTY).
+  @Test
+  public void testMinimalElementsOmitNulls() throws IOException {
+    testSerialization("minimal_elements.json", Block[].class);
+  }
+
   @Test
   public void testInteractiveElementsDeserializeToExpectedTypes() throws IOException {
     BlockElement[] elements = ObjectMapperUtils
@@ -60,9 +72,7 @@ public class BlockElementSerializationTest extends SerializationTestBase {
         JsonLoader.loadJsonFromFile("interactive_elements_batch.json"),
         BlockElement[].class
       );
-    assertThat(elements[0]).isInstanceOf(FileInput.class);
-    assertThat(elements[1]).isInstanceOf(RichTextInput.class);
-    assertThat(elements[2]).isInstanceOf(WorkflowButton.class);
+    assertThat(elements[0]).isInstanceOf(WorkflowButton.class);
   }
 
   @Test

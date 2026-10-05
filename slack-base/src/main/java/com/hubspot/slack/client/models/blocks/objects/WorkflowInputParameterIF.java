@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.models.blocks.objects;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -13,6 +14,7 @@ import org.immutables.value.Value.Immutable;
  */
 @Immutable
 @HubSpotStyle
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonNaming(SnakeCaseStrategy.class)
 public interface WorkflowInputParameterIF {
   @Value.Parameter(order = 1)

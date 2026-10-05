@@ -3,8 +3,8 @@ package com.hubspot.slack.client.models.blocks.objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
-import java.util.List;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
@@ -20,5 +20,5 @@ public interface TriggerObjectIF {
   @Value.Parameter
   String getUrl();
 
-  List<WorkflowInputParameter> getCustomizableInputParameters();
+  ImmutableList<WorkflowInputParameter> getCustomizableInputParameters();
 }

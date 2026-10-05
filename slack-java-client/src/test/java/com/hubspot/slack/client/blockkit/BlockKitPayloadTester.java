@@ -172,13 +172,18 @@ public class BlockKitPayloadTester implements Closeable {
    * standalone or from {@link #postFromFolder(Path)}.
    */
   public PayloadSendResult postFromFile(Path jsonFile) {
-    String fileName = jsonFile.getFileName().toString();
+    return postFile(jsonFile, jsonFile.getFileName().toString());
+  }
 
+  private PayloadSendResult postFile(Path jsonFile, String displayName) {
     String json;
     try {
       json = new String(Files.readAllBytes(jsonFile), StandardCharsets.UTF_8);
     } catch (IOException e) {
-      return PayloadSendResult.failure(fileName, "Could not read file: " + describe(e));
+      return PayloadSendResult.failure(
+        displayName,
+        "Could not read file: " + describe(e)
+      );
     }
 
     List<Block> blocks;
@@ -186,7 +191,7 @@ public class BlockKitPayloadTester implements Closeable {
       blocks = blocksFromJson(json);
     } catch (RuntimeException e) {
       return PayloadSendResult.failure(
-        fileName,
+        displayName,
         "Could not parse/deserialize payload: " + describe(e)
       );
     }
@@ -194,17 +199,17 @@ public class BlockKitPayloadTester implements Closeable {
     try {
       Result<ChatPostMessageResponse, SlackError> result = postBlocks(
         blocks,
-        "Block Kit payload test: " + fileName
+        "Block Kit payload test: " + displayName
       );
       if (result.isOk()) {
-        return PayloadSendResult.success(fileName, result.unwrapOrElseThrow().getTs());
+        return PayloadSendResult.success(displayName, result.unwrapOrElseThrow().getTs());
       }
       return PayloadSendResult.failure(
-        fileName,
+        displayName,
         reasonFor(result.unwrapErrOrElseThrow())
       );
     } catch (RuntimeException e) {
-      return PayloadSendResult.failure(fileName, "Post failed: " + describe(e));
+      return PayloadSendResult.failure(displayName, "Post failed: " + describe(e));
     }
   }
 
@@ -218,12 +223,13 @@ public class BlockKitPayloadTester implements Closeable {
   }
 
   /**
-   * Posts every {@code *.json} payload in the given folder (non-recursive, sorted by file name),
-   * reusing {@link #postFromFile(Path)} for each, and returns an aggregate {@link PayloadSendSummary}.
+   * Posts every {@code *.json} payload found under the given folder, recursively (so per-element
+   * subfolders are included), sorted by relative path. Each result is labelled with its path
+   * relative to {@code folder} (e.g. {@code tag/full.json}). Returns an aggregate summary.
    */
   public PayloadSendSummary postFromFolder(Path folder) {
     List<Path> files;
-    try (Stream<Path> stream = Files.list(folder)) {
+    try (Stream<Path> stream = Files.walk(folder)) {
       files =
         stream
           .filter(Files::isRegularFile)
@@ -231,12 +237,12 @@ public class BlockKitPayloadTester implements Closeable {
           .sorted()
           .collect(Collectors.toList());
     } catch (IOException e) {
-      throw new RuntimeException("Could not list folder " + folder, e);
+      throw new RuntimeException("Could not walk folder " + folder, e);
     }
 
     List<PayloadSendResult> results = new ArrayList<>();
     for (Path file : files) {
-      results.add(postFromFile(file));
+      results.add(postFile(file, folder.relativize(file).toString()));
     }
     return new PayloadSendSummary(results);
   }
