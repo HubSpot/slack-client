@@ -29,6 +29,21 @@ public class SectionBlockTest {
   }
 
   @Test
+  public void itSerializesExpandFalseWhenSet() {
+    Section section = Section
+      .builder()
+      .setText(Text.of(TextType.MARKDOWN, SECTION_TEXT))
+      .setExpand(false)
+      .build();
+
+    JsonNode json = MAPPER.valueToTree(section);
+
+    assertThat(json.has("expand")).isTrue();
+    assertThat(json.get("expand").isBoolean()).isTrue();
+    assertThat(json.get("expand").booleanValue()).isFalse();
+  }
+
+  @Test
   public void itOmitsExpandWhenNotSet() {
     Section section = Section.of(Text.of(TextType.MARKDOWN, SECTION_TEXT));
 
