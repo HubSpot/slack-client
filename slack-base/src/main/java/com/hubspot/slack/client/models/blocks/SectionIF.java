@@ -38,6 +38,8 @@ public interface SectionIF extends Block, ContainerChildBlock {
 
   Optional<BlockElement> getAccessory();
 
+  Optional<Boolean> getExpand();
+
   @Check
   default void check() {
     boolean hasNonEmptyTextField =
