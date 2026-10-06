@@ -3,7 +3,6 @@ package com.hubspot.slack.client.models.blocks.elements.richtextelements;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
-import java.util.Optional;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Immutable;
 
@@ -23,5 +22,5 @@ public interface MemoryCitationDetailsIF extends CitationDetails {
     return CITATION_TYPE;
   }
 
-  Optional<String> getMemoryId();
+  String getMemoryId();
 }

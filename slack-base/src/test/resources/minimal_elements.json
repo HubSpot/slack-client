@@ -25,7 +25,11 @@
             "url": "https://example.com/doc",
             "text": "Source",
             "index": 1,
-            "details": { "citation_type": "file" }
+            "details": {
+              "citation_type": "file",
+              "descriptor": "notes.txt",
+              "file_id": "F123ABC456"
+            }
           }
         ]
       }

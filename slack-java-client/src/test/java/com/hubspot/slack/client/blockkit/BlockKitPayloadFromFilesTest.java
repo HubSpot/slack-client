@@ -68,6 +68,18 @@ public class BlockKitPayloadFromFilesTest {
       assertThat(summary.getTotal())
         .as("expected at least one *.json payload under %s", path)
         .isGreaterThan(0);
+
+      // Fail the test (and the build) if Slack rejected any payload, so a bad payload is not
+      // silently buried in a green build. The assertion message carries the full summary with the
+      // per-payload Slack error reasons.
+      assertThat(summary.getFailedCount())
+        .as(
+          "Slack rejected %s of %s payload(s):%n%s",
+          summary.getFailedCount(),
+          summary.getTotal(),
+          summary.render()
+        )
+        .isZero();
     }
   }
 
