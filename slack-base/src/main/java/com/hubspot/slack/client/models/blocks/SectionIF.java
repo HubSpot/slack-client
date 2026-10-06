@@ -15,6 +15,10 @@ import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 
+/**
+ * Slack's section block displays text, optionally alongside fields and an accessory element.
+ * @see <a href="https://docs.slack.dev/reference/block-kit/blocks/section-block">Section block Docs</a>
+ */
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
@@ -37,6 +41,8 @@ public interface SectionIF extends Block, ContainerChildBlock {
   List<Text> getFields();
 
   Optional<BlockElement> getAccessory();
+
+  Optional<Boolean> getExpand();
 
   @Check
   default void check() {
