@@ -1,6 +1,5 @@
 package com.hubspot.slack.client.models.blocks.elements.richtextelements;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hubspot.immutables.style.HubSpotStyle;
@@ -37,6 +36,5 @@ public interface RichTextCitationElementIF extends RichTextElement {
 
   Optional<Boolean> getFromLlm();
 
-  @JsonProperty("is_slack_url")
   Optional<Boolean> getIsSlackUrl();
 }
