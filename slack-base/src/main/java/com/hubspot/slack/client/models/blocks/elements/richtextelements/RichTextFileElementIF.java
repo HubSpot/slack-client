@@ -1,7 +1,6 @@
 package com.hubspot.slack.client.models.blocks.elements.richtextelements;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -40,7 +39,6 @@ public interface RichTextFileElementIF extends RichTextElement {
 
   Optional<String> getUrl();
 
-  @JsonProperty("is_skill_invocation")
   Optional<Boolean> getIsSkillInvocation();
 
   Optional<StyleIF> getStyle();
