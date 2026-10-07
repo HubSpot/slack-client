@@ -1,0 +1,212 @@
+[
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "tag",
+            "text": "Urgent",
+            "color": "red",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "list_record",
+            "file_id": "F123ABC456",
+            "record_id": "Rec1",
+            "view_id": "View1",
+            "text": "a record",
+            "url": "https://example.com/record",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "work_object_mention",
+            "entity_id": "E123",
+            "app_id": "A123",
+            "text": "the object",
+            "url": "https://example.com/object",
+            "icon_url": "https://example.com/icon.png",
+            "full_size_preview_enabled": true,
+            "product_name": "Acme",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "workflow_mention",
+            "workflow_id": "Wf123",
+            "function_trigger_id": "Ft123",
+            "text": "the workflow",
+            "url": "https://example.com/workflow",
+            "channel_id": "C123ABC456",
+            "ts": "1234567890.123456",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "salesforce_data_field",
+            "salesforce_record_id": "SR123",
+            "salesforce_field_label": "Stage",
+            "salesforce_field_api_name": "StageName",
+            "salesforce_include_field_label": true,
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "canvas",
+            "file_id": "F_canvas",
+            "label": "Doc",
+            "hide_title": true,
+            "section_id": "Sec1",
+            "text": "the canvas",
+            "url": "https://example.com/canvas",
+            "is_skill_invocation": true,
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "canvas_user_mention",
+            "user_id": "U123ABC456",
+            "thread_id": "Th123",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "canvas_message_unfurl",
+            "root_message_ts": "1234567890.123456",
+            "root_message_channel": "C123ABC456",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

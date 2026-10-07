@@ -187,8 +187,207 @@
         "type": "rich_text_section",
         "elements": [
           {
+            "type": "unsupported_rich_text_element",
+            "some_field": "some_value"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "attachment_mention",
+            "url": "https://example.com/attachment",
+            "text": "Fallback text",
+            "app_id": "A123ABC456",
+            "style": {
+              "bold": true,
+              "client_highlight": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "team",
+            "team_id": "T123ABC456",
+            "style": {
+              "bold": true
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
             "type": "message_mention",
-            "message_id": "1234567890.123456"
+            "channel_id": "C123ABC456",
+            "message_ts": "1234567890.123456",
+            "author_id": "U123ABC456",
+            "text": "a message"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "file",
+            "file_id": "F123ABC456",
+            "text": "the file",
+            "style": { "bold": true }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          { "type": "tag", "text": "Urgent", "color": "red", "style": { "bold": true } }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          { "type": "list_record", "file_id": "F123ABC456", "record_id": "Rec1", "text": "a record" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "work_object_mention",
+            "entity_id": "E123",
+            "app_id": "A123",
+            "text": "the object",
+            "url": "https://example.com/object"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "workflow_mention",
+            "workflow_id": "Wf123",
+            "function_trigger_id": "Ft123",
+            "text": "the workflow"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "salesforce_data_field",
+            "salesforce_record_id": "SR123",
+            "salesforce_field_label": "Stage"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          { "type": "canvas", "file_id": "F_canvas", "label": "Doc", "text": "the canvas" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          { "type": "canvas_user_mention", "user_id": "U123ABC456", "thread_id": "Th123" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "canvas_message_unfurl",
+            "root_message_ts": "1234567890.123456",
+            "root_message_channel": "C123ABC456"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "citation",
+            "url": "https://example.com/doc",
+            "text": "Source",
+            "index": 1,
+            "details": {
+              "citation_type": "file",
+              "descriptor": "notes.txt",
+              "file_id": "F999"
+            },
+            "from_llm": true
           }
         ]
       }

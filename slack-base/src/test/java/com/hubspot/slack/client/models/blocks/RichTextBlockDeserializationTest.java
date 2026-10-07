@@ -6,17 +6,31 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.JsonLoader;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.FileCitationDetails;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextAttachmentMentionElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextBroadcastElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextBroadcastRange;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextCanvasElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextCanvasMessageUnfurlElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextCanvasUserMentionElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextChannelElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextCitationElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextColorElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextDateElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextEmojiElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextFileElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextLinkElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextListRecordElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextMessageMentionElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextSalesforceDataFieldElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextSection;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextTagElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextTeamElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextTextElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextUserElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextUserGroupElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextWorkObjectMentionElement;
+import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichTextWorkflowMentionElement;
 import com.hubspot.slack.client.models.blocks.elements.richtextelements.UnknownRichTextElement;
 import java.io.IOException;
 import org.junit.BeforeClass;
@@ -36,6 +50,19 @@ public class RichTextBlockDeserializationTest {
   private static final int SECTION_WITH_USERGROUP_ELEMENT_INDEX = 8;
   private static final int SECTION_WITH_MULTIPLE_ELEMENTS_INDEX = 9;
   private static final int SECTION_WITH_UNKNOWN_ELEMENT_INDEX = 10;
+  private static final int SECTION_WITH_ATTACHMENT_MENTION_ELEMENT_INDEX = 11;
+  private static final int SECTION_WITH_TEAM_ELEMENT_INDEX = 12;
+  private static final int SECTION_WITH_MESSAGE_MENTION_ELEMENT_INDEX = 13;
+  private static final int SECTION_WITH_FILE_ELEMENT_INDEX = 14;
+  private static final int SECTION_WITH_TAG_ELEMENT_INDEX = 15;
+  private static final int SECTION_WITH_LIST_RECORD_ELEMENT_INDEX = 16;
+  private static final int SECTION_WITH_WORK_OBJECT_MENTION_ELEMENT_INDEX = 17;
+  private static final int SECTION_WITH_WORKFLOW_MENTION_ELEMENT_INDEX = 18;
+  private static final int SECTION_WITH_SALESFORCE_DATA_FIELD_ELEMENT_INDEX = 19;
+  private static final int SECTION_WITH_CANVAS_ELEMENT_INDEX = 20;
+  private static final int SECTION_WITH_CANVAS_USER_MENTION_ELEMENT_INDEX = 21;
+  private static final int SECTION_WITH_CANVAS_MESSAGE_UNFURL_ELEMENT_INDEX = 22;
+  private static final int SECTION_WITH_CITATION_ELEMENT_INDEX = 23;
   private static RichTextSection[] sections;
 
   @BeforeClass
@@ -131,6 +158,188 @@ public class RichTextBlockDeserializationTest {
     assertThat(sections[SECTION_WITH_USERGROUP_ELEMENT_INDEX].getElements())
       .containsExactly(
         RichTextUserGroupElement.builder().setUserGroupId("G123ABC456").build()
+      );
+  }
+
+  @Test
+  public void itDeserializesAttachmentMentionElement() {
+    assertThat(sections[SECTION_WITH_ATTACHMENT_MENTION_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextAttachmentMentionElement
+          .builder()
+          .setUrl("https://example.com/attachment")
+          .setText("Fallback text")
+          .setAppId("A123ABC456")
+          .setStyle(
+            RichTextAttachmentMentionElement.Style
+              .builder()
+              .setBold(true)
+              .setClientHighlight(true)
+              .build()
+          )
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesTeamElement() {
+    assertThat(sections[SECTION_WITH_TEAM_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextTeamElement
+          .builder()
+          .setTeamId("T123ABC456")
+          .setStyle(RichTextTeamElement.Style.builder().setBold(true).build())
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesMessageMentionElement() {
+    assertThat(sections[SECTION_WITH_MESSAGE_MENTION_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextMessageMentionElement
+          .builder()
+          .setChannelId("C123ABC456")
+          .setMessageTs("1234567890.123456")
+          .setAuthorId("U123ABC456")
+          .setText("a message")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesFileElement() {
+    assertThat(sections[SECTION_WITH_FILE_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextFileElement
+          .builder()
+          .setFileId("F123ABC456")
+          .setText("the file")
+          .setStyle(RichTextFileElement.Style.builder().setBold(true).build())
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesTagElement() {
+    assertThat(sections[SECTION_WITH_TAG_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextTagElement
+          .builder()
+          .setText("Urgent")
+          .setColor("red")
+          .setStyle(RichTextTagElement.Style.builder().setBold(true).build())
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesListRecordElement() {
+    assertThat(sections[SECTION_WITH_LIST_RECORD_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextListRecordElement
+          .builder()
+          .setFileId("F123ABC456")
+          .setRecordId("Rec1")
+          .setText("a record")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesWorkObjectMentionElement() {
+    assertThat(sections[SECTION_WITH_WORK_OBJECT_MENTION_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextWorkObjectMentionElement
+          .builder()
+          .setEntityId("E123")
+          .setAppId("A123")
+          .setText("the object")
+          .setUrl("https://example.com/object")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesWorkflowMentionElement() {
+    assertThat(sections[SECTION_WITH_WORKFLOW_MENTION_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextWorkflowMentionElement
+          .builder()
+          .setWorkflowId("Wf123")
+          .setFunctionTriggerId("Ft123")
+          .setText("the workflow")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesSalesforceDataFieldElement() {
+    assertThat(sections[SECTION_WITH_SALESFORCE_DATA_FIELD_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextSalesforceDataFieldElement
+          .builder()
+          .setSalesforceRecordId("SR123")
+          .setSalesforceFieldLabel("Stage")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesCanvasElement() {
+    assertThat(sections[SECTION_WITH_CANVAS_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextCanvasElement
+          .builder()
+          .setFileId("F_canvas")
+          .setLabel("Doc")
+          .setText("the canvas")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesCanvasUserMentionElement() {
+    assertThat(sections[SECTION_WITH_CANVAS_USER_MENTION_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextCanvasUserMentionElement
+          .builder()
+          .setUserId("U123ABC456")
+          .setThreadId("Th123")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesCanvasMessageUnfurlElement() {
+    assertThat(sections[SECTION_WITH_CANVAS_MESSAGE_UNFURL_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextCanvasMessageUnfurlElement
+          .builder()
+          .setRootMessageTs("1234567890.123456")
+          .setRootMessageChannel("C123ABC456")
+          .build()
+      );
+  }
+
+  @Test
+  public void itDeserializesCitationElement() {
+    assertThat(sections[SECTION_WITH_CITATION_ELEMENT_INDEX].getElements())
+      .containsExactly(
+        RichTextCitationElement
+          .builder()
+          .setUrl("https://example.com/doc")
+          .setText("Source")
+          .setIndex(1)
+          .setDetails(
+            FileCitationDetails
+              .builder()
+              .setDescriptor("notes.txt")
+              .setFileId("F999")
+              .build()
+          )
+          .setFromLlm(true)
+          .build()
       );
   }
 

@@ -1,0 +1,9 @@
+[
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "*Example payload* — a single Block Kit message. This file is a JSON array of blocks (the `blocks` you'd pass to chat.postMessage)."
+    }
+  }
+]

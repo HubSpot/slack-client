@@ -1,0 +1,25 @@
+[
+  {
+    "type": "rich_text",
+    "elements": [
+      {
+        "type": "rich_text_section",
+        "elements": [
+          {
+            "type": "team",
+            "team_id": "T123ABC456",
+            "style": {
+              "bold": true,
+              "italic": true,
+              "strike": true,
+              "highlight": true,
+              "client_highlight": true,
+              "underline": true,
+              "unlink": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

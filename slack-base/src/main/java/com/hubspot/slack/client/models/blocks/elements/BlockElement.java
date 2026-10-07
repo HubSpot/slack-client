@@ -52,6 +52,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
       name = UsersMultiSelectMenu.TYPE
     ),
     @JsonSubTypes.Type(value = UrlSource.class, name = UrlSource.TYPE),
+    @JsonSubTypes.Type(value = WorkflowButton.class, name = WorkflowButton.TYPE),
   }
 )
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

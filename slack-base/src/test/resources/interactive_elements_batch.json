@@ -1,0 +1,20 @@
+[
+  {
+    "type": "workflow_button",
+    "text": {
+      "type": "plain_text",
+      "text": "Run"
+    },
+    "workflow": {
+      "trigger": {
+        "url": "https://slack.com/shortcuts/Ft0000000000/abc123",
+        "customizable_input_parameters": [
+          { "name": "input_a", "value": "value_a" }
+        ]
+      }
+    },
+    "action_id": "workflow_button_1",
+    "style": "primary",
+    "accessibility_label": "Run the workflow"
+  }
+]
