@@ -30,6 +30,13 @@ public class PlanTest {
   }
 
   @Test
+  public void itRejectsEmptyPlan() {
+    assertThatThrownBy(() -> Plan.builder().setTitle("My plan").build())
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("between 1 and 50");
+  }
+
+  @Test
   public void itRejectsDuplicateTaskIds() {
     assertThatThrownBy(() ->
         Plan

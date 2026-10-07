@@ -32,8 +32,8 @@ public interface PlanIF extends Block {
   @Check
   default void check() {
     Preconditions.checkState(
-      getTasks().size() <= 50,
-      "plan cannot contain more than 50 tasks"
+      !getTasks().isEmpty() && getTasks().size() <= 50,
+      "plan must contain between 1 and 50 tasks"
     );
     long distinctTaskIds = getTasks()
       .stream()

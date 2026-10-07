@@ -45,6 +45,18 @@ public class VideoBlockTest {
   }
 
   @Test
+  public void itAcceptsUppercaseHttpsScheme() {
+    VideoBlock video = VideoBlock
+      .builder()
+      .setAltText("a")
+      .setTitle(Text.of(TextType.PLAIN_TEXT, "t"))
+      .setThumbnailUrl("https://example.com/t.png")
+      .setVideoUrl("HTTPS://example.com/v")
+      .build();
+    assertThat(video.getVideoUrl()).isEqualTo("HTTPS://example.com/v");
+  }
+
+  @Test
   public void itRejectsNonHttpsVideoUrl() {
     assertThatThrownBy(() ->
         VideoBlock

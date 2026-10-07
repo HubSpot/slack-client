@@ -20,7 +20,7 @@ import org.immutables.value.Value.Immutable;
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
-public interface VideoBlockIF extends Block {
+public interface VideoBlockIF extends Block, ContainerChildBlock {
   String TYPE = "video";
   String HTTPS_PREFIX = "https://";
 
@@ -77,15 +77,20 @@ public interface VideoBlockIF extends Block {
         )
       );
     Preconditions.checkState(
-      getVideoUrl().startsWith(HTTPS_PREFIX),
+      isHttpsUrl(getVideoUrl()),
       "video video_url must be an HTTPS URL"
     );
     getTitleUrl()
       .ifPresent(titleUrl ->
         Preconditions.checkState(
-          titleUrl.startsWith(HTTPS_PREFIX),
+          isHttpsUrl(titleUrl),
           "video title_url must be an HTTPS URL"
         )
       );
+  }
+
+  /** Case-insensitive {@code https://} prefix check (URL schemes are case-insensitive). */
+  static boolean isHttpsUrl(String url) {
+    return url.regionMatches(true, 0, HTTPS_PREFIX, 0, HTTPS_PREFIX.length());
   }
 }
