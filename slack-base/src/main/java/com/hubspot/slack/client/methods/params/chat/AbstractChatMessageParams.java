@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.immutables.value.Value.Check;
 
 @JsonNaming(SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public abstract class AbstractChatMessageParams implements MessageParams {
 
   @JsonProperty("channel")
