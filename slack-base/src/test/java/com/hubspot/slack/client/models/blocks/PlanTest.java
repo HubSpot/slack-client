@@ -10,8 +10,10 @@ import org.junit.Test;
 
 public class PlanTest {
 
-  private static TaskCardBlock task(String taskId, String title) {
-    return TaskCardBlock.builder().setTaskId(taskId).setTitle(title).build();
+  private static final ObjectMapper MAPPER = ObjectMapperUtils.mapper();
+
+  private static PlanTask task(String taskId, String title) {
+    return PlanTask.builder().setTaskId(taskId).setTitle(title).build();
   }
 
   @Test
@@ -22,11 +24,39 @@ public class PlanTest {
       .addTasks(task("t1", "First task"))
       .addTasks(task("t2", "Second task"))
       .build();
-    ObjectMapper mapper = ObjectMapperUtils.mapper();
-    String serialized = mapper.writeValueAsString(original);
+    String serialized = MAPPER.writeValueAsString(original);
 
-    assertThat(mapper.readValue(serialized, Block.class)).isInstanceOf(Plan.class);
-    assertThat(mapper.readValue(serialized, Plan.class)).isEqualTo(original);
+    assertThat(MAPPER.readValue(serialized, Block.class)).isInstanceOf(Plan.class);
+    assertThat(MAPPER.readValue(serialized, Plan.class)).isEqualTo(original);
+  }
+
+  @Test
+  public void itDoesNotSerializeTaskTypeField() throws IOException {
+    Plan plan = Plan.builder().setTitle("My plan").addTasks(task("t1", "A")).build();
+    // Per Slack's plan docs, task objects carry no "type" field.
+    assertThat(MAPPER.writeValueAsString(plan)).doesNotContain("task_card");
+  }
+
+  @Test
+  public void itDeserializesTasksWithoutTypeField() throws IOException {
+    String json =
+      "{\"type\":\"plan\",\"title\":\"My plan\",\"tasks\":[" +
+      "{\"task_id\":\"t1\",\"title\":\"First task\",\"status\":\"in_progress\"}]}";
+    Plan plan = MAPPER.readValue(json, Plan.class);
+    assertThat(plan.getTasks()).hasSize(1);
+    assertThat(plan.getTasks().get(0).getTaskId()).isEqualTo("t1");
+    assertThat(plan.getTasks().get(0).getStatus())
+      .contains(TaskCardBlockStatus.IN_PROGRESS);
+  }
+
+  @Test
+  public void itToleratesInboundTaskTypeField() throws IOException {
+    // A task that includes "type":"task_card" must still parse (the field is ignored).
+    String json =
+      "{\"type\":\"plan\",\"title\":\"My plan\",\"tasks\":[" +
+      "{\"type\":\"task_card\",\"task_id\":\"t1\",\"title\":\"First task\"}]}";
+    Plan plan = MAPPER.readValue(json, Plan.class);
+    assertThat(plan.getTasks().get(0).getTaskId()).isEqualTo("t1");
   }
 
   @Test

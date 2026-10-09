@@ -27,7 +27,7 @@ public interface PlanIF extends Block {
 
   String getTitle();
 
-  ImmutableList<TaskCardBlock> getTasks();
+  ImmutableList<PlanTask> getTasks();
 
   @Check
   default void check() {
@@ -37,7 +37,7 @@ public interface PlanIF extends Block {
     );
     long distinctTaskIds = getTasks()
       .stream()
-      .map(TaskCardBlock::getTaskId)
+      .map(PlanTask::getTaskId)
       .distinct()
       .count();
     Preconditions.checkState(

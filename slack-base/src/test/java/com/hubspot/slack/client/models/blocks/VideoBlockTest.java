@@ -102,4 +102,34 @@ public class VideoBlockTest {
       .isInstanceOf(IllegalStateException.class)
       .hasMessageContaining("author_name");
   }
+
+  // Slack docs: title/description "must be less than 200 characters" — so 199 is allowed, 200 is not.
+  @Test
+  public void itAcceptsTitleOf199Chars() {
+    String title199 = new String(new char[199]).replace('\0', 'a');
+    VideoBlock video = VideoBlock
+      .builder()
+      .setAltText("a")
+      .setTitle(Text.of(TextType.PLAIN_TEXT, title199))
+      .setThumbnailUrl("https://example.com/t.png")
+      .setVideoUrl("https://example.com/v")
+      .build();
+    assertThat(video.getTitle().getText()).hasSize(199);
+  }
+
+  @Test
+  public void itRejectsTitleOf200Chars() {
+    String title200 = new String(new char[200]).replace('\0', 'a');
+    assertThatThrownBy(() ->
+        VideoBlock
+          .builder()
+          .setAltText("a")
+          .setTitle(Text.of(TextType.PLAIN_TEXT, title200))
+          .setThumbnailUrl("https://example.com/t.png")
+          .setVideoUrl("https://example.com/v")
+          .build()
+      )
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("title must be less than 200");
+  }
 }
