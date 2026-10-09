@@ -1,0 +1,12 @@
+{
+  "type": "video",
+  "alt_text": "How to use Slack.",
+  "title": { "type": "plain_text", "text": "How to use Slack." },
+  "thumbnail_url": "https://example.com/thumb.png",
+  "video_url": "https://www.youtube.com/embed/abc123",
+  "title_url": "https://www.youtube.com/watch?v=abc123",
+  "description": { "type": "plain_text", "text": "Watch this short demo." },
+  "provider_name": "YouTube",
+  "provider_icon_url": "https://example.com/yt-icon.png",
+  "author_name": "Slack"
+}

@@ -21,6 +21,7 @@ import com.hubspot.slack.client.models.blocks.elements.richtextelements.RichText
     @JsonSubTypes.Type(value = RichTextBlock.class, name = RichTextBlock.TYPE),
     @JsonSubTypes.Type(value = Section.class, name = Section.TYPE),
     @JsonSubTypes.Type(value = Table.class, name = Table.TYPE),
+    @JsonSubTypes.Type(value = VideoBlock.class, name = VideoBlock.TYPE),
   }
 )
 public interface ContainerChildBlock {}

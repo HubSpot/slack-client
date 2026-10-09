@@ -1,0 +1,48 @@
+package com.hubspot.slack.client.models.blocks;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
+import com.hubspot.immutables.style.HubSpotStyle;
+import org.immutables.value.Value;
+import org.immutables.value.Value.Check;
+import org.immutables.value.Value.Immutable;
+
+/**
+ * Slack's plan block — a collection of related task cards.
+ * @see <a href="https://docs.slack.dev/reference/block-kit/blocks/plan-block">Plan block</a>
+ */
+@Immutable
+@HubSpotStyle
+@JsonNaming(SnakeCaseStrategy.class)
+public interface PlanIF extends Block {
+  String TYPE = "plan";
+
+  @Override
+  @Value.Derived
+  default String getType() {
+    return TYPE;
+  }
+
+  String getTitle();
+
+  ImmutableList<PlanTask> getTasks();
+
+  @Check
+  default void check() {
+    Preconditions.checkState(
+      !getTasks().isEmpty() && getTasks().size() <= 50,
+      "plan must contain between 1 and 50 tasks"
+    );
+    long distinctTaskIds = getTasks()
+      .stream()
+      .map(PlanTask::getTaskId)
+      .distinct()
+      .count();
+    Preconditions.checkState(
+      distinctTaskIds == getTasks().size(),
+      "each task_id in a plan must be unique"
+    );
+  }
+}
