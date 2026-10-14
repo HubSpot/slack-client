@@ -6,10 +6,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.jackson.ChatUpdateMessageParamsSerializer;
 import java.util.Optional;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
@@ -19,6 +21,7 @@ import org.immutables.value.Value.Immutable;
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonInclude(Include.NON_EMPTY)
+@JsonSerialize(using = ChatUpdateMessageParamsSerializer.class)
 public interface ChatUpdateMessageParamsIF extends MessageParams {
   @JsonProperty("channel")
   String getChannelId();

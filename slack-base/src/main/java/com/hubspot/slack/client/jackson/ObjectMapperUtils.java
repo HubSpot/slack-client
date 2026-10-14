@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -25,12 +24,6 @@ public final class ObjectMapperUtils {
     mapper.registerModule(new JodaModule());
     mapper.registerModule(new Jdk8Module());
     mapper.registerModule(new JavaTimeModule());
-
-    SimpleModule chatUpdateClearFlagsModule = new SimpleModule();
-    chatUpdateClearFlagsModule.setSerializerModifier(
-      new ChatUpdateMessageParamsSerializerModifier()
-    );
-    mapper.registerModule(chatUpdateClearFlagsModule);
 
     mapper.configure(JsonParser.Feature.ALLOW_COMMENTS, false);
     mapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);

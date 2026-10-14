@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
 import com.hubspot.slack.client.models.Attachment;
 import com.hubspot.slack.client.models.blocks.Divider;
@@ -240,11 +242,9 @@ public class ChatUpdateMessageParamsSerializationTest {
   }
 
   /**
-   * The {@code BeanSerializerModifier} registered on the shared mapper must only rewrite
-   * {@link ChatUpdateMessageParams} writers. Serializing a different {@link MessageParams} type
-   * exercises that guard: if the modifier matched too broadly, {@code ForceEmitPropertyWriter}'s
-   * predicate would try to cast this bean to {@code ChatUpdateMessageParams} and throw, so a clean
-   * serialization proves the modifier left other types alone.
+   * The custom serializer is attached only to {@link ChatUpdateMessageParams} via
+   * {@code @JsonSerialize}, so a different {@link MessageParams} type is unaffected and keeps its
+   * own serialization rules.
    */
   @Test
   public void itDoesNotAffectOtherMessageParamTypes() {
@@ -256,10 +256,36 @@ public class ChatUpdateMessageParamsSerializationTest {
 
     JsonNode json = OBJECT_MAPPER.valueToTree(postParams);
 
-    // ChatPostMessageParams keeps empty collections by its own (unchanged) rules — the point is
-    // simply that serialization succeeds and our clear-flag behavior did not leak onto it.
     assertThat(json.get("channel").asText()).isEqualTo("C123");
     assertThat(json.has("should_clear_attachments")).isFalse();
     assertThat(json.has("should_clear_blocks")).isFalse();
+  }
+
+  /**
+   * The whole reason for {@code @JsonSerialize} on the type (rather than a mapper-level modifier):
+   * consumers serialize request bodies with their own {@link ObjectMapper}, not
+   * {@link ObjectMapperUtils#mapper()}. A foreign mapper with no slack-specific configuration must
+   * still honor the clear flags and emit {@code []}, otherwise the field never gets cleared and the
+   * message double-renders. This mirrors how slack-integration serializes (its own mapper).
+   */
+  @Test
+  public void itHonorsClearFlagsUnderAForeignObjectMapper() {
+    ObjectMapper foreignMapper = new ObjectMapper()
+      .registerModule(new Jdk8Module())
+      .registerModule(new GuavaModule());
+
+    JsonNode json = foreignMapper.valueToTree(
+      ChatUpdateMessageParams
+        .builder()
+        .setChannelId("C123")
+        .setTs("1790587670.603089")
+        .setText("testText")
+        .setShouldClearBlocks(true)
+        .build()
+    );
+
+    assertThat(json.get("blocks").isArray()).isTrue();
+    assertThat(json.get("blocks")).isEmpty();
+    assertThat(json.has("attachments")).isFalse();
   }
 }
