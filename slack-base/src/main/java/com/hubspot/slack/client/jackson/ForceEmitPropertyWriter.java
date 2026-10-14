@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
-import java.util.function.Predicate;
+import java.io.Serializable;
 
 /**
  * Wraps a single {@link BeanPropertyWriter}. When {@code forceEmit} tests {@code true} for the bean
@@ -17,9 +17,21 @@ import java.util.function.Predicate;
  */
 public class ForceEmitPropertyWriter extends BeanPropertyWriter {
 
-  private final transient Predicate<Object> forceEmit;
+  /**
+   * Decides, per bean instance, whether the wrapped property should be force-emitted. Declared
+   * {@link Serializable} because {@link BeanPropertyWriter} is itself serializable, so this field
+   * must not be left as unrestorable (transient) state.
+   */
+  @FunctionalInterface
+  public interface ForceEmitPredicate extends Serializable {
+    boolean test(Object bean);
+  }
 
-  public ForceEmitPropertyWriter(BeanPropertyWriter base, Predicate<Object> forceEmit) {
+  private static final long SERIAL_VERSION_UID = 1L;
+
+  private final ForceEmitPredicate forceEmit;
+
+  public ForceEmitPropertyWriter(BeanPropertyWriter base, ForceEmitPredicate forceEmit) {
     super(base);
     this.forceEmit = forceEmit;
   }
