@@ -13,4 +13,6 @@ public interface UsersListParamsIF {
   Optional<String> getCursor();
 
   Optional<Integer> getLimit();
+
+  Optional<String> getTeamId();
 }
