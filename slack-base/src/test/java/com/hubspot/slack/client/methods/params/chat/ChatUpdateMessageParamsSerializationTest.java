@@ -330,4 +330,35 @@ public class ChatUpdateMessageParamsSerializationTest {
     assertThat(json.has("text")).isFalse();
     assertThat(json.get("blocks")).hasSize(1);
   }
+
+  /**
+   * Populated attachments/blocks must serialize their elements correctly under a foreign mapper
+   * too — the serializer routes each element through the active {@code SerializerProvider}, so
+   * element-level serializers (e.g. {@code AttachmentSerializer}) apply and it does not depend on
+   * the generator carrying an {@code ObjectCodec}. The empty-list foreign-mapper tests would not
+   * catch a regression here.
+   */
+  @Test
+  public void itSerializesPopulatedListElementsUnderAForeignObjectMapper() {
+    ObjectMapper foreignMapper = new ObjectMapper()
+      .registerModule(new Jdk8Module())
+      .registerModule(new GuavaModule());
+
+    JsonNode json = foreignMapper.valueToTree(
+      ChatUpdateMessageParams
+        .builder()
+        .setChannelId("C123")
+        .setTs("1790587670.603089")
+        .setText("testText")
+        .addAttachments(Attachment.builder().setText("attachment body").build())
+        .addBlocks(Divider.builder().build())
+        .build()
+    );
+
+    assertThat(json.get("attachments")).hasSize(1);
+    assertThat(json.get("attachments").get(0).get("text").asText())
+      .isEqualTo("attachment body");
+    assertThat(json.get("blocks")).hasSize(1);
+    assertThat(json.get("blocks").get(0).get("type").asText()).isEqualTo("divider");
+  }
 }

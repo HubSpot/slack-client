@@ -17,6 +17,11 @@ import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 
+// NOTE: serialization is done by the hand-written ChatUpdateMessageParamsSerializer (so the
+// shouldClear* flags emit `[]` under any ObjectMapper, not just ObjectMapperUtils.mapper()). That
+// serializer lists every field explicitly — when adding a field here or to MessageParams, add it to
+// the serializer too, or it will be silently dropped from the wire (guarded by
+// ChatUpdateMessageParamsSerializationTest.itSerializesEveryPopulatedField).
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
@@ -57,7 +62,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
    * {@code []} even when there are no attachments, so a {@code chat.update} actively clears any
    * attachments on the target message. Left {@code false} (the default), an empty attachments list
    * is omitted and Slack keeps the message's existing attachments. Not part of the Slack payload —
-   * it only drives serialization (see {@code ChatUpdateMessageParamsSerializerModifier}).
+   * it only drives serialization (see {@code ChatUpdateMessageParamsSerializer}).
    */
   @JsonIgnore
   @Default

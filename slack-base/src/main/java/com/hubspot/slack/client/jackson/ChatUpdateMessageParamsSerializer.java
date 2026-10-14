@@ -50,11 +50,14 @@ public class ChatUpdateMessageParamsSerializer
   ) throws IOException {
     gen.writeStartObject();
 
-    // NON_EMPTY string fields: present on the wire only when non-empty.
+    // MAINTENANCE: this serializer writes every field by hand. If a field is added to
+    // ChatUpdateMessageParamsIF (or MessageParams), add it here too — otherwise it will silently be
+    // dropped from the wire with no compile error. itSerializesEveryPopulatedField guards this.
+
+    // NON_EMPTY string fields: present on the wire only when non-empty (Optional text included:
+    // orElse(null) -> absent and empty-string both omitted).
     writeNonEmptyString(gen, CHANNEL_FIELD, params.getChannelId());
-    if (params.getText().isPresent() && !params.getText().get().isEmpty()) {
-      gen.writeStringField(TEXT_FIELD, params.getText().get());
-    }
+    writeNonEmptyString(gen, TEXT_FIELD, params.getText().orElse(null));
     writeNonEmptyString(gen, TS_FIELD, params.getTs());
 
     if (!params.getFileIds().isEmpty()) {
@@ -76,11 +79,18 @@ public class ChatUpdateMessageParamsSerializer
 
     writeListOrClear(
       gen,
+      provider,
       ATTACHMENTS_FIELD,
       params.getAttachments(),
       params.shouldClearAttachments()
     );
-    writeListOrClear(gen, BLOCKS_FIELD, params.getBlocks(), params.shouldClearBlocks());
+    writeListOrClear(
+      gen,
+      provider,
+      BLOCKS_FIELD,
+      params.getBlocks(),
+      params.shouldClearBlocks()
+    );
 
     gen.writeEndObject();
   }
@@ -99,12 +109,14 @@ public class ChatUpdateMessageParamsSerializer
    * Writes {@code fieldName} as a JSON array of the list's elements when the list is non-empty, or
    * as an empty array {@code []} when {@code forceClear} is set (the Slack "clear this field"
    * signal). When the list is empty and {@code forceClear} is {@code false} the field is omitted,
-   * matching {@code NON_EMPTY}. Each element is serialized through the active generator's codec so
-   * element-level custom serializers (e.g. {@link AttachmentSerializer}) still apply under whatever
-   * mapper is in use.
+   * matching {@code NON_EMPTY}. Each element is serialized through {@code provider} (not
+   * {@code gen.writeObject}, which requires the generator to carry an {@code ObjectCodec}), so
+   * element-level custom serializers (e.g. {@link AttachmentSerializer}) and per-call config apply
+   * under whatever mapper is in use.
    */
   private static void writeListOrClear(
     JsonGenerator gen,
+    SerializerProvider provider,
     String fieldName,
     List<?> items,
     boolean forceClear
@@ -114,7 +126,7 @@ public class ChatUpdateMessageParamsSerializer
     }
     gen.writeArrayFieldStart(fieldName);
     for (Object item : items) {
-      gen.writeObject(item);
+      provider.defaultSerializeValue(item, gen);
     }
     gen.writeEndArray();
   }
