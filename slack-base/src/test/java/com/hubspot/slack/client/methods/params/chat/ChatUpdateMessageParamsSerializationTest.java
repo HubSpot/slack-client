@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hubspot.slack.client.jackson.ObjectMapperUtils;
+import com.hubspot.slack.client.models.Attachment;
+import com.hubspot.slack.client.models.blocks.Divider;
 import org.junit.Test;
 
 public class ChatUpdateMessageParamsSerializationTest {
@@ -41,5 +43,223 @@ public class ChatUpdateMessageParamsSerializationTest {
     JsonNode json = OBJECT_MAPPER.valueToTree(params);
 
     assertThat(json.has("file_ids")).isFalse();
+  }
+
+  @Test
+  public void itOmitsEmptyAttachmentsWhenNotClearing() {
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(params);
+
+    assertThat(json.has("attachments")).isFalse();
+  }
+
+  @Test
+  public void itEmitsEmptyAttachmentsArrayWhenClearing() {
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .setShouldClearAttachments(true)
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(params);
+
+    assertThat(json.get("attachments").isArray()).isTrue();
+    assertThat(json.get("attachments")).isEmpty();
+  }
+
+  @Test
+  public void itOmitsEmptyBlocksWhenNotClearing() {
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(params);
+
+    assertThat(json.has("blocks")).isFalse();
+  }
+
+  @Test
+  public void itEmitsEmptyBlocksArrayWhenClearing() {
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .setShouldClearBlocks(true)
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(params);
+
+    assertThat(json.get("blocks").isArray()).isTrue();
+    assertThat(json.get("blocks")).isEmpty();
+  }
+
+  @Test
+  public void itDoesNotLeakTheClearFlagsIntoThePayload() {
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .setShouldClearAttachments(true)
+      .setShouldClearBlocks(true)
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(params);
+
+    assertThat(json.has("should_clear_attachments")).isFalse();
+    assertThat(json.has("should_clear_blocks")).isFalse();
+  }
+
+  @Test
+  public void itLeavesNonEmptyAttachmentsUntouchedWhenClearing() {
+    // Flag + a real attachment: the flag only forces emission of an EMPTY list, so a populated
+    // list is written normally (the flag is effectively a no-op here).
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .addAttachments(Attachment.builder().setText("attachment").build())
+      .setShouldClearAttachments(true)
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(params);
+
+    assertThat(json.get("attachments").isArray()).isTrue();
+    assertThat(json.get("attachments")).hasSize(1);
+  }
+
+  /**
+   * The modifier swaps only the attachments/blocks writers, so every other field must keep its
+   * default writer and still serialize with the expected names and values.
+   */
+  @Test
+  public void itSerializesEveryPopulatedField() {
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .addFileIds("F0C4SK2P1EZ")
+      .setAsUser(true)
+      .setShouldLinkNames(false)
+      .setParse("full")
+      .addAttachments(Attachment.builder().setText("attachment").build())
+      .addBlocks(Divider.builder().build())
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(params);
+
+    assertThat(json.get("channel").asText()).isEqualTo("C123");
+    assertThat(json.get("ts").asText()).isEqualTo("1790587670.603089");
+    assertThat(json.get("text").asText()).isEqualTo("testText");
+    assertThat(json.get("file_ids"))
+      .extracting(JsonNode::asText)
+      .containsExactly("F0C4SK2P1EZ");
+    assertThat(json.get("as_user").asBoolean()).isTrue();
+    assertThat(json.get("link_names").asBoolean()).isFalse();
+    assertThat(json.get("parse").asText()).isEqualTo("full");
+    assertThat(json.get("attachments").isArray()).isTrue();
+    assertThat(json.get("attachments")).hasSize(1);
+    assertThat(json.get("blocks").isArray()).isTrue();
+    assertThat(json.get("blocks")).hasSize(1);
+    assertThat(json.get("blocks").get(0).get("type").asText()).isEqualTo("divider");
+  }
+
+  @Test
+  public void itLeavesNonEmptyBlocksUntouchedWhenClearing() {
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .addBlocks(Divider.builder().build())
+      .setShouldClearBlocks(true)
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(params);
+
+    assertThat(json.get("blocks").isArray()).isTrue();
+    assertThat(json.get("blocks")).hasSize(1);
+  }
+
+  @Test
+  public void itClearsOnlyTheFlaggedField() {
+    // Clearing attachments must not also emit an empty blocks array, and vice versa — the two
+    // flags are independent.
+    JsonNode clearingAttachments = OBJECT_MAPPER.valueToTree(
+      ChatUpdateMessageParams
+        .builder()
+        .setChannelId("C123")
+        .setTs("1790587670.603089")
+        .setText("testText")
+        .setShouldClearAttachments(true)
+        .build()
+    );
+    assertThat(clearingAttachments.get("attachments").isArray()).isTrue();
+    assertThat(clearingAttachments.get("attachments")).isEmpty();
+    assertThat(clearingAttachments.has("blocks")).isFalse();
+
+    JsonNode clearingBlocks = OBJECT_MAPPER.valueToTree(
+      ChatUpdateMessageParams
+        .builder()
+        .setChannelId("C123")
+        .setTs("1790587670.603089")
+        .setText("testText")
+        .setShouldClearBlocks(true)
+        .build()
+    );
+    assertThat(clearingBlocks.get("blocks").isArray()).isTrue();
+    assertThat(clearingBlocks.get("blocks")).isEmpty();
+    assertThat(clearingBlocks.has("attachments")).isFalse();
+  }
+
+  @Test
+  public void itDefaultsBothClearFlagsToFalse() {
+    ChatUpdateMessageParams params = ChatUpdateMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setTs("1790587670.603089")
+      .setText("testText")
+      .build();
+
+    assertThat(params.shouldClearAttachments()).isFalse();
+    assertThat(params.shouldClearBlocks()).isFalse();
+  }
+
+  /**
+   * The {@code BeanSerializerModifier} registered on the shared mapper must only rewrite
+   * {@link ChatUpdateMessageParams} writers. Serializing a different {@link MessageParams} type
+   * exercises that guard: if the modifier matched too broadly, {@code ForceEmitPropertyWriter}'s
+   * predicate would try to cast this bean to {@code ChatUpdateMessageParams} and throw, so a clean
+   * serialization proves the modifier left other types alone.
+   */
+  @Test
+  public void itDoesNotAffectOtherMessageParamTypes() {
+    ChatPostMessageParams postParams = ChatPostMessageParams
+      .builder()
+      .setChannelId("C123")
+      .setText("testText")
+      .build();
+
+    JsonNode json = OBJECT_MAPPER.valueToTree(postParams);
+
+    // ChatPostMessageParams keeps empty collections by its own (unchanged) rules — the point is
+    // simply that serialization succeeds and our clear-flag behavior did not leak onto it.
+    assertThat(json.get("channel").asText()).isEqualTo("C123");
+    assertThat(json.has("should_clear_attachments")).isFalse();
+    assertThat(json.has("should_clear_blocks")).isFalse();
   }
 }

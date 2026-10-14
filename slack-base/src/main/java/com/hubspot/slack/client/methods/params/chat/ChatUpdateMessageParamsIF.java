@@ -1,5 +1,6 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,6 +47,32 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
   @Default
   default String getParse() {
     return "none";
+  }
+
+  /**
+   * When {@code true}, force the {@code attachments} field to serialize as an empty array
+   * {@code []} even when there are no attachments, so a {@code chat.update} actively clears any
+   * attachments on the target message. Left {@code false} (the default), an empty attachments list
+   * is omitted and Slack keeps the message's existing attachments. Not part of the Slack payload —
+   * it only drives serialization (see {@code ChatUpdateMessageParamsSerializerModifier}).
+   */
+  @JsonIgnore
+  @Default
+  default boolean shouldClearAttachments() {
+    return false;
+  }
+
+  /**
+   * When {@code true}, force the {@code blocks} field to serialize as an empty array {@code []}
+   * even when there are no blocks, so a {@code chat.update} actively clears any blocks on the
+   * target message. Left {@code false} (the default), an empty blocks list is omitted and Slack
+   * keeps the message's existing blocks. Not part of the Slack payload — it only drives
+   * serialization (see {@code ChatUpdateMessageParamsSerializerModifier}).
+   */
+  @JsonIgnore
+  @Default
+  default boolean shouldClearBlocks() {
+    return false;
   }
 
   @Check
