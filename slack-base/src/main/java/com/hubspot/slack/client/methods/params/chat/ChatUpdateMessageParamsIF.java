@@ -75,7 +75,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
    * even when there are no blocks, so a {@code chat.update} actively clears any blocks on the
    * target message. Left {@code false} (the default), an empty blocks list is omitted and Slack
    * keeps the message's existing blocks. Not part of the Slack payload — it only drives
-   * serialization (see {@code ChatUpdateMessageParamsSerializerModifier}).
+   * serialization (see {@code ChatUpdateMessageParamsSerializer}).
    */
   @JsonIgnore
   @Default
