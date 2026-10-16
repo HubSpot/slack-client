@@ -6,19 +6,27 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.hubspot.immutables.style.HubSpotStyle;
+import com.hubspot.slack.client.jackson.ChatUpdateMessageParamsSerializer;
 import java.util.Optional;
 import org.immutables.value.Value.Check;
 import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 
+// NOTE: serialization is done by the hand-written ChatUpdateMessageParamsSerializer (so the
+// shouldClear* flags emit `[]` under any ObjectMapper, not just ObjectMapperUtils.mapper()). That
+// serializer lists every field explicitly — when adding a field here or to MessageParams, add it to
+// the serializer too, or it will be silently dropped from the wire (guarded by
+// ChatUpdateMessageParamsSerializationTest.itSerializesEveryPopulatedField).
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonInclude(Include.NON_EMPTY)
+@JsonSerialize(using = ChatUpdateMessageParamsSerializer.class)
 public interface ChatUpdateMessageParamsIF extends MessageParams {
   @JsonProperty("channel")
   String getChannelId();
@@ -54,7 +62,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
    * {@code []} even when there are no attachments, so a {@code chat.update} actively clears any
    * attachments on the target message. Left {@code false} (the default), an empty attachments list
    * is omitted and Slack keeps the message's existing attachments. Not part of the Slack payload —
-   * it only drives serialization (see {@code ChatUpdateMessageParamsSerializerModifier}).
+   * it only drives serialization (see {@code ChatUpdateMessageParamsSerializer}).
    */
   @JsonIgnore
   @Default
@@ -67,7 +75,7 @@ public interface ChatUpdateMessageParamsIF extends MessageParams {
    * even when there are no blocks, so a {@code chat.update} actively clears any blocks on the
    * target message. Left {@code false} (the default), an empty blocks list is omitted and Slack
    * keeps the message's existing blocks. Not part of the Slack payload — it only drives
-   * serialization (see {@code ChatUpdateMessageParamsSerializerModifier}).
+   * serialization (see {@code ChatUpdateMessageParamsSerializer}).
    */
   @JsonIgnore
   @Default
