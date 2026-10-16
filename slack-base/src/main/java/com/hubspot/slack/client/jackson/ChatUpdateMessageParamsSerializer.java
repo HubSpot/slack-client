@@ -59,14 +59,7 @@ public class ChatUpdateMessageParamsSerializer
     writeNonEmptyString(gen, CHANNEL_FIELD, params.getChannelId());
     writeNonEmptyString(gen, TEXT_FIELD, params.getText().orElse(null));
     writeNonEmptyString(gen, TS_FIELD, params.getTs());
-
-    if (!params.getFileIds().isEmpty()) {
-      gen.writeArrayFieldStart(FILE_IDS_FIELD);
-      for (String fileId : params.getFileIds()) {
-        gen.writeString(fileId);
-      }
-      gen.writeEndArray();
-    }
+    writeNonEmptyFileIds(params, gen);
 
     // as_user carries a field-level @JsonInclude(NON_ABSENT): present only when set.
     if (params.getAsUser().isPresent()) {
@@ -93,6 +86,19 @@ public class ChatUpdateMessageParamsSerializer
     );
 
     gen.writeEndObject();
+  }
+
+  private static void writeNonEmptyFileIds(
+    ChatUpdateMessageParams params,
+    JsonGenerator gen
+  ) throws IOException {
+    if (!params.getFileIds().isEmpty()) {
+      gen.writeArrayFieldStart(FILE_IDS_FIELD);
+      for (String fileId : params.getFileIds()) {
+        gen.writeString(fileId);
+      }
+      gen.writeEndArray();
+    }
   }
 
   private static void writeNonEmptyString(

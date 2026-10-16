@@ -1,5 +1,10 @@
 package com.hubspot.slack.client.methods.params.chat;
 
+import static com.hubspot.slack.client.TestConstants.TEST_ATTACHMENTS_TEXT;
+import static com.hubspot.slack.client.TestConstants.TEST_CHANNEL_ID;
+import static com.hubspot.slack.client.TestConstants.TEST_FILE_ID;
+import static com.hubspot.slack.client.TestConstants.TEST_MESSAGE_TEXT;
+import static com.hubspot.slack.client.TestConstants.TEST_MESSAGE_TS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.BeanDescription;
@@ -31,14 +36,14 @@ public class ChatUpdateMessageParamsSerializerDriftReflectionTest {
 
     ChatUpdateMessageParams fullyPopulated = ChatUpdateMessageParams
       .builder()
-      .setChannelId("C123")
-      .setTs("1790587670.603089")
-      .setText("testText")
-      .addFileIds("F0C4SK2P1EZ")
+      .setChannelId(TEST_CHANNEL_ID)
+      .setTs(TEST_MESSAGE_TS)
+      .setText(TEST_MESSAGE_TEXT)
+      .addFileIds(TEST_FILE_ID)
       .setAsUser(true)
       .setShouldLinkNames(false)
       .setParse("full")
-      .addAttachments(Attachment.builder().setText("attachment").build())
+      .addAttachments(Attachment.builder().setText(TEST_ATTACHMENTS_TEXT).build())
       .addBlocks(Divider.builder().build())
       .build();
 
