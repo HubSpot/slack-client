@@ -408,6 +408,19 @@ public class SlackWebClient implements SlackClient {
 
   @Override
   public Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers() {
+    return listUsers(UsersListParams.builder().build());
+  }
+
+  @Override
+  public Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers(
+    String teamId
+  ) {
+    return listUsers(UsersListParams.builder().setTeamId(teamId).build());
+  }
+
+  private Iterable<CompletableFuture<Result<List<SlackUser>, SlackError>>> listUsers(
+    UsersListParams params
+  ) {
     return new AbstractPagedIterable<Result<List<SlackUser>, SlackError>, String>() {
       @Override
       protected String getInitialOffset() {
@@ -424,6 +437,7 @@ public class SlackWebClient implements SlackClient {
 
         UsersListParams.Builder requestBuilder = UsersListParams
           .builder()
+          .from(params)
           .setLimit(config.getUsersListBatchSize().get());
         Optional.ofNullable(offset).ifPresent(requestBuilder::setCursor);
 
