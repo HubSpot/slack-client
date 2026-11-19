@@ -1,0 +1,31 @@
+{
+  "token": "redacted",
+  "team_id": "T012AB3C4",
+  "api_app_id": "A015CDE6F",
+  "event": {
+    "type": "team_join",
+    "user": {
+      "id": "W012CDE",
+      "team_id": "T012AB3C4",
+      "name": "testperson",
+      "profile": {
+        "title": "Engineer",
+        "real_name": "Test Person",
+        "real_name_normalized": "Test Person",
+        "display_name": "testperson",
+        "display_name_normalized": "testperson",
+        "avatar_hash": "g18e65e0de31",
+        "first_name": "Test",
+        "last_name": "Person",
+        "image_24": "https://example.com/avatar-24.png",
+        "image_72": "https://example.com/avatar-72.png"
+      },
+      "updated": 1539024393
+    },
+    "cache_ts": 1539024393,
+    "event_ts": "1539024393.000200"
+  },
+  "type": "event_callback",
+  "event_id": "Ev012ABC4",
+  "event_time": 1539024393
+}
