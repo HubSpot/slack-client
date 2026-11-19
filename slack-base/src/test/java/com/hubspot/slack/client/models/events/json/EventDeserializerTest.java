@@ -267,8 +267,9 @@ public class EventDeserializerTest {
         "user_profile_changed.json"
       );
     assertThat(event.getType()).isEqualTo(SlackEventType.USER_PROFILE_CHANGED);
-    assertThat(event.getUser().getId()).isEqualTo("W012CDE");
-    assertThat(event.getUser().getProfile().get().getRealName()).contains("Test Person");
+    assertThat(event.getUser().getId()).isEqualTo("U123ABC456");
+    assertThat(event.getUser().getProfile().get().getRealName())
+      .contains("Sandra Slacksalot");
     assertThat(event.getTs()).isNull();
   }
 
@@ -278,8 +279,9 @@ public class EventDeserializerTest {
       "team_join.json"
     );
     assertThat(event.getType()).isEqualTo(SlackEventType.TEAM_JOIN);
-    assertThat(event.getUser().getId()).isEqualTo("W012CDE");
-    assertThat(event.getUser().getProfile().get().getRealName()).contains("Test Person");
+    assertThat(event.getUser().getId()).isEqualTo("U123ABC456");
+    assertThat(event.getUser().getProfile().get().getRealName())
+      .contains("Sandra Slacksalot");
     assertThat(event.getTs()).isNull();
   }
 

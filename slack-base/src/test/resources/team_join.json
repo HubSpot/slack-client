@@ -1,31 +1,34 @@
 {
-  "token": "redacted",
-  "team_id": "T012AB3C4",
-  "api_app_id": "A015CDE6F",
+  "token": "XXYYZZ",
+  "team_id": "T123ABC456",
+  "api_app_id": "A123ABC456",
   "event": {
     "type": "team_join",
     "user": {
-      "id": "W012CDE",
-      "team_id": "T012AB3C4",
-      "name": "testperson",
+      "id": "U123ABC456",
+      "team_id": "T123ABC456",
+      "name": "sandraslacksalot",
       "profile": {
-        "title": "Engineer",
-        "real_name": "Test Person",
-        "real_name_normalized": "Test Person",
-        "display_name": "testperson",
-        "display_name_normalized": "testperson",
-        "avatar_hash": "g18e65e0de31",
-        "first_name": "Test",
-        "last_name": "Person",
-        "image_24": "https://example.com/avatar-24.png",
-        "image_72": "https://example.com/avatar-72.png"
+        "avatar_hash": "gexxxyyyzzz",
+        "first_name": "Sandra",
+        "last_name": "Slacksalot",
+        "real_name": "Sandra Slacksalot",
+        "display_name": "sandraslacksalot",
+        "real_name_normalized": "Sandra Slacksalot",
+        "display_name_normalized": "sandraslacksalot",
+        "image_72": "https://example.com/img/72.png"
       },
-      "updated": 1539024393
-    },
-    "cache_ts": 1539024393,
-    "event_ts": "1539024393.000200"
+      "updated": 1734567890
+    }
   },
   "type": "event_callback",
-  "event_id": "Ev012ABC4",
-  "event_time": 1539024393
+  "authorizations": [
+    {
+      "team_id": "T123ABC456",
+      "is_bot": false,
+      "is_enterprise_install": false
+    }
+  ],
+  "event_id": "Ev123ABC456",
+  "event_time": 123456789
 }
