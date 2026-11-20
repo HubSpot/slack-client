@@ -1,0 +1,13 @@
+{
+  "color": "#36a64f",
+  "fallback": "hello",
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "hello"
+      }
+    }
+  ]
+}
