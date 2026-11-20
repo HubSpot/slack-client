@@ -15,7 +15,9 @@ import com.hubspot.slack.client.models.events.SlackEventWrapper;
 import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
+import com.hubspot.slack.client.models.events.user.SlackTeamJoinEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
+import com.hubspot.slack.client.models.events.user.SlackUserProfileChangedEvent;
 import java.io.IOException;
 import org.junit.Test;
 
@@ -256,6 +258,33 @@ public class EventDeserializerTest {
     assertThat(
       event.getUser().isDeleted().isPresent() && event.getUser().isDeleted().get()
     );
+  }
+
+  @Test
+  public void itCanDeserUserProfileChangedEvent() throws IOException {
+    SlackUserProfileChangedEvent event =
+      (SlackUserProfileChangedEvent) fetchAndDeserializeSlackEvent(
+        "user_profile_changed.json"
+      );
+    assertThat(event.getType()).isEqualTo(SlackEventType.USER_PROFILE_CHANGED);
+    assertThat(event.getUser().getId()).isEqualTo("U123ABC456");
+    assertThat(event.getUser().getProfile().get().getRealName())
+      .contains("Sandra Slacksalot");
+    assertThat(event.getTs()).isNull();
+    assertThat(event.getEventTs()).contains("1734567890.000001");
+    assertThat(event.getCacheTs()).contains(1734567890L);
+  }
+
+  @Test
+  public void itCanDeserTeamJoinEvent() throws IOException {
+    SlackTeamJoinEvent event = (SlackTeamJoinEvent) fetchAndDeserializeSlackEvent(
+      "team_join.json"
+    );
+    assertThat(event.getType()).isEqualTo(SlackEventType.TEAM_JOIN);
+    assertThat(event.getUser().getId()).isEqualTo("U123ABC456");
+    assertThat(event.getUser().getProfile().get().getRealName())
+      .contains("Sandra Slacksalot");
+    assertThat(event.getTs()).isNull();
   }
 
   @Test

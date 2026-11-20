@@ -1,0 +1,34 @@
+{
+  "token": "XXYYZZ",
+  "team_id": "T123ABC456",
+  "api_app_id": "A123ABC456",
+  "event": {
+    "type": "team_join",
+    "user": {
+      "id": "U123ABC456",
+      "team_id": "T123ABC456",
+      "name": "sandraslacksalot",
+      "profile": {
+        "avatar_hash": "gexxxyyyzzz",
+        "first_name": "Sandra",
+        "last_name": "Slacksalot",
+        "real_name": "Sandra Slacksalot",
+        "display_name": "sandraslacksalot",
+        "real_name_normalized": "Sandra Slacksalot",
+        "display_name_normalized": "sandraslacksalot",
+        "image_72": "https://example.com/img/72.png"
+      },
+      "updated": 1734567890
+    }
+  },
+  "type": "event_callback",
+  "authorizations": [
+    {
+      "team_id": "T123ABC456",
+      "is_bot": false,
+      "is_enterprise_install": false
+    }
+  ],
+  "event_id": "Ev123ABC456",
+  "event_time": 123456789
+}

@@ -23,7 +23,9 @@ import com.hubspot.slack.client.models.events.links.EntityDetailsRequestedEvent;
 import com.hubspot.slack.client.models.events.links.SlackLinkSharedEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberJoinedChannelEvent;
 import com.hubspot.slack.client.models.events.user.SlackMemberLeftChannelEvent;
+import com.hubspot.slack.client.models.events.user.SlackTeamJoinEvent;
 import com.hubspot.slack.client.models.events.user.SlackUserChangeEvent;
+import com.hubspot.slack.client.models.events.user.SlackUserProfileChangedEvent;
 
 public enum SlackEventType {
   APP_HOME_OPENED(SlackAppHomeOpenedEvent.class),
@@ -90,11 +92,12 @@ public enum SlackEventType {
   SUBTEAM_SELF_REMOVED,
   SUBTEAM_UPDATED,
   TEAM_DOMAIN_CHANGE,
-  TEAM_JOIN,
+  TEAM_JOIN(SlackTeamJoinEvent.class),
   TEAM_RENAME,
   TOKENS_REVOKED(SlackTokensRevokedEvent.class),
   URL_VERIFICATION,
   USER_CHANGE(SlackUserChangeEvent.class),
+  USER_PROFILE_CHANGED(SlackUserProfileChangedEvent.class),
   UNKNOWN;
 
   private final Class<? extends SlackEvent> eventClass;
