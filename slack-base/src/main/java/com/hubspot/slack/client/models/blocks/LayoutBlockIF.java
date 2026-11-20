@@ -81,7 +81,10 @@ public interface LayoutBlockIF extends Block {
     );
     getFallback()
       .forEach(block ->
+        // Allow UnknownBlock through: a fallback type Slack adds that this library does not yet
+        // model deserializes to UnknownBlock, and reads (e.g. conversations.history) must not fail.
         Preconditions.checkState(
+          block instanceof UnknownBlock ||
           ALLOWED_FALLBACK_TYPES.contains(block.getType()),
           "fallback does not support block type '%s'; allowed types: %s",
           block.getType(),

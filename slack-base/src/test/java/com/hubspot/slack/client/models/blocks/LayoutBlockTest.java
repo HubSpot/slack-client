@@ -152,6 +152,22 @@ public class LayoutBlockTest {
   }
 
   @Test
+  public void itAllowsUnknownBlockInFallbackOnDeserialize() throws IOException {
+    // A fallback type Slack adds that this library does not model yet becomes UnknownBlock;
+    // deserializing an inbound message (e.g. conversations.history) must not fail the @Check.
+    String json =
+      "{" +
+      "\"type\":\"layout\"," +
+      "\"label\":\"Unknown fallback\"," +
+      "\"rows\":[{\"items\":[{\"block\":{\"type\":\"divider\"}}]}]," +
+      "\"fallback\":[{\"type\":\"some_future_block\"}]" +
+      "}";
+    LayoutBlock block = MAPPER.readValue(json, LayoutBlock.class);
+    assertThat(block.getFallback()).hasSize(1);
+    assertThat(block.getFallback().get(0)).isInstanceOf(UnknownBlock.class);
+  }
+
+  @Test
   public void itFailsWhenFallbackTypeNotAllowed() {
     assertThatThrownBy(() ->
         LayoutBlock
