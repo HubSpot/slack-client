@@ -271,6 +271,8 @@ public class EventDeserializerTest {
     assertThat(event.getUser().getProfile().get().getRealName())
       .contains("Sandra Slacksalot");
     assertThat(event.getTs()).isNull();
+    assertThat(event.getEventTs()).contains("1734567890.000001");
+    assertThat(event.getCacheTs()).contains(1734567890L);
   }
 
   @Test
