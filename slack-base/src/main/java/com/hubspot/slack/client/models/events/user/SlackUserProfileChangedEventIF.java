@@ -9,11 +9,6 @@ import com.hubspot.slack.client.models.users.SlackUser;
 import java.util.Optional;
 import org.immutables.value.Value.Immutable;
 
-/**
- * Sent when a user's profile fields change.
- *
- * @see <a href="https://docs.slack.dev/reference/events/user_profile_changed/">user_profile_changed</a>
- */
 @Immutable
 @HubSpotStyle
 @JsonNaming(SnakeCaseStrategy.class)
