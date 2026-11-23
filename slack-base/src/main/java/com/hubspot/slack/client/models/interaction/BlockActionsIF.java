@@ -10,6 +10,8 @@ import com.hubspot.slack.client.models.SlackChannel;
 import com.hubspot.slack.client.models.response.views.ViewResponseBase;
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.Nullable;
+import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 
 @Immutable
@@ -43,6 +45,8 @@ public interface BlockActionsIF extends SlackInteractiveCallback {
   }
 
   @Override
+  @Default
+  @Nullable
   default SlackChannel getChannel() {
     return null;
   }
