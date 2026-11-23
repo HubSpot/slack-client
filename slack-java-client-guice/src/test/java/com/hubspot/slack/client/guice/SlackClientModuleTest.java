@@ -33,7 +33,6 @@ public class SlackClientModuleTest {
           binder().requireAtInjectOnConstructors();
 
           install(new SlackClientModule());
-          install(new com.hubspot.slack.client.SlackClientModule());
         }
       }
     );
