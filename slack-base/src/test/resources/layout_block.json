@@ -1,0 +1,70 @@
+[
+  {
+    "type": "layout",
+    "block_id": "layout123",
+    "label": "Portal selector",
+    "is_label_visible": true,
+    "grid_lines": "rows",
+    "rows": [
+      {
+        "items": [
+          {
+            "width": "wide",
+            "block": {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "*Acme Co*"
+              }
+            }
+          },
+          {
+            "width": "narrow",
+            "horizontal_alignment": "end",
+            "block": {
+              "type": "actions",
+              "elements": [
+                {
+                  "type": "button",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Select"
+                  },
+                  "action_id": "select_acme"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "block": {
+              "type": "divider"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "layout",
+    "label": "Minimal layout",
+    "rows": [
+      {
+        "items": [
+          {
+            "block": {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "Only item"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

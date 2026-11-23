@@ -34,6 +34,7 @@ import java.util.Optional;
     @JsonSubTypes.Type(value = Table.class, name = Table.TYPE),
     @JsonSubTypes.Type(value = DataTable.class, name = DataTable.TYPE),
     @JsonSubTypes.Type(value = ContainerBlock.class, name = ContainerBlock.TYPE),
+    @JsonSubTypes.Type(value = LayoutBlock.class, name = LayoutBlock.TYPE),
     @JsonSubTypes.Type(value = VideoBlock.class, name = VideoBlock.TYPE),
     @JsonSubTypes.Type(value = Carousel.class, name = Carousel.TYPE),
     @JsonSubTypes.Type(value = Plan.class, name = Plan.TYPE),
