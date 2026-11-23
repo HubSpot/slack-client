@@ -11,11 +11,13 @@ import com.hubspot.slack.client.models.Attachment;
 import java.io.IOException;
 import java.util.List;
 
-// this custom serializer is used for compatibility with some Slack API features -
-// if our attachment has a not empty "blocks" field, all other fields should not be present
+// for compatibility with Slack, an attachment with "blocks" is written without the other legacy
+// fields (empty lists, nulls), except for "color" and "fallback" when they are set
 public class AttachmentSerializer extends StdSerializer<Attachment> {
 
   private static final String BLOCKS_FIELD_NAME = "blocks";
+  private static final String COLOR_FIELD_NAME = "color";
+  private static final String FALLBACK_FIELD_NAME = "fallback";
 
   public AttachmentSerializer() {
     this(Attachment.class);
@@ -36,6 +38,12 @@ public class AttachmentSerializer extends StdSerializer<Attachment> {
     } else {
       jgen.writeStartObject();
       writeArray(jgen, attachment.getBlocks(), BLOCKS_FIELD_NAME);
+      attachment
+        .getColor()
+        .ifPresent(color -> writeString(jgen, COLOR_FIELD_NAME, color));
+      attachment
+        .getFallback()
+        .ifPresent(fallback -> writeString(jgen, FALLBACK_FIELD_NAME, fallback));
       jgen.writeEndObject();
     }
   }
@@ -53,6 +61,14 @@ public class AttachmentSerializer extends StdSerializer<Attachment> {
     });
 
     jgen.writeEndArray();
+  }
+
+  private void writeString(JsonGenerator jgen, String fieldName, String value) {
+    try {
+      jgen.writeStringField(fieldName, value);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private void serializeByDefault(
